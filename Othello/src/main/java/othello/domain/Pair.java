@@ -8,7 +8,31 @@ package othello.domain;
 /**
  *
  * @author Foster
+ * @param <T>
+ * @param <U>
  */
-public class Pair {
+public class Pair<T, U> {
+    private T first;
+    private U second;
     
+    public Pair(T f, U s) {
+        first = f;
+        second = s;
+    }
+    
+    public T first() {
+        return first;
+    }
+    
+    public U second() {
+        return second;
+    }
+    
+    public void setfirst(T f) {
+        first = f;
+    }
+    
+    public void setsecond(U s) {
+        second = s;
+    }
 }

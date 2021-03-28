@@ -33,7 +33,7 @@ public class Tablero {
     }
     
     public boolean comprobarPos() {
-        
+        return true;
     }
      
     
