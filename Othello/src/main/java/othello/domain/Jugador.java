@@ -58,10 +58,6 @@ public class Jugador extends GameState{
     public int Nfitxes(){ //retorna el nombre de fitxes del jugador al taulell
         return Fitxes.size();
     }
-    @Override
-    public ArrayList<int[]> FitxesJugador(){ //retorna una llista de les posicions de les fitxes
-        return Fitxes;
-    }
     public Estadistica Estadistiques() {
         return stats;
     }

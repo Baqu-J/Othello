@@ -10,31 +10,30 @@ package othello.data;
 /**
  *
  * @author Foster
- * @param <T>
- * @param <U>
  */
-public class Pair<T, U> {
-    private T first;
-    private U second;
+public class Pair {
+    private int first;
+    private int second;
     
-    public Pair(T f, U s) {
+    public Pair(int f, int s) {
         first = f;
         second = s;
     }
     
-    public T first() {
+    public int first() {
         return first;
     }
     
-    public U second() {
+    public int second() {
         return second;
     }
     
-    public void setfirst(T f) {
+    public void setfirst(int f) {
         first = f;
     }
     
-    public void setsecond(U s) {
+    public void setsecond(int s) {
         second = s;
     }
+    
 }

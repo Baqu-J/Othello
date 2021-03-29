@@ -15,6 +15,5 @@ public interface GameStateInterface {
     public void FerJugada(); //implementa les normes del joc
     public int Temps(); //retorna temps invertit pel jugador
     public int Nfitxes(); //retorna el nombre de fitxes del jugador al taulell
-    public ArrayList FitxesJugador(); //retorna una llista de les posicions de les fitxes
     //...
 }

@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Aleix
  */
 public class GameState implements GameStateInterface{
-    private ArrayList<int[]> Fitxes;
+    
+    private int FitxesRestants;
     private int TempsInvertit;
 
     @Override
@@ -22,16 +23,11 @@ public class GameState implements GameStateInterface{
 
     @Override
     public int Temps() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TempsInvertit;
     }
 
     @Override
     public int Nfitxes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList FitxesJugador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return FitxesRestants;
     }
 }
