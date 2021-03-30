@@ -35,5 +35,9 @@ public class Pair {
     public void setsecond(int s) {
         second = s;
     }
+    public void sum(Pair p) {
+        this.first += p.first();
+        this.second += p.second();
+    }
     
 }
