@@ -35,9 +35,8 @@ public class Pair {
     public void setsecond(int s) {
         second = s;
     }
-    public void sum(Pair p) {
-        this.first += p.first();
-        this.second += p.second();
+    public Pair sum(Pair p) {
+        return new Pair(this.first() + p.first(), this.second() + p.second());
     }
     
 }

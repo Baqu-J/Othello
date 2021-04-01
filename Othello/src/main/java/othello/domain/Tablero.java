@@ -28,7 +28,10 @@ enum Casilla {
        
         
 public class Tablero {
-     
+    private static final Pair directions[] = {
+        new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
+        new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
+    };
     private ArrayList<ArrayList<Casilla>> matrix;
     private ArrayList<Pair> blancas;
     private ArrayList<Pair> negras;
@@ -49,6 +52,33 @@ public class Tablero {
         matrix.get(4).add(5, Casilla.NEGRA);
         matrix.get(5).add(4, Casilla.NEGRA);
         matrix.get(5).add(5, Casilla.BLANCA);
+    }
+    
+    private boolean inBounds(Pair p) {
+        if(p.first() >= 0 || p.first() < 8) {
+            return true;
+        }
+        if(p.second() >= 0 || p.second() < 8) {
+            return true;
+        }
+        else return false;
+    }
+    
+    private boolean Get_empty_nearby(Pair p, ArrayList<Pair> Empty) {
+        Pair ret;
+        boolean found = false;
+        for(Pair dir: directions) {
+            ret = p.sum(dir);
+            if(inBounds(ret)){
+                if(matrix.get(ret.first()).get(ret.second()) == Casilla.VACIA) {
+                    if(!Empty.contains(ret)){
+                        Empty.add(ret);
+                        found = true;
+                    }
+                }
+            }
+        }
+        return found;
     }
     
     //PUBLIC METHODS
@@ -133,62 +163,40 @@ public class Tablero {
     //evalua una si un movimiento es legal para un color.
     public boolean is_legal(Pair p, Casilla c) {
         
-        //Por cada dirección evalua si se pueden encerrar fichas.
-            //UP
-            int start = p.first() - 1;
-            if(start >= 0){
-                if(matrix.get(start).get(p.second()).contrary() == c) { //comprova que el adjacent sigui del color contrari.
-                    for(--start; start >= 0; start = start + -1) {
-                        if(matrix.get(start).get(p.second()) == c) break;
-                        else if(matrix.get(start).get(p.second()) == Casilla.VACIA) return true;
+        for(Pair dir: directions) {
+            Pair start = p.sum(dir);
+            if(inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
+                while(inBounds(start)){
+                    if(matrix.get(start.first()).get(start.second()) == c) {
+                        return true;
                     }
+                    if(matrix.get(start.first()).get(start.second()) == Casilla.VACIA) {
+                        break;
+                    }
+                    start = start.sum(dir);
                 }
             }
-            //DOWN
-            start = p.first() + 1;
-            if(start < 8) {
-                if(matrix.get(start).get(p.second()).contrary() == c) { //comprova que el adjacent sigui del color contrari.
-                    for(--start; start < matrix.size(); start = start + 1) {
-                        if(matrix.get(start).get(p.second()) == c) break;
-                        else if(matrix.get(start).get(p.second()) == Casilla.VACIA) return true;
-                    }
-                }
-            }
-            //LEFT
-            start = p.second() - 1;
-            if(start >= 0){
-                if(matrix.get(p.first()).get(start).contrary() == c) { //comprova que el adjacent sigui del color contrari.
-                    for(--start; start >= 0; start = start + -1) {
-                        if(matrix.get(p.first()).get(start) == c) break;
-                        else if(matrix.get(p.first()).get(start) == Casilla.VACIA) return true;
-                    }
-                }
-            }
-            //RIGHT
-            start = p.second() + 1;
-            if(start < 8) {
-                if(matrix.get(p.first()).get(start).contrary() == c) { //comprova que el adjacent sigui del color contrari.
-                    for(--start; start < matrix.size(); start = start + 1) {
-                        if(matrix.get(p.first()).get(start) == c) break;
-                        else if(matrix.get(p.first()).get(start) == Casilla.VACIA) return true;
-                    }
-                }
-            }
-            return false;
+        }
+        return false;
     }
     
     public ArrayList<Pair> getLegalMoves(Casilla c) {
-        ArrayList<Pair> p;
+        ArrayList<Pair> positions;
         if(c == Casilla.BLANCA){
-            p = (ArrayList<Pair>)blancas.clone();
+            positions = (ArrayList<Pair>)negras.clone();
         }
         else {
-            p = (ArrayList<Pair>)negras.clone();
+            positions = (ArrayList<Pair>)blancas.clone();
         }
         ArrayList<Pair> Legals = new ArrayList<Pair>(0);
-        for(int i = 0; i < p.size(); ++i) {
-            if(is_legal(p.get(i), c)) {
-                Legals.add(p.get(i));
+        for(int i = 0; i < positions.size(); ++i) {
+            Get_empty_nearby(positions.get(i), Legals);
+        }
+        if(!Legals.isEmpty()) {
+            for(int j = 0; j < Legals.size(); ++j) {
+                if(!is_legal(Legals.get(j), c)) {
+                    Legals.remove(j);
+                }
             }
         }
         return Legals;
