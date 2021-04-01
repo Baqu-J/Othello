@@ -48,10 +48,10 @@ public class Tablero {
             }
             matrix.add(aux);
         }
-        matrix.get(4).add(4, Casilla.BLANCA);
-        matrix.get(4).add(5, Casilla.NEGRA);
-        matrix.get(5).add(4, Casilla.NEGRA);
-        matrix.get(5).add(5, Casilla.BLANCA);
+        matrix.get(4).set(4, Casilla.BLANCA);
+        matrix.get(4).set(5, Casilla.NEGRA);
+        matrix.get(5).set(4, Casilla.NEGRA);
+        matrix.get(5).set(5, Casilla.BLANCA);
     }
     
     private boolean inBounds(Pair p) {
@@ -128,10 +128,6 @@ public class Tablero {
         return matrix;
     }
     
-    /**
-     *
-     * @param v
-     */
     public void setBlancas(ArrayList<Pair> v) {
         blancas = v;
     }
