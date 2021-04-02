@@ -59,10 +59,7 @@ public class Tablero {
     }
     
     private boolean inBounds(Pair p) {
-        if(p.first() >= 0 || p.first() < 8) {
-            return true;
-        }
-        if(p.second() >= 0 || p.second() < 8) {
+        if(p.first() >= 0 && p.first() < 8 && p.second() >= 0 && p.second() < 8) {
             return true;
         }
         else return false;
