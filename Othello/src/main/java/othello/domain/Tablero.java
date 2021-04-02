@@ -49,9 +49,13 @@ public class Tablero {
             matrix.add(aux);
         }
         matrix.get(4).set(4, Casilla.BLANCA);
+        blancas.add(new Pair(4, 4));
         matrix.get(4).set(5, Casilla.NEGRA);
+        negras.add(new Pair(4, 5));
         matrix.get(5).set(4, Casilla.NEGRA);
+        negras.add(new Pair(5, 4));
         matrix.get(5).set(5, Casilla.BLANCA);
+        blancas.add(new Pair(5, 5));
     }
     
     private boolean inBounds(Pair p) {
@@ -85,10 +89,12 @@ public class Tablero {
 
     public Tablero() {
         matrix = new ArrayList<ArrayList<Casilla>>(8);
-        build_matrix(matrix);
-        
         blancas = new ArrayList<Pair>(0);
         negras = new ArrayList<Pair>(0);
+        
+        build_matrix(matrix);
+        
+        
     }
 
     public Tablero(ArrayList<ArrayList<Casilla>> matrix,  ArrayList<Pair> blancas, ArrayList<Pair> negras) {
