@@ -2,7 +2,7 @@
 package othello.data;
 
 import java.util.ArrayList;
-import othello.domain.Tablero;
+import othello.domain.tablero.Tablero;
 
 public class Nodo {
 

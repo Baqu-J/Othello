@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package othello.domain;
+package othello.domain.tablero;
 
 import java.util.ArrayList;
 import othello.data.Pair;
@@ -23,7 +23,7 @@ enum Casilla {
 
 /**
  *
- * @author Aleix
+ * @author Jaume
  */
        
         
@@ -32,7 +32,7 @@ public class Tablero {
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
-    private ArrayList<ArrayList<Casilla>> matrix;
+    protected ArrayList<ArrayList<Casilla>> matrix;
     private ArrayList<Pair> blancas;
     private ArrayList<Pair> negras;
     
@@ -161,7 +161,7 @@ public class Tablero {
     
     //evalua una si un movimiento es legal para un color.
     public boolean is_legal(Pair p, Casilla c) {
-        
+        if(matrix.get(p.first()).get(p.second()) != Casilla.VACIA) return false;
         for(Pair dir: directions) {
             Pair start = p.sum(dir);
             if(inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
@@ -199,5 +199,13 @@ public class Tablero {
             }
         }
         return Legals;
+    }
+    
+    public boolean commitPlay(Pair p, Casilla c) {
+        if(inBounds(p) && is_legal(p, c)) {
+            matrix.get(p.first()).set(p.second(), c);
+            return true;
+        }
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 
 package othello.domain;
+import othello.domain.tablero.Tablero;
 import othello.data.Pair;
 import java.util.ArrayList;
 import othello.data.Nodo;
