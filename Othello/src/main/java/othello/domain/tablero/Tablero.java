@@ -82,6 +82,43 @@ public class Tablero {
         return found;
     }
     
+    private void swapTile(Pair p) {
+        Casilla c = matrix.get(p.first()).get(p.second());
+        matrix.get(p.first()).set(p.second(),c.contrary());
+    }
+    
+    private void swapEnemy(Pair p, Casilla c) {
+        if(matrix.get(p.first()).get(p.second()) == c){
+            for(Pair dir: directions) {
+                Pair start = p.sum(dir);
+                while(inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()){
+                    swapTile(start);
+                    start = start.sum(dir);
+                }
+            }
+        }
+    }
+    
+    //evalua una si un movimiento es legal para un color.
+    protected boolean is_legal(Pair p, Casilla c) {
+        if(matrix.get(p.first()).get(p.second()) != Casilla.VACIA) return false;
+        for(Pair dir: directions) {
+            Pair start = p.sum(dir);
+            if(inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
+                while(inBounds(start)){
+                    if(matrix.get(start.first()).get(start.second()) == c) {
+                        return true;
+                    }
+                    if(matrix.get(start.first()).get(start.second()) == Casilla.VACIA) {
+                        break;
+                    }
+                    start = start.sum(dir);
+                }
+            }
+        }
+        return false;
+    }
+    
     //PUBLIC METHODS
 
     public Tablero() {
@@ -159,25 +196,7 @@ public class Tablero {
         negras.remove(p);
     }
     
-    //evalua una si un movimiento es legal para un color.
-    public boolean is_legal(Pair p, Casilla c) {
-        if(matrix.get(p.first()).get(p.second()) != Casilla.VACIA) return false;
-        for(Pair dir: directions) {
-            Pair start = p.sum(dir);
-            if(inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
-                while(inBounds(start)){
-                    if(matrix.get(start.first()).get(start.second()) == c) {
-                        return true;
-                    }
-                    if(matrix.get(start.first()).get(start.second()) == Casilla.VACIA) {
-                        break;
-                    }
-                    start = start.sum(dir);
-                }
-            }
-        }
-        return false;
-    }
+    
     
     public ArrayList<Pair> getLegalMoves(Casilla c) {
         ArrayList<Pair> positions;
@@ -204,6 +223,7 @@ public class Tablero {
     public boolean commitPlay(Pair p, Casilla c) {
         if(inBounds(p) && is_legal(p, c)) {
             matrix.get(p.first()).set(p.second(), c);
+            swapEnemy(p, c);
             return true;
         }
         return false;
