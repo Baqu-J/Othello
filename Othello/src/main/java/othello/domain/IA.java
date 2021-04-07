@@ -91,5 +91,30 @@ public class IA extends GameState {
         return 0;
     }
     
-    
+    /*
+    Node minimax(Tree<Node> t, int depth, int alpha, int beta, boolean maximizingPlayer) {
+        if(depth == 0 || (t.getSubTrees()).isEmpty())
+            return t.getRoot();
+
+        if(maximizingPlayer) {
+            Node maxEval = new Node(-1000);
+            for(Tree<Node> child : t.getSubTrees()) {
+                Node eval = minimax(child, depth - 1, alpha, beta, false);
+                maxEval = ((maxEval.getScore() > eval.getScore()) ? maxEval : eval);
+                alpha = ((alpha > eval.getScore()) ? alpha : eval.getScore());
+                if(beta <= alpha)   break;
+            }
+            return maxEval;
+        }else {
+            Node minEval = new Node(+1000);
+            for(Tree<Node> child : t.getSubTrees()) {
+                Node eval = minimax(child, depth - 1, alpha, beta, true);
+                minEval = ((minEval.getScore() < eval.getScore()) ? minEval : eval);
+                beta = ((beta < eval.getScore()) ? beta : eval.getScore());
+                if(beta <= alpha)   break;
+            }
+            return minEval;
+        }
+    }
+    */
 }

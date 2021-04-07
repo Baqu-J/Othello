@@ -53,3 +53,72 @@ public class Nodo {
         this.hijos = hijos;
     }
 }
+/*package othello.data;
+
+/**
+ * A Node of a Tree for Minimax
+ * 
+ * @author Aleix Velasco Calvo
+ *
+public class Node {
+    
+    // Attributes
+    private int x, y;
+    private int player;
+    private int score;
+
+    // Constructors
+    public Node(int x, int y, int player) {
+        this.x = x;
+        this.y = y;
+        this.player = player;
+        this.score = 0;
+    }
+
+    public Node(int x, int y, int player, int score) {
+        this.x = x;
+        this.y = y;
+        this.player = player;
+        this.score = score;
+    }
+    
+    public Node(int score) {
+        this.x = -1;
+        this.y = -1;
+        this.player = -1;
+        this.score = score;
+    }
+    
+    // Getters and Setters
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(int player) {
+        this.player = player;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    } 
+}*/
