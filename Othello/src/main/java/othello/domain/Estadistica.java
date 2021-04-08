@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Aleix Velasco Calvo
  */
 public class Estadistica implements EstadisticaInteface {
-    
+
     // Attributes
     private int victoria;
     private int derrota;
@@ -28,7 +28,7 @@ public class Estadistica implements EstadisticaInteface {
         this.empat = empat;
         this.punts = punts;
     }
-    
+
     /*public Estadistica(ArrayList<String> s) {
         for)() {
             
@@ -69,29 +69,27 @@ public class Estadistica implements EstadisticaInteface {
 
     @Override
     public void incVictories() {
-        setVictoria(getVictoria()+1);
+        setVictoria(getVictoria() + 1);
     }
 
     @Override
     public void incDerrotes() {
-        setDerrota(getDerrota()+1);
+        setDerrota(getDerrota() + 1);
     }
 
     @Override
     public void incEmpat() {
-        setEmpat(getEmpat()+1);
+        setEmpat(getEmpat() + 1);
     }
 
     @Override
     public void incPunts(int p) {
-        setPunts(getPunts()+p);
+        setPunts(getPunts() + p);
     }
 
-    
     public ArrayList<String> toStringStat() {
         //return "Estadistica{" + "victoria=" + victoria + ", derrota=" + derrota + ", empat=" + empat + ", punts=" + punts + '}';
         return new ArrayList<String>();
     }
-    
-    
+
 }
