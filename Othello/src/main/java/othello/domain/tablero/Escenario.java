@@ -8,6 +8,8 @@ import othello.data.Pair;
  *
  * @author Foster
  */
+
+//hashmap i copiar constructora bucle modificacion escenario
 public class Escenario extends Tablero {
     
     public Escenario() {

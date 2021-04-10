@@ -15,6 +15,8 @@ public class Tablero implements java.io.Serializable{
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
     protected ArrayList<ArrayList<Casilla>> matrix;
+    
+    //CAMBIAR POR HASHMAP<PAIR, CASILLA> also GSON
     private ArrayList<Pair> blancas;
     private ArrayList<Pair> negras;
 
@@ -202,8 +204,11 @@ public class Tablero implements java.io.Serializable{
 
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         ArrayList<Pair> swaps = new ArrayList<>(0);
+        
         if (inBounds(p) && is_legal(p, c)) {
             matrix.get(p.first()).set(p.second(), c);
+            
+            swaps.add(p);
             swapEnemy(p, c, swaps);
         }
         return swaps;
