@@ -8,9 +8,9 @@ import othello.data.Pair;
  *
  * @author Jaume
  */
-public class Tablero {
+public class Tablero implements java.io.Serializable{
 
-    private static final Pair directions[] = {
+    protected static final Pair directions[] = {
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
@@ -39,7 +39,7 @@ public class Tablero {
         blancas.add(new Pair(5, 5));
     }
 
-    private boolean inBounds(Pair p) {
+    protected boolean inBounds(Pair p) {
         if (p.first() >= 0 && p.first() < 8 && p.second() >= 0 && p.second() < 8) {
             return true;
         } else {
@@ -47,7 +47,7 @@ public class Tablero {
         }
     }
 
-    private boolean Get_empty_nearby(Pair p, ArrayList<Pair> Empty) {
+    protected boolean Get_empty_nearby(Pair p, ArrayList<Pair> Empty) {
         Pair ret;
         boolean found = false;
         for (Pair dir : directions) {
@@ -64,17 +64,18 @@ public class Tablero {
         return found;
     }
 
-    private void swapTile(Pair p) {
+    protected void swapTile(Pair p) {
         Casilla c = matrix.get(p.first()).get(p.second());
         matrix.get(p.first()).set(p.second(), c.contrary());
     }
 
-    private void swapEnemy(Pair p, Casilla c) {
+    protected void swapEnemy(Pair p, Casilla c, ArrayList<Pair> swaps) {
         if (matrix.get(p.first()).get(p.second()) == c) {
             for (Pair dir : directions) {
                 Pair start = p.sum(dir);
                 while (inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
                     swapTile(start);
+                    swaps.add(start);
                     start = start.sum(dir);
                 }
             }
@@ -199,12 +200,12 @@ public class Tablero {
         return Legals;
     }
 
-    public boolean commitPlay(Pair p, Casilla c) {
+    public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
+        ArrayList<Pair> swaps = new ArrayList<>(0);
         if (inBounds(p) && is_legal(p, c)) {
             matrix.get(p.first()).set(p.second(), c);
-            swapEnemy(p, c);
-            return true;
+            swapEnemy(p, c, swaps);
         }
-        return false;
+        return swaps;
     }
 }
