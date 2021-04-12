@@ -65,6 +65,24 @@ public class Tablero implements java.io.Serializable{
         }
         return found;
     }
+    
+    protected void addtoColor(Pair p, Casilla c) {
+        if(c == Casilla.BLANCA) {
+            blancas.add(p);
+        }
+        else if(c == Casilla.NEGRA) {
+            negras.add(p);
+        }
+    }
+    
+    protected void removefromColor(Pair p, Casilla c) {
+        if(c == Casilla.BLANCA) {
+            blancas.remove(p);
+        }
+        else if(c == Casilla.NEGRA) {
+            negras.remove(p);
+        }
+    }
 
     protected void swapTile(Pair p) {
         Casilla c = matrix.get(p.first()).get(p.second());
@@ -77,6 +95,8 @@ public class Tablero implements java.io.Serializable{
                 Pair start = p.sum(dir);
                 while (inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
                     swapTile(start);
+                    removefromColor(start ,c.contrary());
+                    addtoColor(start, c);
                     swaps.add(start);
                     start = start.sum(dir);
                 }
@@ -207,7 +227,7 @@ public class Tablero implements java.io.Serializable{
         
         if (inBounds(p) && is_legal(p, c)) {
             matrix.get(p.first()).set(p.second(), c);
-            
+            addtoColor(p, c);
             swaps.add(p);
             swapEnemy(p, c, swaps);
         }
