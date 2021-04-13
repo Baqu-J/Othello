@@ -13,23 +13,24 @@ import othello.data.Pair;
 public class Escenario extends Tablero {
     
     public Escenario() {
-        for (int i = 0; i < 8; i++) {
-            ArrayList<Casilla> aux = new ArrayList<>(8);
-            for (int k = 0; k < aux.size(); k++) {
-                aux.add(Casilla.VACIA);
-            }
-            matrix.add(aux);
-        }
-        matrix.get(4).set(4, Casilla.BLANCA);
-       
-        matrix.get(4).set(5, Casilla.NEGRA);
+         matrix = new Casilla[8][8];
         
-        matrix.get(5).set(4, Casilla.NEGRA);
-       
-        matrix.get(5).set(5, Casilla.BLANCA);
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                matrix[i][k] = Casilla.VACIA;
+            }
+        }
+        matrix[4][4] = Casilla.BLANCA;
+        blancas.add(new Pair(4, 4));
+        matrix [4][5] = Casilla.NEGRA;
+        negras.add(new Pair(4, 5));
+        matrix [5][4] = Casilla.NEGRA;
+        negras.add(new Pair(5, 4));
+        matrix [5][5] = Casilla.BLANCA;
+        blancas.add(new Pair(5, 5));
     }
     
-    public Escenario(ArrayList<ArrayList<Casilla>> matrix) {
+    public Escenario(Casilla[][] matrix) {
         this.matrix = matrix;
     }
     
@@ -37,14 +38,14 @@ public class Escenario extends Tablero {
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         ArrayList<Pair> swaps = new ArrayList<>(0);
         if (inBounds(p) && is_legal(p, c)) {
-            matrix.get(p.first()).set(p.second(), c);
+            matrix[p.first()][p.second()] = c;
         }
         return swaps;
     }
 
     public void Erase(Pair p) {
-        if (matrix.get(p.first()).get(p.second()) != Casilla.VACIA) {
-            matrix.get(p.first()).set(p.second(), Casilla.VACIA);
+        if (matrix[p.first()][p.second()] != Casilla.VACIA) {
+             matrix[p.first()][p.second()] = Casilla.VACIA;
         }
     }
 

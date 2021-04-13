@@ -6,7 +6,7 @@ import othello.data.Pair;
 
 /**
  *
- * @author Jaume
+ * @author Jaumes
  */
 public class Tablero implements java.io.Serializable{
 
@@ -14,30 +14,29 @@ public class Tablero implements java.io.Serializable{
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
-    protected ArrayList<ArrayList<Casilla>> matrix;
+    protected Casilla[][] matrix;
     
     //CAMBIAR POR HASHMAP<PAIR, CASILLA> also GSON
-    private ArrayList<Pair> blancas;
-    private ArrayList<Pair> negras;
+    protected ArrayList<Pair> blancas;
+    protected ArrayList<Pair> negras;
 
     //PRIVATE METHODS
     //construye el tablero standard
-    private void build_matrix(ArrayList<ArrayList<Casilla>> matrix) {
-
+    private void build_matrix() {
+        matrix = new Casilla[8][8];
+        
         for (int i = 0; i < 8; i++) {
-            ArrayList<Casilla> aux = new ArrayList<>(8);
-            for (int k = 0; k < aux.size(); k++) {
-                aux.add(Casilla.VACIA);
+            for (int k = 0; k < 8; k++) {
+                matrix[i][k] = Casilla.VACIA;
             }
-            matrix.add(aux);
         }
-        matrix.get(4).set(4, Casilla.BLANCA);
+        matrix[4][4] = Casilla.BLANCA;
         blancas.add(new Pair(4, 4));
-        matrix.get(4).set(5, Casilla.NEGRA);
+        matrix [4][5] = Casilla.NEGRA;
         negras.add(new Pair(4, 5));
-        matrix.get(5).set(4, Casilla.NEGRA);
+        matrix [5][4] = Casilla.NEGRA;
         negras.add(new Pair(5, 4));
-        matrix.get(5).set(5, Casilla.BLANCA);
+        matrix [5][5] = Casilla.BLANCA;
         blancas.add(new Pair(5, 5));
     }
 
@@ -55,7 +54,7 @@ public class Tablero implements java.io.Serializable{
         for (Pair dir : directions) {
             ret = p.sum(dir);
             if (inBounds(ret)) {
-                if (matrix.get(ret.first()).get(ret.second()) == Casilla.VACIA) {
+                if (matrix[ret.first()][ret.second()] == Casilla.VACIA) {
                     if (!Empty.contains(ret)) {
                         Empty.add(ret);
                         found = true;
@@ -85,15 +84,15 @@ public class Tablero implements java.io.Serializable{
     }
 
     protected void swapTile(Pair p) {
-        Casilla c = matrix.get(p.first()).get(p.second());
-        matrix.get(p.first()).set(p.second(), c.contrary());
+        Casilla c = matrix[p.first()][p.second()];
+        matrix[p.first()][p.second()] = c.contrary();
     }
 
     protected void swapEnemy(Pair p, Casilla c, ArrayList<Pair> swaps) {
-        if (matrix.get(p.first()).get(p.second()) == c) {
+        if (matrix[p.first()][p.second()] == c) {
             for (Pair dir : directions) {
                 Pair start = p.sum(dir);
-                while (inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
+                while (inBounds(start) && matrix[start.first()][start.second()] == c.contrary()) {
                     swapTile(start);
                     removefromColor(start ,c.contrary());
                     addtoColor(start, c);
@@ -106,17 +105,17 @@ public class Tablero implements java.io.Serializable{
 
     //evalua una si un movimiento es legal para un color.
     protected boolean is_legal(Pair p, Casilla c) {
-        if (matrix.get(p.first()).get(p.second()) != Casilla.VACIA) {
+        if (matrix[p.first()][p.second()] != Casilla.VACIA) {
             return false;
         }
         for (Pair dir : directions) {
             Pair start = p.sum(dir);
-            if (inBounds(start) && matrix.get(start.first()).get(start.second()) == c.contrary()) {
+            if (inBounds(start) && matrix[start.first()][start.second()] == c.contrary()) {
                 while (inBounds(start)) {
-                    if (matrix.get(start.first()).get(start.second()) == c) {
+                    if (matrix[start.first()][start.second()] == c) {
                         return true;
                     }
-                    if (matrix.get(start.first()).get(start.second()) == Casilla.VACIA) {
+                    if (matrix[start.first()][start.second()] == Casilla.VACIA) {
                         break;
                     }
                     start = start.sum(dir);
@@ -128,15 +127,14 @@ public class Tablero implements java.io.Serializable{
 
     //PUBLIC METHODS
     public Tablero() {
-        matrix = new ArrayList<ArrayList<Casilla>>(8);
         blancas = new ArrayList<Pair>(0);
         negras = new ArrayList<Pair>(0);
 
-        build_matrix(matrix);
+        build_matrix();
 
     }
 
-    public Tablero(ArrayList<ArrayList<Casilla>> matrix, ArrayList<Pair> blancas, ArrayList<Pair> negras) {
+    public Tablero(Casilla[][] matrix, ArrayList<Pair> blancas, ArrayList<Pair> negras) {
         this.matrix = matrix;
         this.blancas = blancas;
         this.negras = negras;
@@ -145,9 +143,9 @@ public class Tablero implements java.io.Serializable{
     public Tablero DeepCopy() {
         Tablero t = new Tablero();
 
-        for (int x = 0; x < this.matrix.size(); ++x) {
-            for (int y = 0; y < this.matrix.get(0).size(); ++y) {
-                t.matrix.get(x).add(y, this.matrix.get(x).get(y));
+        for (int x = 0; x < this.matrix.length; ++x) {
+            for (int y = 0; y < this.matrix[0].length; ++y) {
+                t.matrix[x][y] = this.matrix[x][y];
             }
         }
 
@@ -169,7 +167,7 @@ public class Tablero implements java.io.Serializable{
         return negras;
     }
 
-    public ArrayList<ArrayList<Casilla>> getMatrix() {
+    public Casilla[][] getMatrix() {
         return matrix;
     }
 
@@ -181,7 +179,7 @@ public class Tablero implements java.io.Serializable{
         negras = v;
     }
 
-    public void setMatrix(ArrayList<ArrayList<Casilla>> matrix) {
+    public void setMatrix(Casilla[][] matrix) {
         this.matrix = matrix;
     }
 
@@ -226,11 +224,18 @@ public class Tablero implements java.io.Serializable{
         ArrayList<Pair> swaps = new ArrayList<>(0);
         
         if (inBounds(p) && is_legal(p, c)) {
-            matrix.get(p.first()).set(p.second(), c);
+            matrix[p.first()][p.second()] = c;
             addtoColor(p, c);
             swaps.add(p);
             swapEnemy(p, c, swaps);
         }
         return swaps;
+    }
+    public void print_tablero() {
+        for(int i = 0; i < 8; ++i) {
+            for(int j = 0; j < 8; ++j) {
+                System.out.println(this.matrix[i][j]);
+            }
+        }
     }
 }
