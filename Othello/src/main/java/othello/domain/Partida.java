@@ -46,13 +46,6 @@ public class Partida {
     private Tablero t;
 
     private static void createTree_rec(Tree tree, int depth, Tablero tablero, Casilla player) {
-
-        // AQUI VA EL CODIGO:
-        // -> sumar los pesos de las posiciones de las fichas de casilla c
-        //    restandole los pesos de las posiciones de las fichas del 
-        //    contrario usando la tabla PESOS. 
-        //    SUmando la cantidad de fichas c menos el contrario
-        // -> formula = SUM(pesos(c)) - SUM(pesos(contrario)) + #fichas(c) - #fichas(contrario)
         if (depth != 0) {
             ArrayList<Pair> legalMoves = tablero.getLegalMoves(player);
             for(Pair p : legalMoves) {
@@ -69,7 +62,27 @@ public class Partida {
             }
         }
     }
+    
+    private static void createTree_aux(Tree tree, int depth, Tablero tablero, Casilla player) {
+        if (depth != 0) {
+            ArrayList<Pair> legalMoves = tablero.getLegalMoves(player);
+            for(Pair p : legalMoves) {
+                Tablero tDeepCopy = tablero.DeepCopy();
+                ArrayList<Pair> pa = tDeepCopy.commitPlay(p, player);
+                
 
+                Tree tr = tree.addLeaf(new Node(p, player, 0));
+                createTree_rec(tr, depth - 1, tDeepCopy, player.contrary());
+
+            }
+        }
+        else{
+           //evaluar solo nodos hoja
+        }
+    }
+
+    
+    
     Tree createTree(int depth, Tablero tablero, Casilla player) {
         Tree jugadas = new Tree(new Node());
         createTree_rec(jugadas, depth, tablero, player);

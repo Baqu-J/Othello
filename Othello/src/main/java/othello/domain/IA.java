@@ -1,6 +1,5 @@
 
 package othello.domain;
-import othello.domain.tablero.Tablero;
 import othello.data.Pair;
 import othello.data.Node;
 import othello.data.Tree;
@@ -10,7 +9,11 @@ enum dificultad{FACIL, NORMAL, DIFICIL};
 /**/
 public class IA extends GameState {
     
-     private final dificultad opcion;
+     private dificultad opcion;
+
+    public void setOpcion(dificultad opcion) {
+        this.opcion = opcion;
+    }
      
      IA(){
          opcion = dificultad.NORMAL;
@@ -24,16 +27,6 @@ public class IA extends GameState {
          return dificultad.FACIL;
     }
 
-    /*
-    private void funcionFacil(Tablero tab) {};
-
-    private void funcionNormal(Tablero tab) {};
-
-    private void funcionDificil(Tablero tab) { };
-    
-    
-    */
-    
     /*private Pair alpha_beta(Node id, int profundidad, int alpha, int beta, boolean maximizing_player ){
         if (profundidad == 0) return id.getCord();
  
@@ -86,33 +79,10 @@ public class IA extends GameState {
         }
     }
     
-    public void realizar_jugada(Node raiz){
-        switch(opcion) {
-            case FACIL:
-                /*alpha_beta();*/
-            break;
-
-            case NORMAL:
-                /*alpha_beta();*/
-            break;
-
-            case DIFICIL:
-                double inf = Double.POSITIVE_INFINITY;
-                //int aux = alpha_beta(raiz,3,(int)-inf,(int)inf,true);
-            break;
-            
-            default: break;
-        }
-    }
-
-    
-    
-    Pair minimax(Tablero tab) {
+    public Node elegir_movimiento(Node raiz){
+        Node movimiento = null;
         
-        return new Pair(3, 3);
+        return movimiento;
     }
-    
-    int min() {
-        return 0;
-    }
+
 }

@@ -11,6 +11,8 @@
 package othello.domain;
 
 import java.util.ArrayList;
+import othello.data.Node;
+import othello.data.Tree;
 import othello.domain.Estadistica;
 
 public class Jugador extends GameState{
@@ -31,8 +33,9 @@ public class Jugador extends GameState{
         TempsInvertit = T;
         stats = E;
     }
+    
+
     //Setters
-     
      public void SetFitxes (ArrayList<int[]> F) {
          Fitxes = F;
      }
@@ -45,8 +48,8 @@ public class Jugador extends GameState{
     
    
     @Override
-    public void FerJugada(){ //implementa les normes del joc
-        //STUFF
+    public Node elegir_movimiento(Tree<Node> t){
+        return null;
     }
     
      //Getters
@@ -61,6 +64,5 @@ public class Jugador extends GameState{
     public Estadistica Estadistiques() {
         return stats;
     }
-    
- 
+
 }
