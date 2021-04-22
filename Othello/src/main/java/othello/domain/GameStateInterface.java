@@ -15,7 +15,5 @@ import othello.data.Tree;
 
 public interface GameStateInterface {
     public Node elegir_movimiento(Tree<Node> t); //elige movimiento
-    public int Temps(); //retorna temps invertit pel jugador
     public int Nfitxes(); //retorna el nombre de fitxes del jugador al taulell
-    //...
 }

@@ -63,25 +63,6 @@ public class Partida {
         }
     }
     
-    private static void createTree_aux(Tree tree, int depth, Tablero tablero, Casilla player) {
-        if (depth != 0) {
-            ArrayList<Pair> legalMoves = tablero.getLegalMoves(player);
-            for(Pair p : legalMoves) {
-                Tablero tDeepCopy = tablero.DeepCopy();
-                ArrayList<Pair> pa = tDeepCopy.commitPlay(p, player);
-                
-
-                Tree tr = tree.addLeaf(new Node(p, player, 0));
-                createTree_rec(tr, depth - 1, tDeepCopy, player.contrary());
-
-            }
-        }
-        else{
-           //evaluar solo nodos hoja
-        }
-    }
-
-    
     
     Tree createTree(int depth, Tablero tablero, Casilla player) {
         Tree jugadas = new Tree(new Node());

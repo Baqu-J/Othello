@@ -18,51 +18,62 @@ import othello.domain.Estadistica;
 public class Jugador extends GameState{
     
     //Attributes
-    private ArrayList<int[]> Fitxes;
-    private int TempsInvertit;
+    private String id;
+    private int Fitxes;
     private Estadistica stats;
+
     
     //Constructors
-    public Jugador() {
-        Fitxes = new ArrayList<int[]>(0);
-        TempsInvertit = 0;
+    public Jugador() { //Para usuarios GUEST
+        Fitxes = 0;
+    }
+    
+    public Jugador(String id1){
+        this.id = id1;
+        Fitxes = 0;
         stats = new Estadistica ();
     }
-     public Jugador(ArrayList<int[]> F, int T, Estadistica E) {
+    
+    public Jugador(String id1, int F, Estadistica E) {
+        this.id = id1;
         Fitxes = F;
-        TempsInvertit = T;
         stats = E;
     }
     
 
     //Setters
-     public void SetFitxes (ArrayList<int[]> F) {
+     public void SetFitxes (int F) {
          Fitxes = F;
      }
-     public void SetTemps (int T) {
-         TempsInvertit = T;
-     }
+
      public void SetStats (Estadistica E) {
          stats = E;
      }
-    
-   
-    @Override
-    public Node elegir_movimiento(Tree<Node> t){
-        return null;
+
+     public void setId(String id) {
+        this.id = id;
     }
+   
     
      //Getters
-    @Override
-    public int Temps(){ //retorna temps invertit pel jugador
-        return TempsInvertit;
-    }
+
     @Override
     public int Nfitxes(){ //retorna el nombre de fitxes del jugador al taulell
-        return Fitxes.size();
+        return Fitxes;
     }
     public Estadistica Estadistiques() {
         return stats;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    
+    @Override
+    public Node elegir_movimiento(Tree<Node> t){
+        return null;
+    }
+
+    
 }

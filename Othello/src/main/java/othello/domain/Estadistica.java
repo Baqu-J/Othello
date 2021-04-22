@@ -29,11 +29,7 @@ public class Estadistica implements EstadisticaInteface {
         this.punts = punts;
     }
 
-    /*public Estadistica(ArrayList<String> s) {
-        for)() {
-            
-        }
-    }*/
+
     // Getters and Setters
     public int getVictoria() {
         return victoria;
@@ -47,6 +43,7 @@ public class Estadistica implements EstadisticaInteface {
         return empat;
     }
 
+    @Override
     public int getPunts() {
         return punts;
     }
@@ -70,6 +67,7 @@ public class Estadistica implements EstadisticaInteface {
     @Override
     public void incVictories() {
         setVictoria(getVictoria() + 1);
+        this.punts = this.punts + 3;
     }
 
     @Override
@@ -80,16 +78,13 @@ public class Estadistica implements EstadisticaInteface {
     @Override
     public void incEmpat() {
         setEmpat(getEmpat() + 1);
+        ++this.punts;
     }
 
-    @Override
-    public void incPunts(int p) {
-        setPunts(getPunts() + p);
-    }
 
     public ArrayList<String> toStringStat() {
         //return "Estadistica{" + "victoria=" + victoria + ", derrota=" + derrota + ", empat=" + empat + ", punts=" + punts + '}';
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
 }

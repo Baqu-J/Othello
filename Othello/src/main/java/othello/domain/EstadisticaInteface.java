@@ -21,10 +21,8 @@ public interface EstadisticaInteface {
      */
     void incEmpat();
 
-    /**
-     * incrementa la variable punts
-     *
-     * @param p punts a incrementar
+    /*
+     @return 
      */
-    void incPunts(int p);
+    public int getPunts();
 }

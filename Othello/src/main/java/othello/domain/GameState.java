@@ -11,7 +11,6 @@ import othello.data.Tree;
 public abstract class GameState implements GameStateInterface{
     
     private int FitxesRestants;
-    private int TempsInvertit;
 
     @Override
     public Node elegir_movimiento(Tree<Node> t) {
@@ -19,11 +18,6 @@ public abstract class GameState implements GameStateInterface{
         
     }
 
-    @Override
-    public int Temps() {
-        return TempsInvertit;
-    }
-    
     @Override
     public int Nfitxes() {
         return FitxesRestants;
