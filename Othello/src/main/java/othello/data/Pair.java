@@ -33,4 +33,13 @@ public class Pair {
     public Pair sum(Pair p) {
         return new Pair(this.first() + p.first(), this.second() + p.second());
     }
+    
+    public Pair sub(Pair p) {
+        return new Pair(this.first() - p.first(), this.second() - p.second());
+    }
+    
+    public String convertString() {
+        String s = String.valueOf(this.first) + "/" + String.valueOf(this.second);
+        return s;
+    } 
 }

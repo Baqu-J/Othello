@@ -30,14 +30,14 @@ public class Tablero implements java.io.Serializable{
                 matrix[i][k] = Casilla.VACIA;
             }
         }
-        matrix[4][4] = Casilla.BLANCA;
+        matrix[3][3] = Casilla.BLANCA;
+        blancas.add(new Pair(3, 3));
+        matrix [3][4] = Casilla.NEGRA;
+        negras.add(new Pair(3, 4));
+        matrix [4][3] = Casilla.NEGRA;
+        negras.add(new Pair(4, 3));
+        matrix [4][4] = Casilla.BLANCA;
         blancas.add(new Pair(4, 4));
-        matrix [4][5] = Casilla.NEGRA;
-        negras.add(new Pair(4, 5));
-        matrix [5][4] = Casilla.NEGRA;
-        negras.add(new Pair(5, 4));
-        matrix [5][5] = Casilla.BLANCA;
-        blancas.add(new Pair(5, 5));
     }
 
     protected boolean inBounds(Pair p) {
@@ -89,16 +89,34 @@ public class Tablero implements java.io.Serializable{
     }
 
     protected void swapEnemy(Pair p, Casilla c, ArrayList<Pair> swaps) {
+       
         if (matrix[p.first()][p.second()] == c) {
             for (Pair dir : directions) {
                 Pair start = p.sum(dir);
-                while (inBounds(start) && matrix[start.first()][start.second()] == c.contrary()) {
-                    swapTile(start);
-                    removefromColor(start ,c.contrary());
-                    addtoColor(start, c);
-                    swaps.add(start);
-                    start = start.sum(dir);
+                if (inBounds(start) && matrix[start.first()][start.second()] == c.contrary()) {
+               
+                    while(inBounds(start)){
+                         
+                        if (matrix[start.first()][start.second()] == c) {
+                            start = start.sub(dir);
+                            while(!start.convertString().equals(p.convertString())) {
+                                removefromColor(start ,c.contrary());
+                                addtoColor(start, c);
+                                swaps.add(start);
+                                start = start.sub(dir);
+                            }
+                            break;
+                        }
+                        if (matrix[start.first()][start.second()] == Casilla.VACIA) {
+                            break;
+                        }
+                         start = start.sum(dir);
+                    }
                 }
+            }
+            
+            for(int i = 1; i < swaps.size(); ++i) {
+                 swapTile(swaps.get(i));
             }
         }
     }
@@ -113,14 +131,17 @@ public class Tablero implements java.io.Serializable{
             if (inBounds(start) && matrix[start.first()][start.second()] == c.contrary()) {
                 while (inBounds(start)) {
                     if (matrix[start.first()][start.second()] == c) {
+                        
                         return true;
                     }
                     if (matrix[start.first()][start.second()] == Casilla.VACIA) {
+                       
                         break;
                     }
                     start = start.sum(dir);
                 }
             }
+           
         }
         return false;
     }
@@ -199,7 +220,7 @@ public class Tablero implements java.io.Serializable{
         negras.remove(p);
     }
 
-    public ArrayList<Pair> getLegalMoves(Casilla c) {
+    public ArrayList<Pair> getLegalMoves(Casilla c) { 
         ArrayList<Pair> positions;
         if (c == Casilla.BLANCA) {
             positions = (ArrayList<Pair>) negras.clone();
@@ -210,13 +231,19 @@ public class Tablero implements java.io.Serializable{
         for (int i = 0; i < positions.size(); ++i) {
             Get_empty_nearby(positions.get(i), Legals);
         }
+        int s = Legals.size();
         if (!Legals.isEmpty()) {
-            for (int j = 0; j < Legals.size(); ++j) {
+            for (int j = s-1; j >= 0; --j) {
                 if (!is_legal(Legals.get(j), c)) {
                     Legals.remove(j);
+                    
                 }
             }
         }
+        for(int i = 0; i < Legals.size(); ++i) {
+            System.out.print(Legals.get(i).convertString() + " ");
+        }
+        System.out.println("");
         return Legals;
     }
 
@@ -232,10 +259,18 @@ public class Tablero implements java.io.Serializable{
         return swaps;
     }
     public void print_tablero() {
+        String nums = "  |1|2|3|4|5|6|7|8|";
+        String letters = "12345678";
+        System.out.println(nums);
         for(int i = 0; i < 8; ++i) {
+            System.out.print(letters.charAt(i) + "| ");
             for(int j = 0; j < 8; ++j) {
-                System.out.println(this.matrix[i][j]);
+                
+                if(this.matrix[i][j] == Casilla.VACIA) System.out.print("- ");
+                else if(this.matrix[i][j] == Casilla.BLANCA) System.out.print("B ");
+                else System.out.print("N ");
             }
+            System.out.println("");
         }
     }
 }
