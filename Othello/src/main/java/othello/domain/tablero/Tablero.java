@@ -1,5 +1,6 @@
 package othello.domain.tablero;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import othello.data.Casilla;
 import othello.data.Pair;
@@ -8,7 +9,7 @@ import othello.data.Pair;
  *
  * @author Jaumes
  */
-public class Tablero implements java.io.Serializable{
+public class Tablero implements Serializable{
 
     protected static final Pair directions[] = {
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),

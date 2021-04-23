@@ -18,7 +18,7 @@ import othello.domain.Estadistica;
 public class Jugador extends GameState{
     
     //Attributes
-    private String id;
+    private static String id;
     private int Fitxes;
     private Estadistica stats;
 
@@ -65,7 +65,7 @@ public class Jugador extends GameState{
         return stats;
     }
 
-    public String getId() {
+    public static String getId() {
         return id;
     }
 

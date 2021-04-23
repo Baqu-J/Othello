@@ -1,10 +1,12 @@
 package othello.data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Foster
  */
-public class Pair {
+public class Pair implements Serializable{
 
     private int first;
     private int second;

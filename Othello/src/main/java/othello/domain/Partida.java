@@ -1,5 +1,6 @@
 package othello.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import othello.data.Casilla;
 import othello.data.Node;
@@ -11,7 +12,7 @@ import othello.domain.tablero.Tablero;
  *
  * @author
  */
-public class Partida {
+public class Partida implements Serializable {
 
     private static final int PESOS_HARD[][]
             = {{4, -3, 2, 2, 2, 2, -3, 4},

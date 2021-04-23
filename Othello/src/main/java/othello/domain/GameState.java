@@ -1,6 +1,7 @@
 
 package othello.domain;
 
+import java.io.Serializable;
 import othello.data.Node;
 import othello.data.Tree;
 
@@ -8,7 +9,7 @@ import othello.data.Tree;
  *
  * @author Aleix
  */
-public abstract class GameState implements GameStateInterface{
+public abstract class GameState implements GameStateInterface, Serializable{
     
     private int FitxesRestants;
 

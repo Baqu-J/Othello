@@ -1,5 +1,6 @@
 package othello.domain.tablero;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import othello.data.Casilla;
 import othello.data.Pair;
@@ -10,9 +11,11 @@ import othello.data.Pair;
  */
 
 //hashmap i copiar constructora bucle modificacion escenario
-public class Escenario extends Tablero {
+public class Escenario extends Tablero implements Serializable{
+    private String id;
     
-    public Escenario() {
+    public Escenario(String name) {
+        id = name;
          matrix = new Casilla[8][8];
         
         for (int i = 0; i < 8; i++) {
@@ -47,6 +50,10 @@ public class Escenario extends Tablero {
         if (matrix[p.first()][p.second()] != Casilla.VACIA) {
              matrix[p.first()][p.second()] = Casilla.VACIA;
         }
+    }
+    
+    public String getId() {
+        return id;
     }
 
 }
