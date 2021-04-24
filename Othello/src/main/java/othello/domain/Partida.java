@@ -14,60 +14,184 @@ import othello.domain.tablero.Tablero;
  */
 public class Partida implements Serializable {
 
-    private static final int PESOS_HARD[][]
-            = {{4, -3, 2, 2, 2, 2, -3, 4},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {4, -3, 2, 2, 2, 2, -3, 4}};
+    // Attributes
+    enum GameType {
+        IAvsIA, PLAYERvsIA, PLAYERvsPLAYER
+    };
 
-    private static final int PESOS_NORMAL[][]
-            = {{4, -3, 2, 2, 2, 2, -3, 4},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {4, -3, 2, 2, 2, 2, -3, 4}};
-
-    private static final int PESOS_EASY[][]
-            = {{4, -3, 2, 2, 2, 2, -3, 4},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {4, -3, 2, 2, 2, 2, -3, 4}};
-
+    private GameType type;
     private Tablero t;
+    private IA ia1;
+    private IA ia2;
+    private Jugador j1;
+    private Jugador j2;
+    private int turn;
+    
+    // Constructors
+    public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
 
-    private static void createTree_rec(Tree tree, int depth, Tablero tablero, Casilla player) {
-        if (depth != 0) {
-            ArrayList<Pair> legalMoves = tablero.getLegalMoves(player);
-            for(Pair p : legalMoves) {
-                Tablero tDeepCopy = tablero.DeepCopy();
-                ArrayList<Pair> pa = tDeepCopy.commitPlay(p, player);
-                int score = 0;
-                for (Pair coord : pa) {
-                    score += PESOS_EASY[coord.first()][coord.second()];
+        this.ia1 = player1;
+        this.ia2 = player2;
+        this.j1 = null;
+        this.j2 = null;
+    }
+
+    public Partida(GameType type, Tablero t, int turno, IA player1, Jugador player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
+
+        this.ia1 = player1;
+        this.ia2 = null;
+        this.j1 = null;
+        this.j2 = player2;
+
+        swapPlayersColors();
+    }
+
+    public Partida(GameType type, Tablero t, int turno, Jugador player1, Jugador player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
+
+        this.ia1 = null;
+        this.ia2 = null;
+        this.j1 = player1;
+        this.j2 = player2;
+    }
+
+    private void swapPlayersColors() {
+        if (this.type == GameType.PLAYERvsIA) {
+            if (this.ia1.getColor() == Casilla.BLANCA) {
+                this.ia2 = this.ia1;
+                this.ia1 = null;
+                this.j1 = this.j2;
+                this.j2 = null;
+            }
+        }
+    }
+
+    // Getters and Setters
+    public Casilla[][] getT() {
+        return t.getMatrix();
+    }
+
+    public void setT(Tablero t) {
+        this.t = t;
+    }
+
+    public GameType getType() {
+        return type;
+    }
+
+    public void setType(GameType type) {
+        this.type = type;
+    }
+
+    // Other Methods
+    public void playGame() {
+        boolean negrasHasMoves = true;
+        boolean blancasHasMoves = true;
+        do {
+            /*while(){
+
+            }
+             */
+
+            move();
+            if (t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
+                negrasHasMoves = false;
+            }
+            if (t.getLegalMoves(Casilla.BLANCA).isEmpty()) {
+                blancasHasMoves = false;
+            }
+        } while (negrasHasMoves || blancasHasMoves);
+
+        if (this.type != GameType.IAvsIA) {
+            if(this.j1 != null) {
+            //this.j1.updateStats();
+            }else {
+                 //this.j2.updateStats();
+            }
+            if (this.type == GameType.PLAYERvsPLAYER) {
+                //this.j2.updateStats();
+            }
+        }
+    }
+
+    public void move() {
+        switch (this.type) {
+
+            case IAvsIA:
+                if (this.turn % 2 == 0) {
+                    iaMove(this.ia1);
+                } else {
+                    iaMove(this.ia2);
                 }
+                break;
 
-                Tree tr = tree.addLeaf(new Node(p, player, score));
-                createTree_rec(tr, depth - 1, tDeepCopy, player.contrary());
+            case PLAYERvsIA:
+                if (this.turn % 2 == 0) {
+                    if (this.j1 == null) {
+                        iaMove(this.ia1);
+                    } else {
+                        //t.commitPlay( ?, this.j1);
+                    }
+                } else {
+                    if (this.j2 == null) {
+                        iaMove(this.ia2);
+                    } else {
+                        //t.commitPlay( ?, this.j2);
+                    }
+                }
+                break;
+
+            case PLAYERvsPLAYER:
+                if (this.turn % 2 == 0) {
+                    //t.commitPlay( ?, this.j1);
+                } else {
+                    //t.commitPlay( ?, this.j2);
+                }
+                break;
+
+            default:
+                break;
+        }
+        this.turn++;
+    }
+
+    private void iaMove(IA ia) {
+        Tree jugadas = createTree(t, ia);
+        Pair c = ia.escogerMovimiento(jugadas);
+        t.commitPlay(c, ia.getColor());
+    }
+
+    private static void createTree_rec(Tree tree, int depth, Tablero tablero, IA player, Casilla color) {
+        if (depth >= 0) {
+            ArrayList<Pair> legalMoves = tablero.getLegalMoves(color);
+            for (Pair p : legalMoves) {
+                Tablero tDeepCopy = tablero.DeepCopy();
+                ArrayList<Pair> pa = tDeepCopy.commitPlay(p, color);
+
+                Tree tr;
+                if (depth == 0) {
+                    int score = player.obtener_score(pa);
+                    tr = tree.addLeaf(new Node(p, color, score));
+                } else {
+                    tr = tree.addLeaf(new Node(p, color, -1));
+                }
+                createTree_rec(tr, depth - 1, tDeepCopy, player, color.contrary());
 
             }
         }
     }
-    
-    
-    Tree createTree(int depth, Tablero tablero, Casilla player) {
+
+    Tree createTree(Tablero tablero, IA ia) {
         Tree jugadas = new Tree(new Node());
-        createTree_rec(jugadas, depth, tablero, player);
+        createTree_rec(jugadas, ia.getDepth(), tablero, ia, ia.getColor());
         return jugadas;
     }
 }
