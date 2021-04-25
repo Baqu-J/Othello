@@ -6,6 +6,7 @@
 package othello.persistence;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,30 +25,54 @@ public class Serializador {
     private static Gson serializador;
    
     
-    public void createJSONfromJugador(Estadistica n) throws IOException {
+    public int createJSONfromJugador(Estadistica n){
+        int ret = 1;
+        try{
         File json = new File("JSON/Ranking/" + n.getId() + ".json");
         json.createNewFile();
         serializador = new Gson();
         FileWriter w = new FileWriter(json.getPath());
         w.write(serializador.toJson(n));
         w.close();
+        }
+        catch(IOException io) {
+            ret = 0;
+        }
+        return ret;
     }
     
-    public Estadistica getEstadisticafromFile(String path) throws FileNotFoundException {
-        File f = new File(path);
-        Scanner reader = new Scanner(f);
-        String json = reader.next();
-        serializador = new Gson();
-        return serializador.fromJson(json, Estadistica.class);
+    public int getEstadisticafromFile(Estadistica e, String path) {
+        int ret = 1;
+        try {
+            File f = new File(path);
+            Scanner reader = new Scanner(f);
+            String json = reader.next();
+            serializador = new Gson();
+            e = serializador.fromJson(json, Estadistica.class);
+        }
+        catch(JsonSyntaxException | FileNotFoundException f) {
+            ret = 0;
+        }
+        
+        return  ret;
+        
     }
     
-    public void createJSONfromPartida(Partida n) throws IOException {
+    public int createJSONfromPartida(Partida n) throws IOException {
+        int ret = 1;
+        try{
         File json = new File("JSON/Partida/SavedGame.json");
         json.createNewFile();
         serializador = new Gson();
         FileWriter w = new FileWriter(json.getPath());
         w.write(serializador.toJson(n));
         w.close();
+        }
+        
+        catch(IOException io) {
+            ret = 0;
+        }
+        return ret;
     }
     
     public Partida getPartidafromFile() throws FileNotFoundException {
