@@ -21,7 +21,7 @@ import othello.domain.tablero.Escenario;
  *
  * @author Foster
  */
-public class Serializador {
+public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
     private static Gson serializador;
    
     

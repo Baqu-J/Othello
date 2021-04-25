@@ -1,11 +1,16 @@
 package othello.persistence;
 
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.PriorityQueue;
+import othello.domain.Estadistica;
+
 /**
  *
  * @author 
  */
 public class CtrlPersistence {
-        
+    private Serializador serializador;
     // Attributes
     private static CtrlPersistence instance;
     
@@ -22,11 +27,28 @@ public class CtrlPersistence {
     }
     //methods
     public void CrearPerfil() { //Check si perfil existe
-    
+        Scanner s = new Scanner(System.in);
+        String id = s.next();
+        Estadistica e = new Estadistica(id);
+        int resp = serializador.createJSONfromEstadistica(e);
+        if(resp == 1) {System.out.println("Perfil creado con exito");}
+        else if(resp == -1) {System.out.println("Perfil ya existe");}
+        else {System.out.println("Ha habido un error, prueba de nuevo");}
     }
     
-    public void CargarRanking() { //DEVUELVE Priority_queue
-    
+    public PriorityQueue CargarRanking() { //DEVUELVE Priority_queue
+        Comparator c = new Comparator<Estadistica>() {
+            @Override
+            public int compare(Estadistica o1, Estadistica o2) {
+                return o2.getPunts()- o1.getPunts();
+            }
+        };
+        
+        PriorityQueue<Estadistica> ranking = new PriorityQueue<>(c);
+        
+        //STUFF
+        
+        return ranking;
     }
     
     public void BorrarSavedGame() {  //se llama al acabar partida o al sobreescribir
