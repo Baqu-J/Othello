@@ -24,12 +24,12 @@ public class Serializador {
     private static Gson serializador;
    
     
-    public void createJSONfromJugador(Jugador n) throws IOException {
-        File json = new File("JSON/Ranking/" + Jugador.getId() + ".json");
+    public void createJSONfromJugador(Estadistica n) throws IOException {
+        File json = new File("JSON/Ranking/" + n.getId() + ".json");
         json.createNewFile();
         serializador = new Gson();
         FileWriter w = new FileWriter(json.getPath());
-        w.write(serializador.toJson(n.Estadistiques()));
+        w.write(serializador.toJson(n));
         w.close();
     }
     
