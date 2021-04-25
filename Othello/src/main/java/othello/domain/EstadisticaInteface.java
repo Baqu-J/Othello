@@ -7,22 +7,17 @@ package othello.domain;
 public interface EstadisticaInteface {
 
     /**
-     * incrementa la variable victories
+     * incrementa la variable victories + 1
      */
     void incVictories();
 
     /**
-     * incrementa la variable derrotes
+     * incrementa la variable derrotes + 1
      */
     void incDerrotes();
 
     /**
-     * incrementa la variable empat
+     * incrementa la variable empat + 1
      */
     void incEmpat();
-
-    /*
-     @return 
-     */
-    public int getPunts();
 }

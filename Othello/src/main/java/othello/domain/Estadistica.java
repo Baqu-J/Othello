@@ -9,43 +9,52 @@ import java.util.ArrayList;
 public class Estadistica implements EstadisticaInteface {
 
     // Attributes
+    private static String id;
     private int victoria;
     private int derrota;
     private int empat;
     private int punts;
 
     // Constructors
-    public Estadistica() {
+    public Estadistica(String id) {
+        this.id = id;
         this.victoria = 0;
         this.derrota = 0;
         this.empat = 0;
         this.punts = 0;
     }
 
-    public Estadistica(int victoria, int derrota, int empat, int punts) {
+    public Estadistica(String id, int victoria, int derrota, int empat, int punts) {
+        this.id = id;
         this.victoria = victoria;
         this.derrota = derrota;
         this.empat = empat;
         this.punts = punts;
     }
 
-
     // Getters and Setters
+    public String getId() {
+        return this.id;
+    }
+
     public int getVictoria() {
-        return victoria;
+        return this.victoria;
     }
 
     public int getDerrota() {
-        return derrota;
+        return this.derrota;
     }
 
     public int getEmpat() {
-        return empat;
+        return this.empat;
     }
 
-    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public int getPunts() {
-        return punts;
+        return this.punts;
     }
 
     public void setVictoria(int victoria) {
