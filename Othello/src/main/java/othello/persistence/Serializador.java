@@ -25,15 +25,17 @@ public class Serializador {
     private static Gson serializador;
    
     
-    public int createJSONfromJugador(Estadistica n){
+    public int createJSONfromEstadistica(Estadistica n){
         int ret = 1;
         try{
-        File json = new File("JSON/Ranking/" + n.getId() + ".json");
-        json.createNewFile();
-        serializador = new Gson();
-        FileWriter w = new FileWriter(json.getPath());
-        w.write(serializador.toJson(n));
-        w.close();
+            File json = new File("JSON/Ranking/" + n.getId() + ".json");
+            if(json.createNewFile()) {
+                serializador = new Gson();
+                FileWriter w = new FileWriter(json.getPath());
+                w.write(serializador.toJson(n));
+                w.close();
+            }
+            else ret = -1;
         }
         catch(IOException io) {
             ret = 0;
@@ -45,10 +47,13 @@ public class Serializador {
         int ret = 1;
         try {
             File f = new File(path);
-            Scanner reader = new Scanner(f);
-            String json = reader.next();
-            serializador = new Gson();
-            e = serializador.fromJson(json, Estadistica.class);
+            if(f.exists()){
+                Scanner reader = new Scanner(f);
+                String json = reader.next();
+                serializador = new Gson();
+                e = serializador.fromJson(json, Estadistica.class);
+            }
+            else ret = -1;
         }
         catch(JsonSyntaxException | FileNotFoundException f) {
             ret = 0;
@@ -58,15 +63,17 @@ public class Serializador {
         
     }
     
-    public int createJSONfromPartida(Partida n) throws IOException {
+    public int createJSONfromPartida(Partida n) {
         int ret = 1;
         try{
-        File json = new File("JSON/Partida/SavedGame.json");
-        json.createNewFile();
-        serializador = new Gson();
-        FileWriter w = new FileWriter(json.getPath());
-        w.write(serializador.toJson(n));
-        w.close();
+            File json = new File("JSON/Partida/SavedGame.json");
+            if(json.createNewFile()) {
+                serializador = new Gson();
+                FileWriter w = new FileWriter(json.getPath());
+                w.write(serializador.toJson(n));
+                w.close();
+            }
+            else ret = -1;
         }
         
         catch(IOException io) {
@@ -75,29 +82,58 @@ public class Serializador {
         return ret;
     }
     
-    public Partida getPartidafromFile() throws FileNotFoundException {
-        File f = new File("JSON/Partida/SavedGame.json");
-        Scanner reader = new Scanner(f);
-        String json = reader.next();
-        serializador = new Gson();
-        return serializador.fromJson(json, Partida.class);
+    public int getPartidafromFile(Partida p) {
+        int ret = 1;
+        try{
+            File f = new File("JSON/Partida/SavedGame.json");
+            if(f.exists()) {
+                Scanner reader = new Scanner(f);
+                String json = reader.next();
+                serializador = new Gson();
+                p = serializador.fromJson(json, Partida.class);
+            }
+            else ret = -1;
+        }
+        catch(FileNotFoundException f) {
+            ret = 0;
+        }
+        return ret;
     }
     
-    public void createJSONfromEscenario(Escenario e) throws IOException {
-        File json = new File("JSON/Escenarios/" + e.getId() + ".json");
-        json.createNewFile();
-        serializador = new Gson();
-        FileWriter w = new FileWriter(json.getPath());
-        w.write(serializador.toJson(e));
-        w.close();
+    public int createJSONfromEscenario(Escenario e) {
+        int ret = 1;
+        try {
+            File json = new File("JSON/Escenarios/" + e.getId() + ".json");
+            if(json.createNewFile()) {
+            serializador = new Gson();
+            FileWriter w = new FileWriter(json.getPath());
+            w.write(serializador.toJson(e));
+            w.close();
+            }
+            else ret = -1;
+        }
+        catch(IOException io) {
+            ret = 0;
+        }
+        return ret;
     }
     
-    public Escenario getEscenariofromFile(String path) throws FileNotFoundException {
-        File f = new File(path);
-        Scanner reader = new Scanner(f);
-        String json = reader.next();
-        serializador = new Gson();
-        return serializador.fromJson(json, Escenario.class);
+    public int getEscenariofromFile(Escenario e, String path) {
+        int ret = 1;
+        try {
+            File f = new File(path);
+            if(f.exists()) {
+                Scanner reader = new Scanner(f);
+                String json = reader.next();
+                serializador = new Gson();
+                e = serializador.fromJson(json, Escenario.class);
+            }
+            else ret = -1;
+        }
+        catch(FileNotFoundException f) {
+            ret = 0;
+        }
+        return ret;
     }
     
 }
