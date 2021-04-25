@@ -26,7 +26,9 @@ public class Partida implements Serializable {
     private Jugador j1;
     private Jugador j2;
     private int turn;
-    
+
+    private Pair coord;
+
     // Constructors
     public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
         this.type = type;
@@ -91,16 +93,19 @@ public class Partida implements Serializable {
         this.type = type;
     }
 
+    public Pair getCoord() {
+        return coord;
+    }
+
+    public void setCoord(Pair coord) {
+        this.coord = coord;
+    }
+
     // Other Methods
     public void playGame() {
         boolean negrasHasMoves = true;
         boolean blancasHasMoves = true;
         do {
-            /*while(){
-
-            }
-             */
-
             move();
             if (t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
                 negrasHasMoves = false;
@@ -110,14 +115,44 @@ public class Partida implements Serializable {
             }
         } while (negrasHasMoves || blancasHasMoves);
 
+        updateEstadisticas();
+    }
+
+    private void updateEstadisticas() {
+        int b = t.getBlancas().size();
+        int n = t.getNegras().size();
         if (this.type != GameType.IAvsIA) {
-            if(this.j1 != null) {
-            //this.j1.updateStats();
-            }else {
-                 //this.j2.updateStats();
-            }
-            if (this.type == GameType.PLAYERvsPLAYER) {
-                //this.j2.updateStats();
+
+            if (b == n) {
+
+                if (this.j1 != null) {
+                    this.j1.updateStats(false, false, true);
+                } else {
+                    this.j2.updateStats(false, false, true);
+                }
+                if (this.type == GameType.PLAYERvsPLAYER) {
+                    this.j2.updateStats(false, false, true);
+                }
+
+            } else if (b > n) {
+                if (this.j1 != null) {
+                    this.j1.updateStats(false, true, false);
+                } else {
+                    this.j2.updateStats(true, false, false);
+                }
+                if (this.type == GameType.PLAYERvsPLAYER) {
+                    this.j2.updateStats(true, false, false);
+                }
+            } else if (b < n) {
+                if (this.j1 != null) {
+
+                    this.j1.updateStats(true, false, false);
+                } else {
+                    this.j2.updateStats(false, true, false);
+                }
+                if (this.type == GameType.PLAYERvsPLAYER) {
+                    this.j2.updateStats(false, true, false);
+                }
             }
         }
     }
@@ -138,22 +173,22 @@ public class Partida implements Serializable {
                     if (this.j1 == null) {
                         iaMove(this.ia1);
                     } else {
-                        //t.commitPlay( ?, this.j1);
+                        t.commitPlay(coord, this.j1.getColor());
                     }
                 } else {
                     if (this.j2 == null) {
                         iaMove(this.ia2);
                     } else {
-                        //t.commitPlay( ?, this.j2);
+                        t.commitPlay(coord, this.j2.getColor());
                     }
                 }
                 break;
 
             case PLAYERvsPLAYER:
                 if (this.turn % 2 == 0) {
-                    //t.commitPlay( ?, this.j1);
+                    t.commitPlay(coord, this.j1.getColor());
                 } else {
-                    //t.commitPlay( ?, this.j2);
+                    t.commitPlay(coord, this.j2.getColor());
                 }
                 break;
 

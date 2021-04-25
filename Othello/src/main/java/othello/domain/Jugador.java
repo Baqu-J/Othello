@@ -52,4 +52,15 @@ public class Jugador extends GameState {
     public Node elegir_movimiento(Tree<Node> t) {
         return null;
     }
+
+    public void updateStats(boolean victoria, boolean derrota, boolean empate) {
+        if (victoria) {
+            stats.incVictories();
+        } else if (derrota) {
+            stats.incDerrotes();
+        } else if (empate) {
+            stats.incEmpat();
+        }
+    }
+
 }
