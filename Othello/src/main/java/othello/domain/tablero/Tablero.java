@@ -15,11 +15,11 @@ public class Tablero implements Serializable{
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
-    protected Casilla[][] matrix;
+    private Casilla[][] matrix;
     
     //CAMBIAR POR HASHMAP<PAIR, CASILLA> also GSON
-    protected ArrayList<Pair> blancas;
-    protected ArrayList<Pair> negras;
+    private ArrayList<Pair> blancas;
+    private ArrayList<Pair> negras;
 
     //PRIVATE METHODS
     //construye el tablero standard
@@ -163,20 +163,25 @@ public class Tablero implements Serializable{
     }
 
     public Tablero DeepCopy() {
-        Tablero t = new Tablero();
-
-        for (int x = 0; x < this.matrix.length; ++x) {
-            for (int y = 0; y < this.matrix[0].length; ++y) {
-                t.matrix[x][y] = this.matrix[x][y];
-            }
+        Casilla[][] m2 = new Casilla[8][8];
+        
+        for (int i = 0; i < matrix.length; i++) {
+            System.arraycopy(matrix[i], 0, m2[i], 0, matrix[0].length);
         }
 
-        for (int i = 0; i < blancas.size(); ++i) {
-            t.blancas.add(i, this.blancas.get(i));
+        ArrayList<Pair> b2 = new ArrayList<>();
+        
+        for (Pair p : blancas) {
+            b2.add(new Pair(p.first(), p.second()));
         }
-        for (int i = 0; i < negras.size(); ++i) {
-            t.negras.add(i, this.negras.get(i));
+        
+        ArrayList<Pair> n2 = new ArrayList<>();
+        
+        for (Pair p : negras) {
+            n2.add(new Pair(p.first(), p.second()));
         }
+        
+        Tablero t = new Tablero(m2, b2, n2);
 
         return t;
     }
@@ -220,7 +225,7 @@ public class Tablero implements Serializable{
     public void delNegras(Pair p) {
         negras.remove(p);
     }
-
+    
     public ArrayList<Pair> getLegalMoves(Casilla c) { 
         ArrayList<Pair> positions;
         if (c == Casilla.BLANCA) {
