@@ -28,6 +28,8 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
     public int createJSONfromEstadistica(Estadistica n){
         int ret = 1;
         try{
+            File directory = new File("/JSON/Ranking/");
+            if(!directory.exists()) directory.mkdirs();
             File json = new File("JSON/Ranking/" + n.getId() + ".json");
             if(json.createNewFile()) {
                 serializador = new Gson();
@@ -66,6 +68,8 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
     public int createJSONfromPartida(Partida n) {
         int ret = 1;
         try{
+            File directory = new File("/JSON/Partida/");
+            if(!directory.exists()) directory.mkdirs();
             File json = new File("JSON/Partida/SavedGame.json");
             if(json.createNewFile()) {
                 serializador = new Gson();
@@ -103,6 +107,8 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
     public int createJSONfromEscenario(Escenario e) {
         int ret = 1;
         try {
+            File directory = new File("/JSON/Escenarios/");
+            if(!directory.exists()) directory.mkdirs();
             File json = new File("JSON/Escenarios/" + e.getId() + ".json");
             if(json.createNewFile()) {
             serializador = new Gson();

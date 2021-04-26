@@ -37,10 +37,10 @@ public class Main {
                     exit = true;
                     break;
                 case 1:
-                    p = crearPerfil();
+                    s = crearPerfil();
                     break;
                 case 2:
-                    consultarEstadisticas(p);
+                    consultarEstadisticas(s);
                     break;
                 case 3:
                     e = gestionEscenarios(e);
@@ -104,7 +104,7 @@ public class Main {
     }
 
     private static void consultarEstadisticas(Estadistica s) {
-        System.out.println(s.getName()+"->");
+        System.out.println(s.getId()+"->");
         System.out.println(s.toString());
     }
     

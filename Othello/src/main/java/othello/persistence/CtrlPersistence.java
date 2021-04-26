@@ -1,9 +1,11 @@
 package othello.persistence;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.PriorityQueue;
 import othello.domain.Estadistica;
+import othello.domain.tablero.Escenario;
 
 /**
  *
@@ -26,26 +28,28 @@ public class CtrlPersistence {
         
     }
     //methods
-    public void CrearPerfil() { //Check si perfil existe
+    public int CrearPerfil() { //Check si perfil existe
         Scanner s = new Scanner(System.in);
         String id = s.next();
         Estadistica e = new Estadistica(id);
         int resp = serializador.createJSONfromEstadistica(e);
-        if(resp == 1) {System.out.println("Perfil creado con exito");}
-        else if(resp == -1) {System.out.println("Perfil ya existe");}
-        else {System.out.println("Ha habido un error, prueba de nuevo");}
+        return resp;
     }
     
     public PriorityQueue CargarRanking() { //DEVUELVE Priority_queue
-        Comparator c = new Comparator<Estadistica>() {
-            @Override
-            public int compare(Estadistica o1, Estadistica o2) {
-                return o2.getPunts()- o1.getPunts();
-            }
-        };
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPunts()- o1.getPunts();
         
         PriorityQueue<Estadistica> ranking = new PriorityQueue<>(c);
-        
+        File dir = new File("/JSON/Ranking");
+        if(dir.exists()) {
+            
+            File[] list = dir.listFiles();
+            for(int i = 0; i < list.length; ++i) {
+                Estadistica e = new Estadistica("");
+                serializador.getEstadisticafromFile(e, list[i].getPath());
+                ranking.add(e);
+            }
+        }
         //STUFF
         
         return ranking;
