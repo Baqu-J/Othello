@@ -213,7 +213,7 @@ public class Partida implements Serializable {
 
                 Tree tr;
                 if (depth == 0) {
-                    int score = player.obtener_score(pa);
+                    int score = player.obtenerScore(pa);
                     tr = tree.addLeaf(new Node(p, color, score));
                 } else {
                     tr = tree.addLeaf(new Node(p, color, -1));

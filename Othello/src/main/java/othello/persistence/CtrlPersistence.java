@@ -37,7 +37,7 @@ public class CtrlPersistence {
     }
     
     public PriorityQueue CargarRanking() { //DEVUELVE Priority_queue
-        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPunts()- o1.getPunts();
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
         
         PriorityQueue<Estadistica> ranking = new PriorityQueue<>(c);
         File dir = new File("/JSON/Ranking");

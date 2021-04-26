@@ -1,36 +1,40 @@
-
 package othello.domain;
 
 import java.io.Serializable;
 import othello.data.Casilla;
-import othello.data.Node;
-import othello.data.Tree;
 
 /**
  *
- * @author Aleix
+ * @author 
  */
-public abstract class GameState implements GameStateInterface, Serializable{
+public abstract class GameState implements Serializable{
     
-    private int FitxesRestants;
+    // Attributes
     private Casilla color;
+    private int numeroDeFichas;
 
-    public Casilla getColor() {
-        return color;
+    // Constructors
+    public GameState(Casilla color, int numeroDeFichas) {
+        this.color = color;
+        this.numeroDeFichas = numeroDeFichas;
     }
 
+    // Getters and Setters
+    public Casilla getColor() {
+        return this.color;
+    }
+
+    public int getNumeroDeFichas() {
+        return this.numeroDeFichas;
+    }
+    
+    public void setNumeroDeFitxes(int numeroDeFichas) {
+        this.numeroDeFichas = numeroDeFichas;
+    }
+    
     public void setColor(Casilla color) {
         this.color = color;
     }
 
-    @Override
-    public Node elegir_movimiento(Tree<Node> t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-    }
-
-    @Override
-    public int Nfitxes() {
-        return FitxesRestants;
-    }
+    // Other Methods
 }

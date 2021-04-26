@@ -1,35 +1,37 @@
 package othello.domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
+ * Clase Estadistica que contiene un Id (Nombre de un jugador) con sus
+ * estadísticas (Victorias, Derrotas, Empates ...).
  *
  * @author Aleix Velasco Calvo
  */
-public class Estadistica implements EstadisticaInteface {
+public class Estadistica implements Serializable {
 
     // Attributes
     private static String id;
     private int victoria;
     private int derrota;
-    private int empat;
-    private int punts;
+    private int empate;
+    private int puntos;
 
     // Constructors
     public Estadistica(String id) {
         this.id = id;
         this.victoria = 0;
         this.derrota = 0;
-        this.empat = 0;
-        this.punts = 0;
+        this.empate = 0;
+        this.puntos = 0;
     }
 
-    public Estadistica(String id, int victoria, int derrota, int empat, int punts) {
+    public Estadistica(String id, int victoria, int derrota, int empate, int puntos) {
         this.id = id;
         this.victoria = victoria;
         this.derrota = derrota;
-        this.empat = empat;
-        this.punts = punts;
+        this.empate = empate;
+        this.puntos = puntos;
     }
 
     // Getters and Setters
@@ -45,16 +47,16 @@ public class Estadistica implements EstadisticaInteface {
         return this.derrota;
     }
 
-    public int getEmpat() {
-        return this.empat;
+    public int getEmpate() {
+        return this.empate;
+    }
+
+    public int getPuntos() {
+        return this.puntos;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-    
-    public int getPunts() {
-        return this.punts;
     }
 
     public void setVictoria(int victoria) {
@@ -65,35 +67,35 @@ public class Estadistica implements EstadisticaInteface {
         this.derrota = derrota;
     }
 
-    public void setEmpat(int empat) {
-        this.empat = empat;
+    public void setEmpate(int empate) {
+        this.empate = empate;
     }
 
-    public void setPunts(int punts) {
-        this.punts = punts;
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 
-    @Override
-    public void incVictories() {
+    // Other Methods
+    /**
+     * Método que incrementa el atributo victoria + 1.
+     */
+    public void incVictorias() {
         setVictoria(getVictoria() + 1);
-        this.punts = this.punts + 3;
+        this.puntos = this.puntos + 3;
     }
 
-    @Override
-    public void incDerrotes() {
+    /**
+     * Método que incrementa el atributo derrota + 1.
+     */
+    public void incDerrotas() {
         setDerrota(getDerrota() + 1);
     }
 
-    @Override
-    public void incEmpat() {
-        setEmpat(getEmpat() + 1);
-        ++this.punts;
+    /**
+     * Método que incrementa el atributo empate + 1.
+     */
+    public void incEmpates() {
+        setEmpate(getEmpate() + 1);
+        ++this.puntos;
     }
-
-
-    public ArrayList<String> toStringStat() {
-        //return "Estadistica{" + "victoria=" + victoria + ", derrota=" + derrota + ", empat=" + empat + ", punts=" + punts + '}';
-        return new ArrayList<>();
-    }
-
 }

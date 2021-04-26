@@ -2,7 +2,7 @@ package othello.data;
 
 /**
  *
- * @author Aleix
+ * @author Foster
  */
 public enum Casilla {
 

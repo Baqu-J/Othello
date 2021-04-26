@@ -1,66 +1,52 @@
-/**
- *
- * @author Foster
- */
 package othello.domain;
 
-import java.util.ArrayList;
-import othello.data.Node;
-import othello.data.Tree;
-import othello.domain.Estadistica;
+import othello.data.Casilla;
 
+/**
+ * Clase Jugador que hereda de GameState y contiene las estadísticas del Jugador
+ * junto a métodos de actualización de dichas estadísticas.
+ *
+ * @author Aleix Velasco Calvo
+ */
 public class Jugador extends GameState {
 
     //Attributes
-    private int Fitxes;
     private Estadistica stats;
 
     //Constructors
-    public Jugador() { //Para usuarios GUEST
-        Fitxes = 0;
+    public Jugador(Casilla color, int numeroDeFichas) { // Para usuarios GUEST
+        super(color, numeroDeFichas);
     }
 
-    public Jugador(String id1) {
-        Fitxes = 0;
-        stats = new Estadistica(id1);
-    }
-
-    public Jugador(int F, Estadistica E) {
-        Fitxes = F;
-        stats = E;
+    public Jugador(Estadistica s, Casilla color, int numeroDeFichas) {
+        super(color, numeroDeFichas);
+        this.stats = s;
     }
 
     // Getters and Setters
-    public void SetFitxes(int F) {
-        Fitxes = F;
-    }
-
-    public void SetStats(Estadistica E) {
-        stats = E;
-    }
-
-    @Override
-    public int Nfitxes() { //retorna el nombre de fitxes del jugador al taulell
-        return Fitxes;
-    }
-
-    public Estadistica Estadistiques() {
+    public Estadistica getStats() {
         return stats;
     }
 
-    @Override
-    public Node elegir_movimiento(Tree<Node> t) {
-        return null;
+    public void setStats(Estadistica stats) {
+        this.stats = stats;
     }
 
+    // Other Methods
+    /**
+     * Método que actualiza las estadísticas del jugador
+     *
+     * @param victoria booleano que indica si ha ganado o no
+     * @param derrota booleano que indica si ha perdido o no
+     * @param empate booleano que indica si ha quedado empate o no
+     */
     public void updateStats(boolean victoria, boolean derrota, boolean empate) {
         if (victoria) {
-            stats.incVictories();
+            stats.incVictorias();
         } else if (derrota) {
-            stats.incDerrotes();
+            stats.incDerrotas();
         } else if (empate) {
-            stats.incEmpat();
+            stats.incEmpates();
         }
     }
-
 }
