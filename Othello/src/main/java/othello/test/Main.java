@@ -296,7 +296,9 @@ public class Main {
     }
 
     private static void guardarDatos() {
-        
+        dominio = CtrlDomain.getInstance();
+        dominio.guardarEscenarios();
+        dominio.guardarUsuarios();
     }
 
 }

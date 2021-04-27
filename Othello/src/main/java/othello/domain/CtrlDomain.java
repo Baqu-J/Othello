@@ -39,7 +39,7 @@ public class CtrlDomain {
         perfiles = ctrlPersistencia.CargarPerfiles();
     }
     
-    private void guardarUsuarios() {
+    public void guardarUsuarios() {
         
         for(Estadistica e: perfiles) {
             ctrlPersistencia.GuardarPerfil(e);
@@ -51,7 +51,7 @@ public class CtrlDomain {
         
     }
     
-    private void guardarEscenarios() {
+    public void guardarEscenarios() {
         
     }
     
@@ -63,7 +63,15 @@ public class CtrlDomain {
     }
     
     public int borrarPerfil(String nombre) {
-        return ctrlPersistencia.BorrarPerfil(nombre);
+        int ret;
+        ret = ctrlPersistencia.BorrarPerfil(nombre);
+        if(ret ==1){
+            for(Estadistica e: perfiles) {
+                if(e.getId().equals(nombre)) perfiles.remove(e);
+                break;
+            }
+        }
+        return ret;
     }
     
     public void verEstadisticasPerfil(String nombre) {
@@ -82,11 +90,7 @@ public class CtrlDomain {
             System.out.println("El usuario no existe.");
         }
     }
-    /*
-    private Perfil buscarPerfilPorNombre(String nombre) {
-        return perfiles.get(nombre);
-    }
-    */
+
     public void DisplayRanking() {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
         Collections.sort(perfiles, c);
