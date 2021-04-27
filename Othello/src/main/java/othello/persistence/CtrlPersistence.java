@@ -37,6 +37,21 @@ public class CtrlPersistence {
         return resp;
     }
     
+    /**
+     *
+     * @param nombre
+     * @return 
+     */
+    public int BorrarPerfil(String nombre) { //Check si perfil existe
+        Boolean success = false;
+        File file = new File("JSON/Ranking/" + nombre +".json");
+
+        if(file.exists()) success = file.delete();
+        
+        if(success) return 1;
+        else return -1;
+    }
+    
     public PriorityQueue CargarRanking() { //DEVUELVE Priority_queue
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
         
@@ -57,7 +72,7 @@ public class CtrlPersistence {
     }
     
     public void BorrarSavedGame(Partida p) {  //se llama al acabar partida o al sobreescribir
-        File file = new File("JSON/Escenarios/SavedGame.json");
+        File file = new File("JSON/Partida/SavedGame.json");
         if(file.exists()) file.delete();
     }
     

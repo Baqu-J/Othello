@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import othello.domain.Estadistica;
-import othello.domain.Jugador;
 import othello.domain.Partida;
 import othello.domain.tablero.Escenario;
 

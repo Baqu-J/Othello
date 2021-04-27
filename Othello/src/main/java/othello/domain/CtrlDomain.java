@@ -55,6 +55,10 @@ public class CtrlDomain {
         return ctrlPersistencia.CrearPerfil(nombre);
     }
     
+    public int borrarPerfil(String nombre) {
+        return ctrlPersistencia.BorrarPerfil(nombre);
+    }
+    
     /*public String verEstadisticasPerfil(String nombre) {
         return buscarPerfilPorNombre(nombre).toString();
     }

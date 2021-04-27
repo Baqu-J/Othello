@@ -36,7 +36,7 @@ public class Main {
                     exit = true;
                     break;
                 case 1:
-                    crearPerfil();
+                    gestionPerfiles();
                     break;
                 case 2:
                     consultarEstadisticas(s);
@@ -65,7 +65,7 @@ public class Main {
      */
     private static void menuApp() {
         System.out.println("\nMenu Principal\n"
-                + "\t1 - Crear Perfil\n"
+                + "\t1 - Crear/Borrar Perfil\n"
                 + "\t2 - Consultar Estadistiques\n"
                 + "\t3 - Crear/Modificar Escenario\n"
                 + "\t4 - Jugar Partida\n"
@@ -76,6 +76,13 @@ public class Main {
     /**
      * Metodo para mostrar el menu de de gestión de Escenarios por pantalla
      */
+    private static void menuPerfiles() {
+        System.out.println("\nMenu Perfiles\n"
+                + "\t1 - Crear Perfil\n"
+                + "\t2 - Borrar Perfil\n"
+                + "\t0 - Atras\n");
+    }
+    
     private static void menuEscenarios() {
         System.out.println("\nMenu Escenarios\n"
                 + "\t1 - Crear Escenario\n"
@@ -121,10 +128,63 @@ public class Main {
         }
         
     }
+    
+    private static void borrarPerfil() {
+        Scanner sc = new Scanner(System.in);
+        Boolean exit= false;
+        int ret;
+        while(!exit){
+            System.out.println("Perfil a borrar: ");
+            String name = sc.nextLine();
+            
+            if("0".equals(name)) {break;}
+            
+            dominio = CtrlDomain.getInstance();
+            ret = dominio.borrarPerfil(name);
+            
+            switch(ret) {
+                case 1:
+                    System.out.println("Perfil " + name + " borrado con exito!");
+                    exit = true;
+                    break;
+                case -1:
+                    System.out.println("Perfil " + name + " no existe, prueba de nuevo");
+                    break;
+                default:
+                    System.out.println("ha habido un error, prueba de nuevo");
+                    break;
+            }
+        }
+        
+    }
 
     private static void consultarEstadisticas(Estadistica s) {
         System.out.println(s.getId()+"->");
         System.out.println(s.toString());
+    }
+    
+    private static void gestionPerfiles() {
+        int opt;
+        Scanner sc = new Scanner(System.in);
+        
+            menuPerfiles();
+          
+            opt = sc.nextInt();
+            
+            switch (opt) {
+                case 0:
+                    break;
+                case 1:
+                    crearPerfil();
+                    break;
+                case 2:
+                    borrarPerfil();
+                    break;
+                default:
+                    break;
+            }
+ 
+       
     }
     
     private static Escenario gestionEscenarios(Escenario e) {
