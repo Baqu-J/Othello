@@ -1,6 +1,7 @@
 package othello.domain;
 
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Vector;
 import othello.domain.tablero.Escenario;
 import othello.persistence.CtrlPersistence;
@@ -15,7 +16,7 @@ public class CtrlDomain {
     private static CtrlDomain instance;
     private CtrlPersistence ctrlPersistencia;
     
-    //private HashSet<String, Perfil> perfiles;
+    private PriorityQueue<Estadistica> perfiles;
     //private HashSet<String, Escenario> escenarios;
     
     public static CtrlDomain getInstance() {
@@ -35,11 +36,7 @@ public class CtrlDomain {
 
     // Others Methods
     private void cargarUsuarios() {
-        /*vector<String> usuarios = ctrlPersistencia.();
-        
-        for(int i = 0; i < usuarios.size(); i++) {
-            
-        }*/
+        perfiles = ctrlPersistencia.CargarRanking();
     }
     
     private void guardarUsuarios() {
@@ -54,10 +51,8 @@ public class CtrlDomain {
         
     }
     
-    public void crearPerfil(String nombre) {
-        /*Perfil p = new Perfil(nombre);
-        // Añadir al set
-        System.out.println(p.toString());*/
+    public int crearPerfil(String nombre) {
+        return ctrlPersistencia.CrearPerfil(nombre);
     }
     
     /*public String verEstadisticasPerfil(String nombre) {
@@ -67,9 +62,14 @@ public class CtrlDomain {
     private Perfil buscarPerfilPorNombre(String nombre) {
         return perfiles.get(nombre);
     }
-    
-    public Vector<String> crearRanking() {
-        Vector<String> v();
-        return v;
-    }*/
+    */
+    public void DisplayRanking() {
+        for(Estadistica e: perfiles) {
+            System.out.println(e.getId() + ":");
+            System.out.println("\tPuntos: " + e.getPuntos());
+            System.out.println("\tVictorias: "+ e.getVictoria());
+            System.out.println("\tDerrotas: "+ e.getDerrota());
+            System.out.println("\tEmpates: "+ e.getEmpate());
+        }
+    }
 }

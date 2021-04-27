@@ -14,7 +14,7 @@ import othello.domain.tablero.Escenario;
  * @author 
  */
 public class CtrlPersistence {
-    private Serializador serializador;
+    private final Serializador serializador;
     // Attributes
     private static CtrlPersistence instance;
     
@@ -27,13 +27,12 @@ public class CtrlPersistence {
     
     // Private Constructor
     private CtrlPersistence() {
-        
+        serializador = new Serializador();
     }
     //methods
-    public int CrearPerfil() { //Check si perfil existe
-        Scanner s = new Scanner(System.in);
-        String id = s.next();
-        Estadistica e = new Estadistica(id);
+    public int CrearPerfil(String nombre) { //Check si perfil existe
+        
+        Estadistica e = new Estadistica(nombre);
         int resp = serializador.createJSONfromEstadistica(e);
         return resp;
     }
@@ -42,7 +41,7 @@ public class CtrlPersistence {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
         
         PriorityQueue<Estadistica> ranking = new PriorityQueue<>(c);
-        File dir = new File("/JSON/Ranking");
+        File dir = new File("JSON/Ranking");
         if(dir.exists()) {
             
             File[] list = dir.listFiles();

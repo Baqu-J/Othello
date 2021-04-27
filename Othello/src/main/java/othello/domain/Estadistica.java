@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Estadistica implements Serializable {
 
     // Attributes
-    private static String id;
+    private String id;
     private int victoria;
     private int derrota;
     private int empate;
@@ -57,6 +57,14 @@ public class Estadistica implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public void setAll(String id, int puntos, int victoria, int derrota, int empate) {
+        this.id = id;
+        this.puntos = puntos;
+        this.victoria = victoria;
+        this.derrota = derrota;
+        this.empate = empate;
     }
 
     public void setVictoria(int victoria) {

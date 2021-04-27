@@ -14,14 +14,13 @@ import othello.domain.tablero.Escenario;
  * @author Aleix Velasco Calvo
  */
 public class Main {
-
+    private static CtrlDomain dominio;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         boolean exit = false;
         int opt;
-        
         Estadistica s = new Estadistica("Default");
         Escenario e = new Escenario("Default");
         e.commitPlay(new Pair(0,0), Casilla.BLANCA);
@@ -37,7 +36,7 @@ public class Main {
                     exit = true;
                     break;
                 case 1:
-                    s = crearPerfil();
+                    crearPerfil();
                     break;
                 case 2:
                     consultarEstadisticas(s);
@@ -94,13 +93,33 @@ public class Main {
                 + "\t0 - Atras\n");
     }
     
-    private static Estadistica crearPerfil() {
+    private static void crearPerfil() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Tu nombre: ");
-        String name = sc.nextLine();
-        Estadistica s = new Estadistica(name);
-        System.out.println(s.toString());
-        return s;
+        Boolean exit= false;
+        int ret = -1;
+        while(!exit){
+            System.out.println("Tu nombre: ");
+            String name = sc.nextLine();
+            
+            if("0".equals(name)) {break;}
+            
+            dominio = CtrlDomain.getInstance();
+            ret = dominio.crearPerfil(name);
+            
+            switch(ret) {
+                case 1:
+                    System.out.println("Perfil " + name + " creado con exito!");
+                    exit = true;
+                    break;
+                case -1:
+                    System.out.println("Perfil " + name + " ya existe, prueba de nuevo");
+                    break;
+                default:
+                    System.out.println("ha habido un error, prueba de nuevo");
+                    break;
+            }
+        }
+        
     }
 
     private static void consultarEstadisticas(Estadistica s) {
@@ -208,7 +227,8 @@ public class Main {
     }
     
     private static void displayRanking() {
-        System.out.println("No implementado!!!");
+        dominio = CtrlDomain.getInstance();
+        dominio.DisplayRanking();
     }
 
     private static void guardarDatos() {

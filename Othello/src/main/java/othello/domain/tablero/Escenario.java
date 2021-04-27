@@ -20,6 +20,8 @@ public class Escenario extends Tablero implements Serializable{
     public Escenario(String name) {
         id = name;
         Tablero t = new Tablero();
+        tableros = new Stack();
+        popped = new Stack();
         tableros.add(t);
     }
     
