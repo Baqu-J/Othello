@@ -106,10 +106,10 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             if(!directory.exists()) directory.mkdirs();
             File json = new File("JSON/Escenarios/" + e.getId() + ".json");
             if(json.createNewFile()) {
-            serializador = new Gson();
-            FileWriter w = new FileWriter(json.getPath());
-            w.write(serializador.toJson(e));
-            w.close();
+                serializador = new Gson();
+                FileWriter w = new FileWriter(json.getPath());
+                w.write(serializador.toJson(e));
+                w.close();
             }
             else ret = -1;
         }
