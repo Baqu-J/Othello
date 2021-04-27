@@ -66,10 +66,23 @@ public class CtrlDomain {
         return ctrlPersistencia.BorrarPerfil(nombre);
     }
     
-    /*public String verEstadisticasPerfil(String nombre) {
-        return buscarPerfilPorNombre(nombre).toString();
+    public void verEstadisticasPerfil(String nombre) {
+        Boolean found = false;
+        for(Estadistica e: perfiles) {
+            if(e.getId().equals(nombre)) {
+                found = true;
+                System.out.println(e.getId() + ":");
+                System.out.println("\tPuntos: " + e.getPuntos());
+                System.out.println("\tVictorias: " + e.getVictoria());
+                System.out.println("\tDerrotas: " + e.getDerrota());
+                System.out.println("\tEmpate: " + e.getEmpate());
+            }
+        }
+        if(found == false) {
+            System.out.println("El usuario no existe.");
+        }
     }
-    
+    /*
     private Perfil buscarPerfilPorNombre(String nombre) {
         return perfiles.get(nombre);
     }

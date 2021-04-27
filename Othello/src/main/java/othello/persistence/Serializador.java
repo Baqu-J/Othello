@@ -41,7 +41,7 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         int ret = 1;
         try{
             File directory = new File("JSON/Ranking/");
-            if(!directory.exists()) directory.mkdirs();
+            if(!directory.exists()) {directory.mkdirs(); directory.setWritable(true, false);}
             File json = new File("JSON/Ranking/" + n.getId() + ".json");
             if(json.createNewFile()) {
                 serializador = new Gson();

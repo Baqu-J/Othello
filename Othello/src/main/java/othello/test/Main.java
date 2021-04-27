@@ -39,7 +39,7 @@ public class Main {
                     gestionPerfiles();
                     break;
                 case 2:
-                    consultarEstadisticas(s);
+                    consultarEstadisticas();
                     break;
                 case 3:
                     e = gestionEscenarios(e);
@@ -158,9 +158,13 @@ public class Main {
         
     }
 
-    private static void consultarEstadisticas(Estadistica s) {
-        System.out.println(s.getId()+"->");
-        System.out.println(s.toString());
+    private static void consultarEstadisticas() {
+        System.out.println("Introduce nombre del perfil:");
+        Scanner sc = new Scanner(System.in);
+        dominio = CtrlDomain.getInstance();
+        
+        String nombre = sc.nextLine();
+        dominio.verEstadisticasPerfil(nombre);
     }
     
     private static void gestionPerfiles() {
