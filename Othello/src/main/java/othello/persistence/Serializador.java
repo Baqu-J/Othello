@@ -19,6 +19,24 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
     private static Gson serializador;
    
     
+    public int updateJSONfromEstadistica(Estadistica n){
+        int ret = 1;
+        try{
+            File directory = new File("JSON/Ranking/");
+            if(!directory.exists()) directory.mkdirs();
+            File json = new File("JSON/Ranking/" + n.getId() + ".json");
+            json.createNewFile() ;
+            serializador = new Gson();
+            FileWriter w = new FileWriter(json.getPath(), false);
+            w.write(serializador.toJson(n));
+            w.close();
+        }
+        catch(IOException io) {
+            ret = 0;
+        }
+        return ret;
+    }
+    
     public int createJSONfromEstadistica(Estadistica n){
         int ret = 1;
         try{
@@ -27,7 +45,7 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             File json = new File("JSON/Ranking/" + n.getId() + ".json");
             if(json.createNewFile()) {
                 serializador = new Gson();
-                FileWriter w = new FileWriter(json.getPath());
+                FileWriter w = new FileWriter(json.getPath(), false);
                 w.write(serializador.toJson(n));
                 w.close();
             }
@@ -68,7 +86,7 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             File json = new File("JSON/Partida/SavedGame.json");
             if(json.createNewFile()) {
                 serializador = new Gson();
-                FileWriter w = new FileWriter(json.getPath());
+                FileWriter w = new FileWriter(json.getPath(), false);
                 w.write(serializador.toJson(n));
                 w.close();
             }
@@ -107,7 +125,7 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             File json = new File("JSON/Escenarios/" + e.getId() + ".json");
             if(json.createNewFile()) {
                 serializador = new Gson();
-                FileWriter w = new FileWriter(json.getPath());
+                FileWriter w = new FileWriter(json.getPath(), false);
                 w.write(serializador.toJson(e));
                 w.close();
             }

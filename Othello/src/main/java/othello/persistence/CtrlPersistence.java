@@ -2,6 +2,7 @@ package othello.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.PriorityQueue;
@@ -30,9 +31,9 @@ public class CtrlPersistence {
         serializador = new Serializador();
     }
     //methods
-    public int CrearPerfil(String nombre) { //Check si perfil existe
+    public int CrearPerfil(Estadistica e) { //Check si perfil existe
         
-        Estadistica e = new Estadistica(nombre);
+        
         int resp = serializador.createJSONfromEstadistica(e);
         return resp;
     }
@@ -52,10 +53,13 @@ public class CtrlPersistence {
         else return -1;
     }
     
-    public PriorityQueue CargarRanking() { //DEVUELVE Priority_queue
-        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
+    /**
+     *
+     * @return
+     */
+    public ArrayList CargarPerfiles() { //DEVUELVE Priority_queue
         
-        PriorityQueue<Estadistica> ranking = new PriorityQueue<>(c);
+        ArrayList<Estadistica> perfiles = new ArrayList();
         File dir = new File("JSON/Ranking");
         if(dir.exists()) {
             
@@ -63,12 +67,17 @@ public class CtrlPersistence {
             for(int i = 0; i < list.length; ++i) {
                 Estadistica e = new Estadistica("");
                 serializador.getEstadisticafromFile(e, list[i].getPath());
-                ranking.add(e);
+                perfiles.add(e);
             }
         }
         //STUFF
         
-        return ranking;
+        return perfiles;
+    }
+    
+    public int GuardarPerfil(Estadistica e) {
+        
+        return serializador.updateJSONfromEstadistica(e);
     }
     
     public void BorrarSavedGame(Partida p) {  //se llama al acabar partida o al sobreescribir

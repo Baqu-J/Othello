@@ -1,5 +1,8 @@
 package othello.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Vector;
@@ -16,7 +19,7 @@ public class CtrlDomain {
     private static CtrlDomain instance;
     private CtrlPersistence ctrlPersistencia;
     
-    private PriorityQueue<Estadistica> perfiles;
+    private ArrayList<Estadistica> perfiles;
     //private HashSet<String, Escenario> escenarios;
     
     public static CtrlDomain getInstance() {
@@ -36,10 +39,14 @@ public class CtrlDomain {
 
     // Others Methods
     private void cargarUsuarios() {
-        perfiles = ctrlPersistencia.CargarRanking();
+        perfiles = ctrlPersistencia.CargarPerfiles();
     }
     
     private void guardarUsuarios() {
+        
+        for(Estadistica e: perfiles) {
+            ctrlPersistencia.GuardarPerfil(e);
+        }
 
     }
     
@@ -52,7 +59,10 @@ public class CtrlDomain {
     }
     
     public int crearPerfil(String nombre) {
-        return ctrlPersistencia.CrearPerfil(nombre);
+        Estadistica e = new Estadistica(nombre);
+        int ret = ctrlPersistencia.CrearPerfil(e);
+        if(ret == 1)perfiles.add(e);
+        return ret;
     }
     
     public int borrarPerfil(String nombre) {
@@ -68,6 +78,8 @@ public class CtrlDomain {
     }
     */
     public void DisplayRanking() {
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
+        Collections.sort(perfiles, c);
         for(Estadistica e: perfiles) {
             System.out.println(e.getId() + ":");
             System.out.println("\tPuntos: " + e.getPuntos());
