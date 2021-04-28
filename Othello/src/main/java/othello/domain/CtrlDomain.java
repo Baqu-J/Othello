@@ -17,7 +17,7 @@ public class CtrlDomain {
     private CtrlPersistence ctrlPersistencia;
     
     private ArrayList<Estadistica> perfiles;
-    //private HashSet<String, Escenario> escenarios;
+    private ArrayList<Escenario> escenarios;
     
     public static CtrlDomain getInstance() {
         if (instance == null) {
@@ -48,11 +48,13 @@ public class CtrlDomain {
     }
     
     private void cargarEscenarios() {
-        
+        escenarios = ctrlPersistencia.CargarEscenarios();
     }
     
     public void guardarEscenarios() {
-        
+        for(Escenario e: escenarios) {
+            ctrlPersistencia.GuardarEscenario(e);
+        }
     }
     
     public int crearPerfil(String nombre) {

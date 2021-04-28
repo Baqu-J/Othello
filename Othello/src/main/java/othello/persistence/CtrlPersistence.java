@@ -75,6 +75,25 @@ public class CtrlPersistence {
         return perfiles;
     }
     
+    public ArrayList CargarEscenarios() {
+        ArrayList<Escenario> escenarios = new ArrayList();
+        File dir = new File("JSON/Escenarios");
+        if(dir.exists()) {
+            
+            File[] list = dir.listFiles();
+            for(int i = 0; i < list.length; ++i) {
+                Escenario e = new Escenario("");
+                serializador.getEscenariofromFile(e, list[i].getPath());
+                escenarios.add(e);
+            }
+        }
+        return escenarios;
+    }
+    
+    public int GuardarEscenario(Escenario e) {
+        return serializador.updateJSONfromEscenario(e);
+    }
+    
     public int GuardarPerfil(Estadistica e) {
         
         return serializador.updateJSONfromEstadistica(e);
@@ -98,15 +117,5 @@ public class CtrlPersistence {
         return null;
     }
     
-    public int GuardarEscenario(Escenario e) { //check si guarda bien
-        int ret = serializador.createJSONfromEscenario(e);
-        return ret;
-    }
-    
-    public Escenario CargarEscenario(String id) { //check si existe
-        Escenario e = new Escenario("id");
-        int ret = serializador.getEscenariofromFile(e, "JSON/Escenarios/"+id+".json");
-        if(ret == 1) return e;
-        return null;
-    }
+
 }

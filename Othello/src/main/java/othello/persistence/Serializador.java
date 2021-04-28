@@ -117,6 +117,24 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    public int updateJSONfromEscenario(Escenario e){
+        int ret = 1;
+        try{
+            File directory = new File("JSON/Escenarios/");
+            if(!directory.exists()) directory.mkdirs();
+            File json = new File("JSON/Escenarios/" + e.getId() + ".json");
+            json.createNewFile() ;
+            serializador = new Gson();
+            FileWriter w = new FileWriter(json.getPath(), false);
+            w.write(serializador.toJson(e));
+            w.close();
+        }
+        catch(IOException io) {
+            ret = 0;
+        }
+        return ret;
+    }
+    
     public int createJSONfromEscenario(Escenario e) {
         int ret = 1;
         try {
@@ -145,7 +163,8 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
                 Scanner reader = new Scanner(f);
                 String json = reader.next();
                 serializador = new Gson();
-                e = serializador.fromJson(json, Escenario.class);
+                Escenario aux = serializador.fromJson(json, Escenario.class);
+                e.setAll(aux.getId(), aux.getTab(), aux.getPop());
             }
             else ret = -1;
         }

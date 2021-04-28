@@ -13,7 +13,7 @@ import othello.data.Pair;
 
 //hashmap i copiar constructora bucle modificacion escenario
 public class Escenario extends Tablero implements Serializable{
-    private final String id;
+    private String id;
     private Stack<Tablero> tableros;
     private Stack<Tablero> popped;
     
@@ -25,8 +25,22 @@ public class Escenario extends Tablero implements Serializable{
         tableros.add(t);
     }
     
+    public void setAll(String id, Stack<Tablero> tab, Stack<Tablero> pop) {
+        this.id = id;
+        this.tableros = tab;
+        this.popped = pop;
+    }
+    
     public Tablero getTop() {
         return tableros.peek().DeepCopy();
+    }
+    
+    public Stack getTab() {
+        return tableros;
+    }
+    
+    public Stack getPop() {
+        return popped;
     }
     
     @Override
