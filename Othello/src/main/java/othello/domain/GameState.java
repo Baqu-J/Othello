@@ -40,6 +40,10 @@ public abstract class GameState implements Serializable{
     public void setColor(Casilla color) {
         this.color = color;
     }
+    
+    public void decreaseFichas() {
+        --numeroDeFichas;
+    }
 
     // Other Methods
 }
