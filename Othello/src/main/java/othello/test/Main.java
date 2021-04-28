@@ -47,7 +47,7 @@ public class Main {
                     consultarEstadisticas();
                     break;
                 case 3:
-                    e = gestionEscenarios(e);
+                    gestionEscenarios();
                     break;
                 case 4:
                     gestionPartida();
@@ -196,7 +196,7 @@ public class Main {
        
     }
     
-    private static Escenario gestionEscenarios(Escenario e) {
+    private static void gestionEscenarios() {
         int opt;
         boolean back = false;
         Scanner sc = new Scanner(System.in);
@@ -210,30 +210,72 @@ public class Main {
                     back = true;
                     break;
                 case 1:
-                    e = crearEscenario();
+                    crearEscenario();
                     break;
                 case 2:
-                    e = modificarEscenario(e);
+                    modificarEscenario();
                     break;
                 default:
                     break;
             }
-            e.print_tablero();
         } while (!back);
-        return e;
     }
 
-    private static Escenario crearEscenario() {
-        Escenario e = new Escenario("?");
-        //editarTablero(e);
-        // Añadir a la lista de escenarios
-        return e;
+    private static void crearEscenario() {
+        Scanner sc = new Scanner(System.in);
+        Boolean exit= false;
+        int ret = -1;
+        while(!exit){
+            System.out.println("Nombre para el escenario: ");
+            String name = sc.nextLine();
+            
+            if("0".equals(name)) {break;}
+            
+            dominio = CtrlDomain.getInstance();
+            ret = dominio.crearEscenario(name);
+            
+            switch(ret) {
+                case 1:
+                    System.out.println("Escenario " + name + " creado con exito!");
+                    editarTablero(dominio.searchEscenario(name));
+                    exit = true;
+                    break;
+                case -1:
+                    System.out.println("Escenario " + name + " ya existe, prueba de nuevo");
+                    break;
+                default:
+                    System.out.println("ha habido un error, prueba de nuevo");
+                    break;
+            }
+        }
+        
     }
 
-    private static Escenario modificarEscenario(Escenario e) {
+    private static void modificarEscenario() {
         //editarTablero(e);
-        e.commitPlay(new Pair(0,0), Casilla.NEGRA);
-        return e;
+        dominio = CtrlDomain.getInstance();
+        Scanner sc = new Scanner(System.in);
+        Boolean exit= false;
+        System.out.println("Escenarios disponibles: ");
+        dominio.printEscenarios();
+        while(!exit){
+            System.out.println("Nombre del escenario a seleccionar: ");
+            String name = sc.nextLine();
+            
+            if("0".equals(name)) {break;}
+            
+            
+            Escenario e = dominio.searchEscenario(name);
+            
+            if(e != null) {
+                System.out.println("Escenario " + name + " seleccionado con exito!");
+                editarTablero(dominio.searchEscenario(name));
+                exit = true;
+            }
+            else {
+                System.out.println("Escenario " + name + " no existe, prueba de nuevo");
+            }
+        }
     }
 
     private static void editarTablero(Escenario e) {
@@ -325,7 +367,9 @@ public class Main {
         String c = sc.next();
         if(c.equals("Y")) {
             System.out.println("\nSeleccionar Escenario:\n");
-            Escenario e = dominio.findEscenario(" ");
+            dominio.printEscenarios();
+            c = sc.nextLine();
+            Escenario e = dominio.searchEscenario(c);
             return e.getTop();  
         }
         return new Tablero(); 

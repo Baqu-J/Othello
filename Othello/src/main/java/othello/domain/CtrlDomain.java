@@ -57,6 +57,13 @@ public class CtrlDomain {
         }
     }
     
+    public int crearEscenario(String nombre) {
+        Escenario e = new Escenario(nombre);
+        int ret = ctrlPersistencia.CrearEscenario(e);
+        if(ret == 1)escenarios.add(e);
+        return ret;
+    }
+    
     public int crearPerfil(String nombre) {
         Estadistica e = new Estadistica(nombre);
         int ret = ctrlPersistencia.CrearPerfil(e);
@@ -75,20 +82,26 @@ public class CtrlDomain {
         }
         return ret;
     }
+    
+    public Estadistica searchEstadistica(String nombre) {
+        for(Estadistica e: perfiles) {
+            if(e.getId().equals(nombre)) return e;
+        }
+        return null;
+    }
+    
      // Devolver una estadistica
     public void verEstadisticasPerfil(String nombre) {
-        Boolean found = false;
-        for(Estadistica e: perfiles) {
-            if(e.getId().equals(nombre)) {
-                found = true;
-                System.out.println(e.getId() + ":");
-                System.out.println("\tPuntos: " + e.getPuntos());
-                System.out.println("\tVictorias: " + e.getVictoria());
-                System.out.println("\tDerrotas: " + e.getDerrota());
-                System.out.println("\tEmpate: " + e.getEmpate());
-            }
+       
+        Estadistica e = searchEstadistica(nombre);
+        if(e != null) {
+            System.out.println(e.getId() + ":");
+            System.out.println("\tPuntos: " + e.getPuntos());
+            System.out.println("\tVictorias: " + e.getVictoria());
+            System.out.println("\tDerrotas: " + e.getDerrota());
+            System.out.println("\tEmpate: " + e.getEmpate());
         }
-        if(found == false) {
+        else {
             System.out.println("El usuario no existe.");
         }
     }
@@ -106,10 +119,16 @@ public class CtrlDomain {
     }
     
     public void printEscenarios() {
-        
+        for(Escenario e: escenarios) {
+            System.out.println(e.getId());
+            e.print_tablero();
+        }
     }
     
-    public Escenario findEscenario(String name) {
-        return new Escenario(name);
+    public Escenario searchEscenario(String name) {
+        for(Escenario e: escenarios) {
+            if(e.getId().equals(name)) return e;
+        }
+        return null;
     }
 }

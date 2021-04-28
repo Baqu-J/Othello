@@ -90,6 +90,11 @@ public class CtrlPersistence {
         return escenarios;
     }
     
+    public int CrearEscenario(Escenario e) {
+        int resp = serializador.createJSONfromEscenario(e);
+        return resp;
+    }
+    
     public int GuardarEscenario(Escenario e) {
         return serializador.updateJSONfromEscenario(e);
     }

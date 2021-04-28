@@ -44,6 +44,11 @@ public class Escenario extends Tablero implements Serializable{
     }
     
     @Override
+    public void print_tablero() {
+        tableros.peek().print_tablero();
+    }
+    
+    @Override
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         Tablero t = tableros.peek().DeepCopy();
         ArrayList<Pair> ret = t.commitPlay(p, c);
