@@ -15,7 +15,7 @@ import othello.domain.tablero.Tablero;
 public class Partida implements Serializable {
 
     // Attributes
-    enum GameType {
+    public enum GameType {
         IAvsIA, PLAYERvsIA, PLAYERvsPLAYER
     };
 

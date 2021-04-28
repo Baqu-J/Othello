@@ -25,7 +25,9 @@ public class Escenario extends Tablero implements Serializable{
         tableros.add(t);
     }
     
-    
+    public Tablero getTop() {
+        return tableros.peek().DeepCopy();
+    }
     
     @Override
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {

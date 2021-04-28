@@ -46,7 +46,7 @@ public class IA extends GameState {
             {3, 4, 1, 1, 1, 1, 4, 3},
             {-5, 3, -2, -2, -2, -2, 3, -5}};
 
-    enum Dificultad {
+    public enum Dificultad {
         FACIL, NORMAL, DIFICIL
     };
 
@@ -54,13 +54,13 @@ public class IA extends GameState {
     private int depth;
 
     //Constructors
-    IA(Casilla color, int numeroDeFichas) {
+    public IA(Casilla color, int numeroDeFichas) {
         super(color, numeroDeFichas);
         this.opcion = Dificultad.NORMAL;
         this.depth = 3;
     }
 
-    IA(Dificultad op, Casilla color, int numeroDeFichas) {
+    public IA(Dificultad op, Casilla color, int numeroDeFichas) {
         super(color, numeroDeFichas);
         this.opcion = op;
         switch (this.opcion) {

@@ -73,7 +73,7 @@ public class CtrlDomain {
         }
         return ret;
     }
-    
+     // Devolver una estadistica
     public void verEstadisticasPerfil(String nombre) {
         Boolean found = false;
         for(Estadistica e: perfiles) {
@@ -101,5 +101,13 @@ public class CtrlDomain {
             System.out.println("\tDerrotas: "+ e.getDerrota());
             System.out.println("\tEmpates: "+ e.getEmpate());
         }
+    }
+    
+    public void printEscenarios() {
+        
+    }
+    
+    public Escenario findEscenario(String name) {
+        return new Escenario(name);
     }
 }

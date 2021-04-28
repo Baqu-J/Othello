@@ -1,13 +1,18 @@
 package othello.test;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import othello.data.Casilla;
 import othello.data.Pair;
 import othello.domain.CtrlDomain;
 import othello.domain.Estadistica;
+import othello.domain.IA;
+import othello.domain.IA.Dificultad;
+import othello.domain.Jugador;
 import othello.domain.Partida;
 import othello.domain.tablero.Escenario;
+import othello.domain.tablero.Tablero;
 
 /**
  *
@@ -277,10 +282,23 @@ public class Main {
         Partida p;
         Scanner sc = new Scanner(System.in);
         int opt = sc.nextInt();
+        dominio = CtrlDomain.getInstance();
+        
+        Tablero t = seleccionarEscenario();
+        
+        
+        
+        
         if(opt == 1) { // IAvsIA
-            //p = new Partida(0,);
+            Casilla c = seleccionarColor();
+            IA ia1 = createIA(c);
+            IA ia2 = createIA(c.contrary());
+            p = new Partida(Partida.GameType.IAvsIA, t, 0, ia1, ia2);
         }else if(opt == 2) { // PLAYERvsIA
-            
+            Casilla c = seleccionarColor();
+            Jugador j2 = seleccionarJugador(c);
+            IA ia1 = createIA(c.contrary());
+            p = new Partida(Partida.GameType.PLAYERvsIA, t, 0, ia1, j2);
         }else if(opt == 3) { // PLAYERvsPLAYER
             
         }
@@ -299,6 +317,98 @@ public class Main {
         dominio = CtrlDomain.getInstance();
         dominio.guardarEscenarios();
         dominio.guardarUsuarios();
+    }
+
+    private static Tablero seleccionarEscenario() {
+        System.out.println("\nQuieres seleccionar un Escenario? (Y/N)\n");
+        Scanner sc = new Scanner(System.in);
+        String c = sc.next();
+        if(c.equals("Y")) {
+            System.out.println("\nSeleccionar Escenario:\n");
+            Escenario e = dominio.findEscenario(" ");
+            return e.getTop();  
+        }
+        return new Tablero(); 
+    }
+
+    private static Jugador seleccionarJugador(Casilla c) {
+        System.out.println("\nQuieres seleccionar un Jugador? (Y/N)\n");
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        if(s.equals("Y")) {
+            System.out.println("\nSeleccionar Jugador:\n");
+            return new Jugador(null,c,32);
+        }
+        return null; 
+    }
+    
+    private static Casilla seleccionarColor() {
+        System.out.println("\nSelecciona un Color:\n"
+                + "\t1 - Negro\n"
+                + "\t2 - Blanco\n"
+                + "\t0 - Aleatorio\n");
+        Scanner sc = new Scanner(System.in);
+        Casilla c;
+        int opt = sc.nextInt();
+        switch(opt) {
+            case 0:
+                Random rand = new Random();
+                int r = rand.nextInt(1);
+                if(r % 2 == 0){
+                    c = Casilla.NEGRA;
+                } else {
+                   c = Casilla.BLANCA; 
+                }
+                break;
+            case 1:
+                c = Casilla.NEGRA;
+                break;
+            case 2:
+                c = Casilla.BLANCA;
+                break;
+            default:
+                c = Casilla.NEGRA;
+                break;
+        }
+        return c;
+    }
+
+    private static IA createIA(Casilla c) {
+        Dificultad d;
+        System.out.println("\nSelecciona una Dificultad:\n"
+                + "\t1 - Facil\n"
+                + "\t2 - Normal\n"
+                + "\t2 - Dificil\n"
+                + "\t0 - Aleatorio\n");
+        Scanner sc = new Scanner(System.in);
+        int opt = sc.nextInt();
+        switch(opt) {
+            case 0:
+                Random rand = new Random();
+                int r = rand.nextInt(1);
+                if(r % 3 == 0){
+                    d = Dificultad.FACIL;
+                } else if(r % 3 == 1){
+                    d = Dificultad.NORMAL;
+                } else {
+                   d = Dificultad.DIFICIL; 
+                }
+                break;
+            case 1:
+                d = Dificultad.FACIL;
+                break;
+            case 2:
+                d = Dificultad.NORMAL;
+                break;
+            case 3:
+                d = Dificultad.DIFICIL;
+                break;
+            default:
+                d = Dificultad.NORMAL;
+                break;
+        }
+        IA ia = new IA(d,c,32);
+        return ia;
     }
 
 }
