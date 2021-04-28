@@ -54,14 +54,14 @@ public class IA extends GameState {
     private int depth;
 
     //Constructors
-    public IA(Casilla color, int numeroDeFichas) {
-        super(color, numeroDeFichas);
+    public IA(Casilla color) {
+        super(color);
         this.opcion = Dificultad.NORMAL;
         this.depth = 3;
     }
 
-    public IA(Dificultad op, Casilla color, int numeroDeFichas) {
-        super(color, numeroDeFichas);
+    public IA(Dificultad op, Casilla color) {
+        super(color);
         this.opcion = op;
         switch (this.opcion) {
             case FACIL:

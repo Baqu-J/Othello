@@ -8,126 +8,185 @@ import othello.persistence.CtrlPersistence;
 
 /**
  *
- * @author 
+ * @author
  */
 public class CtrlDomain {
-        
+
     // Attributes
     private static CtrlDomain instance;
     private CtrlPersistence ctrlPersistencia;
-    
+
     private ArrayList<Estadistica> perfiles;
     private ArrayList<Escenario> escenarios;
-    
+
+    /**
+     * Método que crea una única instancia de CtrlDomain.
+     *
+     * @return Instancia de la clase CtrlDomain.
+     */
     public static CtrlDomain getInstance() {
         if (instance == null) {
             instance = new CtrlDomain();
         }
         return instance;
     }
-    
+
     // Private Constructor
     private CtrlDomain() {
         ctrlPersistencia = CtrlPersistence.getInstance();
-        
+
         cargarUsuarios();
         cargarEscenarios();
     }
 
     // Others Methods
+    /**
+     * Método que carga todas las Estadisticas.
+     */
     private void cargarUsuarios() {
         perfiles = ctrlPersistencia.CargarPerfiles();
     }
-    
+
+    /**
+     * Método que guarda cada Estadistica.
+     */
     public void guardarUsuarios() {
-        
-        for(Estadistica e: perfiles) {
+        for (Estadistica e : perfiles) {
             ctrlPersistencia.GuardarPerfil(e);
         }
-
     }
-    
+
+    /**
+     * Método que carga todos los Escenarios.
+     */
     private void cargarEscenarios() {
         escenarios = ctrlPersistencia.CargarEscenarios();
     }
-    
+
+    /**
+     * Método que guarda cada Escenario.
+     */
     public void guardarEscenarios() {
-        for(Escenario e: escenarios) {
+        for (Escenario e : escenarios) {
             ctrlPersistencia.GuardarEscenario(e);
         }
     }
-    
+
+    /**
+     * Método que crea un Escenario si no existe ningunO con el mismo id y lo
+     * añade al listado ESCENARIOS y crea su archivo.
+     *
+     * @param nombre id deL Escenario
+     * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
+     */
     public int crearEscenario(String nombre) {
-        Escenario e = new Escenario(nombre);
-        int ret = ctrlPersistencia.CrearEscenario(e);
-        if(ret == 1)escenarios.add(e);
-        return ret;
-    }
-    
-    public int crearPerfil(String nombre) {
-        Estadistica e = new Estadistica(nombre);
-        int ret = ctrlPersistencia.CrearPerfil(e);
-        if(ret == 1)perfiles.add(e);
-        return ret;
-    }
-    
-    public int borrarPerfil(String nombre) {
-        int ret;
-        ret = ctrlPersistencia.BorrarPerfil(nombre);
-        if(ret ==1){
-            for(Estadistica e: perfiles) {
-                if(e.getId().equals(nombre)) perfiles.remove(e);
-                break;
+
+        int ret = -1;
+        Escenario e = searchEscenario(nombre);
+        if (e == null) {
+            e = new Escenario(nombre);
+            ret = ctrlPersistencia.CrearEscenario(e);
+            if (ret == 1) {
+                escenarios.add(e);
             }
         }
         return ret;
     }
-    
-    public Estadistica searchEstadistica(String nombre) {
-        for(Estadistica e: perfiles) {
-            if(e.getId().equals(nombre)) return e;
-        }
-        return null;
-    }
-    
-     // Devolver una estadistica
-    public void verEstadisticasPerfil(String nombre) {
-       
+
+    /**
+     * Método que crea una Estadistica si no existe ninguna con el mismo id y lo
+     * añade al listado perfiles y crea su archivo.
+     *
+     * @param nombre id de la Estadistica
+     * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
+     */
+    public int crearPerfil(String nombre) {
+        int ret = -1;
         Estadistica e = searchEstadistica(nombre);
-        if(e != null) {
+        if (e == null) {
+            e = new Estadistica(nombre);
+            ret = ctrlPersistencia.CrearPerfil(e);
+            if (ret == 1) {
+                perfiles.add(e);
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Método que elimina una Estadistica del listado perfiles y su archivo.
+     *
+     * @param nombre id de la Estadistica
+     * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
+     */
+    public int borrarPerfil(String nombre) {
+        int ret = -1;
+        Estadistica e = searchEstadistica(nombre);
+        if (e != null) {
+            ret = ctrlPersistencia.BorrarPerfil(nombre);
+            if (ret == 1) {
+                perfiles.remove(e);
+            }
+        }
+        return ret;
+    }
+
+    public void DisplayRanking() {
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
+        Collections.sort(perfiles, c);
+        for (Estadistica e : perfiles) {
             System.out.println(e.getId() + ":");
             System.out.println("\tPuntos: " + e.getPuntos());
             System.out.println("\tVictorias: " + e.getVictoria());
             System.out.println("\tDerrotas: " + e.getDerrota());
-            System.out.println("\tEmpate: " + e.getEmpate());
-        }
-        else {
-            System.out.println("El usuario no existe.");
+            System.out.println("\tEmpates: " + e.getEmpate());
         }
     }
 
-    public void DisplayRanking() {
-        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos()- o1.getPuntos();
-        Collections.sort(perfiles, c);
-        for(Estadistica e: perfiles) {
-            System.out.println(e.getId() + ":");
-            System.out.println("\tPuntos: " + e.getPuntos());
-            System.out.println("\tVictorias: "+ e.getVictoria());
-            System.out.println("\tDerrotas: "+ e.getDerrota());
-            System.out.println("\tEmpates: "+ e.getEmpate());
-        }
+    /**
+     * Método que devulve todos las Estadisticas.
+     *
+     * @return Listado de Estadisticas.
+     */
+    public Iterable<Estadistica> listPerfiles() {
+        return perfiles;
     }
-    
-    public void printEscenarios() {
-        for(Escenario e: escenarios) {
-            System.out.println(e.getId());
-            e.print_tablero();
+
+    /**
+     * Método que busca una Estadistica en el listado de perfiles.
+     *
+     * @param nombre id de la Estadistica
+     * @return Devuelve una Estadistica si existe, si no un null.
+     */
+    public Estadistica searchEstadistica(String nombre) {
+        for (Estadistica p : perfiles) {
+            if (p.getId().equals(nombre)) {
+                return p;
+            }
         }
+        return null;
     }
-    
-    public Escenario searchEscenario(String name) {
-        for(Escenario e: escenarios) {
-            if(e.getId().equals(name)) return e;
+
+    /**
+     * Método que devulve todos las Estadisticas.
+     *
+     * @return Listado de Estadisticas.
+     */
+    public Iterable<Escenario> listEscenarios() {
+        return escenarios;
+    }
+
+    /**
+     * Método que busca un Escenario en el listado de escenarios.
+     *
+     * @param nombre id del Escenario
+     * @return Devuelve un Escenario si existe, si no un null.
+     */
+    public Escenario searchEscenario(String nombre) {
+        for (Escenario e : escenarios) {
+            if (e.getId().equals(nombre)) {
+                return e;
+            }
         }
         return null;
     }

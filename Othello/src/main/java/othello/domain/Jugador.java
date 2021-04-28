@@ -14,12 +14,13 @@ public class Jugador extends GameState {
     private Estadistica stats;
 
     //Constructors
-    public Jugador(Casilla color, int numeroDeFichas) { // Para usuarios GUEST
-        super(color, numeroDeFichas);
+    public Jugador(Casilla color) { // Para usuarios GUEST
+        super(color);
+        this.stats = null;
     }
 
-    public Jugador(Estadistica s, Casilla color, int numeroDeFichas) {
-        super(color, numeroDeFichas);
+    public Jugador(Estadistica s, Casilla color) {
+        super(color);
         this.stats = s;
     }
 

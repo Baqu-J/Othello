@@ -19,6 +19,11 @@ public abstract class GameState implements Serializable{
         this.numeroDeFichas = numeroDeFichas;
     }
 
+    public GameState(Casilla color) {
+        this.color = color;
+        this.numeroDeFichas = 32;
+    }
+    
     // Getters and Setters
     public Casilla getColor() {
         return this.color;

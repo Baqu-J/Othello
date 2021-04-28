@@ -106,4 +106,17 @@ public class Estadistica implements Serializable {
         setEmpate(getEmpate() + 1);
         ++this.puntos;
     }
+    
+    @Override
+    public String toString() {
+        return (id + ":\n\tPuntos: " + puntos + "\n\tVictorias: " + victoria + "\n\tDerrotas: " + derrota + "\n\tEmpates: " + empate);
+    }
+    
+    /**
+     * Método que devuelve un string con el id
+     * @return string con id de la estadistica
+     */
+    public String toStringOnlyName() {
+        return ("Nombre: " + id);
+    }
 }
