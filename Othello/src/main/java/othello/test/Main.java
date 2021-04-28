@@ -1,6 +1,7 @@
 package othello.test;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import othello.data.Casilla;
@@ -282,16 +283,39 @@ public class Main {
         
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("Colocar ficha en:(color)");
-            int x = sc.nextInt();
-            int y = sc.nextInt();
-            Pair coord = new Pair(x,y);
-            
-            
-        }while(!exit);
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Casilla c = Casilla.NEGRA;
+        int x;
+        int y;
+            do {
+                e.print_tablero();
+                System.out.println("Colocar ficha en: " + c);
+                System.out.println("\t u - UNDO, r - REDO, s - SAVE AND QUIT");
+                String s = sc.nextLine();
+                
+                switch(s) {
+                    case("u"):
+                        e.undo();
+                        break;
+                    case("r"):
+                        e.redo();
+                        break;
+                    case("s"):
+                        exit = true;
+                        break;
+                    default:
+                        x = Character.getNumericValue(s.charAt(0));
+                        y = Character.getNumericValue(s.charAt(2));
+                        ArrayList<Pair> a = e.commitPlay(new Pair(x,y), c);
+                        if(a.isEmpty()) {
+                            System.out.println("Movimiento ilegal. Prueba otra vez!");
+                        }
+                        else {
+                            c = c.contrary();
+                        }
+                        break;
+                }
+                
+            }while(!exit);
     }
     
     private static void gestionPartida() {
