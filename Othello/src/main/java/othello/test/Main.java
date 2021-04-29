@@ -455,6 +455,24 @@ public class Main {
                 }while(!save);
             }
         } while (!p.gameIsFinished() && !exit);
+        if(p.gameIsFinished()) {
+            p.getT().print_tablero();
+            int nB = p.getT().getBlancas().size();
+            int nN = p.getT().getNegras().size();
+            System.out.println("Fin de la partida!\n");
+            System.out.println("Puntuaciones:\n"
+                             + "\tBlanco: " + nB + " fichas!\n"
+                             + "\tNegro: " + nN + " fichas!\n");
+            if(nB > nN) {
+                System.out.println("Felicidades blanco! WINNER!!");
+            }
+            if(nN > nB) {
+                System.out.println("Felicidades negro! WINNER!!");
+            }
+            else {
+                System.out.println("Empate!");
+            }
+        }
     }
 
     private static void displayRanking() {
