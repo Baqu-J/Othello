@@ -97,6 +97,8 @@ public class Estadistica implements Serializable {
      */
     public void incDerrotas() {
         setDerrota(getDerrota() + 1);
+        this.puntos = this.puntos - 2;
+        if(this.puntos < 0) this.puntos = 0;
     }
 
     /**
@@ -104,7 +106,6 @@ public class Estadistica implements Serializable {
      */
     public void incEmpates() {
         setEmpate(getEmpate() + 1);
-        ++this.puntos;
     }
     
     @Override
