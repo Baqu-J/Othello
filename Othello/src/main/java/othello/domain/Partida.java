@@ -389,12 +389,8 @@ public class Partida implements Serializable {
                 ArrayList<Pair> pa = tDeepCopy.commitPlay(p, color);
 
                 Tree tr;
-                if (depth == 0) {
-                    int score = player.obtenerScore(pa);
-                    tr = tree.addLeaf(new Node(p, color, score));
-                } else {
-                    tr = tree.addLeaf(new Node(p, color, -1));
-                }
+                int score = player.obtenerScore(pa);
+                tr = tree.addLeaf(new Node(p, color, score));
                 createTree_rec(tr, depth - 1, tDeepCopy, player, color.contrary());
 
             }

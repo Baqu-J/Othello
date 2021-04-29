@@ -623,7 +623,7 @@ public class Main {
         System.out.println("\nSelecciona una Dificultad:\n"
                 + "\t1 - Facil\n"
                 + "\t2 - Normal\n"
-                + "\t2 - Dificil\n"
+                + "\t3 - Dificil\n"
                 + "\t0 - Aleatorio\n");
         Scanner sc = new Scanner(System.in);
         int opt;

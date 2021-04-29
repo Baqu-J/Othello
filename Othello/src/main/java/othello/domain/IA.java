@@ -1,6 +1,7 @@
 package othello.domain;
 
 import java.util.ArrayList;
+import java.util.Random;
 import othello.data.Casilla;
 import othello.data.Pair;
 import othello.data.Node;
@@ -21,36 +22,15 @@ public class IA extends GameState {
     private static final int POSITIVE_INFINITY = +1000;
     private static final int NEGATIVE_INFINITY = -1000;
 
-    private static final int PESOS_DIFICIL[][]
-            = {{5, -3, 2, 2, 2, 2, -3, 5},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {-3, -4, -1, -1, -1, -1, -4, -3},
-            {5, -3, 2, 2, 2, 2, -3, 5}};
-
-    private static final int PESOS_NORMAL[][]
-            = {{2, -2, 2, 2, 2, 2, -2, 2},
-            {-2, -4, -1, -1, -1, -1, -4, -2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 0, 1, 1, 0, -1, 2},
-            {2, -1, 1, 0, 0, 1, -1, 2},
-            {-2, -4, -1, -1, -1, -1, -4, -2},
-            {2, -2, 2, 2, 2, 2, -2, 2}};
-
-    private static final int PESOS_FACIL[][]
-            = {{-5, 3, -2, -2, -2, -2, 3, -5},
-            {3, 4, 1, 1, 1, 1, 4, 3},
-            {-2, 1, -1, 0, 0, -1, 1, -2},
-            {-2, 1, 0, -1, -1, 0, 1, -2},
-            {-2, 1, 0, -1, -1, 0, 1, -2},
-            {-2, 1, -1, 0, 0, -1, 1, -2},
-            {3, 4, 1, 1, 1, 1, 4, 3},
-            {-5, 3, -2, -2, -2, -2, 3, -5}};
-
+    private static final int HEURISTIC[][]
+            =   {{99, -18, 8, 6,6, 8, -18, 99},
+                {-18, -24, -14, -12, -12, -14, -24, -18},
+                {8, -14, 15, 15, 15, 15, -14, 8},
+                {6, -12, 15, 10, 10, 15, -12, 6},
+                {6, -12, 15, 10, 10, 15, -12, 6},
+                {8, -14, 15, 15, 15, 15, -14, 8},
+                {-18, -24, -14, -12, -12, -14, -24, -18},
+                {99, -18, 8, 6, 6, 8, -18, 99}};
     
     public enum Dificultad {
         FACIL, NORMAL, DIFICIL
@@ -68,7 +48,7 @@ public class IA extends GameState {
     public IA(Casilla color) {
         super(color);
         this.opcion = Dificultad.NORMAL;
-        this.depth = 3;
+        this.depth = 2;
     }
 
     /**
@@ -81,16 +61,16 @@ public class IA extends GameState {
         this.opcion = op;
         switch (this.opcion) {
             case FACIL:
-                this.depth = 2;
+                this.depth = 0;
                 break;
             case NORMAL:
-                this.depth = 3;
+                this.depth = 2;
                 break;
             case DIFICIL:
                 this.depth = 4;
                 break;
             default:
-                this.depth = 3;
+                this.depth = 2;
                 break;
         }
     }
@@ -123,13 +103,7 @@ public class IA extends GameState {
     public int obtenerScore(ArrayList<Pair> A) {
         int score = 0;
         for (Pair d : A) {
-            if (this.opcion == Dificultad.FACIL) {
-                score += PESOS_FACIL[d.first()][d.second()];
-            } else if (this.opcion == Dificultad.NORMAL) {
-                score += PESOS_NORMAL[d.first()][d.second()];
-            } else if (this.opcion == Dificultad.DIFICIL) {
-                score += PESOS_DIFICIL[d.first()][d.second()];
-            }
+                score += HEURISTIC[d.first()][d.second()];
         }
         return score;
     }
@@ -146,7 +120,7 @@ public class IA extends GameState {
      * @return Nodo seleccionado.
      */
     private Node alpha_beta(Tree<Node> t, int depth, int alpha, int beta, boolean maximizingPlayer) {
-        if (depth == 0 || (t.getSubTrees()).isEmpty()) {
+        if (depth == 0 || t.getSubTrees().isEmpty()) {
             return t.getRoot();
         }
 
@@ -155,14 +129,11 @@ public class IA extends GameState {
             for (Tree<Node> child : t.getSubTrees()) {
                 //System.out.println(depth + " " + this.depth);
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, false);
-                if(depth == this.depth) {
-                    
-                    maxEval = ((maxEval.getScore() > eval.getScore()) ? maxEval: eval);
-                    maxEval.setCord(child.getRoot().getCord());
-                }else {
+                
                     int scr = ((maxEval.getScore() > eval.getScore()) ? maxEval.getScore() : eval.getScore());
+                    //System.out.println(depth + " " + scr);
                     maxEval.setScore(scr); 
-                }
+                
                 
                 alpha = ((alpha > eval.getScore()) ? alpha : eval.getScore());
                 if (beta <= alpha) {
@@ -173,15 +144,15 @@ public class IA extends GameState {
         } else {
             Node minEval = new Node(POSITIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
+                
                 //System.out.println(depth + " " + this.depth);
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, true);
-                if(depth == this.depth) {
-                    minEval = ((minEval.getScore() < eval.getScore()) ? minEval : eval);
-                }else {
+                
                     int scr = ((minEval.getScore() < eval.getScore()) ? minEval.getScore() : eval.getScore());
+                    //System.out.println(depth + " " + scr);
                     minEval.setScore(scr);
                      
-                }
+                
                 beta = ((beta < eval.getScore()) ? beta : eval.getScore());
                 if (beta <= alpha) {
                     break;
@@ -198,7 +169,23 @@ public class IA extends GameState {
      * @return Coordenada escogida.
      */
     public Pair escogerMovimiento(Tree<Node> t) {
-        Node movimiento = alpha_beta(t, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
+        //System.out.println(t.toString());
+        Node maxEval = new Node(NEGATIVE_INFINITY);
+        
+        for (Tree<Node> child : t.getSubTrees()) {
+               // System.out.println("AAAAAAAAAAAAAAAAAAAA");
+                //System.out.println(this.depth);
+
+                Node eval = alpha_beta(child, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
+              //  System.out.println("EVAL SCORE: " + eval.getScore());
+                if(maxEval.getScore() < eval.getScore()) {
+                //    System.out.println("BBBBBBBBBBBBBBBBBB");
+                    maxEval.setScore(eval.getScore());
+                    maxEval.setCord(child.getRoot().getCord());
+                }
+            }
+        
+        Node movimiento = maxEval;
         return movimiento.getCord();
     }
 }
