@@ -46,4 +46,39 @@ public class Pair implements Serializable{
         String s = String.valueOf(this.first) + "/" + String.valueOf(this.second);
         return s;
     } 
+
+    @Override
+    public String toString() {
+        return "Pair{" + "first=" + first + ", second=" + second + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.first;
+        hash = 89 * hash + this.second;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pair other = (Pair) obj;
+        if (this.first != other.first) {
+            return false;
+        }
+        if (this.second != other.second) {
+            return false;
+        }
+        return true;
+    }
+    
 }

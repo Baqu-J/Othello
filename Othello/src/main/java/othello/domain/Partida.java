@@ -24,10 +24,24 @@ public class Partida implements Serializable {
     private IA ia1;
     private IA ia2;
     private Jugador j1;
+
+    public Jugador getJ1() {
+        return j1;
+    }
+
+    public void setJ1(Jugador j1) {
+        this.j1 = j1;
+    }
     private Jugador j2;
     private int turn;
 
-    private Pair coord;
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
 
     // Constructors
     public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
@@ -77,8 +91,8 @@ public class Partida implements Serializable {
     }
 
     // Getters and Setters
-    public Casilla[][] getT() {
-        return t.getMatrix();
+    public Tablero getT() {
+        return t;
     }
 
     public void setT(Tablero t) {
@@ -93,20 +107,12 @@ public class Partida implements Serializable {
         this.type = type;
     }
 
-    public Pair getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Pair coord) {
-        this.coord = coord;
-    }
-
     // Other Methods
-    public void playGame() {
-        boolean negrasHasMoves = true;
-        boolean blancasHasMoves = true;
+    /*public void playGame() {
+
         do {
             move();
+            
             if (t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
                 negrasHasMoves = false;
             }
@@ -116,15 +122,21 @@ public class Partida implements Serializable {
         } while (negrasHasMoves || blancasHasMoves);
 
         updateEstadisticas();
+    }*/
+    public boolean gameIsFinished() {
+        
+        if (t.getLegalMoves(Casilla.BLANCA).isEmpty() && t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
+            updateEstadisticas();
+            return true;
+        }
+        return false;
     }
 
     private void updateEstadisticas() {
         int b = t.getBlancas().size();
         int n = t.getNegras().size();
         if (this.type != GameType.IAvsIA) {
-
             if (b == n) {
-
                 if (this.j1 != null) {
                     this.j1.updateStats(false, false, true);
                 } else {
@@ -157,56 +169,108 @@ public class Partida implements Serializable {
         }
     }
 
-    public void move() {
+    public int move(Pair coord) {
+        int b = -1;
         switch (this.type) {
 
             case IAvsIA:
                 if (this.turn % 2 == 0) {
-                    iaMove(this.ia1);
+                    System.out.println("\n" + this.turn + " " + this.ia1.getColor() + "\n");
+                    if (!t.getLegalMoves(this.ia1.getColor()).isEmpty()) {
+                        if (iaMove(this.ia1)) {
+                            b = 1;
+                        }
+                    }
                 } else {
-                    iaMove(this.ia2);
+                    System.out.println("\n" + this.turn + " " + this.ia2.getColor() + "\n");
+                    if (!t.getLegalMoves(this.ia2.getColor()).isEmpty()) {
+                        if (iaMove(this.ia2)) {
+                            b = 1;
+                        }
+                    }
                 }
                 break;
 
             case PLAYERvsIA:
                 if (this.turn % 2 == 0) {
                     if (this.j1 == null) {
-                        iaMove(this.ia1);
+                        if (!t.getLegalMoves(this.ia1.getColor()).isEmpty()) {
+                            if (iaMove(this.ia1)) {
+                                b = 1;
+                            }
+                        }
                     } else {
-                        t.commitPlay(coord, this.j1.getColor());
+                        if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
+                            if (!t.commitPlay(coord, this.j1.getColor()).isEmpty()) {
+                                b = 1;
+                            } else {
+                                b = 0;
+                            }
+                        }
                     }
                 } else {
                     if (this.j2 == null) {
-                        iaMove(this.ia2);
+                        if (!t.getLegalMoves(this.ia2.getColor()).isEmpty()) {
+                            if (iaMove(this.ia2)) {
+                                b = 1;
+                            }
+                        }
                     } else {
-                        t.commitPlay(coord, this.j2.getColor());
+                        if (!t.getLegalMoves(this.j2.getColor()).isEmpty()) {
+                            if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                                b = 1;
+                            } else {
+                                b = 0;
+                            }
+                        }
                     }
-                }
-                break;
-
-            case PLAYERvsPLAYER:
-                if (this.turn % 2 == 0) {
-                    t.commitPlay(coord, this.j1.getColor());
-                } else {
-                    t.commitPlay(coord, this.j2.getColor());
                 }
                 break;
 
             default:
+                if (this.turn % 2 == 0) {
+                    System.out.println("\n" + this.turn + " " + this.j1.getColor() + "\n");
+                    if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
+                        if (!t.commitPlay(coord, this.j1.getColor()).isEmpty()) {
+                            b = 1;
+                        } else {
+                            b = 0;
+                        }
+                    }
+                } else {
+                    System.out.println("\n" + this.turn + " " + this.j2.getColor() + "\n");
+                    if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
+                        if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                            b = 1;
+                        } else {
+                            b = 0;
+                        }
+                    }
+                }
                 break;
         }
-        this.turn++;
+        if (b != 0) {
+            this.turn++;
+        }
+        return b;
     }
 
-    private void iaMove(IA ia) {
+    private boolean iaMove(IA ia) {
         Tree jugadas = createTree(t, ia);
         Pair c = ia.escogerMovimiento(jugadas);
-        t.commitPlay(c, ia.getColor());
+        //System.out.println(ia.getColor());
+        //System.out.println(jugadas.toString());
+        //System.out.println(c.toString());
+        return !(t.commitPlay(c, ia.getColor()).isEmpty());
     }
 
     private static void createTree_rec(Tree tree, int depth, Tablero tablero, IA player, Casilla color) {
         if (depth >= 0) {
             ArrayList<Pair> legalMoves = tablero.getLegalMoves(color);
+                //System.out.println(depth);
+                /*for(Pair p : legalMoves) {
+                    System.out.println(p.toString());
+                }*/
             for (Pair p : legalMoves) {
                 Tablero tDeepCopy = tablero.DeepCopy();
                 ArrayList<Pair> pa = tDeepCopy.commitPlay(p, color);

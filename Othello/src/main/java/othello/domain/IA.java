@@ -137,8 +137,17 @@ public class IA extends GameState {
         if (maximizingPlayer) {
             Node maxEval = new Node(NEGATIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
+                //System.out.println(depth + " " + this.depth);
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, false);
-                maxEval = ((maxEval.getScore() > eval.getScore()) ? maxEval : eval);
+                if(depth == this.depth) {
+                    
+                    maxEval = ((maxEval.getScore() > eval.getScore()) ? maxEval: eval);
+                    maxEval.setCord(child.getRoot().getCord());
+                }else {
+                    int scr = ((maxEval.getScore() > eval.getScore()) ? maxEval.getScore() : eval.getScore());
+                    maxEval.setScore(scr); 
+                }
+                
                 alpha = ((alpha > eval.getScore()) ? alpha : eval.getScore());
                 if (beta <= alpha) {
                     break;
@@ -148,8 +157,15 @@ public class IA extends GameState {
         } else {
             Node minEval = new Node(POSITIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
+                //System.out.println(depth + " " + this.depth);
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, true);
-                minEval = ((minEval.getScore() < eval.getScore()) ? minEval : eval);
+                if(depth == this.depth) {
+                    minEval = ((minEval.getScore() < eval.getScore()) ? minEval : eval);
+                }else {
+                    int scr = ((minEval.getScore() < eval.getScore()) ? minEval.getScore() : eval.getScore());
+                    minEval.setScore(scr);
+                     
+                }
                 beta = ((beta < eval.getScore()) ? beta : eval.getScore());
                 if (beta <= alpha) {
                     break;

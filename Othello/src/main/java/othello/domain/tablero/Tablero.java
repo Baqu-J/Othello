@@ -246,10 +246,10 @@ public class Tablero implements Serializable{
                 }
             }
         }
-        for(int i = 0; i < Legals.size(); ++i) {
+        /*for(int i = 0; i < Legals.size(); ++i) {
             System.out.print(Legals.get(i).convertString() + " ");
         }
-        System.out.println("");
+        System.out.println("");*/
         return Legals;
     }
 
@@ -265,8 +265,8 @@ public class Tablero implements Serializable{
         return swaps;
     }
     public void print_tablero() {
-        String nums = "  |1|2|3|4|5|6|7|8|";
-        String letters = "12345678";
+        String nums = "  |0|1|2|3|4|5|6|7|";
+        String letters = "01234567";
         System.out.println(nums);
         for(int i = 0; i < 8; ++i) {
             System.out.print(letters.charAt(i) + "| ");

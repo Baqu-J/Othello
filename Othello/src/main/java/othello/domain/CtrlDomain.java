@@ -3,6 +3,7 @@ package othello.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import othello.data.Pair;
 import othello.domain.tablero.Escenario;
 import othello.persistence.CtrlPersistence;
 
@@ -189,5 +190,42 @@ public class CtrlDomain {
             }
         }
         return null;
+    }
+
+   
+    public boolean turno(Partida p) {
+        if (p.getType() == Partida.GameType.PLAYERvsPLAYER) {
+            return true;
+        }
+        if (p.getJ1() == null) {
+            if (p.getTurn() % 2 == 1) {
+                return true;
+            }
+        } else {
+            if (p.getTurn() % 2 == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int colocarFicha(Partida p, Pair pair) {
+        int ret = -1;
+        if (p.move(pair) != 0 ) {
+            return 1;
+        }
+        
+        return ret;
+    }
+
+    public int guardarPartida(Partida p) {
+        int ret = -1;
+        ret = ctrlPersistencia.GuardarPartida(p);
+        return ret;
+
+    }
+
+    public Partida cargarPartida() {
+        return ctrlPersistencia.CargarPartida();
     }
 }

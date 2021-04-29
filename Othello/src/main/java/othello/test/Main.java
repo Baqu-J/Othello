@@ -107,6 +107,7 @@ public class Main {
         System.out.println("\nMenu Partida\n"
                 + "\t1 - Crear Partida\n"
                 + "\t2 - Cargar Partida\n"
+                + "\t3 - Jugar Partida\n"
                 + "\t0 - Atras\n");
     }
 
@@ -336,7 +337,7 @@ public class Main {
         int opt;
         boolean back = false;
         Scanner sc = new Scanner(System.in);
-
+        Partida p = null;
         do {
             menuPartida();
 
@@ -347,10 +348,17 @@ public class Main {
                     back = true;
                     break;
                 case 1:
-                    crearPartida();
+                    p = crearPartida();
                     break;
                 case 2:
-                    cargarPartida();
+                    p = cargarPartida();
+                    break;
+                case 3:
+                    if (p != null) {
+                        jugarPartida(p);
+                    }else {
+                        System.out.println("\nNo hay partida cargada o creada\n");
+                    }
                     break;
                 default:
                     System.out.println("\nOpción incorrecta\n");
@@ -359,8 +367,8 @@ public class Main {
         } while (!back);
     }
 
-    private static void crearPartida() {
-        Partida p;
+    private static Partida crearPartida() {
+        Partida p = null;
         int opt;
         System.out.println("\nTipo de Partida: (IAvsIA:1, PLAYERvsIA:2, PLAYERvsPLAYER:3)\n");
         Scanner sc = new Scanner(System.in);
@@ -384,10 +392,69 @@ public class Main {
             Jugador j2 = seleccionarJugador(c.contrary());
             p = new Partida(Partida.GameType.PLAYERvsPLAYER, t, 0, j1, j2);
         }
+        /*if(p != null) {
+            System.out.println(p.getType().toString());
+            Casilla [][] a =p.getT();
+            for(int i = 0;i<8;i++) {
+                for(int j = 0;j<8;j++) {
+                    System.out.println(a[i][j].toString());
+                }  
+            }
+        }*/
+        return p;
     }
 
-    private static void cargarPartida() {
-        System.out.println("No implementado!!!");
+    private static Partida cargarPartida() {
+        Partida p = dominio.cargarPartida();
+        if (p == null) {
+            System.out.println("\nNo se ha encontrado Partida !\n");
+        }
+        return p;
+    }
+
+    private static void jugarPartida(Partida p) {
+        boolean exit = false, save = false;
+        int x = 0, y = 0;
+        String s = " ";
+        do {
+            p.getT().print_tablero();
+             System.out.println(p.getTurn());
+            Scanner sc = new Scanner(System.in);
+            if(p.getType() != Partida.GameType.IAvsIA) {
+                if(dominio.turno(p)) {
+                    System.out.println("Introducir Coordenadas:\n");
+                    s = sc.nextLine();
+                    if(!s.equals("S")) {
+                        x = Character.getNumericValue(s.charAt(0));
+                        y = Character.getNumericValue(s.charAt(2));
+                    }
+                }
+                
+            }    
+            if (!s.equals("S")) {
+                dominio.colocarFicha(p, new Pair(x, y));
+                
+            } else {
+                do {
+                    int ret = dominio.guardarPartida(p);
+                    if (ret != 1) {
+                        System.out.println("\nLa Partida no se ha guardado!\n");
+                        System.out.println("\nQuieres salir sin guardar? (Y/N)\n");
+                        String c;
+                        do {
+                            c = sc.nextLine();
+                            if (!c.equals("Y") && !c.equals("N")) {
+                                System.out.println("\nIntroduzca un valor correcto!!!\n");
+                            }
+                        } while (!c.equals("Y") && !c.equals("N"));
+                        if(c.equals("Y")) {
+                            save = true;
+                        }
+                    }
+                    exit = true;
+                }while(!save);
+            }
+        } while (!p.gameIsFinished() && !exit);
     }
 
     private static void displayRanking() {
@@ -402,7 +469,7 @@ public class Main {
     private static Tablero seleccionarEscenario() {
         System.out.println("\nQuieres seleccionar un Escenario? (Y/N)\n");
         Scanner sc = new Scanner(System.in);
-        String c = sc.nextLine();
+        String c;
 
         do {
             c = sc.nextLine();
@@ -414,7 +481,7 @@ public class Main {
         if (c.equals("Y")) {
             System.out.println("\nSeleccionar Escenario:\n");
             for (Escenario esc : dominio.listEscenarios()) {
-                System.out.println(esc.toString());
+                esc.getTop().print_tablero();
             }
             String name;
             Escenario e;
@@ -434,16 +501,16 @@ public class Main {
     private static Jugador seleccionarJugador(Casilla c) {
         System.out.println("\nQuieres seleccionar un Jugador? (Y/N)\n");
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
+        String s;
 
         do {
             s = sc.nextLine();
-            if (!c.equals("Y") && !c.equals("N")) {
+            if (!s.equals("Y") && !s.equals("N")) {
                 System.out.println("\nIntroduzca un valor correcto!!!\n");
             }
-        } while (!c.equals("Y") && !c.equals("N"));
+        } while (!s.equals("Y") && !s.equals("N"));
 
-        if (c.equals("Y")) {
+        if (s.equals("Y")) {
             System.out.println("\nSeleccionar Perfil:\n");
             for (Estadistica j : dominio.listPerfiles()) {
                 System.out.println(j.toStringOnlyName());
@@ -540,4 +607,5 @@ public class Main {
         } while (ia == null);
         return ia;
     }
+
 }

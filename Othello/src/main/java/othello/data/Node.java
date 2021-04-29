@@ -77,4 +77,11 @@ public class Node {
     public void setScore(int score) {
         this.score = score;
     }   
+
+    @Override
+    public String toString() {
+        return "Node{" + "cord=" + cord + ", player=" + player + ", score=" + score + '}';
+    }
+    
+    
 }
