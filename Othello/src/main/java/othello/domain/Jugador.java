@@ -6,7 +6,7 @@ import othello.data.Casilla;
  * Clase Jugador que hereda de GameState y contiene las estadísticas del Jugador
  * junto a métodos de actualización de dichas estadísticas.
  *
- * @author Aleix Velasco Calvo
+ * @author Franco Acevedo Montañez
  */
 public class Jugador extends GameState {
 
@@ -14,11 +14,20 @@ public class Jugador extends GameState {
     private Estadistica stats;
 
     //Constructors
-    public Jugador(Casilla color) { // Para usuarios GUEST
+    /**
+     * Constructor por defecto - usuarios GUEST"
+     * @param color 
+     */
+    public Jugador(Casilla color) {
         super(color);
         this.stats = null;
     }
 
+    /**
+     * Constructor de jugador asignando stats(estadistica) y color
+     * @param s
+     * @param color 
+     */
     public Jugador(Estadistica s, Casilla color) {
         super(color);
         this.stats = s;
