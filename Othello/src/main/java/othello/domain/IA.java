@@ -7,8 +7,13 @@ import othello.data.Node;
 import othello.data.Tree;
 
 /**
- *
- * @author 
+ * Clase IA que hereda de GameState y contiene la dificultad
+ * (fácil, normal, difícil) de la IA y una profundidad asociada
+ * a su dificultad, junto a métodos que gestionan la heurística
+ * de cada nivel de dificultad y el algoritmo de inteligencia 
+ * artificial.
+ * 
+ * @author Franco Acevedo Montañez
  */
 public class IA extends GameState {
 
@@ -46,6 +51,7 @@ public class IA extends GameState {
             {3, 4, 1, 1, 1, 1, 4, 3},
             {-5, 3, -2, -2, -2, -2, 3, -5}};
 
+    
     public enum Dificultad {
         FACIL, NORMAL, DIFICIL
     };
@@ -54,12 +60,22 @@ public class IA extends GameState {
     private int depth;
 
     //Constructors
+    
+    /**
+     * Constructor de IA por defecto
+     * @param color 
+     */
     public IA(Casilla color) {
         super(color);
         this.opcion = Dificultad.NORMAL;
         this.depth = 3;
     }
 
+    /**
+     * Constructor de IA asignándole dificultad
+     * @param op
+     * @param color 
+     */
     public IA(Dificultad op, Casilla color) {
         super(color);
         this.opcion = op;

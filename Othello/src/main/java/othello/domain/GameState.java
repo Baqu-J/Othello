@@ -4,8 +4,9 @@ import java.io.Serializable;
 import othello.data.Casilla;
 
 /**
- *
- * @author 
+ * Clase abstracta GameState que será utilizada en la partida.
+ * 
+ * @author Franco Acevedo Montañez
  */
 public abstract class GameState implements Serializable{
     
@@ -14,11 +15,20 @@ public abstract class GameState implements Serializable{
     private int numeroDeFichas;
 
     // Constructors
+    /**
+     * Constructor asignandole numero de fichas y color
+     * @param color
+     * @param numeroDeFichas 
+     */
     public GameState(Casilla color, int numeroDeFichas) {
         this.color = color;
         this.numeroDeFichas = numeroDeFichas;
     }
 
+    /**
+     * Constructor por defecto asignandole color
+     * @param color 
+     */
     public GameState(Casilla color) {
         this.color = color;
         this.numeroDeFichas = 32;
@@ -42,6 +52,9 @@ public abstract class GameState implements Serializable{
     }
 
     // Other Methods
+    /**
+     * Método que decrementa el numero actual de fichas
+     */
     public void decreaseFichas() {
         --numeroDeFichas;
     }
