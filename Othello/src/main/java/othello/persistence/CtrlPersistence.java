@@ -104,19 +104,13 @@ public class CtrlPersistence {
         return serializador.updateJSONfromEstadistica(e);
     }
     
-    public void BorrarSavedGame(Partida p) {  //se llama al acabar partida o al sobreescribir
-        File file = new File("JSON/Partida/SavedGame.json");
-        if(file.exists()) file.delete();
-    }
-    
     public int GuardarPartida(Partida p) { //borrar existente antes de guardar y check si guarda bien
-        BorrarSavedGame(p);
         int ret = serializador.createJSONfromPartida(p);
         return ret;
     }
     
     public Partida CargarPartida() { //check si existe NO DEBE BORRAR
-        Partida p = null;
+        Partida p = new Partida();
         int ret = serializador.getPartidafromFile(p);
         if(ret == 1) return p;
         return null;

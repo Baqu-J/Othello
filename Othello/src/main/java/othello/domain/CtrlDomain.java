@@ -208,7 +208,11 @@ public class CtrlDomain {
         }
         return false;
     }
-
+    
+    public void printPartida(Partida p) {
+        p.printTurn();
+    }
+    
     public int colocarFicha(Partida p, Pair pair) {
         int ret = -1;
         if (p.move(pair) != 0 ) {

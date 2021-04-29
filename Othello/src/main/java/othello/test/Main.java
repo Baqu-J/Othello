@@ -388,8 +388,20 @@ public class Main {
             IA ia1 = createIA(c.contrary());
             p = new Partida(Partida.GameType.PLAYERvsIA, t, 0, ia1, j2);
         } else if (opt == 3) { // PLAYERvsPLAYER
+            
             Jugador j1 = seleccionarJugador(c);
-            Jugador j2 = seleccionarJugador(c.contrary());
+            Jugador j2;
+            boolean diferent = false;
+            do{
+                j2 = seleccionarJugador(c.contrary());
+                
+                if(j1.getStats() != null && j2.getStats() != null && j1.getStats().getId().equals(j2.getStats().getId())) {
+                    System.out.println("No puedes seleccionar el mismo perfil!!");
+                }
+                else {
+                    diferent = true;
+                }
+            } while(!diferent);
             p = new Partida(Partida.GameType.PLAYERvsPLAYER, t, 0, j1, j2);
         }
         /*if(p != null) {
@@ -418,41 +430,62 @@ public class Main {
         String s = " ";
         do {
             p.getT().print_tablero();
-             System.out.println(p.getTurn());
+            
+            dominio.printPartida(p);
             Scanner sc = new Scanner(System.in);
             if(p.getType() != Partida.GameType.IAvsIA) {
                 if(dominio.turno(p)) {
                     System.out.println("Introducir Coordenadas:\n");
+                    System.out.println("\tOpciones: S - Guardar y salir, Q - Salir\n");
                     s = sc.nextLine();
-                    if(!s.equals("S")) {
+                    if(!s.equals("S") && !s.equals("Q")) {
                         x = Character.getNumericValue(s.charAt(0));
                         y = Character.getNumericValue(s.charAt(2));
                     }
                 }
                 
             }    
-            if (!s.equals("S")) {
+            if (!s.equals("S") && !s.equals("Q")) {
                 dominio.colocarFicha(p, new Pair(x, y));
                 
             } else {
-                do {
-                    int ret = dominio.guardarPartida(p);
-                    if (ret != 1) {
-                        System.out.println("\nLa Partida no se ha guardado!\n");
-                        System.out.println("\nQuieres salir sin guardar? (Y/N)\n");
-                        String c;
-                        do {
-                            c = sc.nextLine();
-                            if (!c.equals("Y") && !c.equals("N")) {
-                                System.out.println("\nIntroduzca un valor correcto!!!\n");
+                if(s.equals("S")) {
+                    do {
+                        int ret = dominio.guardarPartida(p);
+                        if (ret != 1) {
+                            System.out.println("\nLa Partida no se ha guardado!\n");
+                            System.out.println("\nQuieres salir sin guardar? (Y/N)\n");
+                            String c;
+                            do {
+                                c = sc.nextLine();
+                                if (!c.equals("Y") && !c.equals("N")) {
+                                    System.out.println("\nIntroduzca un valor correcto!!!\n");
+                                }
+                            } while (!c.equals("Y") && !c.equals("N"));
+                            if(c.equals("Y")) {
+                                save = true;
                             }
-                        } while (!c.equals("Y") && !c.equals("N"));
-                        if(c.equals("Y")) {
+                        }
+                        else {
                             save = true;
                         }
+                        exit = true;
+                    }while(!save);
+                }
+                else {
+                    System.out.println("Seguro que quieres salir sin guardar? (Y/N)\n");
+                    String c;
+                    do {
+                        c = sc.nextLine();
+                        if (!c.equals("Y") && !c.equals("N")) {
+                            System.out.println("\nIntroduzca un valor correcto!!!\n");
+                        }
+                    } while (!c.equals("Y") && !c.equals("N"));
+                    if(c.equals("Y")) {
+                        exit = true;
                     }
-                    exit = true;
-                }while(!save);
+                            
+                }
             }
         } while (!p.gameIsFinished() && !exit);
         if(p.gameIsFinished()) {
@@ -472,6 +505,7 @@ public class Main {
             else {
                 System.out.println("Empate!");
             }
+            p.updateEstadisticas();
         }
     }
 
@@ -499,6 +533,7 @@ public class Main {
         if (c.equals("Y")) {
             System.out.println("\nSeleccionar Escenario:\n");
             for (Escenario esc : dominio.listEscenarios()) {
+                System.out.println(esc.getId());
                 esc.getTop().print_tablero();
             }
             String name;

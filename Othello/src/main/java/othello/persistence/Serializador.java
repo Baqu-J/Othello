@@ -84,13 +84,11 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             File directory = new File("JSON/Partida/");
             if(!directory.exists()) directory.mkdirs();
             File json = new File("JSON/Partida/SavedGame.json");
-            if(json.createNewFile()) {
-                serializador = new Gson();
-                FileWriter w = new FileWriter(json.getPath(), false);
-                w.write(serializador.toJson(n));
-                w.close();
-            }
-            else ret = -1;
+            json.createNewFile();
+            serializador = new Gson();
+            FileWriter w = new FileWriter(json.getPath(), false);
+            w.write(serializador.toJson(n));
+            w.close();
         }
         
         catch(IOException io) {
@@ -104,10 +102,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         try{
             File f = new File("JSON/Partida/SavedGame.json");
             if(f.exists()) {
+                System.out.println("Found partida");
                 Scanner reader = new Scanner(f);
                 String json = reader.next();
                 serializador = new Gson();
-                p = serializador.fromJson(json, Partida.class);
+               Partida aux = serializador.fromJson(json, Partida.class);
+               p.setAll(aux.getType(), aux.getT(), aux.getTurn(), aux.getIa1(), aux.getIa2(), aux.getJ1(), aux.getJ2());
             }
             else ret = -1;
         }
