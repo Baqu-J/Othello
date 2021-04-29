@@ -7,8 +7,11 @@ import othello.data.Casilla;
 import othello.data.Pair;
 
 /**
- *
- * @author Foster
+ * Clase Escenario que hereda de GameState y contiene un identificador, 
+ * y dos pilas que tendrán las jugadas guardadas una por una, junto 
+ * a métodos para gestionar el tablero y deshacer un movimiento o rehacerlo.
+ * 
+ * @author Jaume Baqueró Quesada
  */
 
 //hashmap i copiar constructora bucle modificacion escenario
@@ -17,6 +20,10 @@ public class Escenario extends Tablero implements Serializable{
     private Stack<Tablero> tableros;
     private Stack<Tablero> popped;
     
+    /**
+     * Constructor por defecto asignandole un identificador(name) al escenario
+     * @param name 
+     */
     public Escenario(String name) {
         id = name;
         Tablero t = new Tablero();
@@ -49,6 +56,11 @@ public class Escenario extends Tablero implements Serializable{
     }
     
     @Override
+    /**
+     * Método que realiza el movimiento de fichas en el escenario
+     * @return retorna una lista de pares que contiene las posiciones de 
+     * las nuevas posiciones que se ha cambiado al color "c"
+     */
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         Tablero t = tableros.peek().DeepCopy();
         ArrayList<Pair> ret = t.commitPlay(p, c);
@@ -57,10 +69,16 @@ public class Escenario extends Tablero implements Serializable{
         return ret;
     }
     
+    /**
+     * Método para deshacer un movimiento
+     */
     public void undo() {
         if(tableros.size() > 1) popped.add(tableros.pop());
     }
     
+    /**
+     * Método para rehacer un movimiento
+     */
     public void redo() {
         if(!popped.empty()) tableros.add(popped.pop());
     }

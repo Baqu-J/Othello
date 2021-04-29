@@ -6,8 +6,13 @@ import othello.data.Casilla;
 import othello.data.Pair;
 
 /**
- *
- * @author Jaumes
+ * Clase Tablero que contiene una matriz con las posiciones del tablero 
+ * de juego, y una lista de posiciones de fichas para cada color(blancas,negras)
+ * junto a métodos que permiten gestionar movimientos de fichas en el tablero,
+ * verificar si una jugada es legal, obtener las posiciones legales para colocar
+ * una ficha y hacer los cambios de color necesarios al ejecutar el movimiento
+ * 
+ * @author Jaume Baqueró Quesada
  */
 public class Tablero implements Serializable{
 
@@ -15,14 +20,15 @@ public class Tablero implements Serializable{
         new Pair(-1, 0), new Pair(1, 0), new Pair(0, -1), new Pair(0, 1),
         new Pair(-1, -1), new Pair(-1, 1), new Pair(1, -1), new Pair(1, 1)
     };
-    private Casilla[][] matrix;
     
-    //CAMBIAR POR HASHMAP<PAIR, CASILLA> also GSON
+    private Casilla[][] matrix;
     private ArrayList<Pair> blancas;
     private ArrayList<Pair> negras;
 
     //PRIVATE METHODS
-    //construye el tablero standard
+    /**
+     * Método para construir el tablero estándar
+     */
     private void build_matrix() {
         matrix = new Casilla[8][8];
         
@@ -41,6 +47,12 @@ public class Tablero implements Serializable{
         blancas.add(new Pair(4, 4));
     }
 
+    /**
+     * Método que sirve para verificar si la posición p es válida, es decir
+     * que está dentro del tablero.
+     * @param p
+     * @return 
+     */
     protected boolean inBounds(Pair p) {
         if (p.first() >= 0 && p.first() < 8 && p.second() >= 0 && p.second() < 8) {
             return true;
@@ -49,6 +61,15 @@ public class Tablero implements Serializable{
         }
     }
 
+    /**
+     * Método para obtener posiciones vacías que rodean una posición dada
+     * @param p
+     * @param Empty
+     * @return true-> si existe posiciones vacías cerca a posición "p" y lo
+     *                guarda en la lista "Empty"
+     *         false-> no existe posiciones vacías cerca a posición "p" y lo
+     *                 guarda en la lista "Empty"
+     */
     protected boolean Get_empty_nearby(Pair p, ArrayList<Pair> Empty) {
         Pair ret;
         boolean found = false;
@@ -66,6 +87,11 @@ public class Tablero implements Serializable{
         return found;
     }
     
+    /**
+     * Método para asignar agregar una nueva posición a la lista de fichas de color "c"
+     * @param p
+     * @param c 
+     */
     protected void addtoColor(Pair p, Casilla c) {
         if(c == Casilla.BLANCA) {
             blancas.add(p);
@@ -75,6 +101,11 @@ public class Tablero implements Serializable{
         }
     }
     
+    /**
+     * Método para remover una posición de la lista del color "c".
+     * @param p
+     * @param c 
+     */
     protected void removefromColor(Pair p, Casilla c) {
         if(c == Casilla.BLANCA) {
             blancas.remove(p);
@@ -84,11 +115,22 @@ public class Tablero implements Serializable{
         }
     }
 
+    /**
+     * Método que cambia el color de una casilla
+     * @param p 
+     */
     protected void swapTile(Pair p) {
         Casilla c = matrix[p.first()][p.second()];
         matrix[p.first()][p.second()] = c.contrary();
     }
 
+    /**
+     * Método que cambia el color de las fichas enemigas en todas las
+     * direcciones en las cuales encierra a su enemigo
+     * @param p
+     * @param c
+     * @param swaps 
+     */
     protected void swapEnemy(Pair p, Casilla c, ArrayList<Pair> swaps) {
        
         if (matrix[p.first()][p.second()] == c) {
@@ -122,7 +164,12 @@ public class Tablero implements Serializable{
         }
     }
 
-    //evalua una si un movimiento es legal para un color.
+    /**
+     * Método que evalua si una posición es legal para jugarla
+     * @param p
+     * @param c
+     * @return 
+     */
     protected boolean is_legal(Pair p, Casilla c) {
         if (matrix[p.first()][p.second()] != Casilla.VACIA) {
             return false;
@@ -148,20 +195,32 @@ public class Tablero implements Serializable{
     }
 
     //PUBLIC METHODS
+    /**
+     * Constructor por defecto
+     */
     public Tablero() {
         blancas = new ArrayList<Pair>(0);
         negras = new ArrayList<Pair>(0);
-
         build_matrix();
-
     }
 
+    /**
+     * Constructor asignando matriz de posiciones y listas de posiciones de
+     * blancas y negras.
+     * @param matrix
+     * @param blancas
+     * @param negras 
+     */
     public Tablero(Casilla[][] matrix, ArrayList<Pair> blancas, ArrayList<Pair> negras) {
         this.matrix = matrix;
         this.blancas = blancas;
         this.negras = negras;
     }
 
+    /**
+     * Función que realiza una copia por valor del tablero implícito
+     * @return copia de tablero
+     */
     public Tablero DeepCopy() {
         Casilla[][] m2 = new Casilla[8][8];
         
@@ -210,22 +269,43 @@ public class Tablero implements Serializable{
         this.matrix = matrix;
     }
 
+    /**
+     * Método para agregar una posición a la lista de fichas blancas
+     * @param p 
+     */
     public void addBlancas(Pair p) {
         blancas.add(p);
     }
 
+    /**
+     * Método para agregar una posición a la lista de fichas negras
+     * @param p 
+     */
     public void addNegras(Pair p) {
         negras.add(p);
     }
 
+    /**
+     * Método para remover una posición de la lista de fichas blancas.
+     * @param p 
+     */
     public void delBlancas(Pair p) {
         blancas.remove(p);
     }
 
+    /**
+     * Método para remover una posición de la lista de fichas negras.
+     * @param p 
+     */
     public void delNegras(Pair p) {
         negras.remove(p);
     }
     
+    /**
+     * Función para obtener los posibles movimientos legales del color "c"
+     * @param c
+     * @return lista de posiciones
+     */
     public ArrayList<Pair> getLegalMoves(Casilla c) { 
         ArrayList<Pair> positions;
         if (c == Casilla.BLANCA) {
@@ -253,6 +333,14 @@ public class Tablero implements Serializable{
         return Legals;
     }
 
+    /**
+     * Función para colocar una ficha de color "c" en la posición "p"
+     * y realizar los cambios de color de las fichas encerradas 
+     * enemigas. 
+     * @param p
+     * @param c
+     * @return lista de fichas cambiadas de color
+     */
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         ArrayList<Pair> swaps = new ArrayList<>(0);
         
