@@ -1,4 +1,4 @@
-package othello.domain.Test;
+package drivers;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import othello.domain.IA;
 /**
  * Clase para testear la IA.
  *
- * @author
+ * @author Aleix Velasco Calvo
  */
 public class DriverIA {
 

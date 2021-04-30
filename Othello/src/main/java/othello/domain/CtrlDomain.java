@@ -132,18 +132,12 @@ public class CtrlDomain {
         return ret;
     }
 
-    public void DisplayRanking() {
+    public ArrayList<Estadistica> displayRanking() {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
-        for (Estadistica e : perfiles) {
-            System.out.println(e.getId() + ":");
-            System.out.println("\tPuntos: " + e.getPuntos());
-            System.out.println("\tVictorias: " + e.getVictoria());
-            System.out.println("\tDerrotas: " + e.getDerrota());
-            System.out.println("\tEmpates: " + e.getEmpate());
-        }
+        return perfiles;
     }
-
+    
     /**
      * Método que devulve todos las Estadisticas.
      *
