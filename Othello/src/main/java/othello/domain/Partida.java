@@ -193,32 +193,31 @@ public class Partida implements Serializable {
         if (this.type != GameType.IAvsIA) {
             if (b == n) {
                 if (this.j1 != null) {
-                    this.j1.updateStats(false, false, true);
+                    if( this.j1.getStats() != null) this.j1.updateStats(false, false, true);
                 } else {
-                    this.j2.updateStats(false, false, true);
+                    if( this.j2.getStats() != null) this.j2.updateStats(false, false, true);
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    this.j2.updateStats(false, false, true);
+                    if( this.j2.getStats() != null) this.j2.updateStats(false, false, true);
                 }
 
             } else if (b > n) {
                 if (this.j1 != null) {
-                    this.j1.updateStats(false, true, false);
+                    if(this.j1.getStats() != null) this.j1.updateStats(false, true, false);
                 } else {
-                    this.j2.updateStats(true, false, false);
+                    if( this.j2.getStats() != null) this.j2.updateStats(true, false, false);
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    this.j2.updateStats(true, false, false);
+                    if( this.j2.getStats() != null) this.j2.updateStats(true, false, false);
                 }
             } else if (b < n) {
                 if (this.j1 != null) {
-
-                    this.j1.updateStats(true, false, false);
+                    if( this.j1.getStats() != null) this.j1.updateStats(true, false, false);
                 } else {
-                    this.j2.updateStats(false, true, false);
+                    if( this.j2.getStats() != null) this.j2.updateStats(false, true, false);
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    this.j2.updateStats(false, true, false);
+                    if( this.j2.getStats() != null)this.j2.updateStats(false, true, false);
                 }
             }
         }
