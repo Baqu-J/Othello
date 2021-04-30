@@ -55,12 +55,12 @@ public class Escenario extends Tablero implements Serializable{
         tableros.peek().print_tablero();
     }
     
-    @Override
     /**
      * Método que realiza el movimiento de fichas en el escenario
      * @return retorna una lista de pares que contiene las posiciones de 
      * las nuevas posiciones que se ha cambiado al color "c"
      */
+    @Override
     public ArrayList<Pair> commitPlay(Pair p, Casilla c) {
         Tablero t = tableros.peek().DeepCopy();
         ArrayList<Pair> ret = t.commitPlay(p, c);

@@ -9,8 +9,10 @@ import othello.data.Tree;
 import othello.domain.tablero.Tablero;
 
 /**
- *
- * @author
+ * Clase Partida que simula en un tablero determinado una partida
+ * de Othello entre dos jugadores asignados.
+ * 
+ * @author Aleix Velasco Calvo
  */
 public class Partida implements Serializable {
 
@@ -24,7 +26,9 @@ public class Partida implements Serializable {
     private IA ia1;
     private IA ia2;
     private Jugador j1;
-
+    private Jugador j2;
+    private int turn;
+    
     public Jugador getJ1() {
         return j1;
     }
@@ -32,9 +36,7 @@ public class Partida implements Serializable {
     public void setJ1(Jugador j1) {
         this.j1 = j1;
     }
-    private Jugador j2;
-    private int turn;
-
+    
     public int getTurn() {
         return turn;
     }
@@ -57,21 +59,18 @@ public class Partida implements Serializable {
 
     public void setAll(GameType type, Tablero t, int turno, IA ia1, IA ia2, Jugador j1, Jugador j2) {
         this.type = type;
-
         this.ia1 = ia1;
-
         this.ia2 = ia2;
-
         this.t = t;
-
         this.j1 = j1;
-
         this.j2 = j2;
-
         this.turn = turno;
     }
 
     // Constructors
+    /**
+     * Constructor de partida por defecto
+     */
     public Partida() {
         this.type = null;
         this.t = null;
@@ -82,6 +81,14 @@ public class Partida implements Serializable {
         this.j2 = null;
     }
 
+    /**
+     * Constructor de partida IA vs IA 
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2 
+     */
     public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
         this.type = type;
         this.t = t;
@@ -93,6 +100,14 @@ public class Partida implements Serializable {
         this.j2 = null;
     }
 
+    /**
+     * Constructor de partida IA vs Jugador
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2 
+     */
     public Partida(GameType type, Tablero t, int turno, IA player1, Jugador player2) {
         this.type = type;
         this.t = t;
@@ -106,6 +121,14 @@ public class Partida implements Serializable {
         swapPlayersColors();
     }
 
+    /**
+     * Constructor de partida Jugador vs Jugador
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2 
+     */
     public Partida(GameType type, Tablero t, int turno, Jugador player1, Jugador player2) {
         this.type = type;
         this.t = t;
@@ -117,6 +140,10 @@ public class Partida implements Serializable {
         this.j2 = player2;
     }
 
+    /**
+     * Método que sirve para asignar el color de ficha blanca a una IA antes
+     * de empezar una partida de jugador vs IA
+     */
     private void swapPlayersColors() {
         if (this.type == GameType.PLAYERvsIA) {
             if (this.ia1.getColor() == Casilla.BLANCA) {
@@ -145,31 +172,21 @@ public class Partida implements Serializable {
         this.type = type;
     }
 
-    // Other Methods
-    /*public void playGame() {
-
-        do {
-            move();
-            
-            if (t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
-                negrasHasMoves = false;
-            }
-            if (t.getLegalMoves(Casilla.BLANCA).isEmpty()) {
-                blancasHasMoves = false;
-            }
-        } while (negrasHasMoves || blancasHasMoves);
-
-        updateEstadisticas();
-    }*/
+    /**
+     * Función que verifica si la partida ha terminado
+     * @return true: partida terminada, false: partida 
+     */
     public boolean gameIsFinished() {
-
         if (t.getLegalMoves(Casilla.BLANCA).isEmpty() && t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
-            //updateEstadisticas();
             return true;
         }
         return false;
     }
 
+    /**
+     * Método para actualizar las estadísticas de los jugadores una vez
+     * la partida haya terminado
+     */
     public void updateEstadisticas() {
         int b = t.getBlancas().size();
         int n = t.getNegras().size();
@@ -261,6 +278,11 @@ public class Partida implements Serializable {
         }
     }
 
+    /**
+     * Función que realiza el movimiento de un jugador en una posicion "coord"
+     * @param coord
+     * @return 0:no tiene movimientos, 1:jugada realizada, 2:jugada ilegal 
+     */
     public int move(Pair coord) {
         int b = -1;
         switch (this.type) {
@@ -368,22 +390,28 @@ public class Partida implements Serializable {
         return b;
     }
 
+    /**
+     * Función para realizar el movimiento de una IA
+     * @param ia
+     * @return 
+     */
     private boolean iaMove(IA ia) {
         Tree jugadas = createTree(t, ia);
         Pair c = ia.escogerMovimiento(jugadas);
-        //System.out.println(ia.getColor());
-        //System.out.println(jugadas.toString());
-        //System.out.println(c.toString());
         return !(t.commitPlay(c, ia.getColor()).isEmpty());
     }
 
+    /**
+     * Método que crea el árbol de posibles jugadas que será evaluada por la IA
+     * @param tree
+     * @param depth
+     * @param tablero
+     * @param player
+     * @param color 
+     */
     private static void createTree_rec(Tree tree, int depth, Tablero tablero, IA player, Casilla color) {
         if (depth >= 0) {
             ArrayList<Pair> legalMoves = tablero.getLegalMoves(color);
-            //System.out.println(depth);
-            /*for(Pair p : legalMoves) {
-                    System.out.println(p.toString());
-                }*/
             for (Pair p : legalMoves) {
                 Tablero tDeepCopy = tablero.DeepCopy();
                 ArrayList<Pair> pa = tDeepCopy.commitPlay(p, color);
@@ -397,6 +425,12 @@ public class Partida implements Serializable {
         }
     }
 
+    /**
+     * Función que busca un movimiento para la IA
+     * @param tablero
+     * @param ia
+     * @return movimiento de IA
+     */
     Tree createTree(Tablero tablero, IA ia) {
         Tree jugadas = new Tree(new Node());
         createTree_rec(jugadas, ia.getDepth(), tablero, ia, ia.getColor());

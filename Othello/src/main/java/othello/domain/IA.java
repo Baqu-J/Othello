@@ -95,7 +95,7 @@ public class IA extends GameState {
     // Other Methods
     /**
      * Método que calcula el score total a partir de un listado de posiciones de
-     * fichas basándose en su dificultad.
+     * fichas.
      *
      * @param A Listado de posiciones para calcular el score total.
      * @return Score total.

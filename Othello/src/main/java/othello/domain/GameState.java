@@ -4,7 +4,8 @@ import java.io.Serializable;
 import othello.data.Casilla;
 
 /**
- * Clase abstracta GameState que será utilizada en la partida.
+ * Clase abstracta GameState que será utilizada en la simulación de
+ * la partida.
  * 
  * @author Franco Acevedo Montañez
  */
@@ -16,7 +17,7 @@ public abstract class GameState implements Serializable{
 
     // Constructors
     /**
-     * Constructor asignandole numero de fichas y color
+     * Constructor asignándole numero de fichas y color
      * @param color
      * @param numeroDeFichas 
      */
@@ -26,7 +27,7 @@ public abstract class GameState implements Serializable{
     }
 
     /**
-     * Constructor por defecto asignandole color
+     * Constructor por defecto asignándole color
      * @param color 
      */
     public GameState(Casilla color) {

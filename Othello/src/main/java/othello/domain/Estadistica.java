@@ -18,6 +18,10 @@ public class Estadistica implements Serializable {
     private int puntos;
 
     // Constructors
+    /**
+     * Constructor de Estadística asignándole un identificador
+     * @param id 
+     */
     public Estadistica(String id) {
         this.id = id;
         this.victoria = 0;
@@ -26,6 +30,14 @@ public class Estadistica implements Serializable {
         this.puntos = 0;
     }
 
+    /**
+     * Constructor de Estadística asignándole un id, victoria, empate, puntos
+     * @param id
+     * @param victoria
+     * @param derrota
+     * @param empate
+     * @param puntos 
+     */
     public Estadistica(String id, int victoria, int derrota, int empate, int puntos) {
         this.id = id;
         this.victoria = victoria;
@@ -85,7 +97,8 @@ public class Estadistica implements Serializable {
 
     // Other Methods
     /**
-     * Método que incrementa el atributo victoria + 1.
+     * Método que incrementa el atributo victoria + 1, y aumenta
+     * los puntos en 3 unidades
      */
     public void incVictorias() {
         setVictoria(getVictoria() + 1);
@@ -93,7 +106,8 @@ public class Estadistica implements Serializable {
     }
 
     /**
-     * Método que incrementa el atributo derrota + 1.
+     * Método que incrementa el atributo derrota + 1, y disminuye
+     * los puntos en 2 unidades
      */
     public void incDerrotas() {
         setDerrota(getDerrota() + 1);
@@ -102,10 +116,12 @@ public class Estadistica implements Serializable {
     }
 
     /**
-     * Método que incrementa el atributo empate + 1.
+     * Método que incrementa el atributo empate + 1, y aumenta
+     * los puntos en 1 unidad
      */
     public void incEmpates() {
         setEmpate(getEmpate() + 1);
+        this.puntos = this.puntos + 1;
     }
     
     @Override

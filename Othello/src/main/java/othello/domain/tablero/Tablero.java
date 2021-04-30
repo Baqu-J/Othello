@@ -352,6 +352,7 @@ public class Tablero implements Serializable{
         }
         return swaps;
     }
+    
     public void print_tablero() {
         String nums = "  |0|1|2|3|4|5|6|7|";
         String letters = "01234567";
