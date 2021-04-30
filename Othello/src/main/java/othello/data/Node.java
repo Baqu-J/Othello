@@ -3,7 +3,7 @@ package othello.data;
 /**
  * Un nodo de un árbol para Minimax
  * 
- * @author Aleix Velasco Calvo
+ * @author Franco Acevedo Montañez
  */
 public class Node {
     
