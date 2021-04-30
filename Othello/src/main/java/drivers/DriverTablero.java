@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package othello.domain.Test;
+package drivers;
 
 import java.util.Scanner;
 import othello.data.Casilla;

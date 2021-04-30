@@ -1,4 +1,4 @@
-package othello.domain.Test;
+package drivers;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import othello.domain.tablero.Escenario;
 /**
  * Clase para testear Escenario.
  *
- * @author 
+ * @author Aleix Velasco Calvo
  */
 public class DriverEscenario {
 

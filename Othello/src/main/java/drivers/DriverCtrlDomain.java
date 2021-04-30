@@ -1,4 +1,4 @@
-package othello.domain.Test;
+package drivers;
 
 import java.util.Scanner;
 import othello.domain.CtrlDomain;
