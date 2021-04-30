@@ -65,7 +65,8 @@ public class Pair implements Serializable{
 
     @Override
     public String toString() {
-        return "Pair{" + "first=" + first + ", second=" + second + '}';
+        String s = String.valueOf(this.first) + "/" + String.valueOf(this.second);
+        return s;
     }
 
     @Override
