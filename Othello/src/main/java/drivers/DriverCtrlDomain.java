@@ -1,7 +1,9 @@
 package drivers;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import othello.domain.CtrlDomain;
+import othello.domain.Estadistica;
 
 /**
  * Clase para testear la Estadistica y la creación del Ranking.
@@ -104,6 +106,13 @@ public class DriverCtrlDomain {
      * Método para testear el print del Ranking.
      */
     private static void testRanking() {
-        ctrlDominio.DisplayRanking();
+        ArrayList<Estadistica> perfiles = ctrlDominio.displayRanking();
+        for (Estadistica e : perfiles) {
+            System.out.println(e.getId() + ":");
+            System.out.println("\tPuntos: " + e.getPuntos());
+            System.out.println("\tVictorias: " + e.getVictoria());
+            System.out.println("\tDerrotas: " + e.getDerrota());
+            System.out.println("\tEmpates: " + e.getEmpate());
+        }
     }
 }

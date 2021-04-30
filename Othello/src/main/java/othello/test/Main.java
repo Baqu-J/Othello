@@ -497,7 +497,14 @@ public class Main {
     }
 
     private static void displayRanking() {
-        dominio.DisplayRanking();
+        ArrayList<Estadistica> perfiles = dominio.displayRanking();
+        for (Estadistica e : perfiles) {
+            System.out.println(e.getId() + ":");
+            System.out.println("\tPuntos: " + e.getPuntos());
+            System.out.println("\tVictorias: " + e.getVictoria());
+            System.out.println("\tDerrotas: " + e.getDerrota());
+            System.out.println("\tEmpates: " + e.getEmpate());
+        }
     }
 
     private static void guardarDatos() {
