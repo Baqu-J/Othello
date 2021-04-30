@@ -1,0 +1,1 @@
+Carpeta JSON. Contiene los archivos JSON usados en serializacion.

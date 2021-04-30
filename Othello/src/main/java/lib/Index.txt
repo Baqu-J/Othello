@@ -1,0 +1,1 @@
+Carpeta lib. Contiene las librerías con las que hay dependencias.
