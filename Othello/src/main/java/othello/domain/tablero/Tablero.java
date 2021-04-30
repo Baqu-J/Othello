@@ -65,9 +65,9 @@ public class Tablero implements Serializable{
      * Método para obtener posiciones vacías que rodean una posición dada
      * @param p
      * @param Empty
-     * @return true-> si existe posiciones vacías cerca a posición "p" y lo
+     * @return true: si existe posiciones vacías cerca a posición "p" y lo
      *                guarda en la lista "Empty"
-     *         false-> no existe posiciones vacías cerca a posición "p" y lo
+     *         false: no existe posiciones vacías cerca a posición "p" y lo
      *                 guarda en la lista "Empty"
      */
     protected boolean Get_empty_nearby(Pair p, ArrayList<Pair> Empty) {

@@ -9,7 +9,7 @@ import othello.persistence.CtrlPersistence;
 
 /**
  *
- * @author
+ * @author Aleix Velasco Calvo
  */
 public class CtrlDomain {
 
