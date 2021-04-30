@@ -431,7 +431,7 @@ public class Partida implements Serializable {
      * @param ia
      * @return movimiento de IA
      */
-    Tree createTree(Tablero tablero, IA ia) {
+    public Tree createTree(Tablero tablero, IA ia) {
         Tree jugadas = new Tree(new Node());
         createTree_rec(jugadas, ia.getDepth(), tablero, ia, ia.getColor());
         return jugadas;

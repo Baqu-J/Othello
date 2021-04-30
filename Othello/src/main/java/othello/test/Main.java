@@ -1,7 +1,6 @@
 package othello.test;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import othello.data.Casilla;
@@ -30,9 +29,6 @@ public class Main {
         dominio = CtrlDomain.getInstance();
         boolean exit = false;
         int opt;
-        Estadistica s = new Estadistica("Default");
-        Escenario e = new Escenario("Default");
-        e.commitPlay(new Pair(0, 0), Casilla.BLANCA);
 
         Scanner sc = new Scanner(System.in);
         do {
