@@ -1,13 +1,17 @@
 package othello.data;
 
 /**
- *
- * @author Foster
+ * Enumeration Class
+ * @author Jaume Baqueró Quesada
  */
 public enum Casilla {
 
     VACIA, BLANCA, NEGRA;
 
+    /**
+     * Retorna el color de casilla contraria.
+     * @return Casilla
+     */
     public Casilla contrary() {
         switch (this) {
             case BLANCA:

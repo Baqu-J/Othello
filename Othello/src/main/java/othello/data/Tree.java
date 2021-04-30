@@ -19,15 +19,22 @@ public class Tree<T> {
     private HashMap<T, Tree<T>> locate = new HashMap<T, Tree<T>>(); //Hash table used for quickly grabbing nodes.
 
     // Constructors
-    //Creates a tree with a root node
+    /**
+     * Creates a tree with a root node
+     * @param root 
+     */
     public Tree(T root) {
         this.root = root;
         locate.put(root, this);
     }
 
     // Getters and Setters
-    //Inserts a leaf node on a given tree
-    public void addLeaf(T root, T leaf) {
+   /**
+    * Inserts a leaf node on a given tree
+    * @param root
+    * @param leaf 
+    */
+     public void addLeaf(T root, T leaf) {
         if (locate.containsKey(root)) {
             locate.get(root).addLeaf(leaf);
         } else {
@@ -35,7 +42,11 @@ public class Tree<T> {
         }
     }
 
-    //Creates a leaf node
+    /**
+     * Creates a leaf node
+     * @param leaf
+     * @return Tree
+     */
     public Tree<T> addLeaf(T leaf) {
         Tree<T> t = new Tree<T>(leaf);
         leafs.add(t);
@@ -45,7 +56,11 @@ public class Tree<T> {
         return t;
     }
 
-    //Sets the parent of this tree
+    /**
+     * Sets the parent of this tree
+     * @param parentRoot
+     * @return T
+     */
     public Tree<T> setAsParent(T parentRoot) {
         Tree<T> t = new Tree<T>(parentRoot);
         t.leafs.add(this);
@@ -56,22 +71,36 @@ public class Tree<T> {
         return t;
     }
 
-    //Gets the root of this tree
+    /**
+     * Gets the root of this tree
+     * @return T
+     */
     public T getRoot() {
         return root;
     }
 
-    //Returns a node within this tree
+    /**
+     * Returns a node within this tree
+     * @param element
+     * @return Tree
+     */
     public Tree<T> getTree(T element) {
         return locate.get(element);
     }
 
-    //Gets the parent of this tree
+    /**
+     * Gets the parent of this tree
+     * @return Tree
+     */
     public Tree<T> getParent() {
         return parent;
     }
 
-    //Get all children of this root
+    /**
+     * Get all children of this root
+     * @param root
+     * @return Collection 
+     */
     public Collection<T> getSuccessors(T root) {
         Collection<T> successors = new ArrayList<T>();
         Tree<T> tree = getTree(root);
@@ -83,12 +112,21 @@ public class Tree<T> {
         return successors;
     }
 
-    //Returns all subtrees
+    /**
+     * Returns all subtrees
+     * @return Collection tree
+     */
     public Collection<Tree<T>> getSubTrees() {
         return leafs;
     }
 
-    //Returns all subtrees of a given subtree
+    /**
+     * Returns all subtrees of a given subtree
+     * @param <T>
+     * @param of
+     * @param in
+     * @return ArrayList
+     */
     public static <T> Collection<T> getSuccessors(T of, Collection<Tree<T>> in) {
         for (Tree<T> tree : in) {
             if (tree.locate.containsKey(of)) {

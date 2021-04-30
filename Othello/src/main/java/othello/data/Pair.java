@@ -3,20 +3,23 @@ package othello.data;
 import java.io.Serializable;
 
 /**
- *
- * @author Foster
+ * Clase Pair, representa un par de enteros.
+ * @author Jaume Baqueró Quesada
  */
 public class Pair implements Serializable{
 
     private int first;
     private int second;
 
+    /**
+     * Constructor por defecto asignándole valores al par de enteros.
+     * @param f
+     * @param s 
+     */
     public Pair(int f, int s) {
         first = f;
         second = s;
     }
-    
-    
     
     public int first() {
         return first;
@@ -34,13 +37,26 @@ public class Pair implements Serializable{
         second = s;
     }
 
+    /**
+     * Función que suma el primer valor del par implícito con el primer valor 
+     * del par del parámetro "p", y de igual manera con el 2do elemento.
+     * @param p
+     * @return pair
+     */
     public Pair sum(Pair p) {
         return new Pair(this.first() + p.first(), this.second() + p.second());
     }
     
+    /**
+     * Función que resta el primer valor del par implícito con el primer valor 
+     * del par del parámetro "p", y de igual manera con el 2do elemento.
+     * @param p
+     * @return pair
+     */
     public Pair sub(Pair p) {
         return new Pair(this.first() - p.first(), this.second() - p.second());
     }
+    
     
     public String convertString() {
         String s = String.valueOf(this.first) + "/" + String.valueOf(this.second);

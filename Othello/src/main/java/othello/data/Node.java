@@ -1,7 +1,7 @@
 package othello.data;
 
 /**
- * A Node of a Tree for Minimax
+ * Un nodo de un árbol para Minimax
  * 
  * @author Aleix Velasco Calvo
  */
@@ -13,24 +13,42 @@ public class Node {
     private int score;
 
     // Constructors
+    /**
+     * Constructor por defecto
+     */
     public Node() {
         this.cord = new Pair(-1,-1);
         this.player = Casilla.VACIA;
         this.score = 0;
     }
     
+    /**
+     * Constructor con score asignado
+     * @param score 
+     */
     public Node(int score) {
         this.cord = new Pair(-1,-1);
         this.player = Casilla.VACIA;
         this.score = score;
     }
     
+    /**
+     * Constructor con pair y color asignados
+     * @param p
+     * @param player 
+     */
     public Node(Pair p, Casilla player) {
         this.cord = p;
         this.player = player;
         this.score = 0;
     }
 
+    /**
+     * Constructor con pair, color y score asignados
+     * @param p
+     * @param player
+     * @param score 
+     */
     public Node(Pair p, Casilla player, int score) {
         this.cord = p;
         this.player = player;
