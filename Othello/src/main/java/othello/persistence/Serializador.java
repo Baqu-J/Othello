@@ -134,7 +134,6 @@ public class Serializador {
         try{
             File f = new File("JSON/Partida/SavedGame.json");
             if(f.exists()) {
-                System.out.println("Found partida");
                 Scanner reader = new Scanner(f);
                 String json = reader.next();
                 serializador = new Gson();
