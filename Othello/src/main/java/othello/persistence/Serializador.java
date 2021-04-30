@@ -12,13 +12,22 @@ import othello.domain.Partida;
 import othello.domain.tablero.Escenario;
 
 /**
- *
- * @author Foster
+ * Clase Serializador que gestiona la conversión de objetos en datos que se 
+ * almacenan para que posteriormente puedan ser leídos y restaurar el objeto
+ * original
+ * 
+ * @author Jaume Baqueró Quesada
  */
-public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
+public class Serializador {
+    
     private static Gson serializador;
    
-    
+    /**
+     * Función que actualiza la Estadistica de un jugador y lo guarda en 
+     * el archivo de datos correspondiente
+     * @param n
+     * @return 1:ejecutado satisfactoriamente, 0:error
+     */
     public int updateJSONfromEstadistica(Estadistica n){
         int ret = 1;
         try{
@@ -37,6 +46,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que desde un objeto Estadística guarda la información que ésta
+     * contiene en el archivo de datos correspondiente.
+     * @param n
+     * @return 1:ejecutado satisfactoriamente, -1:error, 0:Exeception
+     */
     public int createJSONfromEstadistica(Estadistica n){
         int ret = 1;
         try{
@@ -57,6 +72,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que obtiene el objeto Estadística si este existe
+     * @param e
+     * @param path
+     * @return 1:ejecutado satisfactoriamente, -1:no existe archivo, 0:Exeception
+     */
     public int getEstadisticafromFile(Estadistica e, String path) {
         int ret = 1;
         try {
@@ -70,7 +91,7 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
             }
             else ret = -1;
         }
-        catch(JsonSyntaxException | FileNotFoundException f) {
+        catch(FileNotFoundException f) {
             ret = 0;
         }
         
@@ -78,6 +99,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         
     }
     
+    /**
+     * Función que desde un objeto Partida guarda la información que ésta
+     * contiene en el archivo de datos correspondiente.
+     * @param n
+     * @return 1:ejecutado satisfactoriamente, 0:Exeception
+     */
     public int createJSONfromPartida(Partida n) {
         int ret = 1;
         try{
@@ -97,6 +124,11 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que obtiene el objeto Partida si este existe.
+     * @param p
+     * @return 1:ejecutado satisfactoriamente, -1:no existe archivo, 0:Exeception
+     */
     public int getPartidafromFile(Partida p) {
         int ret = 1;
         try{
@@ -117,6 +149,11 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que actualiza un Escenario guardado.
+     * @param e
+     * @return 1:ejecutado satisfactoriamente, 0:Exeception
+     */
     public int updateJSONfromEscenario(Escenario e){
         int ret = 1;
         try{
@@ -135,6 +172,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que desde un objeto Escenario guarda la información que ésta
+     * contiene en el archivo de datos correspondiente.
+     * @param e
+     * @return 1:ejecutado satisfactoriamente, 0:Exeception
+     */
     public int createJSONfromEscenario(Escenario e) {
         int ret = 1;
         try {
@@ -155,6 +198,12 @@ public class Serializador { //CHECK IF FOLDER EXISTS IF NOT MAKE IT
         return ret;
     }
     
+    /**
+     * Función que obtiene el objeto Escenario si éste existe.
+     * @param e
+     * @param path
+     * @return 1:ejecutado satisfactoriamente, -1:no existe archivo, 0:Exeception
+     */
     public int getEscenariofromFile(Escenario e, String path) {
         int ret = 1;
         try {
