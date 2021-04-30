@@ -400,15 +400,6 @@ public class Main {
             } while(!diferent);
             p = new Partida(Partida.GameType.PLAYERvsPLAYER, t, 0, j1, j2);
         }
-        /*if(p != null) {
-            System.out.println(p.getType().toString());
-            Casilla [][] a =p.getT();
-            for(int i = 0;i<8;i++) {
-                for(int j = 0;j<8;j++) {
-                    System.out.println(a[i][j].toString());
-                }  
-            }
-        }*/
         return p;
     }
 

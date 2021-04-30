@@ -127,11 +127,11 @@ public class IA extends GameState {
         if (maximizingPlayer) {
             Node maxEval = new Node(NEGATIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
-                //System.out.println(depth + " " + this.depth);
+               
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, false);
                 
                     int scr = ((maxEval.getScore() > eval.getScore()) ? maxEval.getScore() : eval.getScore());
-                    //System.out.println(depth + " " + scr);
+                   
                     maxEval.setScore(scr); 
                 
                 
@@ -145,11 +145,11 @@ public class IA extends GameState {
             Node minEval = new Node(POSITIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
                 
-                //System.out.println(depth + " " + this.depth);
+                
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, true);
                 
                     int scr = ((minEval.getScore() < eval.getScore()) ? minEval.getScore() : eval.getScore());
-                    //System.out.println(depth + " " + scr);
+                   
                     minEval.setScore(scr);
                      
                 
@@ -169,17 +169,16 @@ public class IA extends GameState {
      * @return Coordenada escogida.
      */
     public Pair escogerMovimiento(Tree<Node> t) {
-        //System.out.println(t.toString());
+    
         Node maxEval = new Node(NEGATIVE_INFINITY);
         
         for (Tree<Node> child : t.getSubTrees()) {
-               // System.out.println("AAAAAAAAAAAAAAAAAAAA");
-                //System.out.println(this.depth);
+              
 
                 Node eval = alpha_beta(child, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
-              //  System.out.println("EVAL SCORE: " + eval.getScore());
+              
                 if(maxEval.getScore() < eval.getScore()) {
-                //    System.out.println("BBBBBBBBBBBBBBBBBB");
+               
                     maxEval.setScore(eval.getScore());
                     maxEval.setCord(child.getRoot().getCord());
                 }

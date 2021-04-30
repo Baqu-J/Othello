@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"othello.data"},{"l":"othello.domain"},{"l":"othello.domain.tablero"},{"l":"othello.persistence"},{"l":"othello.test"},{"l":"othello.view"}]
