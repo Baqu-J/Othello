@@ -5,6 +5,9 @@
  */
 package othello.view;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Foster
@@ -71,6 +74,7 @@ public class CrearPartida extends javax.swing.JPanel {
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
+                jRadioButton1ActionPerformed1(evt);
             }
         });
 
@@ -79,6 +83,7 @@ public class CrearPartida extends javax.swing.JPanel {
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
+                jRadioButton2ActionPerformed1(evt);
             }
         });
 
@@ -159,6 +164,7 @@ public class CrearPartida extends javax.swing.JPanel {
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton5ActionPerformed(evt);
+                jRadioButton5ActionPerformed1(evt);
             }
         });
 
@@ -167,6 +173,7 @@ public class CrearPartida extends javax.swing.JPanel {
         jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton6ActionPerformed(evt);
+                jRadioButton6ActionPerformed1(evt);
             }
         });
 
@@ -291,7 +298,7 @@ public class CrearPartida extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
@@ -303,7 +310,7 @@ public class CrearPartida extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
+        jComboBox1.setModel(new DefaultComboBoxModel(new String[] {"Facil", "Normal", "Dificil"}));
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
@@ -315,7 +322,7 @@ public class CrearPartida extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton5ActionPerformed
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
-        // TODO add your handling code here:
+        jComboBox2.setModel(new DefaultComboBoxModel(new String[] {"Facil", "Normal", "Dificil"}));
     }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
@@ -325,6 +332,22 @@ public class CrearPartida extends javax.swing.JPanel {
     private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton8ActionPerformed
+
+    private void jRadioButton1ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed1
+        jLabel1.setText("Selecciona perfil:");
+    }//GEN-LAST:event_jRadioButton1ActionPerformed1
+
+    private void jRadioButton2ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed1
+        jLabel1.setText("Selecciona dificultad:");
+    }//GEN-LAST:event_jRadioButton2ActionPerformed1
+
+    private void jRadioButton5ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed1
+        jLabel3.setText("Selecciona perfil:");
+    }//GEN-LAST:event_jRadioButton5ActionPerformed1
+
+    private void jRadioButton6ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed1
+        jLabel3.setText("Selecciona dificultad:");
+    }//GEN-LAST:event_jRadioButton6ActionPerformed1
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
