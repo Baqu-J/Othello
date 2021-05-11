@@ -12,12 +12,12 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Foster
  */
-public class CrearPartida extends javax.swing.JPanel {
+public class panelCrearPartida extends javax.swing.JPanel {
 
     /**
      * Creates new form CrearPartida
      */
-    public CrearPartida() {
+    public panelCrearPartida() {
         initComponents();
     }
 
