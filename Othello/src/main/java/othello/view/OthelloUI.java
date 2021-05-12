@@ -35,14 +35,14 @@ public class OthelloUI extends JFrame {
     
     public void agregar_paneles(){
         panelPrincipal p1 = new panelPrincipal();
-        p1.setSize(537,425);
-        p1.setLocation(5,5);
+       // p1.setSize(537,425);
+       // p1.setLocation(5,5);
+        this.setContentPane(p1);
         
-        
-        panelMain.removeAll();
+        /*panelMain.removeAll();
         panelMain.add(p1,BorderLayout.CENTER);
         panelMain.revalidate();
-        panelMain.repaint();
+        panelMain.repaint();*/
     }
 
     /**

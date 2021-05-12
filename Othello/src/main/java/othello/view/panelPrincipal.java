@@ -5,23 +5,31 @@
  */
 package othello.view;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static othello.view.OthelloUI.panelMain;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
- * @author FRANCO
+ * @author Aleix
  */
-public class panelPrincipal extends javax.swing.JPanel implements ActionListener{
+public class panelPrincipal extends javax.swing.JPanel {
 
     /**
-     * Creates new form principal
+     * Creates new form panelPrincipa
      */
     public panelPrincipal() {
         initComponents();
-        //jButton1.setIcon(setIcono("src/main/java/resources/barra.jpg",jButton1));
+        
+        try {
+            
+            Image imageResized = ImageIO.read(new File("src/main/java/resources/ranking.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            btn_ranking.setIcon(new ImageIcon(imageResized));
+            
+        } catch (Exception ex) {
+        }
     }
 
     /**
@@ -35,133 +43,85 @@ public class panelPrincipal extends javax.swing.JPanel implements ActionListener
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         btn_perfil = new javax.swing.JButton();
         btn_jugar = new javax.swing.JButton();
         btn_escenario = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         btn_exit = new javax.swing.JButton();
-        label_othello = new javax.swing.JLabel();
-        label_estadistica = new javax.swing.JLabel();
-        btn_estadistica = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btn_ranking = new javax.swing.JButton();
 
         jPanel1.setMinimumSize(new java.awt.Dimension(537, 425));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        btn_perfil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
         btn_perfil.setText("PERFIL");
-        btn_perfil.setMaximumSize(new java.awt.Dimension(180, 60));
-        btn_perfil.setMinimumSize(new java.awt.Dimension(180, 60));
-        btn_perfil.setPreferredSize(new java.awt.Dimension(180, 60));
-        btn_perfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_perfilActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 125, -1, -1));
+        btn_perfil.setMaximumSize(new java.awt.Dimension(200, 60));
+        btn_perfil.setMinimumSize(new java.awt.Dimension(200, 60));
+        btn_perfil.setPreferredSize(new java.awt.Dimension(200, 60));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel2.add(btn_perfil, gridBagConstraints);
 
-        btn_jugar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_jugar.setText("JUGAR");
         btn_jugar.setMaximumSize(new java.awt.Dimension(180, 60));
         btn_jugar.setMinimumSize(new java.awt.Dimension(180, 60));
         btn_jugar.setPreferredSize(new java.awt.Dimension(180, 60));
-        jPanel1.add(btn_jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 195, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
+        jPanel2.add(btn_jugar, gridBagConstraints);
 
-        btn_escenario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_escenario.setText("ESCENARO");
+        btn_escenario.setText("ESCENARIO");
         btn_escenario.setMaximumSize(new java.awt.Dimension(180, 60));
         btn_escenario.setMinimumSize(new java.awt.Dimension(180, 60));
         btn_escenario.setPreferredSize(new java.awt.Dimension(180, 60));
-        jPanel1.add(btn_escenario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 265, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(btn_escenario, gridBagConstraints);
 
-        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
         btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 89, -1));
+        jPanel3.add(btn_exit);
 
-        label_othello.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 3, 60)); // NOI18N
-        label_othello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_othello.setText("OTHELLO");
-        label_othello.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(label_othello, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 37, 288, 82));
+        jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
 
-        label_estadistica.setText("Estadistica");
-        jPanel1.add(label_estadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 118, -1, -1));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel4.add(btn_ranking);
 
-        btn_estadistica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_estadisticaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_estadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 70, 60));
+        jPanel1.add(jPanel4, java.awt.BorderLayout.NORTH);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perfilActionPerformed
-        panelPerfil p1 = new panelPerfil();
-        p1.setSize(537,425);
-        p1.setLocation(5,5);
-        
-        
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
-    }//GEN-LAST:event_btn_perfilActionPerformed
-
-    private void btn_estadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticaActionPerformed
-        panelRanking p1 = new panelRanking();
-        p1.setSize(537,425);
-        p1.setLocation(5,5);
-        
-        
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
-    }//GEN-LAST:event_btn_estadisticaActionPerformed
-
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
-
-    
-    /*public Icon setIcono(String url, JButton boton){
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-        
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto,Image.SCALE_DEFAULT));
-        
-        return icono;
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_escenario;
-    private javax.swing.JButton btn_estadistica;
     private javax.swing.JButton btn_exit;
     private javax.swing.JButton btn_jugar;
     private javax.swing.JButton btn_perfil;
+    private javax.swing.JButton btn_ranking;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel label_estadistica;
-    private javax.swing.JLabel label_othello;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

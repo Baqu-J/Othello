@@ -111,7 +111,7 @@ public class panelPerfil extends javax.swing.JPanel implements ActionListener{
     }//GEN-LAST:event_btn_consultarEstadisticaActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
-        panelPrincipal p1 = new panelPrincipal();
+        panelPrincipalOld p1 = new panelPrincipalOld();
         p1.setSize(537,425);
         p1.setLocation(5,5);
         
