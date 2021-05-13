@@ -8,7 +8,6 @@ package othello.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static othello.view.OthelloUI.panelMain;
 
 /**
  *
@@ -51,10 +50,6 @@ public class panelPrincipalOld extends javax.swing.JPanel implements ActionListe
         p1.setLocation(5,5);
         
         
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
     }//GEN-LAST:event_btn_perfilActionPerformed
 
     private void btn_estadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticaActionPerformed
@@ -63,10 +58,7 @@ public class panelPrincipalOld extends javax.swing.JPanel implements ActionListe
         p1.setLocation(5,5);
         
         
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
+      
     }//GEN-LAST:event_btn_estadisticaActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed

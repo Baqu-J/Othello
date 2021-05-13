@@ -3,6 +3,7 @@ package othello.view;
 import java.util.ArrayList;
 import othello.domain.CtrlDomain;
 
+
 /**
  *
  * @author 
@@ -26,6 +27,10 @@ public class CtrlView {
         ctrlDominio = CtrlDomain.getInstance();
         mainView = new OthelloUI(this);
         mainView.setVisible(true);
+    }
+    
+    public static void crearPartida() {
+        CrearPartidaUI cp = new CrearPartidaUI();
     }
 
     /*public String crearPerfil(String nombre) {

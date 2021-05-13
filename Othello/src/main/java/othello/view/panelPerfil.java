@@ -9,7 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import static othello.view.OthelloUI.panelMain;
 
 /**
  *
@@ -103,11 +102,7 @@ public class panelPerfil extends javax.swing.JPanel implements ActionListener{
         p1.setSize(537,425);
         p1.setLocation(5,5);
         
-        
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
+       
     }//GEN-LAST:event_btn_consultarEstadisticaActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
@@ -116,10 +111,7 @@ public class panelPerfil extends javax.swing.JPanel implements ActionListener{
         p1.setLocation(5,5);
         
         
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
+       
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed

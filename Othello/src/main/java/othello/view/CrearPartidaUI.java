@@ -16,6 +16,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
      */
     public CrearPartidaUI() {
         initComponents();
+        setVisible(true);
     }
 
     /**

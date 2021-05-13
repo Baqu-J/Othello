@@ -6,7 +6,7 @@
 package othello.view;
 
 import java.awt.BorderLayout;
-import static othello.view.OthelloUI.panelMain;
+
 
 
 /**
@@ -127,10 +127,7 @@ public class panelConsultaEstadistica extends javax.swing.JPanel {
         p1.setLocation(5,5);
         
         
-        panelMain.removeAll();
-        panelMain.add(p1,BorderLayout.CENTER);
-        panelMain.revalidate();
-        panelMain.repaint();
+        
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
