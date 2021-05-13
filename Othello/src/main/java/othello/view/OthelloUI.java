@@ -199,12 +199,12 @@ public class OthelloUI extends JFrame {
     private javax.swing.JButton btn_jugar;
     private javax.swing.JButton btn_perfil;
     private javax.swing.JButton btn_ranking;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel panelMain;
+    public static javax.swing.JPanel panelMain;
     // End of variables declaration//GEN-END:variables
 }
