@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
@@ -34,7 +34,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="680" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -84,6 +84,9 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Jugador"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Jugador1ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="IA1">
                       <Properties>
@@ -106,7 +109,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="labelJ1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel2"/>
+                        <Property name="text" type="java.lang.String" value="Escoge perfil:"/>
                         <Property name="alignmentX" type="float" value="0.5"/>
                       </Properties>
                     </Component>
@@ -138,7 +141,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Selecciona Color"/>
+                        <Property name="text" type="java.lang.String" value="Selecciona Color:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="RadioBlanco1">
@@ -149,6 +152,9 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Blanco"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RadioBlanco1ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="RadioNegro1">
                       <Properties>
@@ -195,6 +201,9 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Jugador"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Jugador2ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="IA2">
                       <Properties>
@@ -203,6 +212,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="IA"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IA2ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -214,7 +226,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="labelJ2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel1"/>
+                        <Property name="text" type="java.lang.String" value="Escoge perfil:"/>
                         <Property name="alignmentX" type="float" value="0.5"/>
                       </Properties>
                     </Component>
@@ -246,7 +258,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel4"/>
+                        <Property name="text" type="java.lang.String" value="Selecciona Color:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="RadioBlanco2">
@@ -256,6 +268,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Blanco"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RadioBlanco2ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="RadioNegro2">
                       <Properties>
@@ -265,6 +280,9 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Negro"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RadioNegro2ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -283,18 +301,96 @@
             </Property>
           </Properties>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel13">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanel15">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="jLabel1"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                          <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanel16">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="startGameButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="176" max="32767" attributes="0"/>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="startGameButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="startGameButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Comenzar"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel12">
+          <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[32767, 30]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[0, 30]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[650, 30]"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="2"/>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="backButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atras"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

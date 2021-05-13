@@ -17,6 +17,7 @@ public class OthelloUI extends JFrame {
     
     /**
      * Creates new form OthelloUI
+     * @param pCtrlView
      */
     public OthelloUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;
@@ -33,6 +34,7 @@ public class OthelloUI extends JFrame {
         
         
         initComponents();
+        setVisible(true);
     }
     
    /** public void agregar_paneles(){

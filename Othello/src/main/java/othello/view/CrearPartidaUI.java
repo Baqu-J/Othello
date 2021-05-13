@@ -5,17 +5,36 @@
  */
 package othello.view;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Foster
  */
 public class CrearPartidaUI extends javax.swing.JFrame {
-
+    private final CtrlView iCtrlView;
     /**
      * Creates new form CrearPartidaUI
+     * @param pCtrlView
      */
-    public CrearPartidaUI() {
+    public CrearPartidaUI(CtrlView pCtrlView) {
+        iCtrlView = pCtrlView;
         initComponents();
+        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        Image image = null;
+        try {
+            image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(CrearPartidaUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setIconImage(image);
         setVisible(true);
     }
 
@@ -27,6 +46,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -57,6 +77,13 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         RadioBlanco2 = new javax.swing.JRadioButton();
         RadioNegro2 = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        startGameButton = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Partida");
@@ -73,6 +100,11 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         buttonGroup1.add(Jugador1);
         Jugador1.setSelected(true);
         Jugador1.setText("Jugador");
+        Jugador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jugador1ActionPerformed(evt);
+            }
+        });
         jPanel6.add(Jugador1);
 
         buttonGroup1.add(IA1);
@@ -88,7 +120,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.PAGE_AXIS));
 
-        labelJ1.setText("jLabel2");
+        labelJ1.setText("Escoge perfil:");
         labelJ1.setAlignmentX(0.5F);
         jPanel7.add(labelJ1);
 
@@ -100,12 +132,17 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jLabel3.setText("Selecciona Color");
+        jLabel3.setText("Selecciona Color:");
         jPanel8.add(jLabel3);
 
         buttonGroup2.add(RadioBlanco1);
         RadioBlanco1.setSelected(true);
         RadioBlanco1.setText("Blanco");
+        RadioBlanco1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioBlanco1ActionPerformed(evt);
+            }
+        });
         jPanel8.add(RadioBlanco1);
 
         buttonGroup2.add(RadioNegro1);
@@ -129,17 +166,27 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         buttonGroup3.add(Jugador2);
         Jugador2.setSelected(true);
         Jugador2.setText("Jugador");
+        Jugador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Jugador2ActionPerformed(evt);
+            }
+        });
         jPanel9.add(Jugador2);
 
         buttonGroup3.add(IA2);
         IA2.setText("IA");
+        IA2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IA2ActionPerformed(evt);
+            }
+        });
         jPanel9.add(IA2);
 
         jPanel5.add(jPanel9);
 
         jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.PAGE_AXIS));
 
-        labelJ2.setText("jLabel1");
+        labelJ2.setText("Escoge perfil:");
         labelJ2.setAlignmentX(0.5F);
         jPanel10.add(labelJ2);
 
@@ -151,16 +198,26 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
         jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Selecciona Color:");
         jPanel11.add(jLabel4);
 
         buttonGroup4.add(RadioBlanco2);
         RadioBlanco2.setText("Blanco");
+        RadioBlanco2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioBlanco2ActionPerformed(evt);
+            }
+        });
         jPanel11.add(RadioBlanco2);
 
         buttonGroup4.add(RadioNegro2);
         RadioNegro2.setSelected(true);
         RadioNegro2.setText("Negro");
+        RadioNegro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioNegro2ActionPerformed(evt);
+            }
+        });
         jPanel11.add(RadioNegro2);
 
         jPanel5.add(jPanel11);
@@ -170,25 +227,61 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Escenario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel13.setLayout(new javax.swing.BoxLayout(jPanel13, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel15.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText("jLabel1");
+        jPanel15.add(jLabel1, new java.awt.GridBagConstraints());
+
+        jPanel13.add(jPanel15);
+
+        startGameButton.setText("Comenzar");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 86, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(startGameButton)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 176, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(startGameButton)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        jPanel13.add(jPanel16);
+
+        jPanel3.add(jPanel13, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel3);
+
+        jPanel12.setMaximumSize(new java.awt.Dimension(32767, 30));
+        jPanel12.setMinimumSize(new java.awt.Dimension(0, 30));
+        jPanel12.setPreferredSize(new java.awt.Dimension(650, 30));
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        backButton.setText("Atras");
+        jPanel12.add(backButton);
+
+        jPanel1.add(jPanel12);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,11 +293,47 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void IA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IA1ActionPerformed
         // TODO add your handling code here:
+        labelJ1.setText("Escoge dificultad:");
+        Combo1.setModel(new DefaultComboBoxModel(new String[]{"Facil", "Normal", "Dificil"}));
     }//GEN-LAST:event_IA1ActionPerformed
 
     private void RadioNegro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioNegro1ActionPerformed
         // TODO add your handling code here:
+        RadioBlanco2.setSelected(true);
     }//GEN-LAST:event_RadioNegro1ActionPerformed
+
+    private void Jugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jugador1ActionPerformed
+        // TODO add your handling code here:
+        labelJ1.setText("Escoge perfil:");
+        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+    }//GEN-LAST:event_Jugador1ActionPerformed
+
+    private void Jugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jugador2ActionPerformed
+        // TODO add your handling code here:
+         labelJ2.setText("Escoge perfil:");
+         Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+    }//GEN-LAST:event_Jugador2ActionPerformed
+
+    private void IA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IA2ActionPerformed
+        // TODO add your handling code here:
+        labelJ2.setText("Escoge dificultad:");
+        Combo2.setModel(new DefaultComboBoxModel(new String[]{"Facil", "Normal", "Dificil"}));
+    }//GEN-LAST:event_IA2ActionPerformed
+
+    private void RadioBlanco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBlanco1ActionPerformed
+        // TODO add your handling code here:
+        RadioNegro2.setSelected(true);
+    }//GEN-LAST:event_RadioBlanco1ActionPerformed
+
+    private void RadioBlanco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBlanco2ActionPerformed
+        // TODO add your handling code here:
+        RadioNegro1.setSelected(true);
+    }//GEN-LAST:event_RadioBlanco2ActionPerformed
+
+    private void RadioNegro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioNegro2ActionPerformed
+        // TODO add your handling code here:
+        RadioBlanco1.setSelected(true);
+    }//GEN-LAST:event_RadioNegro2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,15 +351,21 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioBlanco2;
     private javax.swing.JRadioButton RadioNegro1;
     private javax.swing.JRadioButton RadioNegro2;
+    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -241,6 +376,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel labelJ1;
     private javax.swing.JLabel labelJ2;
+    private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
     
 }
