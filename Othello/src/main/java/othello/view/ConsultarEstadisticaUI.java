@@ -5,6 +5,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -101,6 +102,11 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jButton3.setText("BORRAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -164,15 +170,36 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jPanel5.setVisible(true);
+        String jugador1 = jComboBox1.getSelectedItem().toString();
+        String result;
+        result = iCtrlView.estadistica_perfil(jugador1);
+        jLabel2.setText(result); 
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        String jugador = (String)jComboBox1.getSelectedItem();
+        String jugador1 = jComboBox1.getSelectedItem().toString();
         String result;
-        result = iCtrlView.estadistica_perfil(jugador);
-        jLabel2.setText(result);
+        result = iCtrlView.estadistica_perfil(jugador1);
+        jLabel2.setText(result);     
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String jugador = jComboBox1.getSelectedItem().toString();
+        String password = JOptionPane.showInputDialog("Ingresa Contraseña");
+  
+        int ret = iCtrlView.borrar_perfil(jugador, password);
+
+        if(ret == 1){
+            JOptionPane.showMessageDialog(null, "Usuario Borrado");
+            jLabel2.setText("");
+            jPanel5.setVisible(false);
+            jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "contraseña incorrecta", "ERROR", 0);
+        }  
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;

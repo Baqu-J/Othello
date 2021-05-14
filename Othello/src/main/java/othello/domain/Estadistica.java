@@ -71,7 +71,7 @@ public class Estadistica implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -82,8 +82,9 @@ public class Estadistica implements Serializable {
         this.id = id;
     }
     
-    public void setAll(String id, int puntos, int victoria, int derrota, int empate) {
+    public void setAll(String id, String pass, int puntos, int victoria, int derrota, int empate) {
         this.id = id;
+        this.password = pass;
         this.puntos = puntos;
         this.victoria = victoria;
         this.derrota = derrota;

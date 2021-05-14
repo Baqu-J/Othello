@@ -123,6 +123,10 @@ public class CtrlView {
         Estadistica p = ctrlDominio.searchEstadistica(id);
         return ("<html>"+ p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate()+ "<html>");
     }
+    
+    public int borrar_perfil(String id, String password){
+        return ctrlDominio.borrarPerfil(id,password); 
+    }
     /*public String crearPerfil(String nombre) {
         return ctrlDominio.crearPerfil(nombre);
     }

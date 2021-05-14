@@ -87,7 +87,7 @@ public class Serializador {
                 String json = reader.next();
                 serializador = new Gson();
                 Estadistica aux = serializador.fromJson(json, Estadistica.class);
-                e.setAll(aux.getId(), aux.getPuntos(), aux.getVictoria(), aux.getDerrota(), aux.getEmpate());
+                e.setAll(aux.getId(), aux.getPassword(), aux.getPuntos(), aux.getVictoria(), aux.getDerrota(), aux.getEmpate());
             }
             else ret = -1;
         }

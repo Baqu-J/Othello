@@ -125,10 +125,12 @@ public class CtrlDomain {
     public int borrarPerfil(String nombre, String password) {
         int ret = -1;
         Estadistica e = searchEstadistica(nombre);
-        if (e != null && password.equals(e.getPassword())) {
-            ret = ctrlPersistencia.BorrarPerfil(nombre);
-            if (ret == 1) {
-                perfiles.remove(e);
+        if (e != null){
+            if(password == null ? e.getPassword() == null : password.equals(e.getPassword())){
+                ret = ctrlPersistencia.BorrarPerfil(nombre);
+                if (ret == 1) {
+                    perfiles.remove(e);
+                }
             }
         }
         return ret;
