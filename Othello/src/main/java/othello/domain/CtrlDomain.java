@@ -138,6 +138,17 @@ public class CtrlDomain {
         return perfiles;
     }
     
+    
+    public ArrayList<String> getRanking() {
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
+        Collections.sort(perfiles, c);
+        ArrayList<String> ranking = new ArrayList<>(); 
+        for (int i = 0; i < perfiles.size(); i++) {
+            ranking.add(perfiles.get(i).toString());
+        }
+        return ranking;
+    }
+    
     /**
      * Método que devulve todos las Estadisticas.
      *

@@ -1,21 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package othello.view;
+
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 /**
  *
  * @author FRANCO
  */
-public class CrearPerfil extends javax.swing.JFrame {
+public class CrearPerfilUI extends javax.swing.JFrame {
 
+    private CtrlView iCtrlView;
+    
     /**
      * Creates new form CrearPerfil
      */
-    public CrearPerfil() {
+    public CrearPerfilUI(CtrlView pCtrlView) {
+        iCtrlView = pCtrlView;
+        this.setTitle("Othello App");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
+        try {
+            Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
+            this.setIconImage(image);
+            
+        } catch (Exception ex) {
+        }
     }
 
     /**
@@ -28,20 +39,17 @@ public class CrearPerfil extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btn_atras = new javax.swing.JButton();
+        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -86,76 +94,61 @@ public class CrearPerfil extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel2.add(jButton3, gridBagConstraints);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setText("EXIT");
-        jPanel3.add(jButton1, java.awt.BorderLayout.LINE_END);
+        btn_atras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_atras.setText("ATRAS");
+        btn_atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atrasActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        jPanel4.add(btn_atras, gridBagConstraints);
 
-        jButton2.setText("ATRAS");
-        jPanel3.add(jButton2, java.awt.BorderLayout.LINE_START);
+        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_exit.setText("EXIT");
+        btn_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exitActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        jPanel4.add(btn_exit, gridBagConstraints);
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        iCtrlView.backToMainWindow("MenuPerfil");
+    }//GEN-LAST:event_btn_atrasActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CrearPerfil().setVisible(true);
-            }
-        });
-    }
+    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_exitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_atras;
+    private javax.swing.JButton btn_exit;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

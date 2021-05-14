@@ -122,9 +122,9 @@ public class panelConsultaEstadistica extends javax.swing.JPanel {
     }//GEN-LAST:event_box_usuariosActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
-        panelPerfil p1 = new panelPerfil();
+        /*panelPerfil p1 = new panelPerfil();
         p1.setSize(537,425);
-        p1.setLocation(5,5);
+        p1.setLocation(5,5);*/
         
         
         

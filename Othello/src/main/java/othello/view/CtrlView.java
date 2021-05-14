@@ -14,7 +14,14 @@ public class CtrlView {
     // Attributes
     private static CtrlView instance;
     private CtrlDomain ctrlDominio;
-    private OthelloUI mainView;
+    
+    private MenuPrincipalUI mainView;
+    private RankingUI rankingView;
+    private MenuPerfilUI perfilMenuView;
+    private CrearPerfilUI createPerfilView;
+    private ConsultarEstadisticaUI perfilView;
+    private CrearPartidaUI createGameView;
+    private PartidaUI gameView;
     
     public static CtrlView getInstance() {
         if (instance == null) {
@@ -26,13 +33,17 @@ public class CtrlView {
     // Private Constructor
     private CtrlView() {
         ctrlDominio = CtrlDomain.getInstance();
-        mainView = new OthelloUI(this);
+        mainView = new MenuPrincipalUI(this);
+        rankingView = new RankingUI(this);
+        perfilMenuView = new MenuPerfilUI(this);
+        createPerfilView = new CrearPerfilUI(this);
+        perfilView = new ConsultarEstadisticaUI(this); 
+        createGameView = new CrearPartidaUI(this);
+        gameView = new PartidaUI(this);
+        
+        mainView.setVisible(true);
     }
     
-    public static void crearPartida() {
-        CrearPartidaUI cp = new CrearPartidaUI(instance);
-    }
-
     public String[] getProfileModel() {
         ArrayList<String> profiles = new ArrayList<>();
         Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
@@ -44,6 +55,54 @@ public class CtrlView {
         return ret;
         
     }
+    
+    public void changeWindow(String window) {
+        mainView.setVisible(false);
+        switch(window) {
+            case "Ranking":
+                rankingView.setVisible(true);
+                break;
+            case "MenuPerfil":
+                perfilMenuView.setVisible(true);
+                break;
+            case "CrearPerfil":
+                createPerfilView.setVisible(true);
+                break;
+            case "Perfil":
+                perfilView.setVisible(true);
+                break;
+            case "CrearPartida":
+                createGameView.setVisible(true);
+                break;
+            case "Partida":
+                gameView.setVisible(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void backToMainWindow(String window) {
+        switch(window) {
+            case "Ranking":
+                rankingView.setVisible(false);
+                break;
+            case "MenuPerfil":
+                perfilMenuView.setVisible(false);
+                break;
+            case "CrearPartida":
+                createGameView.setVisible(false);
+                break;
+            default:
+                break;
+        }
+        mainView.setVisible(true);
+    }
+    
+    public ArrayList<String> getRanking() {
+        return ctrlDominio.getRanking();
+    }
+    
     /*public String crearPerfil(String nombre) {
         return ctrlDominio.crearPerfil(nombre);
     }
