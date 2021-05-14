@@ -49,7 +49,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
         btn_exit = new javax.swing.JButton();
@@ -106,10 +106,11 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         jPanel5.add(jButton3, gridBagConstraints);
 
-        jLabel3.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        jLabel3.setMinimumSize(new java.awt.Dimension(180, 180));
-        jLabel3.setPreferredSize(new java.awt.Dimension(180, 180));
-        jPanel5.add(jLabel3, new java.awt.GridBagConstraints());
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(180, 180));
+        jLabel2.setMinimumSize(new java.awt.Dimension(180, 180));
+        jLabel2.setPreferredSize(new java.awt.Dimension(180, 180));
+        jPanel5.add(jLabel2, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel5, new java.awt.GridBagConstraints());
 
@@ -167,7 +168,10 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        // TODO add your handling code here:
+        String jugador = (String)jComboBox1.getSelectedItem();
+        String result;
+        result = iCtrlView.estadistica_perfil(jugador);
+        jLabel2.setText(result);
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,7 +180,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

@@ -119,6 +119,10 @@ public class CtrlView {
         return ctrlDominio.getRanking();
     }
     
+    public String estadistica_perfil(String id){
+        Estadistica p = ctrlDominio.searchEstadistica(id);
+        return ("<html>"+ p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate()+ "<html>");
+    }
     /*public String crearPerfil(String nombre) {
         return ctrlDominio.crearPerfil(nombre);
     }
