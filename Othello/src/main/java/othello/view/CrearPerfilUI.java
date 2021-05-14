@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +16,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
     
     /**
      * Creates new form CrearPerfil
+     * @param pCtrlView
      */
     public CrearPerfilUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;
@@ -95,6 +97,11 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         jPanel2.add(jTextField2, gridBagConstraints);
 
         jButton3.setText("CREAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -150,8 +157,25 @@ public class CrearPerfilUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_exitActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String name = jTextField1.getText();
+        String pass = jTextField2.getText();
+        if("".equals(name) || "".equals(pass) ) JOptionPane.showMessageDialog(null, "Introduzca nombre y contraseña");
+        else{
+            int ret = iCtrlView.crearPerfil(name,jTextField2.getText());
+            if(ret == 1){
+                JOptionPane.showMessageDialog(null, "Usuario creado");
+                jTextField1.setText("");
+                jTextField2.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "nombre de usuario ya existe", "ERROR", 0);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;

@@ -17,6 +17,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     
     /**
      * Creates new form ConsultarEstadistica
+     * @param pCtrlView
      */
     public ConsultarEstadisticaUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;

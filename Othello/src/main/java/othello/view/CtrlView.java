@@ -47,6 +47,7 @@ public class CtrlView {
     public String[] getProfileModel() {
         ArrayList<String> profiles = new ArrayList<>();
         Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
+        
         for(Estadistica e: temp) {
             profiles.add(e.getId());
         }
@@ -127,10 +128,11 @@ public class CtrlView {
     public int borrar_perfil(String id, String password){
         return ctrlDominio.borrarPerfil(id,password); 
     }
-    /*public String crearPerfil(String nombre) {
-        return ctrlDominio.crearPerfil(nombre);
+    
+    public int crearPerfil(String nombre, String password) {
+        return ctrlDominio.crearPerfil(nombre,password);
     }
-
+/*
     public ArrayList<String> getEstadisticaPerfil(String nombre) {
         ctrlDominio.searchEstadistica(nombre);
         return new ArrayList<String>();

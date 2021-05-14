@@ -109,7 +109,9 @@ public class CtrlDomain {
             e = new Estadistica(nombre,password);
             ret = ctrlPersistencia.CrearPerfil(e);
             if (ret == 1) {
+                System.out.println("perfiles antes "+perfiles.size());
                 perfiles.add(e);
+                System.out.println("perfiles actualizado "+perfiles.size());
             }
         }
         return ret;
