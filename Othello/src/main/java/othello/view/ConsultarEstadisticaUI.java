@@ -161,6 +161,11 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void actualiza_frame(){
+        jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        jPanel5.setVisible(false);
+    }
+    
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         iCtrlView.backToWindow("Perfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
@@ -188,7 +193,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String jugador = jComboBox1.getSelectedItem().toString();
         String password = JOptionPane.showInputDialog("Ingresa Contraseña");
-  
+        
         int ret = iCtrlView.borrar_perfil(jugador, password);
 
         if(ret == 1){

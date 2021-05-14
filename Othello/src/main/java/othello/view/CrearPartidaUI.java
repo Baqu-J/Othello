@@ -26,8 +26,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     public CrearPartidaUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;
         initComponents();
-        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
-        Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        actualiza_boxs();
         Image image = null;
         try {
             image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
@@ -38,6 +37,12 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         //setVisible(true);
     }
 
+    public void actualiza_boxs(){
+        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

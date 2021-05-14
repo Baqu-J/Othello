@@ -32,7 +32,9 @@ public class RankingUI extends javax.swing.JFrame {
 
         } catch (Exception ex) {
         }
-        
+    }
+    
+    public void actualiza_ranking(){
         ArrayList<String> ranking = iCtrlView.getRanking();
         if(!ranking.isEmpty()) {
             DefaultListModel listModel = new DefaultListModel();
@@ -41,10 +43,10 @@ public class RankingUI extends javax.swing.JFrame {
             }
             jList1.setModel(listModel);
             jList1.setVisible(true);
-            jScrollPane_ranking.setVisible(true);
+            jScrollPane2.setVisible(true);
         }else {
             jList1.setVisible(false);
-            jScrollPane_ranking.setVisible(false);
+            jScrollPane2.setVisible(false);
             JLabel error = new JLabel("No hay Perfiles creados");
             panel_ranking.add(error);
         }
@@ -61,7 +63,7 @@ public class RankingUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         panel_ranking = new javax.swing.JPanel();
-        jScrollPane_ranking = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
@@ -74,23 +76,27 @@ public class RankingUI extends javax.swing.JFrame {
 
         panel_ranking.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "RANKING", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 3, 48))); // NOI18N
         panel_ranking.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        panel_ranking.setMinimumSize(new java.awt.Dimension(537, 142));
-        panel_ranking.setPreferredSize(new java.awt.Dimension(537, 249));
+        panel_ranking.setMinimumSize(new java.awt.Dimension(537, 140));
+        panel_ranking.setPreferredSize(new java.awt.Dimension(537, 140));
         panel_ranking.setLayout(new java.awt.GridBagLayout());
 
         jList1.setBackground(new java.awt.Color(240, 240, 240));
-        jScrollPane_ranking.setViewportView(jList1);
+        jList1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jList1.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jList1.setMaximumSize(new java.awt.Dimension(3223532, 755325));
+        jList1.setMinimumSize(new java.awt.Dimension(150, 875));
+        jList1.setName(""); // NOI18N
+        jList1.setPreferredSize(new java.awt.Dimension(150, 875));
+        jScrollPane2.setViewportView(jList1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 6;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(24, 24, 24, 24);
-        panel_ranking.add(jScrollPane_ranking, gridBagConstraints);
+        gridBagConstraints.weighty = 1.4;
+        panel_ranking.add(jScrollPane2, gridBagConstraints);
 
         getContentPane().add(panel_ranking, java.awt.BorderLayout.CENTER);
 
@@ -141,7 +147,7 @@ public class RankingUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_exit;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane_ranking;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panel_ranking;
     // End of variables declaration//GEN-END:variables
 }

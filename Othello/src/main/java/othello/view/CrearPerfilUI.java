@@ -46,7 +46,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
@@ -66,7 +66,8 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 19));
+        jTextField1.setMinimumSize(new java.awt.Dimension(7, 25));
+        jTextField1.setPreferredSize(new java.awt.Dimension(225, 25));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -88,15 +89,23 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel2.add(jLabel2, gridBagConstraints);
 
-        jTextField2.setPreferredSize(new java.awt.Dimension(200, 19));
+        jPasswordField1.setMinimumSize(new java.awt.Dimension(7, 25));
+        jPasswordField1.setPreferredSize(new java.awt.Dimension(7, 25));
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        jPanel2.add(jTextField2, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel2.add(jPasswordField1, gridBagConstraints);
 
         jButton3.setText("CREAR");
+        jButton3.setMaximumSize(new java.awt.Dimension(90, 30));
+        jButton3.setMinimumSize(new java.awt.Dimension(90, 30));
+        jButton3.setPreferredSize(new java.awt.Dimension(90, 30));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -162,20 +171,24 @@ public class CrearPerfilUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String name = jTextField1.getText();
-        String pass = jTextField2.getText();
+        String pass = jPasswordField1.getText();
         if("".equals(name) || "".equals(pass) ) JOptionPane.showMessageDialog(null, "Introduzca nombre y contraseña");
         else{
-            int ret = iCtrlView.crearPerfil(name,jTextField2.getText());
+            int ret = iCtrlView.crearPerfil(name,jPasswordField1.getText());
             if(ret == 1){
                 JOptionPane.showMessageDialog(null, "Usuario creado");
                 jTextField1.setText("");
-                jTextField2.setText("");
+                jPasswordField1.setText("");
             }
             else{
                 JOptionPane.showMessageDialog(null, "nombre de usuario ya existe", "ERROR", 0);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
@@ -185,7 +198,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

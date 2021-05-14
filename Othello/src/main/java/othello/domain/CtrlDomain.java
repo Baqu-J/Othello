@@ -109,9 +109,7 @@ public class CtrlDomain {
             e = new Estadistica(nombre,password);
             ret = ctrlPersistencia.CrearPerfil(e);
             if (ret == 1) {
-                System.out.println("perfiles antes "+perfiles.size());
                 perfiles.add(e);
-                System.out.println("perfiles actualizado "+perfiles.size());
             }
         }
         return ret;
@@ -149,8 +147,10 @@ public class CtrlDomain {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
         ArrayList<String> ranking = new ArrayList<>(); 
-        for (int i = 0; i < perfiles.size(); i++) {
-            ranking.add(perfiles.get(i).toString());
+        int pos = 1;
+        for (int i = 0; i < perfiles.size(); i++) { 
+            ranking.add("<html>" + pos + "-" + perfiles.get(i).toStringRanking());
+            ++pos;
         }
         return ranking;
     }

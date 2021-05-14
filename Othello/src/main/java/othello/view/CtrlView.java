@@ -62,6 +62,7 @@ public class CtrlView {
         switch(window) {
             case "Ranking":
                 rankingView.setVisible(true);
+                rankingView.actualiza_ranking();
                 break;
             case "MenuPerfil":
                 perfilMenuView.setVisible(true);
@@ -73,9 +74,11 @@ public class CtrlView {
             case "Perfil":
                 perfilMenuView.setVisible(false);
                 perfilView.setVisible(true);
+                perfilView.actualiza_frame();
                 break;
             case "CrearPartida":
                 createGameView.setVisible(true);
+                createGameView.actualiza_boxs();
                 break;
             case "Partida":
                 gameView.setVisible(true);
