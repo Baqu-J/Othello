@@ -68,7 +68,7 @@ public class CtrlPersistence {
             
             File[] list = dir.listFiles();
             for(int i = 0; i < list.length; ++i) {
-                Estadistica e = new Estadistica("");
+                Estadistica e = new Estadistica("","");
                 serializador.getEstadisticafromFile(e, list[i].getPath());
                 perfiles.add(e);
             }

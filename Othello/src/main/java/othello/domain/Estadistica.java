@@ -12,6 +12,7 @@ public class Estadistica implements Serializable {
 
     // Attributes
     private String id;
+    private String password;
     private int victoria;
     private int derrota;
     private int empate;
@@ -21,9 +22,11 @@ public class Estadistica implements Serializable {
     /**
      * Constructor de Estadística asignándole un identificador
      * @param id 
+     * @param pass 
      */
-    public Estadistica(String id) {
+    public Estadistica(String id, String pass) {
         this.id = id;
+        this.password  = pass;
         this.victoria = 0;
         this.derrota = 0;
         this.empate = 0;
@@ -67,6 +70,14 @@ public class Estadistica implements Serializable {
         return this.puntos;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public void setId(String id) {
         this.id = id;
     }

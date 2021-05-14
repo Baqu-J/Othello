@@ -110,16 +110,19 @@ public class Main {
     private static void crearPerfil() {
         Scanner sc = new Scanner(System.in);
         Boolean exit = false;
-        int ret = -1;
+        int ret;
         while (!exit) {
             System.out.println("Tu nombre: ");
             String name = sc.nextLine();
 
-            if ("0".equals(name)) {
+            System.out.println("Tu contraseña: ");
+            String password = sc.nextLine();
+            
+            if ("0".equals(name) || "".equals(name)) {
                 break;
             }
 
-            ret = dominio.crearPerfil(name);
+            ret = dominio.crearPerfil(name, password);
 
             switch (ret) {
                 case 1:
@@ -144,12 +147,17 @@ public class Main {
         while (!exit) {
             System.out.println("Perfil a borrar: ");
             String name = sc.nextLine();
+            
+            System.out.println("contraseña: ");
+            String password = sc.nextLine();
 
-            if ("0".equals(name)) {
+            if ("0".equals(name) || "".equals(name)) {
                 break;
             }
 
-            ret = dominio.borrarPerfil(name);
+            //ret = dominio.searchEstadistica(name);
+            ret = dominio.borrarPerfil(name,password);
+            
 
             switch (ret) {
                 case 1:
@@ -157,7 +165,7 @@ public class Main {
                     exit = true;
                     break;
                 case -1:
-                    System.out.println("Perfil " + name + " no existe, prueba de nuevo");
+                    System.out.println("Perfil " + name + " no existe o contraseña incorrecta, prueba de nuevo");
                     break;
                 default:
                     System.out.println("ha habido un error, prueba de nuevo");

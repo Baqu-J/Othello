@@ -83,9 +83,10 @@ public class CtrlDomainTest {
     public void testCrearPerfil() {
         System.out.println("crearPerfil");
         String nombre = "";
+        String password = "";
         CtrlDomain instance = null;
         int expResult = 1;
-        int result = instance.crearPerfil(nombre);
+        int result = instance.crearPerfil(nombre,password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -113,9 +114,10 @@ public class CtrlDomainTest {
     public void testBorrarPerfil() {
         System.out.println("borrarPerfil");
         String nombre = "";
+        String password = "";
         CtrlDomain instance = null;
         int expResult = 1;
-        int result = instance.borrarPerfil(nombre);
+        int result = instance.borrarPerfil(nombre,password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -67,7 +67,10 @@ public class DriverCtrlDomain {
         Scanner sc = new Scanner(System.in);
         System.out.println("Tu nombre: ");
         String name = sc.nextLine();
-        int ret = ctrlDominio.crearPerfil(name);
+        System.out.println("Tu contraseña: ");
+        String password = sc.nextLine();
+        
+        int ret = ctrlDominio.crearPerfil(name,password);
         switch (ret) {
             case -1:
                 System.out.println("Perfil " + name + " ya existe, prueba de nuevo");
@@ -88,7 +91,9 @@ public class DriverCtrlDomain {
         Scanner sc = new Scanner(System.in);
         System.out.println("Tu nombre: ");
         String name = sc.nextLine();
-        int ret = ctrlDominio.borrarPerfil(name);
+        System.out.println("Tu contraseña: ");
+        String password = sc.nextLine();
+        int ret = ctrlDominio.borrarPerfil(name,password);
         switch (ret) {
             case -1:
                 System.out.println("Perfil " + name + " no existe, prueba de nuevo");

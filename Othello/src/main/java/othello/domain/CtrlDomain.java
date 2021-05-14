@@ -99,13 +99,14 @@ public class CtrlDomain {
      * añade al listado perfiles y crea su archivo.
      *
      * @param nombre id de la Estadistica
+     * @param password
      * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
      */
-    public int crearPerfil(String nombre) {
+    public int crearPerfil(String nombre, String password) {
         int ret = -1;
         Estadistica e = searchEstadistica(nombre);
         if (e == null) {
-            e = new Estadistica(nombre);
+            e = new Estadistica(nombre,password);
             ret = ctrlPersistencia.CrearPerfil(e);
             if (ret == 1) {
                 perfiles.add(e);
@@ -118,12 +119,13 @@ public class CtrlDomain {
      * Método que elimina una Estadistica del listado perfiles y su archivo.
      *
      * @param nombre id de la Estadistica
+     * @param password
      * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
      */
-    public int borrarPerfil(String nombre) {
+    public int borrarPerfil(String nombre, String password) {
         int ret = -1;
         Estadistica e = searchEstadistica(nombre);
-        if (e != null) {
+        if (e != null && password.equals(e.getPassword())) {
             ret = ctrlPersistencia.BorrarPerfil(nombre);
             if (ret == 1) {
                 perfiles.remove(e);
