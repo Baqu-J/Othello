@@ -22,6 +22,7 @@ public class MenuPerfilUI extends javax.swing.JFrame {
         iCtrlView = pCtrlView;
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         initComponents();
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));

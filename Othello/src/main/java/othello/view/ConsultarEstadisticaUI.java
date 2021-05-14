@@ -3,6 +3,7 @@ package othello.view;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +22,9 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
+        jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        jPanel5.setVisible(false);
+        this.setLocationRelativeTo(null);
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
             this.setIconImage(image);
@@ -44,13 +48,15 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
         btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(537, 425));
+        setPreferredSize(new java.awt.Dimension(537, 425));
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
@@ -65,6 +71,16 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario 1", "Usuario 2", "Usuario 3", "Usuario 4", "Usuario 5", "Usuario 6" }));
         jComboBox1.setMinimumSize(new java.awt.Dimension(80, 21));
         jComboBox1.setPreferredSize(new java.awt.Dimension(80, 21));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -73,23 +89,27 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.NORTH);
 
+        jPanel3.setMinimumSize(new java.awt.Dimension(500, 500));
+        jPanel3.setName(""); // NOI18N
+        jPanel3.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "USUARIO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 3, 14))); // NOI18N
-        jPanel5.setMinimumSize(new java.awt.Dimension(300, 300));
-        jPanel5.setPreferredSize(new java.awt.Dimension(300, 300));
+        jPanel5.setMinimumSize(new java.awt.Dimension(220, 220));
+        jPanel5.setPreferredSize(new java.awt.Dimension(220, 220));
+        jPanel5.setRequestFocusEnabled(false);
         jPanel5.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setMaximumSize(new java.awt.Dimension(250, 250));
-        jLabel2.setMinimumSize(new java.awt.Dimension(250, 250));
-        jLabel2.setPreferredSize(new java.awt.Dimension(250, 250));
-        jPanel5.add(jLabel2, new java.awt.GridBagConstraints());
 
         jButton3.setText("BORRAR");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         jPanel5.add(jButton3, gridBagConstraints);
+
+        jLabel3.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jLabel3.setMinimumSize(new java.awt.Dimension(180, 180));
+        jLabel3.setPreferredSize(new java.awt.Dimension(180, 180));
+        jPanel5.add(jLabel3, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel5, new java.awt.GridBagConstraints());
 
@@ -130,15 +150,25 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         getContentPane().add(jPanel6, java.awt.BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
-        iCtrlView.backToMainWindow("MenuPerfil");
+        iCtrlView.backToWindow("Perfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btn_exitActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        jPanel5.setVisible(true);
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
@@ -146,7 +176,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

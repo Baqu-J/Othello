@@ -24,6 +24,7 @@ public class RankingUI extends javax.swing.JFrame {
         iCtrlView = pCtrlView;
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         initComponents();
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
@@ -73,8 +74,11 @@ public class RankingUI extends javax.swing.JFrame {
 
         panel_ranking.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "RANKING", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 3, 48))); // NOI18N
         panel_ranking.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        panel_ranking.setMinimumSize(new java.awt.Dimension(537, 142));
+        panel_ranking.setPreferredSize(new java.awt.Dimension(537, 249));
         panel_ranking.setLayout(new java.awt.GridBagLayout());
 
+        jList1.setBackground(new java.awt.Color(240, 240, 240));
         jScrollPane_ranking.setViewportView(jList1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -90,6 +94,8 @@ public class RankingUI extends javax.swing.JFrame {
 
         getContentPane().add(panel_ranking, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setMinimumSize(new java.awt.Dimension(537, 45));
+        jPanel2.setPreferredSize(new java.awt.Dimension(537, 45));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         btn_atras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

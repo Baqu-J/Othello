@@ -35,7 +35,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
             Logger.getLogger(CrearPartidaUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setIconImage(image);
-        setVisible(true);
+        //setVisible(true);
     }
 
     /**
@@ -46,7 +46,6 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -273,6 +272,11 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         backButton.setText("Atras");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         jPanel12.add(backButton);
 
         jPanel1.add(jPanel12);
@@ -289,6 +293,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void IA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IA1ActionPerformed
@@ -334,6 +339,10 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         RadioBlanco1.setSelected(true);
     }//GEN-LAST:event_RadioNegro2ActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        iCtrlView.backToMainWindow("CrearPartida");
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments

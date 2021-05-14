@@ -21,6 +21,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
+        this.setLocationRelativeTo(null);
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
             this.setIconImage(image);
@@ -50,6 +51,9 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(537, 425));
+        setPreferredSize(new java.awt.Dimension(537, 425));
+        setSize(new java.awt.Dimension(537, 425));
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -60,8 +64,12 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jTextField1.setText("jTextField1");
         jTextField1.setPreferredSize(new java.awt.Dimension(200, 19));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -78,7 +86,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel2.add(jLabel2, gridBagConstraints);
 
-        jTextField2.setText("jTextField2");
         jTextField2.setPreferredSize(new java.awt.Dimension(200, 19));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -131,15 +138,20 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
-        iCtrlView.backToMainWindow("MenuPerfil");
+        iCtrlView.backToWindow("Perfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btn_exitActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;

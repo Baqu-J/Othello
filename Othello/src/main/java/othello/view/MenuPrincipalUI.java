@@ -21,6 +21,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         iCtrlView = pCtrlView;
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         initComponents();
         try {
             Image imageResized = ImageIO.read(new File("src/main/java/resources/ranking.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);

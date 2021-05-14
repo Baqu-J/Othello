@@ -66,9 +66,11 @@ public class CtrlView {
                 perfilMenuView.setVisible(true);
                 break;
             case "CrearPerfil":
+                perfilMenuView.setVisible(false);
                 createPerfilView.setVisible(true);
                 break;
             case "Perfil":
+                perfilMenuView.setVisible(false);
                 perfilView.setVisible(true);
                 break;
             case "CrearPartida":
@@ -93,10 +95,24 @@ public class CtrlView {
             case "CrearPartida":
                 createGameView.setVisible(false);
                 break;
+            case "Escenario":
+                break;
             default:
                 break;
         }
         mainView.setVisible(true);
+    }
+    
+    public void backToWindow(String window) {
+        switch(window) {
+            case "Perfil":
+                perfilView.setVisible(false);
+                createPerfilView.setVisible(false);
+                perfilMenuView.setVisible(true);
+                break;
+            default:
+                break;
+        }
     }
     
     public ArrayList<String> getRanking() {
