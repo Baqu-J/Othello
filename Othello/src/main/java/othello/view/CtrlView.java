@@ -41,7 +41,7 @@ public class CtrlView {
         perfilView = new ConsultarEstadisticaUI(this); 
         createGameView = new CrearPartidaUI(this);
         gameView = new PartidaUI(this);
-        selectEscenario = new SeleccionarEscenario();
+        selectEscenario = new SeleccionarEscenario(this);
         
         
         mainView.setVisible(true);
@@ -83,6 +83,8 @@ public class CtrlView {
                 createGameView.setVisible(true);
                 createGameView.actualiza_boxs();
                 break;
+            case "SeleccionarEscenario":
+                selectEscenario.setVisible(true);
             case "Partida":
                 gameView.setVisible(true);
                 break;

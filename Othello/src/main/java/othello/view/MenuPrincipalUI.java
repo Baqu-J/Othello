@@ -140,7 +140,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_jugarActionPerformed
 
     private void btn_escenarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escenarioActionPerformed
-        iCtrlView.changeWindow("CrearPartida");
+        iCtrlView.changeWindow("SeleccionarEscenario");
     }//GEN-LAST:event_btn_escenarioActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
