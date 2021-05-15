@@ -45,8 +45,14 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,14 +67,30 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+            .addGap(0, 218, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2);
 
+        jLabel1.setText("jLabel1");
+        jPanel4.add(jLabel1);
+
+        jPanel1.add(jPanel4);
+
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel3.add(jPanel7);
 
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jButton1.setText("jButton1");
+        jPanel6.add(jButton1);
+
+        jButton2.setText("jButton2");
+        jPanel6.add(jButton2);
+
+        jPanel3.add(jPanel6);
+
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         backButton.setText("Atras");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,9 +98,9 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(backButton);
+        jPanel5.add(backButton);
 
-        jPanel3.add(jPanel6);
+        jPanel3.add(jPanel5);
 
         jPanel1.add(jPanel3);
 
@@ -112,9 +134,15 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     // End of variables declaration//GEN-END:variables
 }
