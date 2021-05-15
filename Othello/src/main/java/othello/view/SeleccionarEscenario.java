@@ -48,7 +48,6 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -67,26 +66,33 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
+            .addGap(0, 191, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("---------");
         jPanel4.add(jLabel1);
 
         jPanel1.add(jPanel4);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel3.add(jPanel7);
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setText("jButton1");
-        jPanel6.add(jButton1);
+        jButton1.setText("  Previo  ");
+        jButton1.setMaximumSize(new java.awt.Dimension(77, 23));
+        jButton1.setMinimumSize(new java.awt.Dimension(77, 23));
+        jButton1.setPreferredSize(new java.awt.Dimension(77, 23));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton1, new java.awt.GridBagConstraints());
 
-        jButton2.setText("jButton2");
-        jPanel6.add(jButton2);
+        jButton2.setText("Siguiente");
+        jPanel6.add(jButton2, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel6);
 
@@ -128,6 +134,10 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
         iCtrlView.changeWindow("CrearPartida");
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -144,6 +154,5 @@ public class SeleccionarEscenario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     // End of variables declaration//GEN-END:variables
 }
