@@ -193,18 +193,19 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String jugador = jComboBox1.getSelectedItem().toString();
         String password = JOptionPane.showInputDialog("Ingresa Contraseña");
-        
-        int ret = iCtrlView.borrar_perfil(jugador, password);
+        if(password != null){
+            int ret = iCtrlView.borrar_perfil(jugador, password);
 
-        if(ret == 1){
-            JOptionPane.showMessageDialog(null, "Usuario Borrado");
-            jLabel2.setText("");
-            jPanel5.setVisible(false);
-            jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            if(ret == 1){
+                JOptionPane.showMessageDialog(null, "Usuario Borrado");
+                jLabel2.setText("");
+                jPanel5.setVisible(false);
+                jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "contraseña incorrecta", "ERROR", 0);
+            }  
         }
-        else{
-            JOptionPane.showMessageDialog(null, "contraseña incorrecta", "ERROR", 0);
-        }  
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
