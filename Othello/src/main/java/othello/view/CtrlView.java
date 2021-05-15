@@ -22,6 +22,7 @@ public class CtrlView {
     private ConsultarEstadisticaUI perfilView;
     private CrearPartidaUI createGameView;
     private PartidaUI gameView;
+    private SeleccionarEscenario selectEscenario;
     
     public static CtrlView getInstance() {
         if (instance == null) {
@@ -40,6 +41,8 @@ public class CtrlView {
         perfilView = new ConsultarEstadisticaUI(this); 
         createGameView = new CrearPartidaUI(this);
         gameView = new PartidaUI(this);
+        selectEscenario = new SeleccionarEscenario();
+        
         
         mainView.setVisible(true);
     }
@@ -100,6 +103,7 @@ public class CtrlView {
                 createGameView.setVisible(false);
                 break;
             case "Escenario":
+                selectEscenario.setVisible(false);
                 break;
             default:
                 break;
