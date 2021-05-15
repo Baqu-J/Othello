@@ -85,6 +85,7 @@ public class CtrlView {
                 break;
             case "SeleccionarEscenario":
                 selectEscenario.setVisible(true);
+                break;
             case "Partida":
                 gameView.setVisible(true);
                 break;
