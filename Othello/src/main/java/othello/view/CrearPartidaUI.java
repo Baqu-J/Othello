@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import othello.domain.Partida;
 
 /**
  *
@@ -36,7 +37,13 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         this.setIconImage(image);
         //setVisible(true);
     }
-
+    
+    public Partida.GameType getGameType() {
+        if(Jugador1.isSelected() && Jugador2.isSelected()) return Partida.GameType.PLAYERvsPLAYER;
+        else if((Jugador1.isSelected() && IA2.isSelected()) || (IA1.isSelected() && Jugador2.isSelected())) return Partida.GameType.PLAYERvsIA;
+        else return Partida.GameType.IAvsIA;
+    }
+    
     public void actualiza_boxs(){
         Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
         Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
@@ -243,6 +250,11 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel13.add(jPanel15);
 
         startGameButton.setText("Comenzar");
+        startGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startGameButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -348,6 +360,11 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         iCtrlView.backToMainWindow("CrearPartida");
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
+        // TODO add your handling code here:
+        iCtrlView.setupGame(getGameType());
+    }//GEN-LAST:event_startGameButtonActionPerformed
 
     /**
      * @param args the command line arguments

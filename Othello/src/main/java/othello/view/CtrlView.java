@@ -3,6 +3,7 @@ package othello.view;
 import java.util.ArrayList;
 import othello.domain.CtrlDomain;
 import othello.domain.Estadistica;
+import othello.domain.Partida;
 
 
 /**
@@ -142,7 +143,11 @@ public class CtrlView {
     public int crearPerfil(String nombre, String password) {
         return ctrlDominio.crearPerfil(nombre,password);
     }
-/*
+    public void setupGame(Partida.GameType Type) {
+        
+    }
+/*  
+    
     public ArrayList<String> getEstadisticaPerfil(String nombre) {
         ctrlDominio.searchEstadistica(nombre);
         return new ArrayList<String>();
