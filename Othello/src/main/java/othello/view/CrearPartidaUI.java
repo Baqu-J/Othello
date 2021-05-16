@@ -363,6 +363,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
         // TODO add your handling code here:
+        iCtrlView.changeWindow("Partida");
         iCtrlView.setupGame(getGameType());
     }//GEN-LAST:event_startGameButtonActionPerformed
 

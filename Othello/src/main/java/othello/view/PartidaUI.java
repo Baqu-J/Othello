@@ -2,6 +2,7 @@ package othello.view;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -27,7 +28,81 @@ public class PartidaUI extends javax.swing.JFrame {
             
         } catch (Exception ex) {
         }
-        initComponents();
+        
+        ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
+        grid.add(new ArrayList<Integer>());
+        grid.get(0).add(1);
+        grid.get(0).add(0);
+        grid.get(0).add(2);
+        grid.get(0).add(1);
+        grid.get(0).add(0);
+        grid.get(0).add(2);
+        grid.get(0).add(1);
+        grid.get(0).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(1).add(1);
+        grid.get(1).add(0);
+        grid.get(1).add(2);
+        grid.get(1).add(1);
+        grid.get(1).add(0);
+        grid.get(1).add(2);
+        grid.get(1).add(1);
+        grid.get(1).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(2).add(1);
+        grid.get(2).add(0);
+        grid.get(2).add(2);
+        grid.get(2).add(1);
+        grid.get(2).add(0);
+        grid.get(2).add(2);
+        grid.get(2).add(1);
+        grid.get(2).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(3).add(1);
+        grid.get(3).add(0);
+        grid.get(3).add(2);
+        grid.get(3).add(1);
+        grid.get(3).add(0);
+        grid.get(3).add(2);
+        grid.get(3).add(1);
+        grid.get(3).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(4).add(1);
+        grid.get(4).add(0);
+        grid.get(4).add(2);
+        grid.get(4).add(1);
+        grid.get(4).add(0);
+        grid.get(4).add(2);
+        grid.get(4).add(1);
+        grid.get(4).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(5).add(1);
+        grid.get(5).add(0);
+        grid.get(5).add(2);
+        grid.get(5).add(1);
+        grid.get(5).add(0);
+        grid.get(5).add(2);
+        grid.get(5).add(1);
+        grid.get(5).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(6).add(1);
+        grid.get(6).add(0);
+        grid.get(6).add(2);
+        grid.get(6).add(1);
+        grid.get(6).add(0);
+        grid.get(6).add(2);
+        grid.get(6).add(1);
+        grid.get(6).add(0);
+        grid.add(new ArrayList<Integer>());
+        grid.get(7).add(1);
+        grid.get(7).add(0);
+        grid.get(7).add(2);
+        grid.get(7).add(1);
+        grid.get(7).add(0);
+        grid.get(7).add(2);
+        grid.get(7).add(1);
+        grid.get(7).add(0);
+        tableroUI1.fillGrid(grid);
     }
 
     /**
@@ -38,24 +113,111 @@ public class PartidaUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        tableroUI1 = new othello.view.TableroUI();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jLabel1.setText("Turno");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        getContentPane().add(jLabel1, gridBagConstraints);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tableroUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tableroUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridheight = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jLabel2.setText("jLabel2");
+        jPanel2.add(jLabel2);
+
+        jLabel3.setText("jLabel3");
+        jPanel2.add(jLabel3);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jPanel2, gridBagConstraints);
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jLabel4.setText("jLabel4");
+        jPanel3.add(jLabel4);
+
+        jLabel5.setText("jLabel5");
+        jPanel3.add(jLabel5);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jPanel3, gridBagConstraints);
+
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
+        jButton1.setText("jButton1");
+        jPanel4.add(jButton1);
+
+        jButton2.setText("jButton2");
+        jPanel4.add(jButton2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 8;
+        getContentPane().add(jPanel4, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private othello.view.TableroUI tableroUI1;
     // End of variables declaration//GEN-END:variables
 }
