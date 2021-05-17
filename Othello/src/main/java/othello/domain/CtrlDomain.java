@@ -188,6 +188,15 @@ public class CtrlDomain {
         return escenarios;
     }
 
+    
+    public ArrayList<String> getEscenarios() {
+        ArrayList<String> esc = new ArrayList<>(); 
+        for (int i = 0; i < escenarios.size(); i++) { 
+            esc.add(escenarios.get(i).toStringGrid());
+        }
+        return esc;
+    }
+    
     /**
      * Método que busca un Escenario en el listado de escenarios.
      *

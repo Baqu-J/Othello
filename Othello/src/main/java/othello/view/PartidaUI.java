@@ -102,7 +102,7 @@ public class PartidaUI extends javax.swing.JFrame {
         grid.get(7).add(2);
         grid.get(7).add(1);
         grid.get(7).add(0);
-        tableroUI1.fillGrid(grid);
+        //tableroUI1.fillGrid(grid);
     }
 
     /**

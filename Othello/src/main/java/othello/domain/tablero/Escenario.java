@@ -88,4 +88,7 @@ public class Escenario extends Tablero implements Serializable{
         return id;
     }
 
+    public String toStringGrid() {
+        return id + super.toString();
+    }  
 }

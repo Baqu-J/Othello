@@ -15,13 +15,13 @@ public class CasillaUI extends JButton {
     /**
      * Creates new form NewBeanForm
      */
-    public CasillaUI(int ficha) {
+    public CasillaUI(String ficha) {
         initComponents();
         
         String imgFicha = "";
-        if (ficha == 1) {
+        if (ficha.equals("BLANCA")) {
             imgFicha = "src/main/java/resources/OthelloWhiteToken.png";
-        } else if (ficha == 2) {
+        } else if (ficha.equals("NEGRA")) {
             imgFicha = "src/main/java/resources/OthelloBlackToken.png";
         }
 
@@ -32,7 +32,7 @@ public class CasillaUI extends JButton {
 
         } catch (Exception ex) {
         }
-        if (ficha != 0) {
+        if (!ficha.equals("VACIA")) {
             this.setEnabled(false);
         }
 

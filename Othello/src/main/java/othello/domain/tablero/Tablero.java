@@ -368,4 +368,17 @@ public class Tablero implements Serializable{
             System.out.println("");
         }
     }
+
+    @Override
+    public String toString() {
+        String ret = "";
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                ret += "," + matrix[i][k].toString();
+            }
+        }
+        return ret;
+    }
+    
+    
 }

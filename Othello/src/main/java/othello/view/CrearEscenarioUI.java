@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author FRANCO
  */
-public class CrearPerfilUI extends javax.swing.JFrame {
+public class CrearEscenarioUI extends javax.swing.JFrame {
 
     private CtrlView iCtrlView;
     
@@ -18,7 +18,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
      * Creates new form CrearPerfil
      * @param pCtrlView
      */
-    public CrearPerfilUI(CtrlView pCtrlView) {
+    public CrearEscenarioUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,8 +45,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
@@ -54,7 +52,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
-        setPreferredSize(new java.awt.Dimension(537, 425));
         setSize(new java.awt.Dimension(537, 425));
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -79,28 +76,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         jPanel2.add(jTextField1, gridBagConstraints);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("INGRESA CONTRASEÑA:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
-        jPanel2.add(jLabel2, gridBagConstraints);
-
-        jPasswordField1.setMinimumSize(new java.awt.Dimension(7, 25));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(7, 25));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(jPasswordField1, gridBagConstraints);
 
         jButton3.setText("CREAR");
         jButton3.setMaximumSize(new java.awt.Dimension(90, 30));
@@ -158,7 +133,7 @@ public class CrearPerfilUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
-        iCtrlView.backToWindow("CrearPerfil");
+        iCtrlView.backToWindow("CrearEscenario");
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
@@ -171,34 +146,26 @@ public class CrearPerfilUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String name = jTextField1.getText();
-        String pass = jPasswordField1.getText();
-        if("".equals(name) || "".equals(pass) ) JOptionPane.showMessageDialog(null, "Introduzca nombre y contraseña");
+        if("".equals(name)) JOptionPane.showMessageDialog(null, "Introduzca nombre");
         else{
-            int ret = iCtrlView.crearPerfil(name,jPasswordField1.getText());
+            int ret = iCtrlView.crearEscenario(name);
             if(ret == 1){
-                JOptionPane.showMessageDialog(null, "Usuario creado");
+                JOptionPane.showMessageDialog(null, "Escenario creado");
                 jTextField1.setText("");
-                jPasswordField1.setText("");
             }
             else{
-                JOptionPane.showMessageDialog(null, "nombre de usuario ya existe", "ERROR", 0);
+                JOptionPane.showMessageDialog(null, "Escenario ya existe", "ERROR", 0);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
     private javax.swing.JButton btn_exit;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

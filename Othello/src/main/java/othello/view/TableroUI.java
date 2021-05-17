@@ -1,5 +1,7 @@
 package othello.view;
 
+import java.awt.Container;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -21,10 +23,10 @@ public class TableroUI extends JPanel {
      * 
      * @param grid 
      */
-    public void fillGrid(ArrayList<ArrayList<Integer>> grid) {
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid.get(i).size(); j++) {
-                this.add(new CasillaUI(grid.get(i).get(j)));
+    public void fillGrid(String[] grid) {
+        if(grid.length > 0){
+            for (int i = 0; i < grid.length; i++) {
+                    this.add(new CasillaUI(grid[i]));
             }
         }
     }
@@ -43,7 +45,21 @@ public class TableroUI extends JPanel {
         setLayout(new java.awt.GridLayout(8, 8));
     }// </editor-fold>//GEN-END:initComponents
     
-
+    @Override
+    public Dimension getPreferredSize() {
+        Dimension d = super.getPreferredSize();
+        Container c = getParent();
+        if (c != null) {
+            d = c.getSize();
+        } else {
+            return new Dimension(80, 80);
+        }
+        int w = (int) d.getWidth();
+        int h = (int) d.getHeight();
+        int s = (w < h ? w : h);
+        return new Dimension(s, s);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

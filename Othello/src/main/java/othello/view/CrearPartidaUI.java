@@ -91,6 +91,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario();
         jPanel16 = new javax.swing.JPanel();
         startGameButton = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
@@ -246,6 +247,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
         jPanel15.add(jLabel1, new java.awt.GridBagConstraints());
+        jPanel15.add(panelSeleccionarEscenario1, new java.awt.GridBagConstraints());
 
         jPanel13.add(jPanel15);
 
@@ -408,6 +410,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel labelJ1;
     private javax.swing.JLabel labelJ2;
+    private othello.view.panelSeleccionarEscenario panelSeleccionarEscenario1;
     private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
     
