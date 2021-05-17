@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class panelSeleccionarEscenario extends javax.swing.JPanel {
 
-    private ArrayList<String> escenarios;
-    private int current;
+    public ArrayList<String> escenarios;
+    public int current;
 
     /**
      * Creates new form panelSeleccionarEscenario
@@ -35,10 +35,6 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         tableroUI1 = new othello.view.TableroUI();
-        jPanel4 = new javax.swing.JPanel();
-        btn_anterior = new javax.swing.JButton();
-        btn_seleccionar = new javax.swing.JButton();
-        btn_siguiente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
@@ -47,94 +43,12 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         add(tableroUI1, gridBagConstraints);
 
-        jPanel4.setLayout(new java.awt.GridBagLayout());
-
-        btn_anterior.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_anterior.setText("Anterior");
-        btn_anterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_anteriorActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel4.add(btn_anterior, gridBagConstraints);
-
-        btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_seleccionar.setText("Seleccionar");
-        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_seleccionarActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel4.add(btn_seleccionar, gridBagConstraints);
-
-        btn_siguiente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_siguiente.setText("Siguiente");
-        btn_siguiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_siguienteActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel4.add(btn_siguiente, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        add(jPanel4, gridBagConstraints);
-
         jLabel1.setText("jLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         add(jLabel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
-        if(!escenarios.isEmpty() && current > 0) {
-            --current;
-            String[] parts = escenarios.get(current).split(",");
-            jLabel1.setText(parts[0]);
-            String[] grid = new String[8*8];
-            for (int i = 1; i < parts.length; i++) { 
-                grid[i-1] = parts[i];
-            }
-            reloadGrid(grid);
-        }
-    }//GEN-LAST:event_btn_anteriorActionPerformed
-
-    private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed
-        if(!escenarios.isEmpty() && current < escenarios.size()-1) {
-            ++current;
-            String[] parts = escenarios.get(current).split(",");
-            jLabel1.setText(parts[0]);
-            String[] grid = new String[8*8];
-            for (int i = 1; i < parts.length; i++) { 
-                grid[i-1] = parts[i];
-            }
-            reloadGrid(grid);
-        }
-    }//GEN-LAST:event_btn_siguienteActionPerformed
-
-    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_seleccionarActionPerformed
 
     public ArrayList<String> getEscenarios() {
         current = 0;
@@ -154,17 +68,13 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         }
     }
     
-    private void reloadGrid(String[] grid) {
+    protected void reloadGrid(String[] grid) {
         tableroUI1.clearGrid();
         tableroUI1.fillGrid(grid);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_anterior;
-    private javax.swing.JButton btn_seleccionar;
-    private javax.swing.JButton btn_siguiente;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel4;
+    protected javax.swing.JLabel jLabel1;
     private othello.view.TableroUI tableroUI1;
     // End of variables declaration//GEN-END:variables
 }

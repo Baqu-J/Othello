@@ -44,10 +44,15 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario();
+        jPanel4 = new javax.swing.JPanel();
+        btn_anterior = new javax.swing.JButton();
+        btn_seleccionar = new javax.swing.JButton();
+        btn_siguiente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
@@ -63,6 +68,55 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         jPanel2.add(panelSeleccionarEscenario1);
 
         jPanel1.add(jPanel2);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        btn_anterior.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_anterior.setText("Anterior");
+        btn_anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anteriorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        jPanel4.add(btn_anterior, gridBagConstraints);
+
+        btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_seleccionar.setText("Seleccionar");
+        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_seleccionarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        jPanel4.add(btn_seleccionar, gridBagConstraints);
+
+        btn_siguiente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_siguiente.setText("Siguiente");
+        btn_siguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_siguienteActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+        jPanel4.add(btn_siguiente, gridBagConstraints);
+
+        jPanel1.add(jPanel4);
 
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -87,13 +141,13 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 870, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 783, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,6 +158,39 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         iCtrlView.backToWindow("SeleccionarEscenario");
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
+        if(!panelSeleccionarEscenario1.escenarios.isEmpty() && panelSeleccionarEscenario1.current > 0) {
+            --panelSeleccionarEscenario1.current;
+            String[] parts = panelSeleccionarEscenario1.escenarios.get(panelSeleccionarEscenario1.current).split(",");
+            panelSeleccionarEscenario1.jLabel1.setText(parts[0]);
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) {
+                grid[i-1] = parts[i];
+            }
+            panelSeleccionarEscenario1.reloadGrid(grid);
+        }
+    }//GEN-LAST:event_btn_anteriorActionPerformed
+
+    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
+        // TODO add your handling code here:
+        String name = panelSeleccionarEscenario1.jLabel1.getText();
+
+        iCtrlView.editEscenario(name);
+    }//GEN-LAST:event_btn_seleccionarActionPerformed
+
+    private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed
+        if(!panelSeleccionarEscenario1.escenarios.isEmpty() && panelSeleccionarEscenario1.current < panelSeleccionarEscenario1.escenarios.size()-1) {
+            ++panelSeleccionarEscenario1.current;
+            String[] parts = panelSeleccionarEscenario1.escenarios.get(panelSeleccionarEscenario1.current).split(",");
+            panelSeleccionarEscenario1.jLabel1.setText(parts[0]);
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) {
+                grid[i-1] = parts[i];
+            }
+            panelSeleccionarEscenario1.reloadGrid(grid);
+        }
+    }//GEN-LAST:event_btn_siguienteActionPerformed
+
     public void initEscenario(){
         panelSeleccionarEscenario1.setEscenarios(iCtrlView.getEscenarios());
     }
@@ -111,9 +198,13 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton btn_anterior;
+    private javax.swing.JButton btn_seleccionar;
+    private javax.swing.JButton btn_siguiente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private othello.view.panelSeleccionarEscenario panelSeleccionarEscenario1;
     // End of variables declaration//GEN-END:variables

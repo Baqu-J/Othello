@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import othello.domain.CtrlDomain;
 import othello.domain.Estadistica;
 import othello.domain.Partida;
+import othello.domain.tablero.Escenario;
 
 /**
  *
@@ -176,6 +177,7 @@ public class CtrlView {
         return ctrlDominio.getRanking();
     }
 
+    
     public String estadistica_perfil(String id) {
         Estadistica p = ctrlDominio.searchEstadistica(id);
         return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
@@ -196,6 +198,11 @@ public class CtrlView {
     public int crearEscenario(String nombre) {
         return ctrlDominio.crearEscenario(nombre);
     }
+    
+    public void editEscenario(String name) {
+        ctrlDominio.setCurrentEscenario(name);
+    }
+        
     public ArrayList<String> getEscenarios() {
         return ctrlDominio.getEscenarios();
     }

@@ -19,6 +19,8 @@ public class CtrlDomain {
 
     private ArrayList<Estadistica> perfiles;
     private ArrayList<Escenario> escenarios;
+    private Partida currentGame;
+    private Escenario currentEscenario;
 
     /**
      * Método que crea una única instancia de CtrlDomain.
@@ -212,6 +214,9 @@ public class CtrlDomain {
         return null;
     }
 
+    public void setCurrentEscenario(String name){
+        currentEscenario = searchEscenario(name);
+    }
    
     public boolean turno(Partida p) {
         if (p.getType() == Partida.GameType.PLAYERvsPLAYER) {
