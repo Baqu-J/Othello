@@ -14,11 +14,13 @@ import java.util.ArrayList;
 public class panelSeleccionarEscenario extends javax.swing.JPanel {
 
     private ArrayList<String> escenarios;
+    private int current;
 
     /**
      * Creates new form panelSeleccionarEscenario
      */
     public panelSeleccionarEscenario() {
+        current = 0;
         initComponents();
     }
 
@@ -105,11 +107,29 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
-        
+        if(!escenarios.isEmpty() && current > 0) {
+            --current;
+            String[] parts = escenarios.get(current).split(",");
+            jLabel1.setText(parts[0]);
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) { 
+                grid[i-1] = parts[i];
+            }
+            reloadGrid(grid);
+        }
     }//GEN-LAST:event_btn_anteriorActionPerformed
 
     private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed
-        
+        if(!escenarios.isEmpty() && current < escenarios.size()-1) {
+            ++current;
+            String[] parts = escenarios.get(current).split(",");
+            jLabel1.setText(parts[0]);
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) { 
+                grid[i-1] = parts[i];
+            }
+            reloadGrid(grid);
+        }
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
     private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
@@ -117,22 +137,25 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
     public ArrayList<String> getEscenarios() {
+        current = 0;
         return escenarios;
     }
 
     public void setEscenarios(ArrayList<String> escenarios) {
         this.escenarios = escenarios;
-        
-        String[] parts = escenarios.get(0).split(",");
-        jLabel1.setText(parts[0]);
-        String[] grid = new String[8*8];
-        for (int i = 1; i < parts.length; i++) { 
-            grid[i-1] = parts[i];
+        if(!escenarios.isEmpty()) {
+            String[] parts = escenarios.get(current).split(",");
+            jLabel1.setText(parts[0]);
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) { 
+                grid[i-1] = parts[i];
+            }
+            reloadGrid(grid);
         }
-        reloadGrid(grid);
     }
     
     private void reloadGrid(String[] grid) {
+        tableroUI1.clearGrid();
         tableroUI1.fillGrid(grid);
     }
 
