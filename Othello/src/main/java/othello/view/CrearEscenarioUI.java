@@ -133,6 +133,7 @@ public class CrearEscenarioUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToWindow("CrearEscenario");
     }//GEN-LAST:event_btn_atrasActionPerformed
 

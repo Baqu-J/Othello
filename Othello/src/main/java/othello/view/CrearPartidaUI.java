@@ -360,6 +360,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_RadioNegro2ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToMainWindow("CrearPartida");
     }//GEN-LAST:event_backButtonActionPerformed
 
