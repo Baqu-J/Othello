@@ -15,7 +15,7 @@ public class CtrlView {
     // Attributes
     private static CtrlView instance;
     private CtrlDomain ctrlDominio;
-
+    
     private MenuPrincipalUI mainView;
     private RankingUI rankingView;
     private MenuPerfilUI perfilMenuView;
@@ -25,8 +25,8 @@ public class CtrlView {
     private PartidaUI gameView;
     private MenuEscenarioUI escenarioMenuView;
     private CrearEscenarioUI createEscenarioView;
-
     private SeleccionarEscenarioUI selectEscenario;
+    private EditarEscenarioUI editEscenario;
 
     public static CtrlView getInstance() {
         if (instance == null) {
@@ -52,7 +52,8 @@ public class CtrlView {
 
         createEscenarioView = new CrearEscenarioUI(this);
         selectEscenario = new SeleccionarEscenarioUI(this);
-
+        editEscenario = new EditarEscenarioUI(this);
+        
         mainView.setVisible(true);
     }
 
@@ -110,6 +111,11 @@ public class CtrlView {
                 escenarioMenuView.setVisible(false);
                 selectEscenario.setVisible(true);
                 selectEscenario.initEscenario();
+                break;
+                
+            case "EditarEscenario":
+                selectEscenario.setVisible(false);
+                editEscenario.setVisible(true);
                 break;
                 
             /*case "Partida":
@@ -201,6 +207,10 @@ public class CtrlView {
     
     public void editEscenario(String name) {
         ctrlDominio.setCurrentEscenario(name);
+        String[] parts = ctrlDominio.getCurrentEscenarioGrid();
+        editEscenario.drawGrid(parts);
+        changeWindow("EditarEscenario");
+        
     }
         
     public ArrayList<String> getEscenarios() {

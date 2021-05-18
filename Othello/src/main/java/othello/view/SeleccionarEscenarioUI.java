@@ -176,6 +176,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         String name = panelSeleccionarEscenario1.jLabel1.getText();
 
         iCtrlView.editEscenario(name);
+        
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
     private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed

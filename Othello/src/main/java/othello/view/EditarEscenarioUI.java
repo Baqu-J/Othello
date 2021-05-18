@@ -34,6 +34,15 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         //setVisible(true);
     }
     
+    protected void drawGrid(String[] parts) {
+        
+            String[] grid = new String[8*8];
+            for (int i = 1; i < parts.length; i++) { 
+                grid[i-1] = parts[i];
+            }
+            reloadGrid(grid);
+    }
+    
     protected void reloadGrid(String[] grid) {
         tableroUI1.clearGrid();
         tableroUI1.fillGrid(grid);

@@ -217,7 +217,12 @@ public class CtrlDomain {
     public void setCurrentEscenario(String name){
         currentEscenario = searchEscenario(name);
     }
-   
+    
+    public String[] getCurrentEscenarioGrid() {
+        String[] parts = currentEscenario.toStringGrid().split(",");
+        return parts;
+    }
+    
     public boolean turno(Partida p) {
         if (p.getType() == Partida.GameType.PLAYERvsPLAYER) {
             return true;
