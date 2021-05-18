@@ -139,6 +139,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToWindow("SeleccionarEscenario");
     }//GEN-LAST:event_backButtonActionPerformed
 

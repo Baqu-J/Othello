@@ -167,6 +167,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     }
     
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToWindow("Perfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
 

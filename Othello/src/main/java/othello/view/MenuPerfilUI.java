@@ -131,18 +131,17 @@ public class MenuPerfilUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_exitActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToMainWindow("MenuPerfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_crearPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearPerfilActionPerformed
-        /*JOptionPane.showInputDialog("ingresa nombre");
-        JOptionPane.showInputDialog("ingresa contraseña");
-        JOptionPane.showMessageDialog(null, "usuario creado");
-        JOptionPane.showMessageDialog(null, "usuario existente", "ERROR", 0);*/
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("CrearPerfil");
     }//GEN-LAST:event_btn_crearPerfilActionPerformed
 
     private void btn_consultarEstadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarEstadisticaActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("Perfil");
     }//GEN-LAST:event_btn_consultarEstadisticaActionPerformed
 

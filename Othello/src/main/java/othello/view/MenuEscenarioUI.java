@@ -136,6 +136,7 @@ public class MenuEscenarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_modificarEscenarioActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.backToMainWindow("MenuEscenario");
     }//GEN-LAST:event_btn_atrasActionPerformed
 

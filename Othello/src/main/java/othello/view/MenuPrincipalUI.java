@@ -132,14 +132,17 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perfilActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("MenuPerfil");
     }//GEN-LAST:event_btn_perfilActionPerformed
 
     private void btn_jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_jugarActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("CrearPartida");
     }//GEN-LAST:event_btn_jugarActionPerformed
 
     private void btn_escenarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escenarioActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("MenuEscenario");
     }//GEN-LAST:event_btn_escenarioActionPerformed
 
@@ -148,6 +151,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_exitActionPerformed
 
     private void btn_rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rankingActionPerformed
+        this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("Ranking");
     }//GEN-LAST:event_btn_rankingActionPerformed
 
