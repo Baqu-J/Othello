@@ -68,6 +68,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 750));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -139,7 +140,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        iCtrlView.backToWindow("SeleccionarEscenario");
+        iCtrlView.backToWindow("ModificarEscenario");
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

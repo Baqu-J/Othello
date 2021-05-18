@@ -1,6 +1,7 @@
 package othello.view;
 
 import java.util.ArrayList;
+import othello.data.Pair;
 import othello.domain.CtrlDomain;
 import othello.domain.Estadistica;
 import othello.domain.Partida;
@@ -171,7 +172,7 @@ public class CtrlView {
                 escenarioMenuView.setVisible(true);
                 break;
             case "ModificarEscenario":
-
+                editEscenario.setVisible(false);
                 escenarioMenuView.setVisible(true);
                 break;
             default:
@@ -211,6 +212,10 @@ public class CtrlView {
         editEscenario.drawGrid(parts);
         changeWindow("EditarEscenario");
         
+    }
+    
+    public void commitPlayCurrentEscenario(Pair p) {
+    
     }
     
     public void redrawEscenario() {
