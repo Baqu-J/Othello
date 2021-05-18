@@ -130,7 +130,8 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
-        
+        iCtrlView.undoCurrentEscenario();
+        iCtrlView.redrawEscenario();
     }//GEN-LAST:event_btn_anteriorActionPerformed
 
     private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed

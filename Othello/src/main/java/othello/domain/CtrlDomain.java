@@ -223,6 +223,10 @@ public class CtrlDomain {
         return parts;
     }
     
+    public void undoCurrentEscenario() {
+        currentEscenario.undo();
+    }
+    
     public boolean turno(Partida p) {
         if (p.getType() == Partida.GameType.PLAYERvsPLAYER) {
             return true;

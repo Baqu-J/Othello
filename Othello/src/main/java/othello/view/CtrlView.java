@@ -212,7 +212,15 @@ public class CtrlView {
         changeWindow("EditarEscenario");
         
     }
-        
+    
+    public void redrawEscenario() {
+        String[] parts = ctrlDominio.getCurrentEscenarioGrid();
+        editEscenario.drawGrid(parts);
+    }
+       
+    public void undoCurrentEscenario() {
+        ctrlDominio.undoCurrentEscenario();
+    }
     public ArrayList<String> getEscenarios() {
         return ctrlDominio.getEscenarios();
     }
