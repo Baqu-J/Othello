@@ -10,13 +10,12 @@ import javax.swing.JButton;
  *
  * @author Aleix
  */
-public class CasillaUI extends JButton {
+public class CasillaEscenarioUI extends JButton {
     private CtrlView iCtrlView;
     /**
      * Creates new form NewBeanForm
      */
-    public CasillaUI(String ficha, CtrlView pCtrlView) {
-        iCtrlView = pCtrlView;
+    public CasillaEscenarioUI(String ficha, CtrlView pCtrlView) {
         initComponents();
         
         String imgFicha = "";
@@ -51,7 +50,17 @@ public class CasillaUI extends JButton {
     private void initComponents() {
 
         setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1)));
+        addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formActionPerformed(evt);
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

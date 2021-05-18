@@ -10,11 +10,16 @@ import javax.swing.JPanel;
  * @author Aleix
  */
 public class TableroUI extends JPanel {
-
+    private CtrlView iCtrlView;
     /**
      * Creates new form TableroUI
      */
     public TableroUI() {
+        initComponents();
+        iCtrlView = null;
+    }
+    public TableroUI(CtrlView pCtrlView) {
+        iCtrlView = pCtrlView;
         initComponents();
         
     }
@@ -26,7 +31,7 @@ public class TableroUI extends JPanel {
     public void fillGrid(String[] grid) {
         if(grid.length > 0){
             for (int i = 0; i < grid.length; i++) {
-                    this.add(new CasillaUI(grid[i]));
+                    this.add(new CasillaUI(grid[i], iCtrlView));
             }
         }
     }

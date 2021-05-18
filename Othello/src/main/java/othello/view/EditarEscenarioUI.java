@@ -59,7 +59,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        tableroUI1 = new othello.view.TableroUI();
+        tableroUI1 = new othello.view.TableroUI(iCtrlView);
         jPanel4 = new javax.swing.JPanel();
         btn_anterior = new javax.swing.JButton();
         btn_siguiente = new javax.swing.JButton();

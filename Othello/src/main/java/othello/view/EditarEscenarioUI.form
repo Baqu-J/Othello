@@ -30,6 +30,9 @@
       </Layout>
       <SubComponents>
         <Container class="othello.view.TableroUI" name="tableroUI1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new othello.view.TableroUI(iCtrlView)"/>
+          </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="8"/>
