@@ -28,7 +28,7 @@ public class CtrlView {
     private CrearEscenarioUI createEscenarioView;
     private SeleccionarEscenarioUI selectEscenario;
     private EditarEscenarioUI editEscenario;
-
+    
     public static CtrlView getInstance() {
         if (instance == null) {
             instance = new CtrlView();
