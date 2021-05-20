@@ -73,7 +73,7 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         int f = 0, s = 0;
         if(grid.length > 0){
             for (String grid1 : grid) {
-                tableroUI1.add(new CasillaEscenarioUI(grid1, iCtrlView, f, s));
+                tableroUI1.add(new CasillaSelectionUI(grid1));
                 if(s == 7) {
                     s = 0;
                     ++f;
