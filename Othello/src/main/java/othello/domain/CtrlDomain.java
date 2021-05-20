@@ -181,6 +181,15 @@ public class CtrlDomain {
         }
         return null;
     }
+    
+    public String consultaPerfil(String nombre) {
+        for (Estadistica p : perfiles) {
+            if (p.getId().equals(nombre)) {
+                return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
+            }
+        }
+        return null;
+    }
 
     /**
      * Método que devulve todos las Estadisticas.
