@@ -90,6 +90,10 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
     public void resetCurrent() {
         current = 0;
     }
+    
+    public String getNombreEscenario() {
+        return jLabel1.getText();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel jLabel1;

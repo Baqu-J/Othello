@@ -26,6 +26,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
      public SeleccionarEscenarioUI(CtrlView pCtrlView) {
         iCtrlView = pCtrlView;
         initComponents();
+        initExtra();
         Image image = null;
         try {
             image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
@@ -180,6 +181,14 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initExtra() {
+        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    btn_seleccionarActionPerformed(evt);
+                }
+            });
+    }
+    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         iCtrlView.backToWindow("SeleccionarEscenario");
     }//GEN-LAST:event_backButtonActionPerformed
@@ -218,6 +227,11 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
+    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {
+        iCtrlView.setEscenarioCrearPartida(panelSeleccionarEscenario1.getNombreEscenario());
+        iCtrlView.changeWindow("CrearPartida");
+    }
+    
     public void initEscenario(){
         panelSeleccionarEscenario1.resetCurrent();
         panelSeleccionarEscenario1.setEscenarios(iCtrlView.getEscenarios());

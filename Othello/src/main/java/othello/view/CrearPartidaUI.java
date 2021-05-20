@@ -49,6 +49,9 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
     }
     
+    public void setEscenario(String s) {
+        LabelEscenario.setText(s);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +61,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -90,10 +94,14 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario(iCtrlView);
         jPanel16 = new javax.swing.JPanel();
+        LabelEscenario = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        ResetButton = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
         startGameButton = new javax.swing.JButton();
+        loadGameButton = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
 
@@ -241,51 +249,67 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Escenario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jPanel13.setLayout(new javax.swing.BoxLayout(jPanel13, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel13.setLayout(new java.awt.GridLayout());
 
-        jPanel15.setLayout(new java.awt.GridBagLayout());
+        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jLabel1.setText("jLabel1");
-        jPanel15.add(jLabel1, new java.awt.GridBagConstraints());
+        LabelEscenario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LabelEscenario.setText("Tablero standard");
+        jPanel16.add(LabelEscenario);
 
-        panelSeleccionarEscenario1.setPreferredSize(new java.awt.Dimension(600, 750));
-        jPanel15.add(panelSeleccionarEscenario1, new java.awt.GridBagConstraints());
+        jPanel15.add(jPanel16);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel17.add(jButton1);
+
+        ResetButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ResetButton.setText("Reset");
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButtonActionPerformed(evt);
+            }
+        });
+        jPanel17.add(ResetButton);
+
+        jPanel15.add(jPanel17);
 
         jPanel13.add(jPanel15);
 
+        jPanel3.add(jPanel13, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel3);
+
+        jPanel14.setLayout(new java.awt.GridBagLayout());
+
+        startGameButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         startGameButton.setText("Comenzar");
         startGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startGameButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(8, 0, 0, 0);
+        jPanel14.add(startGameButton, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 85, Short.MAX_VALUE)
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel16Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(startGameButton)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 177, Short.MAX_VALUE)
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel16Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(startGameButton)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        loadGameButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        loadGameButton.setText("Cargar");
+        loadGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadGameButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(8, 0, 0, 0);
+        jPanel14.add(loadGameButton, gridBagConstraints);
 
-        jPanel13.add(jPanel16);
-
-        jPanel3.add(jPanel13, java.awt.BorderLayout.CENTER);
-
-        jPanel1.add(jPanel3);
+        jPanel1.add(jPanel14);
 
         jPanel12.setMaximumSize(new java.awt.Dimension(32767, 30));
         jPanel12.setMinimumSize(new java.awt.Dimension(0, 30));
@@ -306,11 +330,11 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -372,6 +396,20 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         iCtrlView.setupGame(getGameType());
     }//GEN-LAST:event_startGameButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        iCtrlView.changeWindow("SeleccionarEscenarioPartida");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loadGameButtonActionPerformed
+
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
+        // TODO add your handling code here:
+        LabelEscenario.setText("Tablero standard");
+    }//GEN-LAST:event_ResetButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -384,16 +422,18 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton IA2;
     private javax.swing.JRadioButton Jugador1;
     private javax.swing.JRadioButton Jugador2;
+    private javax.swing.JLabel LabelEscenario;
     private javax.swing.JRadioButton RadioBlanco1;
     private javax.swing.JRadioButton RadioBlanco2;
     private javax.swing.JRadioButton RadioNegro1;
     private javax.swing.JRadioButton RadioNegro2;
+    private javax.swing.JButton ResetButton;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -401,8 +441,10 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -413,7 +455,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel labelJ1;
     private javax.swing.JLabel labelJ2;
-    private othello.view.panelSeleccionarEscenario panelSeleccionarEscenario1;
+    private javax.swing.JButton loadGameButton;
     private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
     

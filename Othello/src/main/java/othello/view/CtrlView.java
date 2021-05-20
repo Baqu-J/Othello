@@ -84,6 +84,7 @@ public class CtrlView {
                 perfilMenuView.setVisible(true);
                 break;
             case "CrearPartida":
+                selectEscenario.setVisible(false);
                 mainView.setVisible(false);
                 createGameView.setVisible(true);
                 createGameView.actualiza_boxs();
@@ -116,7 +117,14 @@ public class CtrlView {
                 selectEscenario.initEscenario();
                 
                 break;
-                
+            
+            case "SeleccionarEscenarioPartida":
+                createGameView.setVisible(false);
+                selectEscenario.setVisible(true);
+                selectEscenario.enableSelect();
+                selectEscenario.disableEdit();
+                selectEscenario.initEscenario();
+                break;
             case "EditarEscenario":
                 selectEscenario.setVisible(false);
                 editEscenario.setVisible(true);
@@ -235,6 +243,10 @@ public class CtrlView {
     
     public ArrayList<String> getEscenarios() {
         return ctrlDominio.getEscenarios();
+    }
+    
+    public void setEscenarioCrearPartida(String s) {
+        createGameView.setEscenario(s);
     }
     /*  
     
