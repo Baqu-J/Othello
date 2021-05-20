@@ -166,7 +166,7 @@ public class CtrlDomain {
      * @param nombre id de la Estadistica
      * @return Devuelve una Estadistica si existe, si no un null.
      */
-    private Estadistica searchEstadistica(String nombre) {
+    public Estadistica searchEstadistica(String nombre) {
         for (Estadistica p : perfiles) {
             if (p.getId().equals(nombre)) {
                 return p;
@@ -204,7 +204,7 @@ public class CtrlDomain {
      * @param nombre id del Escenario
      * @return Devuelve un Escenario si existe, si no un null.
      */
-    public Escenario searchEscenario(String nombre) {
+    private Escenario searchEscenario(String nombre) {
         for (Escenario e : escenarios) {
             if (e.getId().equals(nombre)) {
                 return e;
@@ -272,5 +272,11 @@ public class CtrlDomain {
 
     public Partida cargarPartida() {
         return ctrlPersistencia.CargarPartida();
+    }
+    
+    public ArrayList<Estadistica> displayRanking() {
+        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
+        Collections.sort(perfiles, c);
+        return perfiles;
     }
 }

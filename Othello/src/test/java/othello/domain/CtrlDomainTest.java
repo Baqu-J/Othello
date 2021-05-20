@@ -22,28 +22,6 @@ public class CtrlDomainTest {
 
     private double expected, valueOne, valueTwo;
 
-    /*public TestingAdd(double e, double v1, double v2) {
-        this.expected = e;
-        this.valueOne = v1;
-        this.valueTwo = v2;
-    }
-
-    @Parameters
-    public static Collection<Double[]> getTestParameters() {
-        return Arrays.asList(new Double[][]{
-            {0.0, 1.0, -1.0}, // expected, valueOne, valueTwo
-            {10.0, 90.0, -80.0},
-            {100.0, -1000.0, 1100.0},
-            {5.0, 2.0, 3.0},
-            {2.0, 1.0, 1.0}});
-    }
-
-    @Test
-    public void add() {
-        Calculator calculator = new Calculator();
-        assertEquals(expected, calculator.add(valueOne, valueTwo), 0);
-    }*/
-
     public CtrlDomainTest() {
     }
 
@@ -100,8 +78,8 @@ public class CtrlDomainTest {
         System.out.println("searchEstadistica");
         String nombre = "";
         CtrlDomain instance = null;
-        Estadistica expResult = null;
-        Estadistica result = instance.searchEstadistica(nombre);
+        String expResult = null;
+        String result = instance.consultaPerfil(nombre);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -135,11 +113,7 @@ public class CtrlDomainTest {
         Collections.sort(perfiles, c);
 
         ArrayList<Estadistica> result = instance.displayRanking();
-        /*for ( ) {
-            assertEquals();
-        }*/
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
 }
