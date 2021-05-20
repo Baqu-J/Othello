@@ -230,6 +230,11 @@ public class CtrlView {
     public void undoCurrentEscenario() {
         ctrlDominio.undoCurrentEscenario();
     }
+    
+    public void redoCurrentEscenario() {
+        ctrlDominio.reCurrentEscenario();
+    }
+    
     public ArrayList<String> getEscenarios() {
         return ctrlDominio.getEscenarios();
     }

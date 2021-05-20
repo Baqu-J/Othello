@@ -228,6 +228,10 @@ public class CtrlDomain {
         currentEscenario.undo();
     }
     
+    public void reCurrentEscenario() {
+        currentEscenario.redo();
+    }
+    
     public void CommitPlayCurrentEscenario(int first, int second) {
         currentEscenario.commitPlay(new Pair(first, second), currentEscenario.getColor());
     }

@@ -41,6 +41,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
                 grid[i-1] = parts[i];
             }
             reloadGrid(grid);
+            //repaint();
     }
     
     public void fillGrid(String[] grid) {
@@ -55,12 +56,12 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
                 else ++s;
             }
         }
+        tableroUI1.revalidate();
     }
     
     protected void reloadGrid(String[] grid) {
         tableroUI1.clearGrid();
         fillGrid(grid);
-        this.repaint();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,7 +151,8 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_anteriorActionPerformed
 
     private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed
-        
+        iCtrlView.redoCurrentEscenario();
+        iCtrlView.redrawEscenario();
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

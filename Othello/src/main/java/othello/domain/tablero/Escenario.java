@@ -67,8 +67,8 @@ public class Escenario extends Tablero implements Serializable{
         Tablero t = tableros.peek().DeepCopy();
         ArrayList<Pair> ret = t.commitPlay(p, c);
         if(!ret.isEmpty())tableros.add(t);
-        if(tableros.size() > 10) tableros.removeElementAt(tableros.size()-1);
-        if(!ret.isEmpty())currentColor = currentColor.contrary();
+        
+        if(!ret.isEmpty()){currentColor = currentColor.contrary();popped.clear();}
         return ret;
     }
     
