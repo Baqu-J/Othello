@@ -1,4 +1,4 @@
-package othello.test;
+/*package othello.test;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,17 +14,12 @@ import othello.domain.Partida;
 import othello.domain.tablero.Escenario;
 import othello.domain.tablero.Tablero;
 
-/**
- *
- * @author Aleix Velasco Calvo
- */
+
 public class Main {
 
     private static CtrlDomain dominio;
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         dominio = CtrlDomain.getInstance();
         boolean exit = false;
@@ -66,9 +61,7 @@ public class Main {
         System.out.println("Has salido de la App...");
     }
 
-    /**
-     * Metodo para mostrar el menu de la App por pantalla
-     */
+    
     private static void menuApp() {
         System.out.println("\nMenu Principal\n"
                 + "\t1 - Crear/Borrar Perfil\n"
@@ -79,9 +72,7 @@ public class Main {
                 + "\t0 - Salir\n");
     }
 
-    /**
-     * Metodo para mostrar el menu de de gestión de Escenarios por pantalla
-     */
+    
     private static void menuPerfiles() {
         System.out.println("\nMenu Perfiles\n"
                 + "\t1 - Crear Perfil\n"
@@ -96,9 +87,7 @@ public class Main {
                 + "\t0 - Atras\n");
     }
 
-    /**
-     * Metodo para mostrar el menu de de gestión de Partida por pantalla
-     */
+    
     private static void menuPartida() {
         System.out.println("\nMenu Partida\n"
                 + "\t1 - Crear Partida\n"
@@ -155,7 +144,7 @@ public class Main {
                 break;
             }
 
-            //ret = dominio.searchEstadistica(name);
+            ret = dominio.searchEstadistica(name);
             ret = dominio.borrarPerfil(name,password);
             
 
@@ -271,7 +260,7 @@ public class Main {
     }
 
     private static void modificarEscenario() {
-        //editarTablero(e);
+        editarTablero(e);
         Scanner sc = new Scanner(System.in);
         Boolean exit = false;
         System.out.println("Escenarios disponibles: ");
@@ -664,3 +653,5 @@ public class Main {
     }
 
 }
+
+*/

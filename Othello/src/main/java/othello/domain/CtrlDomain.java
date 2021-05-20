@@ -139,13 +139,6 @@ public class CtrlDomain {
         return ret;
     }
 
-    public ArrayList<Estadistica> displayRanking() {
-        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
-        Collections.sort(perfiles, c);
-        return perfiles;
-    }
-    
-    
     public ArrayList<String> getRanking() {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
@@ -173,7 +166,7 @@ public class CtrlDomain {
      * @param nombre id de la Estadistica
      * @return Devuelve una Estadistica si existe, si no un null.
      */
-    public Estadistica searchEstadistica(String nombre) {
+    private Estadistica searchEstadistica(String nombre) {
         for (Estadistica p : perfiles) {
             if (p.getId().equals(nombre)) {
                 return p;
@@ -183,12 +176,8 @@ public class CtrlDomain {
     }
     
     public String consultaPerfil(String nombre) {
-        for (Estadistica p : perfiles) {
-            if (p.getId().equals(nombre)) {
-                return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
-            }
-        }
-        return null;
+        Estadistica p = searchEstadistica(nombre);
+        return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
     }
 
     /**
