@@ -9,8 +9,8 @@ import othello.data.Tree;
 
 /**
  * Clase IA que hereda de GameState y contiene la dificultad
- * (fácil, normal, difícil) de la IA y una profundidad asociada
- * a su dificultad, junto a métodos que gestionan la heurística
+ * (fácil, normal, difícil) de la IA y una "profundidad asociada
+ * a su dificultad", junto a métodos que gestionan la heurística
  * de cada nivel de dificultad y el algoritmo de inteligencia 
  * artificial.
  * 
@@ -127,32 +127,22 @@ public class IA extends GameState {
         if (maximizingPlayer) {
             Node maxEval = new Node(NEGATIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
-               
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, false);
-                
-                    int scr = ((maxEval.getScore() > eval.getScore()) ? maxEval.getScore() : eval.getScore());
-                   
-                    maxEval.setScore(scr); 
-                
-                
+                int scr = ((maxEval.getScore() > eval.getScore()) ? maxEval.getScore() : eval.getScore());  
+                maxEval.setScore(scr); 
                 alpha = ((alpha > eval.getScore()) ? alpha : eval.getScore());
                 if (beta <= alpha) {
                     break;
                 }
             }
             return maxEval;
-        } else {
+        } 
+        else {
             Node minEval = new Node(POSITIVE_INFINITY);
             for (Tree<Node> child : t.getSubTrees()) {
-                
-                
                 Node eval = alpha_beta(child, depth - 1, alpha, beta, true);
-                
-                    int scr = ((minEval.getScore() < eval.getScore()) ? minEval.getScore() : eval.getScore());
-                   
-                    minEval.setScore(scr);
-                     
-                
+                int scr = ((minEval.getScore() < eval.getScore()) ? minEval.getScore() : eval.getScore());
+                minEval.setScore(scr);
                 beta = ((beta < eval.getScore()) ? beta : eval.getScore());
                 if (beta <= alpha) {
                     break;
@@ -173,17 +163,13 @@ public class IA extends GameState {
         Node maxEval = new Node(NEGATIVE_INFINITY);
         
         for (Tree<Node> child : t.getSubTrees()) {
-              
-
-                Node eval = alpha_beta(child, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
-              
-                if(maxEval.getScore() < eval.getScore()) {
-               
-                    maxEval.setScore(eval.getScore());
-                    maxEval.setCord(child.getRoot().getCord());
-                }
+            Node eval = alpha_beta(child, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
+            if(maxEval.getScore() < eval.getScore()) {
+                maxEval.setScore(eval.getScore());
+                maxEval.setCord(child.getRoot().getCord());
             }
-        
+        }
+ 
         Node movimiento = maxEval;
         return movimiento.getCord();
     }

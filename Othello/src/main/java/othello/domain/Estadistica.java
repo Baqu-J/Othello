@@ -140,8 +140,11 @@ public class Estadistica implements Serializable {
     public String toString() {
         return (id + ":\n\tPuntos: " + puntos + "\n\tVictorias: " + victoria + "\n\tDerrotas: " + derrota + "\n\tEmpates: " + empate);
     }
-    
-     public String toStringRanking() {
+    /**
+     * Método que devuelve un string con el id del Usuario y sus puntos
+     * @return id del usuario + puntos
+     */
+    public String toStringRanking() {
         return (id + ": Puntos: "+ puntos + "<html>");
     }
     
