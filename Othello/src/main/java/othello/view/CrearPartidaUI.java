@@ -91,7 +91,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario();
+        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario(iCtrlView);
         jPanel16 = new javax.swing.JPanel();
         startGameButton = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
@@ -247,6 +247,8 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
         jPanel15.add(jLabel1, new java.awt.GridBagConstraints());
+
+        panelSeleccionarEscenario1.setPreferredSize(new java.awt.Dimension(600, 750));
         jPanel15.add(panelSeleccionarEscenario1, new java.awt.GridBagConstraints());
 
         jPanel13.add(jPanel15);
@@ -262,7 +264,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGap(0, 85, Short.MAX_VALUE)
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel16Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -271,7 +273,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGap(0, 177, Short.MAX_VALUE)
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel16Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

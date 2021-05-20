@@ -108,10 +108,13 @@ public class CtrlView {
                 createEscenarioView.setVisible(true);
                 break;
 
-            case "SeleccionarEscenario":
+            case "SeleccionarEscenarioEdit":
                 escenarioMenuView.setVisible(false);
                 selectEscenario.setVisible(true);
+                selectEscenario.disableSelect();
+                selectEscenario.enableEdit();
                 selectEscenario.initEscenario();
+                
                 break;
                 
             case "EditarEscenario":
@@ -214,8 +217,9 @@ public class CtrlView {
         
     }
     
-    public void commitPlayCurrentEscenario(Pair p) {
-    
+    public void commitPlayCurrentEscenario(int first, int second) {
+        ctrlDominio.CommitPlayCurrentEscenario(first, second);
+        redrawEscenario();
     }
     
     public void redrawEscenario() {

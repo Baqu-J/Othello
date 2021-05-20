@@ -3,6 +3,7 @@ package othello.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import othello.data.Casilla;
 import othello.data.Pair;
 import othello.domain.tablero.Escenario;
 import othello.persistence.CtrlPersistence;
@@ -225,6 +226,10 @@ public class CtrlDomain {
     
     public void undoCurrentEscenario() {
         currentEscenario.undo();
+    }
+    
+    public void CommitPlayCurrentEscenario(int first, int second) {
+        currentEscenario.commitPlay(new Pair(first, second), currentEscenario.getColor());
     }
     
     public boolean turno(Partida p) {

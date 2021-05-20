@@ -12,14 +12,15 @@ import java.util.ArrayList;
  * @author Aleix
  */
 public class panelSeleccionarEscenario extends javax.swing.JPanel {
-
+    CtrlView iCtrlView;
     public ArrayList<String> escenarios;
     public int current;
 
     /**
      * Creates new form panelSeleccionarEscenario
      */
-    public panelSeleccionarEscenario() {
+    public panelSeleccionarEscenario(CtrlView pCtrlView) {
+        iCtrlView = pCtrlView;
         current = 0;
         initComponents();
     }
@@ -68,13 +69,30 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         }
     }
     
+    public void fillGrid(String[] grid) {
+        int f = 0, s = 0;
+        if(grid.length > 0){
+            for (String grid1 : grid) {
+                tableroUI1.add(new CasillaEscenarioUI(grid1, iCtrlView, f, s));
+                if(s == 7) {
+                    s = 0;
+                    ++f;
+                }
+                else ++s;
+            }
+        }
+    }
+    
     protected void reloadGrid(String[] grid) {
         tableroUI1.clearGrid();
-        tableroUI1.fillGrid(grid);
+        fillGrid(grid);
+    }
+    public void resetCurrent() {
+        current = 0;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel jLabel1;
-    private othello.view.TableroUI tableroUI1;
+    protected othello.view.TableroUI tableroUI1;
     // End of variables declaration//GEN-END:variables
 }

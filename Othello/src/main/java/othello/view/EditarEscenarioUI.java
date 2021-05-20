@@ -43,11 +43,25 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
             reloadGrid(grid);
     }
     
-    protected void reloadGrid(String[] grid) {
-        tableroUI1.clearGrid();
-        tableroUI1.fillGrid(grid);
+    public void fillGrid(String[] grid) {
+        int f = 0, s = 0;
+        if(grid.length > 0){
+            for (String grid1 : grid) {
+                tableroUI1.add(new CasillaEscenarioUI(grid1, iCtrlView, f, s));
+                if(s == 7) {
+                    s = 0;
+                    ++f;
+                }
+                else ++s;
+            }
+        }
     }
     
+    protected void reloadGrid(String[] grid) {
+        tableroUI1.clearGrid();
+        fillGrid(grid);
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

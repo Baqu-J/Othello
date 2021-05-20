@@ -36,6 +36,22 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         //setVisible(true);
     }
 
+    public void disableEdit() {
+        this.btn_editar.setEnabled(false);
+        this.btn_editar.setVisible(false);
+    }
+    public void enableEdit() {
+        this.btn_editar.setEnabled(true);
+        this.btn_editar.setVisible(true);
+    }
+    public void disableSelect() {
+        this.btn_seleccionar.setEnabled(false);
+        this.btn_seleccionar.setVisible(false);
+    }
+    public void enableSelect() {
+        this.btn_seleccionar.setEnabled(true);
+        this.btn_seleccionar.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,11 +64,13 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario();
+        panelSeleccionarEscenario1 = new othello.view.panelSeleccionarEscenario(iCtrlView);
         jPanel4 = new javax.swing.JPanel();
         btn_anterior = new javax.swing.JButton();
-        btn_seleccionar = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
         btn_siguiente = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        btn_seleccionar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
@@ -73,6 +91,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
 
         btn_anterior.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_anterior.setText("Anterior");
+        btn_anterior.setPreferredSize(new java.awt.Dimension(97, 25));
         btn_anterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_anteriorActionPerformed(evt);
@@ -86,11 +105,12 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
         jPanel4.add(btn_anterior, gridBagConstraints);
 
-        btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_seleccionar.setText("Seleccionar");
-        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
+        btn_editar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_editar.setText("Editar");
+        btn_editar.setPreferredSize(new java.awt.Dimension(97, 25));
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_seleccionarActionPerformed(evt);
+                btn_editarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -99,7 +119,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel4.add(btn_seleccionar, gridBagConstraints);
+        jPanel4.add(btn_editar, gridBagConstraints);
 
         btn_siguiente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_siguiente.setText("Siguiente");
@@ -117,6 +137,12 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         jPanel4.add(btn_siguiente, gridBagConstraints);
 
         jPanel1.add(jPanel4);
+
+        btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_seleccionar.setText("Seleccionar");
+        jPanel6.add(btn_seleccionar);
+
+        jPanel1.add(jPanel6);
 
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -171,13 +197,13 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_anteriorActionPerformed
 
-    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         // TODO add your handling code here:
         String name = panelSeleccionarEscenario1.jLabel1.getText();
 
         iCtrlView.editEscenario(name);
         
-    }//GEN-LAST:event_btn_seleccionarActionPerformed
+    }//GEN-LAST:event_btn_editarActionPerformed
 
     private void btn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_siguienteActionPerformed
         if(!panelSeleccionarEscenario1.escenarios.isEmpty() && panelSeleccionarEscenario1.current < panelSeleccionarEscenario1.escenarios.size()-1) {
@@ -193,6 +219,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_siguienteActionPerformed
 
     public void initEscenario(){
+        panelSeleccionarEscenario1.resetCurrent();
         panelSeleccionarEscenario1.setEscenarios(iCtrlView.getEscenarios());
     }
     
@@ -200,6 +227,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btn_anterior;
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_seleccionar;
     private javax.swing.JButton btn_siguiente;
     private javax.swing.JPanel jPanel1;
@@ -207,6 +235,7 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private othello.view.panelSeleccionarEscenario panelSeleccionarEscenario1;
     // End of variables declaration//GEN-END:variables
 }

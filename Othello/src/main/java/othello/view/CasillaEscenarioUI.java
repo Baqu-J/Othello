@@ -12,10 +12,15 @@ import javax.swing.JButton;
  */
 public class CasillaEscenarioUI extends JButton {
     private CtrlView iCtrlView;
+    int first;
+    int second;
     /**
      * Creates new form NewBeanForm
      */
-    public CasillaEscenarioUI(String ficha, CtrlView pCtrlView) {
+    public CasillaEscenarioUI(String ficha, CtrlView pCtrlView, int f, int s) {
+        first = f;
+        second = s;
+        iCtrlView = pCtrlView;
         initComponents();
         
         String imgFicha = "";
@@ -59,7 +64,7 @@ public class CasillaEscenarioUI extends JButton {
 
     private void formActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formActionPerformed
         // TODO add your handling code here:
-        
+        iCtrlView.commitPlayCurrentEscenario(first, second);
     }//GEN-LAST:event_formActionPerformed
 
 

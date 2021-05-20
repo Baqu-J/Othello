@@ -19,6 +19,7 @@ public class Escenario extends Tablero implements Serializable{
     private String id;
     private Stack<Tablero> tableros;
     private Stack<Tablero> popped;
+    private Casilla currentColor;
     
     /**
      * Constructor por defecto asignandole un identificador(name) al escenario
@@ -26,6 +27,7 @@ public class Escenario extends Tablero implements Serializable{
      */
     public Escenario(String name) {
         id = name;
+        currentColor = Casilla.NEGRA;
         Tablero t = new Tablero();
         tableros = new Stack();
         popped = new Stack();
@@ -66,6 +68,7 @@ public class Escenario extends Tablero implements Serializable{
         ArrayList<Pair> ret = t.commitPlay(p, c);
         if(!ret.isEmpty())tableros.add(t);
         if(tableros.size() > 10) tableros.removeElementAt(tableros.size()-1);
+        if(!ret.isEmpty())currentColor = currentColor.contrary();
         return ret;
     }
     
@@ -73,16 +76,19 @@ public class Escenario extends Tablero implements Serializable{
      * Método para deshacer un movimiento
      */
     public void undo() {
-        if(tableros.size() > 1) popped.add(tableros.pop());
+        if(tableros.size() > 1) {popped.add(tableros.pop());currentColor = currentColor.contrary();}
     }
     
     /**
      * Método para rehacer un movimiento
      */
     public void redo() {
-        if(!popped.empty()) tableros.add(popped.pop());
+        if(!popped.empty()) {tableros.add(popped.pop());currentColor = currentColor.contrary();}
     }
     
+    public Casilla getColor() {
+        return currentColor;
+    }
     
     public String getId() {
         return id;
