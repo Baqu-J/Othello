@@ -286,8 +286,11 @@ public class CtrlDomain {
             Casilla c1;
             if(P1White) c1 = Casilla.BLANCA;
             else c1 = Casilla.NEGRA;
-            Estadistica e = searchEstadistica(Opc1);
-            j1 = new Jugador(e, c1);
+            if(Opc1.equals("Guest")) j1 = new Jugador(c1);
+            else {
+                Estadistica e = searchEstadistica(Opc1);
+                j1 = new Jugador(e, c1);
+            }
         }
         
         IA ia1 = null;
@@ -305,8 +308,11 @@ public class CtrlDomain {
             Casilla c2;
             if(P1White) c2 = Casilla.NEGRA;
             else c2 = Casilla.BLANCA;
-            Estadistica e = searchEstadistica(Opc2);
-            j2 = new Jugador(e, c2);
+            if(Opc2.equals("Guest")) j2 = new Jugador(c2);
+            else {
+                Estadistica e = searchEstadistica(Opc2);
+                j2 = new Jugador(e, c2);
+            }
         }
         IA ia2 = null;
         if(IA2) {

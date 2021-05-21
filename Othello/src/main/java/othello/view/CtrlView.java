@@ -65,6 +65,7 @@ public class CtrlView {
         for (Estadistica e : temp) {
             profiles.add(e.getId());
         }
+        profiles.add("Guest");
         String[] ret = new String[]{};
         ret = profiles.toArray(ret);
         return ret;

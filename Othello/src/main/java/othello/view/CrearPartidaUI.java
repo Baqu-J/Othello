@@ -43,7 +43,9 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
         
         DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        model.removeElement(Combo1.getSelectedItem());
+        if(!Combo1.getSelectedItem().equals("Guest")){
+            model.removeElement(Combo1.getSelectedItem());
+        }
         Object o = Combo2.getSelectedItem();
         Combo2.setModel(model);
         Combo2.setEditable(false);
@@ -51,7 +53,9 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         Combo2.setEditable(true);
         
         model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        model.removeElement(Combo2.getSelectedItem());
+        if(!Combo2.getSelectedItem().equals("Guest")){
+            model.removeElement(Combo2.getSelectedItem());
+        }
         o = Combo1.getSelectedItem();
         Combo1.setModel(model);
         Combo1.setEditable(false);
@@ -440,7 +444,9 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private void Combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1ActionPerformed
         // TODO add your handling code here:
         DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        model.removeElement(Combo1.getSelectedItem());
+        if(!Combo1.getSelectedItem().equals("Guest")){
+            model.removeElement(Combo1.getSelectedItem());
+        }
         Object o = Combo2.getSelectedItem();
         Combo2.setModel(model);
         Combo2.setEditable(false);
@@ -451,7 +457,9 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private void Combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2ActionPerformed
         // TODO add your handling code here:
         DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        model.removeElement(Combo2.getSelectedItem());
+        if(!Combo2.getSelectedItem().equals("Guest")){
+            model.removeElement(Combo2.getSelectedItem());
+        }
         Object o = Combo1.getSelectedItem();
         Combo1.setModel(model);
         Combo1.setEditable(false);
