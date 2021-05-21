@@ -6,6 +6,7 @@ import java.util.Comparator;
 import othello.data.Casilla;
 import othello.data.Pair;
 import othello.domain.tablero.Escenario;
+import othello.domain.tablero.Tablero;
 import othello.persistence.CtrlPersistence;
 
 /**
@@ -272,6 +273,83 @@ public class CtrlDomain {
 
     public Partida cargarPartida() {
         return ctrlPersistencia.CargarPartida();
+    }
+    
+    public void setupGame(Boolean J1, Boolean J2, Boolean IA1, Boolean IA2, String Opc1, String Opc2, Boolean P1White, String nameEscenario) {
+        Partida.GameType gt;
+        if(J1 && J2) gt = Partida.GameType.PLAYERvsPLAYER;
+        else if(IA1 && IA2) gt = Partida.GameType.IAvsIA;
+        else gt = Partida.GameType.PLAYERvsIA;
+        
+        Jugador j1 = null;
+        if(J1) {
+            Casilla c1;
+            if(P1White) c1 = Casilla.BLANCA;
+            else c1 = Casilla.NEGRA;
+            Estadistica e = searchEstadistica(Opc1);
+            j1 = new Jugador(e, c1);
+        }
+        
+        IA ia1 = null;
+        if(IA1) {
+            Casilla c1;
+            if(P1White) c1 = Casilla.BLANCA;
+            else c1 = Casilla.NEGRA;
+            if(Opc1.equals("Facil")) ia1 = new IA(IA.Dificultad.FACIL, c1);
+            else if(Opc1.equals("Normal")) ia1 = new IA(IA.Dificultad.NORMAL, c1);
+            else ia1 = new IA(IA.Dificultad.DIFICIL, c1);
+        }
+        
+        Jugador j2 = null;
+        if(J2) {
+            Casilla c2;
+            if(P1White) c2 = Casilla.NEGRA;
+            else c2 = Casilla.BLANCA;
+            Estadistica e = searchEstadistica(Opc2);
+            j2 = new Jugador(e, c2);
+        }
+        IA ia2 = null;
+        if(IA2) {
+            Casilla c2;
+            if(P1White) c2 = Casilla.NEGRA;
+            else c2 = Casilla.BLANCA;
+            if(Opc2.equals("Facil")) ia2 = new IA(IA.Dificultad.FACIL, c2);
+            else if(Opc2.equals("Normal")) ia2 = new IA(IA.Dificultad.NORMAL, c2);
+            else ia2 = new IA(IA.Dificultad.DIFICIL, c2);
+        }
+        
+        if(nameEscenario.equals("Tablero standard")) {
+            if(gt == Partida.GameType.PLAYERvsPLAYER) currentGame = new Partida(gt, new Tablero(), 0, j1, j2);
+            else if (gt == Partida.GameType.IAvsIA) currentGame = new Partida(gt, new Tablero(), 0, ia1, ia2);
+            else {
+                if(J1) {
+                    currentGame = new Partida(gt, new Tablero(), 0, ia2, j1);
+                }
+                else currentGame = new Partida(gt, new Tablero(), 0, ia1, j2);
+            }
+        }
+        
+        else {
+            Tablero t = searchEscenario(nameEscenario).getTop();
+            if(gt == Partida.GameType.PLAYERvsPLAYER) currentGame = new Partida(gt, t, 0, j1, j2);
+            else if (gt == Partida.GameType.IAvsIA) currentGame = new Partida(gt, t, 0, ia1, ia2);
+            else {
+                if(J1) {
+                    currentGame = new Partida(gt, t, 0, ia2, j1);
+                }
+                else currentGame = new Partida(gt, t, 0, ia1, j2);
+            }
+            
+        }
+    }
+    
+    public String loadGame() {
+        Partida p = cargarPartida();
+        if(p == null) return "error";
+        else {
+            currentGame = p;
+            return "ok";
+        }
     }
     
     public ArrayList<Estadistica> displayRanking() {

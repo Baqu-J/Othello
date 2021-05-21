@@ -38,15 +38,26 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         //setVisible(true);
     }
     
-    public Partida.GameType getGameType() {
-        if(Jugador1.isSelected() && Jugador2.isSelected()) return Partida.GameType.PLAYERvsPLAYER;
-        else if((Jugador1.isSelected() && IA2.isSelected()) || (IA1.isSelected() && Jugador2.isSelected())) return Partida.GameType.PLAYERvsIA;
-        else return Partida.GameType.IAvsIA;
-    }
     
     public void actualiza_boxs(){
         Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
-        Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+        model.removeElement(Combo1.getSelectedItem());
+        Object o = Combo2.getSelectedItem();
+        Combo2.setModel(model);
+        Combo2.setEditable(false);
+        Combo2.setSelectedItem(o);
+        Combo2.setEditable(true);
+        
+        model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+        model.removeElement(Combo2.getSelectedItem());
+        o = Combo1.getSelectedItem();
+        Combo1.setModel(model);
+        Combo1.setEditable(false);
+        Combo1.setSelectedItem(o);
+        Combo1.setEditable(true);
+        
     }
     
     public void setEscenario(String s) {
@@ -145,7 +156,14 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel7.add(labelJ1);
 
         Combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Combo1.setMaximumSize(new java.awt.Dimension(57, 20));
+        Combo1.setMaximumSize(new java.awt.Dimension(60, 20));
+        Combo1.setMinimumSize(new java.awt.Dimension(60, 20));
+        Combo1.setPreferredSize(new java.awt.Dimension(60, 20));
+        Combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo1ActionPerformed(evt);
+            }
+        });
         jPanel7.add(Combo1);
 
         jPanel4.add(jPanel7);
@@ -211,7 +229,14 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel10.add(labelJ2);
 
         Combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Combo2.setMaximumSize(new java.awt.Dimension(57, 20));
+        Combo2.setMaximumSize(new java.awt.Dimension(60, 20));
+        Combo2.setMinimumSize(new java.awt.Dimension(60, 20));
+        Combo2.setPreferredSize(new java.awt.Dimension(60, 20));
+        Combo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo2ActionPerformed(evt);
+            }
+        });
         jPanel10.add(Combo2);
 
         jPanel5.add(jPanel10);
@@ -249,7 +274,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Escenario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jPanel13.setLayout(new java.awt.GridLayout());
+        jPanel13.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -393,7 +418,8 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
         // TODO add your handling code here:
         iCtrlView.changeWindow("Partida");
-        iCtrlView.setupGame(getGameType());
+        iCtrlView.setupGame(Jugador1.isSelected(), Jugador2.isSelected(), IA1.isSelected(), IA2.isSelected(),
+                            (String)Combo1.getSelectedItem(), (String)Combo2.getSelectedItem(), RadioBlanco1.isSelected(), LabelEscenario.getText());
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -403,12 +429,35 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         // TODO add your handling code here:
+        iCtrlView.loadGame();
     }//GEN-LAST:event_loadGameButtonActionPerformed
 
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         // TODO add your handling code here:
         LabelEscenario.setText("Tablero standard");
     }//GEN-LAST:event_ResetButtonActionPerformed
+
+    private void Combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+        model.removeElement(Combo1.getSelectedItem());
+        Object o = Combo2.getSelectedItem();
+        Combo2.setModel(model);
+        Combo2.setEditable(false);
+        Combo2.setSelectedItem(o);
+        Combo2.setEditable(true);
+    }//GEN-LAST:event_Combo1ActionPerformed
+
+    private void Combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+        model.removeElement(Combo2.getSelectedItem());
+        Object o = Combo1.getSelectedItem();
+        Combo1.setModel(model);
+        Combo1.setEditable(false);
+        Combo1.setSelectedItem(o);
+        Combo1.setEditable(true);
+    }//GEN-LAST:event_Combo2ActionPerformed
 
     /**
      * @param args the command line arguments

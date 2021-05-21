@@ -130,9 +130,9 @@ public class CtrlView {
                 editEscenario.setVisible(true);
                 break;
                 
-            /*case "Partida":
+            case "Partida":
                 gameView.setVisible(true);
-                break;*/
+                break;
             default:
                 break;
         }
@@ -207,10 +207,16 @@ public class CtrlView {
         return ctrlDominio.crearPerfil(nombre, password);
     }
 
-    public void setupGame(Partida.GameType Type) {
-
+    public void setupGame(Boolean J1, Boolean J2, Boolean IA1, Boolean IA2, String Opc1, String Opc2, Boolean P1White, String nameEscenario) {
+        ctrlDominio.setupGame(J1, J2, IA1, IA2, Opc1, Opc2, P1White, nameEscenario);
     }
     
+    public void loadGame() {
+        String s = ctrlDominio.loadGame();
+        if(s.equals("ok")) {
+            changeWindow("Partida");
+        }
+    }
     public int crearEscenario(String nombre) {
         return ctrlDominio.crearEscenario(nombre);
     }
