@@ -2,17 +2,20 @@ package othello.view;
 
 import java.awt.Image;
 import java.io.File;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Aleix
  */
 public class PartidaUI extends javax.swing.JFrame {
-    
+
     private CtrlView iCtrlView;
+    private String typeGame;
+    private String turnGame;
 
     /**
      * Creates new form PartidaUI
@@ -22,87 +25,81 @@ public class PartidaUI extends javax.swing.JFrame {
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
+
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
             this.setIconImage(image);
-            
+            Image imageResized = ImageIO.read(new File("src/main/java/resources/OthelloBlackToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            jLabelIcon1.setIcon(new ImageIcon(imageResized));
+            imageResized = ImageIO.read(new File("src/main/java/resources/OthelloWhiteToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            jLabelIcon2.setIcon(new ImageIcon(imageResized));
+
         } catch (Exception ex) {
         }
-        
-        ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
-        grid.add(new ArrayList<Integer>());
-        grid.get(0).add(1);
-        grid.get(0).add(0);
-        grid.get(0).add(2);
-        grid.get(0).add(1);
-        grid.get(0).add(0);
-        grid.get(0).add(2);
-        grid.get(0).add(1);
-        grid.get(0).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(1).add(1);
-        grid.get(1).add(0);
-        grid.get(1).add(2);
-        grid.get(1).add(1);
-        grid.get(1).add(0);
-        grid.get(1).add(2);
-        grid.get(1).add(1);
-        grid.get(1).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(2).add(1);
-        grid.get(2).add(0);
-        grid.get(2).add(2);
-        grid.get(2).add(1);
-        grid.get(2).add(0);
-        grid.get(2).add(2);
-        grid.get(2).add(1);
-        grid.get(2).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(3).add(1);
-        grid.get(3).add(0);
-        grid.get(3).add(2);
-        grid.get(3).add(1);
-        grid.get(3).add(0);
-        grid.get(3).add(2);
-        grid.get(3).add(1);
-        grid.get(3).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(4).add(1);
-        grid.get(4).add(0);
-        grid.get(4).add(2);
-        grid.get(4).add(1);
-        grid.get(4).add(0);
-        grid.get(4).add(2);
-        grid.get(4).add(1);
-        grid.get(4).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(5).add(1);
-        grid.get(5).add(0);
-        grid.get(5).add(2);
-        grid.get(5).add(1);
-        grid.get(5).add(0);
-        grid.get(5).add(2);
-        grid.get(5).add(1);
-        grid.get(5).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(6).add(1);
-        grid.get(6).add(0);
-        grid.get(6).add(2);
-        grid.get(6).add(1);
-        grid.get(6).add(0);
-        grid.get(6).add(2);
-        grid.get(6).add(1);
-        grid.get(6).add(0);
-        grid.add(new ArrayList<Integer>());
-        grid.get(7).add(1);
-        grid.get(7).add(0);
-        grid.get(7).add(2);
-        grid.get(7).add(1);
-        grid.get(7).add(0);
-        grid.get(7).add(2);
-        grid.get(7).add(1);
-        grid.get(7).add(0);
-        //tableroUI1.fillGrid(grid);
+    }
+
+    public void initGame() {
+        iCtrlView.redrawTablero();
+        iCtrlView.printTypeGame();
+        iCtrlView.printTurn();
+        iCtrlView.printColorTurn();
+        iCtrlView.printPlayers();
+    }
+
+    public void fillGrid(String[] grid) {
+        if (grid.length > 0) {
+            int x = 0, y = 0;
+            for (int i = 0; i < grid.length; i++) {
+                tableroUI1.add(new CasillaUI(0, grid[i], iCtrlView, x, y));
+                if (y == 7) {
+                    y = 0;
+                    x++;
+                } else {
+                    y++;
+                }
+            }
+        }
+        tableroUI1.revalidate();
+    }
+
+    protected void reloadGrid(String[] grid) {
+        tableroUI1.clearGrid();
+        fillGrid(grid);
+    }
+
+    public void printColorTurn(String color) {
+        jLabelTurnoColor.setText(color);
+    }
+
+    public void printPlayers(String[] players) {
+        jLabel3.setText(players[0]);
+        jLabel5.setText(players[1]);
+    }
+
+    public void popUpMessage(String ret) {
+        JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void addLog(int x, int y) {
+        jTextArea1.append("Turno: " + turnGame + " - Ficha colocada en la posición x=" + x + " - y=" + y + "\n");
+    }
+
+    public String getTypeGame() {
+        return typeGame;
+    }
+
+    public void setTypeGame(String typeGame) {
+        this.typeGame = typeGame;
+        jLabel1.setText("Partida de Tipo: " + typeGame);
+    }
+
+    public String getTurnGame() {
+        return turnGame;
+    }
+
+    public void setTurnGame(String turnGame) {
+        this.turnGame = turnGame;
+        jLabelTurno.setText("Turno: " + turnGame);
     }
 
     /**
@@ -115,110 +112,259 @@ public class PartidaUI extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        tableroUI1 = new othello.view.TableroUI(iCtrlView);
+        jLabel1 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabelTurno = new javax.swing.JLabel();
+        jLabelTurnoColor = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelIcon1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        tableroUI1 = new othello.view.TableroUI();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelIcon2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButtonGuardar = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(537, 425));
+        setPreferredSize(new java.awt.Dimension(537, 425));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Turno");
-        jPanel5.add(jLabel1);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 3;
-        getContentPane().add(jPanel5, gridBagConstraints);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("jLabel2");
+        jPanel1.add(jLabel1);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tableroUI1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tableroUI1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabelTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelTurno.setText("Turno");
+        jPanel6.add(jLabelTurno);
+
+        jLabelTurnoColor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTurnoColor.setText("jLabel7");
+        jPanel6.add(jLabelTurnoColor);
+
+        jPanel1.add(jPanel6);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.gridheight = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
+        jPanel2.setBackground(new java.awt.Color(23, 113, 43));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2);
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Ficha");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(jLabel7, gridBagConstraints);
 
-        jLabel3.setText("jLabel3");
-        jPanel2.add(jLabel3);
+        jLabelIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIcon1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel2.add(jLabelIcon1, gridBagConstraints);
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("jLabel2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel2.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("jLabel3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel2.add(jLabel4, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(100, 5, 100, 5);
         getContentPane().add(jPanel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(tableroUI1, gridBagConstraints);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
+        jPanel3.setBackground(new java.awt.Color(23, 113, 43));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jLabel4.setText("jLabel4");
-        jPanel3.add(jLabel4);
+        jLabelIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIcon2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel3.add(jLabelIcon2, gridBagConstraints);
 
-        jLabel5.setText("jLabel5");
-        jPanel3.add(jLabel5);
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("jLabel4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanel3.add(jLabel5, gridBagConstraints);
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("jLabel5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel3.add(jLabel6, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Ficha");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel3.add(jLabel2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(100, 5, 100, 5);
         getContentPane().add(jPanel3, gridBagConstraints);
 
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setText("jButton1");
-        jPanel4.add(jButton1);
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setText("jButton2");
-        jPanel4.add(jButton2);
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButtonGuardar, new java.awt.GridBagConstraints());
+
+        jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel5.add(jButtonSalir, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(jPanel5, gridBagConstraints);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(275, 100));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(275, 100));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setMinimumSize(new java.awt.Dimension(250, 100));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        jPanel4.add(jScrollPane1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         getContentPane().add(jPanel4, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void guardarPartida() {
+        String ret = iCtrlView.guardarPartida();
+        if (ret.equals("Error al guardar Partida")) {
+            JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.WARNING_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        // TODO add your handling code here:
+        guardarPartida();
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        int seleccion = JOptionPane.showOptionDialog(
+                null,
+                "Quieres guardar la partida?",
+                "Salir",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, 
+                null,3);
+
+        if (seleccion == 0) {
+            guardarPartida();
+        }else if (seleccion == 1) {
+            
+        }
+           
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelIcon1;
+    private javax.swing.JLabel jLabelIcon2;
+    private javax.swing.JLabel jLabelTurno;
+    private javax.swing.JLabel jLabelTurnoColor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private othello.view.TableroUI tableroUI1;
     // End of variables declaration//GEN-END:variables
 }

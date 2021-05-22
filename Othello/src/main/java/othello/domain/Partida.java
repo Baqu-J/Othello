@@ -9,9 +9,9 @@ import othello.data.Tree;
 import othello.domain.tablero.Tablero;
 
 /**
- * Clase Partida que simula en un tablero determinado una partida
- * de Othello entre dos jugadores asignados.
- * 
+ * Clase Partida que simula en un tablero determinado una partida de Othello
+ * entre dos jugadores asignados.
+ *
  * @author Aleix Velasco Calvo
  */
 public class Partida implements Serializable {
@@ -28,7 +28,115 @@ public class Partida implements Serializable {
     private Jugador j1;
     private Jugador j2;
     private int turn;
-    
+
+    // Constructors
+    /**
+     * Constructor de partida por defecto
+     */
+    public Partida() {
+        this.type = null;
+        this.t = null;
+        this.turn = 0;
+        this.ia1 = null;
+        this.ia2 = null;
+        this.j1 = null;
+        this.j2 = null;
+    }
+
+    /**
+     * Constructor de partida IA vs IA
+     *
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2
+     */
+    public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
+
+        this.ia1 = player1;
+        this.ia2 = player2;
+        this.j1 = null;
+        this.j2 = null;
+    }
+
+    /**
+     * Constructor de partida IA vs Jugador
+     *
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2
+     */
+    public Partida(GameType type, Tablero t, int turno, IA player1, Jugador player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
+
+        this.ia1 = player1;
+        this.ia2 = null;
+        this.j1 = null;
+        this.j2 = player2;
+
+        swapPlayersColors();
+    }
+
+    /**
+     * Constructor de partida Jugador vs Jugador
+     *
+     * @param type
+     * @param t
+     * @param turno
+     * @param player1
+     * @param player2
+     */
+    public Partida(GameType type, Tablero t, int turno, Jugador player1, Jugador player2) {
+        this.type = type;
+        this.t = t;
+        this.turn = turno;
+
+        this.ia1 = null;
+        this.ia2 = null;
+        this.j1 = player1;
+        this.j2 = player2;
+    }
+
+    /**
+     * Método que sirve para asignar el color de ficha blanca a una IA antes de
+     * empezar una partida de jugador vs IA
+     */
+    private void swapPlayersColors() {
+        if (this.type == GameType.PLAYERvsIA) {
+            if (this.ia1.getColor() == Casilla.BLANCA) {
+                this.ia2 = this.ia1;
+                this.ia1 = null;
+                this.j1 = this.j2;
+                this.j2 = null;
+            }
+        }
+    }
+
+    // Getters and Setters
+    public Tablero getT() {
+        return t;
+    }
+
+    public void setT(Tablero t) {
+        this.t = t;
+    }
+
+    public GameType getType() {
+        return type;
+    }
+
+    public void setType(GameType type) {
+        this.type = type;
+    }
+
     public Jugador getJ1() {
         return j1;
     }
@@ -36,7 +144,7 @@ public class Partida implements Serializable {
     public void setJ1(Jugador j1) {
         this.j1 = j1;
     }
-    
+
     public int getTurn() {
         return turn;
     }
@@ -67,114 +175,10 @@ public class Partida implements Serializable {
         this.turn = turno;
     }
 
-    // Constructors
-    /**
-     * Constructor de partida por defecto
-     */
-    public Partida() {
-        this.type = null;
-        this.t = null;
-        this.turn = 0;
-        this.ia1 = null;
-        this.ia2 = null;
-        this.j1 = null;
-        this.j2 = null;
-    }
-
-    /**
-     * Constructor de partida IA vs IA 
-     * @param type
-     * @param t
-     * @param turno
-     * @param player1
-     * @param player2 
-     */
-    public Partida(GameType type, Tablero t, int turno, IA player1, IA player2) {
-        this.type = type;
-        this.t = t;
-        this.turn = turno;
-
-        this.ia1 = player1;
-        this.ia2 = player2;
-        this.j1 = null;
-        this.j2 = null;
-    }
-
-    /**
-     * Constructor de partida IA vs Jugador
-     * @param type
-     * @param t
-     * @param turno
-     * @param player1
-     * @param player2 
-     */
-    public Partida(GameType type, Tablero t, int turno, IA player1, Jugador player2) {
-        this.type = type;
-        this.t = t;
-        this.turn = turno;
-
-        this.ia1 = player1;
-        this.ia2 = null;
-        this.j1 = null;
-        this.j2 = player2;
-
-        swapPlayersColors();
-    }
-
-    /**
-     * Constructor de partida Jugador vs Jugador
-     * @param type
-     * @param t
-     * @param turno
-     * @param player1
-     * @param player2 
-     */
-    public Partida(GameType type, Tablero t, int turno, Jugador player1, Jugador player2) {
-        this.type = type;
-        this.t = t;
-        this.turn = turno;
-
-        this.ia1 = null;
-        this.ia2 = null;
-        this.j1 = player1;
-        this.j2 = player2;
-    }
-
-    /**
-     * Método que sirve para asignar el color de ficha blanca a una IA antes
-     * de empezar una partida de jugador vs IA
-     */
-    private void swapPlayersColors() {
-        if (this.type == GameType.PLAYERvsIA) {
-            if (this.ia1.getColor() == Casilla.BLANCA) {
-                this.ia2 = this.ia1;
-                this.ia1 = null;
-                this.j1 = this.j2;
-                this.j2 = null;
-            }
-        }
-    }
-
-    // Getters and Setters
-    public Tablero getT() {
-        return t;
-    }
-
-    public void setT(Tablero t) {
-        this.t = t;
-    }
-
-    public GameType getType() {
-        return type;
-    }
-
-    public void setType(GameType type) {
-        this.type = type;
-    }
-
     /**
      * Función que verifica si la partida ha terminado
-     * @return true: partida terminada, false: partida 
+     *
+     * @return true: partida terminada, false: partida
      */
     public boolean gameIsFinished() {
         if (t.getLegalMoves(Casilla.BLANCA).isEmpty() && t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
@@ -184,8 +188,8 @@ public class Partida implements Serializable {
     }
 
     /**
-     * Método para actualizar las estadísticas de los jugadores una vez
-     * la partida haya terminado
+     * Método para actualizar las estadísticas de los jugadores una vez la
+     * partida haya terminado
      */
     public void updateEstadisticas() {
         int b = t.getBlancas().size();
@@ -193,94 +197,135 @@ public class Partida implements Serializable {
         if (this.type != GameType.IAvsIA) {
             if (b == n) {
                 if (this.j1 != null) {
-                    if( this.j1.getStats() != null) this.j1.updateStats(false, false, true);
+                    if (this.j1.getStats() != null) {
+                        this.j1.updateStats(false, false, true);
+                    }
                 } else {
-                    if( this.j2.getStats() != null) this.j2.updateStats(false, false, true);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(false, false, true);
+                    }
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    if( this.j2.getStats() != null) this.j2.updateStats(false, false, true);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(false, false, true);
+                    }
                 }
 
             } else if (b > n) {
                 if (this.j1 != null) {
-                    if(this.j1.getStats() != null) this.j1.updateStats(false, true, false);
+                    if (this.j1.getStats() != null) {
+                        this.j1.updateStats(false, true, false);
+                    }
                 } else {
-                    if( this.j2.getStats() != null) this.j2.updateStats(true, false, false);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(true, false, false);
+                    }
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    if( this.j2.getStats() != null) this.j2.updateStats(true, false, false);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(true, false, false);
+                    }
                 }
             } else if (b < n) {
                 if (this.j1 != null) {
-                    if( this.j1.getStats() != null) this.j1.updateStats(true, false, false);
+                    if (this.j1.getStats() != null) {
+                        this.j1.updateStats(true, false, false);
+                    }
                 } else {
-                    if( this.j2.getStats() != null) this.j2.updateStats(false, true, false);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(false, true, false);
+                    }
                 }
                 if (this.type == GameType.PLAYERvsPLAYER) {
-                    if( this.j2.getStats() != null)this.j2.updateStats(false, true, false);
+                    if (this.j2.getStats() != null) {
+                        this.j2.updateStats(false, true, false);
+                    }
                 }
             }
         }
     }
 
-    public void printTurn() {
+    public String getPlayers() {
+        String ret = "";
+        switch (this.type) {
+
+            case IAvsIA:
+                ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",IA2 - Dificultad: " + this.ia2.getOpcion().toString();
+                break;
+
+            case PLAYERvsIA:
+                if (this.j1 == null) {
+                    if (j2.getStats() != null) {
+                        ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",Jugador 2 - " + this.j2.getStats().getId();
+                    } else {
+                        ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",Jugador 2 - Guest";
+                    }
+                } else {
+                    if (j1.getStats() != null) {
+                        ret = "Jugador 1 - " + this.j1.getStats().getId() + ",IA1 - Dificultad: " + this.ia2.getOpcion().toString();
+                    } else {
+                        ret = "Jugador 1 - Guest,IA2 - Dificultad: " + this.ia2.getOpcion().toString();
+                    }
+                }
+                break;
+
+            default:
+                if (j1.getStats() != null && j2.getStats() != null) {
+                    ret = "Jugador 1 - " + this.j1.getStats().getId() + ",Jugador 2 - " + this.j2.getStats().getId();
+                } else if (j1.getStats() != null) {
+                    ret = "Jugador 1 - " + this.j1.getStats().getId() + ",Jugador 2 - Guest";
+                } else if (j2.getStats() != null) {
+                    ret = "Jugador 1 - Guest,Jugador 2 - " + this.j2.getStats().getId();
+                }
+                break;
+        }
+        return ret;
+    }
+
+    public String getColorTurn() {
+        String ret = "";
         switch (this.type) {
 
             case IAvsIA:
                 if (this.turn % 2 == 0) {
-                    System.out.println("\n" + this.turn + " - " + this.ia1.getColor() + "\n");
+                    ret = this.ia1.getColor().toString();
                 } else {
-                    System.out.println("\n" + this.turn + " - " + this.ia2.getColor() + "\n");
+                    ret = this.ia2.getColor().toString();
                 }
                 break;
 
             case PLAYERvsIA:
                 if (this.turn % 2 == 0) {
                     if (this.j1 == null) {
-                        System.out.println("\n" + this.turn + " - " + this.ia1.getColor() + "\n");
+                        ret = this.ia1.getColor().toString();
                     } else {
-                        if (j1.getStats() != null) {
-                            System.out.println("\n" + this.turn + " - " + this.j1.getColor() + " - " + this.j1.getStats().getId() + "\n");
-                        } else {
-                            System.out.println("\n" + this.turn + " - " + this.j1.getColor() + " - " + "Guest" + "\n");
-                        }
+                        ret = this.j1.getColor().toString();
                     }
                 } else {
-
                     if (this.j2 == null) {
-                        System.out.println("\n" + this.turn + " - " + this.ia2.getColor() + "\n");
+                        ret = this.ia2.getColor().toString();
                     } else {
-                        if (j2.getStats() != null) {
-                            System.out.println("\n" + this.turn + " - " + this.j2.getColor() + " - " + this.j2.getStats().getId() + "\n");
-                        } else {
-                            System.out.println("\n" + this.turn + " - " + this.j2.getColor() + " - " + "Guest" + "\n");
-                        }
+                        ret = this.j2.getColor().toString();
                     }
                 }
                 break;
 
             default:
-                if (this.turn % 2 == 0) {
-                    if (j1.getStats() != null) {
-                        System.out.println("\n" + this.turn + " - " + this.j1.getColor() + " - " + this.j1.getStats().getId() + "\n");
-                    } else {
-                        System.out.println("\n" + this.turn + " - " + this.j1.getColor() + " - " + "Guest" + "\n");
-                    }
+                if (this.turn % 2 == 0) {System.out.println(this.j2.getColor().toString());
+                    ret = this.j1.getColor().toString();
                 } else {
-                    if (j2.getStats() != null) {
-                        System.out.println("\n" + this.turn + " - " + this.j2.getColor() + " - " + this.j2.getStats().getId() + "\n");
-                    } else {
-                        System.out.println("\n" + this.turn + " - " + this.j2.getColor() + " - " + "Guest" + "\n");
-                    }
+                    ret = this.j2.getColor().toString();
                 }
                 break;
         }
+        return ret;
     }
 
     /**
      * Función que realiza el movimiento de un jugador en una posicion "coord"
+     *
      * @param coord
-     * @return 0:no tiene movimientos, 1:jugada realizada, 2:jugada ilegal 
+     * @return 0:no tiene movimientos, 1:jugada realizada, 2:jugada ilegal
      */
     public int move(Pair coord) {
         int b = -1;
@@ -391,8 +436,9 @@ public class Partida implements Serializable {
 
     /**
      * Función para realizar el movimiento de una IA
+     *
      * @param ia
-     * @return 
+     * @return
      */
     private boolean iaMove(IA ia) {
         Tree jugadas = createTree(t, ia);
@@ -402,11 +448,12 @@ public class Partida implements Serializable {
 
     /**
      * Método que crea el árbol de posibles jugadas que será evaluada por la IA
+     *
      * @param tree
      * @param depth
      * @param tablero
      * @param player
-     * @param color 
+     * @param color
      */
     private static void createTree_rec(Tree tree, int depth, Tablero tablero, IA player, Casilla color) {
         if (depth >= 0) {
@@ -426,6 +473,7 @@ public class Partida implements Serializable {
 
     /**
      * Función que busca un movimiento para la IA
+     *
      * @param tablero
      * @param ia
      * @return movimiento de IA

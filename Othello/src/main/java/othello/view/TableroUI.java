@@ -28,13 +28,13 @@ public class TableroUI extends JPanel {
      * 
      * @param grid 
      */
-    public void fillGrid(String[] grid) {
+    /*public void fillGrid(String[] grid) {
         if(grid.length > 0){
             for (int i = 0; i < grid.length; i++) {
                     this.add(new CasillaUI(grid[i], iCtrlView));
             }
         }
-    }
+    }*/
     
     public void clearGrid() {
         this.removeAll();
@@ -51,7 +51,7 @@ public class TableroUI extends JPanel {
 
         setBackground(new java.awt.Color(23, 113, 43));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        setLayout(new java.awt.GridLayout(8, 8));
+        setLayout(new java.awt.GridLayout(0, 8));
     }// </editor-fold>//GEN-END:initComponents
     
     @Override

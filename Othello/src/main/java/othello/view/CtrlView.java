@@ -133,6 +133,7 @@ public class CtrlView {
                 
             case "Partida":
                 gameView.setVisible(true);
+                gameView.initGame();
                 break;
             default:
                 break;
@@ -255,14 +256,46 @@ public class CtrlView {
     public void setEscenarioCrearPartida(String s) {
         createGameView.setEscenario(s);
     }
-    /*  
     
-    public ArrayList<String> getEstadisticaPerfil(String nombre) {
-        ctrlDominio.searchEstadistica(nombre);
-        return new ArrayList<String>();
+    public void commitPlayCurrentGame(int x, int y) {
+        String ret = ctrlDominio.colocarFicha(x, y);
+        if(ret.equals("Movimiento Realizado")){
+            gameView.addLog(x,y);
+            gameView.initGame();
+        }else{
+            gameView.popUpMessage(ret);
+        }
+    }
+
+    public void redrawTablero() {
+        String[] parts = ctrlDominio.getTableroCurrentGame();
+        /*for(int i = 0;i < parts.length;i++){
+            System.out.println(parts[i]);
+        }*/
+        gameView.reloadGrid(parts);
     }
     
-    public ArrayList<String> listEscenarios() {
-        return ctrlDominio.listEscenarios();
-    }*/
+    public void printTypeGame() {
+        String type = ctrlDominio.getTipoPartida();
+        gameView.setTypeGame(type);
+    }
+    
+    public void printTurn() {
+        String turn = ctrlDominio.getTurnoPartida();
+        gameView.setTurnGame(turn);
+    }
+    
+    public void printColorTurn() {
+        String color = ctrlDominio.getTurnoColorPartida();
+        gameView.printColorTurn(color);
+    }
+
+    public void printPlayers() {
+        String[] players = ctrlDominio.getJugadoresPartida();
+        gameView.printPlayers(players);
+    }
+    
+    public String guardarPartida() {
+        return ctrlDominio.guardarPartida();
+    }
 }

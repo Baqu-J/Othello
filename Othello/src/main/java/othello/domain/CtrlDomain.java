@@ -251,24 +251,47 @@ public class CtrlDomain {
         return false;
     }
     
-    public void printPartida(Partida p) {
-        p.printTurn();
+    public String getTipoPartida() {
+        return currentGame.getType().toString();
     }
     
-    public int colocarFicha(Partida p, Pair pair) {
-        int ret = -1;
-        if (p.move(pair) != 0 ) {
-            return 1;
+    public String getTurnoPartida() {
+        return String.valueOf(currentGame.getTurn());
+    }
+    
+    public String getTurnoColorPartida() {
+        return currentGame.getColorTurn();
+    }
+    
+    public String[] getJugadoresPartida() {
+         return currentGame.getPlayers().split(",");
+    }
+    
+    /*public void printPartida(Partida p) {
+        p.printTurn();
+    }*/
+    
+    public String colocarFicha(int x, int y) {
+        String ret = "";
+        Pair p = new Pair(x,y);
+        int r = currentGame.move(p);
+        if(r == -1) {
+            ret = "No tengo movimientos";
+        }else if(r == 0) {
+            ret = "Movimiento Ilegal";
+        }else {
+           ret = "Movimiento Realizado"; 
         }
-        
         return ret;
     }
 
-    public int guardarPartida(Partida p) {
-        int ret = -1;
-        ret = ctrlPersistencia.GuardarPartida(p);
+    public String guardarPartida() {
+        String ret = "Error al guardar Partida";
+        int r = ctrlPersistencia.GuardarPartida(currentGame);
+        if(r == 1) {
+            ret = "Partida guardada corectamente";
+        }
         return ret;
-
     }
 
     public Partida cargarPartida() {
@@ -362,5 +385,10 @@ public class CtrlDomain {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
         return perfiles;
+    }
+    
+    public String[] getTableroCurrentGame() {
+        //System.out.println(currentGame);
+        return currentGame.getT().toString().split(",");
     }
 }

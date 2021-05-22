@@ -26,6 +26,6 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
     <Property name="columns" type="int" value="8"/>
-    <Property name="rows" type="int" value="8"/>
+    <Property name="rows" type="int" value="0"/>
   </Layout>
 </Form>
