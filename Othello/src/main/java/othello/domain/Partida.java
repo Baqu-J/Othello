@@ -282,6 +282,27 @@ public class Partida implements Serializable {
         return ret;
     }
 
+    public String getPlayerTurn() {
+        String ret = "";
+        if (this.type == GameType.PLAYERvsIA) {
+
+                if (this.turn % 2 == 0) { //Negro
+                    if (this.j1 == null) {
+                        ret = "IA";
+                    } else {
+                        ret = "JUGADOR";
+                    }
+                } else {//Blanco
+                    if (this.j2 == null) {
+                        ret = "IA";
+                    } else {
+                        ret = "JUGADOR";
+                    }
+                }
+        }
+        return ret;
+    }
+    
     public String getColorTurn() {
         String ret = "";
         switch (this.type) {

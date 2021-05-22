@@ -98,6 +98,10 @@ public class CasillaUI extends JButton implements MouseListener {
         if (!ficha.equals("VACIA")) {
             this.setEnabled(false);
         }
+        
+        if (from == 2) {
+            this.setEnabled(false);
+        }
     }
     
     /**

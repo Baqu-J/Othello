@@ -2,10 +2,14 @@ package othello.view;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.Date;
+import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+//import java.util.Timer;
+import javax.swing.Timer;
 
 /**
  *
@@ -16,6 +20,8 @@ public class PartidaUI extends javax.swing.JFrame {
     private CtrlView iCtrlView;
     private String typeGame;
     private String turnGame;
+
+    private Timer timerToIAMove = new Timer(1000,null);
 
     /**
      * Creates new form PartidaUI
@@ -36,27 +42,54 @@ public class PartidaUI extends javax.swing.JFrame {
 
         } catch (Exception ex) {
         }
+        
+        timerToIAMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timerToIAMove.stop();
+                iCtrlView.commitPlayCurrentGame(0, 0); 
+            }
+        });
     }
 
     public void initGame() {
-        iCtrlView.redrawTablero();
         iCtrlView.printTypeGame();
+        iCtrlView.redrawTablero();
         iCtrlView.printTurn();
         iCtrlView.printColorTurn();
         iCtrlView.printPlayers();
+
+        if (this.typeGame.equals("IAvsIA")) {
+            //timerToIAMove.scheduleAtFixedRate(task, new Date(), 1000);
+            timerToIAMove.start();
+        }
     }
 
     public void fillGrid(String[] grid) {
         if (grid.length > 0) {
             int x = 0, y = 0;
             for (int i = 0; i < grid.length; i++) {
-                tableroUI1.add(new CasillaUI(0, grid[i], iCtrlView, x, y));
+                if(this.typeGame.equals("IAvsIA")) {
+                    tableroUI1.add(new CasillaUI(2, grid[i], iCtrlView, x, y));
+                } else if (this.typeGame.equals("PLAYERvsIA")) {
+                    if(iCtrlView.turnPlayer().equals("IA")){
+                        tableroUI1.add(new CasillaUI(2, grid[i], iCtrlView, x, y));
+                    }else {
+                        tableroUI1.add(new CasillaUI(0, grid[i], iCtrlView, x, y));
+                    }
+                } else if (this.typeGame.equals("PLAYERvsPLAYER")) {
+                    tableroUI1.add(new CasillaUI(0, grid[i], iCtrlView, x, y));
+                }
                 if (y == 7) {
                     y = 0;
                     x++;
                 } else {
                     y++;
                 }
+            }
+            if(this.typeGame.equals("IAvsIA") || (this.typeGame.equals("PLAYERvsIA") && iCtrlView.turnPlayer().equals("IA"))){
+                timerToIAMove.restart();
+                //timerToIAMove = new Timer();
+                //timerToIAMove.scheduleAtFixedRate(task, new Date(), 1000);
             }
         }
         tableroUI1.revalidate();
@@ -313,11 +346,11 @@ public class PartidaUI extends javax.swing.JFrame {
         String ret = iCtrlView.guardarPartida();
         if (ret.equals("Error al guardar Partida")) {
             JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.WARNING_MESSAGE);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         guardarPartida();
@@ -331,18 +364,18 @@ public class PartidaUI extends javax.swing.JFrame {
                 "Salir",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null, 
-                null,3);
+                null,
+                null, 3);
 
         if (seleccion == 0) {
             guardarPartida();
-        }else if (seleccion == 1) {
-            
+        } else if (seleccion == 1) {
+
         }
-           
+
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonSalir;

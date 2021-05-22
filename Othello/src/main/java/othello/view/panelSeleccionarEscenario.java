@@ -81,6 +81,7 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
                 else ++s;
             }
         }
+        tableroUI1.revalidate();
     }
     
     protected void reloadGrid(String[] grid) {

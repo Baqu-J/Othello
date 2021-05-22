@@ -421,9 +421,8 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
         // TODO add your handling code here:
+        iCtrlView.setupGame(Jugador1.isSelected(), Jugador2.isSelected(), IA1.isSelected(), IA2.isSelected(), (String)Combo1.getSelectedItem(), (String)Combo2.getSelectedItem(), RadioBlanco1.isSelected(), LabelEscenario.getText());
         iCtrlView.changeWindow("Partida");
-        iCtrlView.setupGame(Jugador1.isSelected(), Jugador2.isSelected(), IA1.isSelected(), IA2.isSelected(),
-                            (String)Combo1.getSelectedItem(), (String)Combo2.getSelectedItem(), RadioBlanco1.isSelected(), LabelEscenario.getText());
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -443,28 +442,32 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void Combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1ActionPerformed
         // TODO add your handling code here:
-        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        if(!Combo1.getSelectedItem().equals("Guest")){
-            model.removeElement(Combo1.getSelectedItem());
+        if(Jugador2.isSelected()) {
+            DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+            if(!Combo1.getSelectedItem().equals("Guest")){
+                model.removeElement(Combo1.getSelectedItem());
+            }
+            Object o = Combo2.getSelectedItem();
+            Combo2.setModel(model);
+            Combo2.setEditable(false);
+            Combo2.setSelectedItem(o);
+            Combo2.setEditable(true);
         }
-        Object o = Combo2.getSelectedItem();
-        Combo2.setModel(model);
-        Combo2.setEditable(false);
-        Combo2.setSelectedItem(o);
-        Combo2.setEditable(true);
     }//GEN-LAST:event_Combo1ActionPerformed
 
     private void Combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2ActionPerformed
         // TODO add your handling code here:
-        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        if(!Combo2.getSelectedItem().equals("Guest")){
-            model.removeElement(Combo2.getSelectedItem());
+        if(Jugador1.isSelected()) {
+            DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+            if(!Combo2.getSelectedItem().equals("Guest")){
+                model.removeElement(Combo2.getSelectedItem());
+            }
+            Object o = Combo1.getSelectedItem();
+            Combo1.setModel(model);
+            Combo1.setEditable(false);
+            Combo1.setSelectedItem(o);
+            Combo1.setEditable(true);
         }
-        Object o = Combo1.getSelectedItem();
-        Combo1.setModel(model);
-        Combo1.setEditable(false);
-        Combo1.setSelectedItem(o);
-        Combo1.setEditable(true);
     }//GEN-LAST:event_Combo2ActionPerformed
 
     /**

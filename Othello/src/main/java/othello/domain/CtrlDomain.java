@@ -267,6 +267,10 @@ public class CtrlDomain {
          return currentGame.getPlayers().split(",");
     }
     
+    public String getJugadoresTurno() {
+         return currentGame.getPlayerTurn();
+    }
+    
     /*public void printPartida(Partida p) {
         p.printTurn();
     }*/

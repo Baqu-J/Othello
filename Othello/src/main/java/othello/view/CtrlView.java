@@ -261,7 +261,11 @@ public class CtrlView {
         String ret = ctrlDominio.colocarFicha(x, y);
         if(ret.equals("Movimiento Realizado")){
             gameView.addLog(x,y);
-            gameView.initGame();
+            printTurn();
+            redrawTablero();
+            printTypeGame();
+            printColorTurn();
+            printPlayers();
         }else{
             gameView.popUpMessage(ret);
         }
@@ -293,6 +297,10 @@ public class CtrlView {
     public void printPlayers() {
         String[] players = ctrlDominio.getJugadoresPartida();
         gameView.printPlayers(players);
+    }
+    
+    public String turnPlayer() {
+        return ctrlDominio.getJugadoresTurno();
     }
     
     public String guardarPartida() {
