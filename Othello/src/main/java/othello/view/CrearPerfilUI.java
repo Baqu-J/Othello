@@ -50,7 +50,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
-        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
@@ -136,21 +135,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
         jPanel4.add(btn_atras, gridBagConstraints);
 
-        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel4.add(btn_exit, gridBagConstraints);
-
         getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
@@ -161,10 +145,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         iCtrlView.backToWindow("CrearPerfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
-
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         
@@ -193,7 +173,6 @@ public class CrearPerfilUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
-    private javax.swing.JButton btn_exit;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

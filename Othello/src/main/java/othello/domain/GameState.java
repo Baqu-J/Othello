@@ -13,7 +13,7 @@ public abstract class GameState implements Serializable{
     
     // Attributes
     private Casilla color;
-    private int numeroDeFichas;
+    protected int numeroDeFichas;
 
     // Constructors
     /**

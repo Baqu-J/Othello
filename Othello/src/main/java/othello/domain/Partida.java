@@ -61,6 +61,7 @@ public class Partida implements Serializable {
         this.ia2 = player2;
         this.j1 = null;
         this.j2 = null;
+        swapPlayersColors();
     }
 
     /**
@@ -103,6 +104,7 @@ public class Partida implements Serializable {
         this.ia2 = null;
         this.j1 = player1;
         this.j2 = player2;
+        swapPlayersColors();
     }
 
     /**
@@ -110,12 +112,24 @@ public class Partida implements Serializable {
      * empezar una partida de jugador vs IA
      */
     private void swapPlayersColors() {
-        if (this.type == GameType.PLAYERvsIA) {
+        if (this.type == GameType.PLAYERvsPLAYER) {
+            if (this.j1.getColor() == Casilla.BLANCA) {
+                Jugador aux = this.j1;
+                this.j1 = this.j2;
+                this.j2 = aux;
+            }
+        }else if (this.type == GameType.PLAYERvsIA) {
             if (this.ia1.getColor() == Casilla.BLANCA) {
                 this.ia2 = this.ia1;
                 this.ia1 = null;
                 this.j1 = this.j2;
                 this.j2 = null;
+            }
+        }else if(this.type == GameType.IAvsIA) {
+            if (this.ia1.getColor() == Casilla.BLANCA) {
+                IA aux = this.ia1;
+                this.ia1 = this.ia2;
+                this.ia2 = aux;
             }
         }
     }
@@ -250,33 +264,39 @@ public class Partida implements Serializable {
         switch (this.type) {
 
             case IAvsIA:
-                ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",IA2 - Dificultad: " + this.ia2.getOpcion().toString();
+                ret = "IA - Dificultad: " + this.ia1.getOpcion().toString() + ",IA - Dificultad: " + this.ia2.getOpcion().toString();
+                ret+= "," + this.ia1.getColor().toString() + "," + this.ia2.getColor().toString();
                 break;
 
             case PLAYERvsIA:
                 if (this.j1 == null) {
                     if (j2.getStats() != null) {
-                        ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",Jugador 2 - " + this.j2.getStats().getId();
+                        ret = "IA - Dificultad: " + this.ia1.getOpcion().toString() + "," + this.j2.getStats().getId();
+                        ret+= "," + this.ia1.getColor().toString() + "," + this.j2.getColor().toString();
                     } else {
-                        ret = "IA1 - Dificultad: " + this.ia1.getOpcion().toString() + ",Jugador 2 - Guest";
+                        ret = "IA - Dificultad: " + this.ia1.getOpcion().toString() + ",Guest";
+                        ret+= "," + this.ia1.getColor().toString() + "," + this.j2.toString();
                     }
                 } else {
                     if (j1.getStats() != null) {
-                        ret = "Jugador 1 - " + this.j1.getStats().getId() + ",IA1 - Dificultad: " + this.ia2.getOpcion().toString();
+                        ret = this.j1.getStats().getId() + ",IA - Dificultad: " + this.ia2.getOpcion().toString();
+                        ret+= "," + this.j1.getColor().toString() + "," + this.ia2.getColor().toString();
                     } else {
-                        ret = "Jugador 1 - Guest,IA2 - Dificultad: " + this.ia2.getOpcion().toString();
+                        ret = "Guest,IA - Dificultad: " + this.ia2.getOpcion().toString();
+                        ret+= "," + this.j1.getColor().toString() + "," + this.ia2.getColor().toString();
                     }
                 }
                 break;
 
             default:
                 if (j1.getStats() != null && j2.getStats() != null) {
-                    ret = "Jugador 1 - " + this.j1.getStats().getId() + ",Jugador 2 - " + this.j2.getStats().getId();
+                    ret = this.j1.getStats().getId() + "," + this.j2.getStats().getId();
                 } else if (j1.getStats() != null) {
-                    ret = "Jugador 1 - " + this.j1.getStats().getId() + ",Jugador 2 - Guest";
+                    ret = this.j1.getStats().getId() + ",Guest";
                 } else if (j2.getStats() != null) {
-                    ret = "Jugador 1 - Guest,Jugador 2 - " + this.j2.getStats().getId();
+                    ret = "Guest," + this.j2.getStats().getId();
                 }
+                ret+= "," + this.j1.getColor().toString() + "," + this.j2.getColor().toString();
                 break;
         }
         return ret;
@@ -355,8 +375,9 @@ public class Partida implements Serializable {
             case IAvsIA:
                 if (this.turn % 2 == 0) {
 
-                    if (!t.getLegalMoves(this.ia1.getColor()).isEmpty()) {
+                    if (!t.getLegalMoves(this.ia1.getColor()).isEmpty() && ia1.getNumeroDeFichas() > 0) {
                         if (iaMove(this.ia1)) {
+                            ia1.decreaseFichas();
                             b = 1;
                         }
                     } else {
@@ -364,8 +385,9 @@ public class Partida implements Serializable {
                     }
                 } else {
 
-                    if (!t.getLegalMoves(this.ia2.getColor()).isEmpty()) {
+                    if (!t.getLegalMoves(this.ia2.getColor()).isEmpty() && ia2.getNumeroDeFichas() > 0) {
                         if (iaMove(this.ia2)) {
+                            ia2.decreaseFichas();
                             b = 1;
                         }
                     } else {
@@ -378,8 +400,9 @@ public class Partida implements Serializable {
                 if (this.turn % 2 == 0) {
                     if (this.j1 == null) {
 
-                        if (!t.getLegalMoves(this.ia1.getColor()).isEmpty()) {
+                        if (!t.getLegalMoves(this.ia1.getColor()).isEmpty() && ia1.getNumeroDeFichas() > 0) {
                             if (iaMove(this.ia1)) {
+                                ia1.decreaseFichas();
                                 b = 1;
                             }
                         } else {
@@ -387,8 +410,9 @@ public class Partida implements Serializable {
                         }
                     } else {
 
-                        if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
+                        if (!t.getLegalMoves(this.j1.getColor()).isEmpty() && j1.getNumeroDeFichas() > 0) {
                             if (!t.commitPlay(coord, this.j1.getColor()).isEmpty()) {
+                                j1.decreaseFichas();
                                 b = 1;
                             } else {
                                 b = 0;
@@ -401,8 +425,9 @@ public class Partida implements Serializable {
 
                     if (this.j2 == null) {
 
-                        if (!t.getLegalMoves(this.ia2.getColor()).isEmpty()) {
+                        if (!t.getLegalMoves(this.ia2.getColor()).isEmpty() && ia2.getNumeroDeFichas() > 0) {
                             if (iaMove(this.ia2)) {
+                                ia2.decreaseFichas();
                                 b = 1;
                             }
                         } else {
@@ -410,8 +435,9 @@ public class Partida implements Serializable {
                         }
                     } else {
 
-                        if (!t.getLegalMoves(this.j2.getColor()).isEmpty()) {
+                        if (!t.getLegalMoves(this.j2.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
                             if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                                j2.decreaseFichas();
                                 b = 1;
                             } else {
                                 b = 0;
@@ -426,8 +452,9 @@ public class Partida implements Serializable {
             default:
                 if (this.turn % 2 == 0) {
 
-                    if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
-                        if (!t.commitPlay(coord, this.j1.getColor()).isEmpty()) {
+                    if (!t.getLegalMoves(this.j1.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
+                        if (!t.commitPlay(coord, this.j1.getColor()).isEmpty() && j1.getNumeroDeFichas() > 0) {
+                            j1.decreaseFichas();
                             b = 1;
                         } else {
                             b = 0;
@@ -437,8 +464,9 @@ public class Partida implements Serializable {
                     }
                 } else {
 
-                    if (!t.getLegalMoves(this.j1.getColor()).isEmpty()) {
+                    if (!t.getLegalMoves(this.j2.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
                         if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                            j2.decreaseFichas();
                             b = 1;
                         } else {
                             b = 0;
@@ -464,7 +492,10 @@ public class Partida implements Serializable {
     private boolean iaMove(IA ia) {
         Tree jugadas = createTree(t, ia);
         Pair c = ia.escogerMovimiento(jugadas);
-        return !(t.commitPlay(c, ia.getColor()).isEmpty());
+        if(!(t.commitPlay(c, ia.getColor()).isEmpty())) {
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -491,7 +522,34 @@ public class Partida implements Serializable {
             }
         }
     }
+    
+    public int[] getFichas() {
+        int[] res = new int[2];
+        switch (this.type) {
 
+            case IAvsIA:
+                res[0] = ia1.getNumeroDeFichas();
+                res[1] = ia2.getNumeroDeFichas();
+                break;
+
+            case PLAYERvsIA:
+                if (this.j1 == null) {
+                    res[0] = ia1.getNumeroDeFichas();
+                    res[1] = j2.getNumeroDeFichas();
+                } else {
+                    res[0] = j1.getNumeroDeFichas();
+                    res[1] = ia2.getNumeroDeFichas();
+                }
+                break;
+
+            default:
+               res[0] = j1.getNumeroDeFichas();
+               res[1] = j2.getNumeroDeFichas();
+               break;
+        }
+        return res;
+    }
+    
     /**
      * Función que busca un movimiento para la IA
      *

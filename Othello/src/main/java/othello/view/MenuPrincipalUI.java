@@ -45,8 +45,6 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         btn_ranking = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        btn_exit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btn_perfil = new javax.swing.JButton();
         btn_jugar = new javax.swing.JButton();
@@ -66,18 +64,6 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         jPanel4.add(btn_ranking);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.NORTH);
-
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_exit);
-
-        getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -146,10 +132,6 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         iCtrlView.changeWindow("MenuEscenario");
     }//GEN-LAST:event_btn_escenarioActionPerformed
 
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
-
     private void btn_rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rankingActionPerformed
         this.setLocationRelativeTo(null);
         iCtrlView.changeWindow("Ranking");
@@ -158,12 +140,10 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_escenario;
-    private javax.swing.JButton btn_exit;
     private javax.swing.JButton btn_jugar;
     private javax.swing.JButton btn_perfil;
     private javax.swing.JButton btn_ranking;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

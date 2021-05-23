@@ -1,11 +1,13 @@
 package othello.view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import othello.data.Pair;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import othello.domain.CtrlDomain;
 import othello.domain.Estadistica;
-import othello.domain.Partida;
-import othello.domain.tablero.Escenario;
 
 /**
  *
@@ -40,24 +42,86 @@ public class CtrlView {
     private CtrlView() {
         ctrlDominio = CtrlDomain.getInstance();
         mainView = new MenuPrincipalUI(this);
-
+        mainView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        mainView.addWindowListener(exitListener);
+        
+        
         rankingView = new RankingUI(this);
+        rankingView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        rankingView.addWindowListener(exitListener);
+        
         perfilMenuView = new MenuPerfilUI(this);
+        perfilMenuView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        perfilMenuView.addWindowListener(exitListener);
+        
         createGameView = new CrearPartidaUI(this);
+        createGameView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        createGameView.addWindowListener(exitListener);
+        
         escenarioMenuView = new MenuEscenarioUI(this);
-
+        escenarioMenuView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        escenarioMenuView.addWindowListener(exitListener);
+        
         createPerfilView = new CrearPerfilUI(this);
+        createPerfilView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        createPerfilView.addWindowListener(exitListener);
+        
         perfilView = new ConsultarEstadisticaUI(this);
+        perfilView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        perfilView.addWindowListener(exitListener);
 
         gameView = new PartidaUI(this);
-
+        gameView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        gameView.addWindowListener(exitListenerinGame);
+        
         createEscenarioView = new CrearEscenarioUI(this);
+        createEscenarioView.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        createEscenarioView.addWindowListener(exitListener);
+        
         selectEscenario = new SeleccionarEscenarioUI(this);
+        selectEscenario.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        selectEscenario.addWindowListener(exitListener);
+        
         editEscenario = new EditarEscenarioUI(this);
+        editEscenario.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        editEscenario.addWindowListener(exitListener);
         
         mainView.setVisible(true);
     }
+    
+    WindowListener exitListener = new WindowAdapter() {
 
+        @Override
+        public void windowClosing(WindowEvent e) {
+            ctrlDominio.guardarEscenarios();
+            ctrlDominio.guardarUsuarios();
+            System.exit(0);
+        }
+    };
+    
+    WindowListener exitListenerinGame = new WindowAdapter() {
+    @Override
+    public void windowClosing(WindowEvent e) {
+        gameView.PauseExit();
+        int seleccion = JOptionPane.showOptionDialog(
+                null,
+                "Quieres guardar la partida?",
+                "Salir",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                null, 3);
+        if(seleccion != 3) {
+            if (seleccion == 0) {
+                gameView.guardarPartida();
+            }
+            ctrlDominio.guardarEscenarios();
+            ctrlDominio.guardarUsuarios();
+            System.exit(0);
+        }
+    }
+};
+    
     public String[] getProfileModel() {
         ArrayList<String> profiles = new ArrayList<>();
         Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
@@ -66,6 +130,19 @@ public class CtrlView {
             profiles.add(e.getId());
         }
         profiles.add("Guest");
+        String[] ret = new String[]{};
+        ret = profiles.toArray(ret);
+        return ret;
+
+    }
+    
+    public String[] getProfileModelConsulta() {
+        ArrayList<String> profiles = new ArrayList<>();
+        Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
+
+        for (Estadistica e : temp) {
+            profiles.add(e.getId());
+        }
         String[] ret = new String[]{};
         ret = profiles.toArray(ret);
         return ret;
@@ -116,6 +193,7 @@ public class CtrlView {
                 selectEscenario.disableSelect();
                 selectEscenario.enableEdit();
                 selectEscenario.initEscenario();
+                selectEscenario.enableBack();
                 
                 break;
             
@@ -125,6 +203,7 @@ public class CtrlView {
                 selectEscenario.enableSelect();
                 selectEscenario.disableEdit();
                 selectEscenario.initEscenario();
+                selectEscenario.disableBack();
                 break;
             case "EditarEscenario":
                 selectEscenario.setVisible(false);
@@ -156,6 +235,10 @@ public class CtrlView {
                 break;
             case "MenuEscenario":
                 escenarioMenuView.setVisible(false);
+                mainView.setVisible(true);
+                break;
+            case "Partida":
+                gameView.setVisible(false);
                 mainView.setVisible(true);
                 break;
             default:
@@ -204,6 +287,10 @@ public class CtrlView {
     public int borrar_perfil(String id, String password) {
         return ctrlDominio.borrarPerfil(id, password);
     }
+    
+    public int borrar_escenario(String id) {
+        return ctrlDominio.borrarEscenario(id);
+    }
 
     public int crearPerfil(String nombre, String password) {
         return ctrlDominio.crearPerfil(nombre, password);
@@ -227,6 +314,7 @@ public class CtrlView {
         ctrlDominio.setCurrentEscenario(name);
         String[] parts = ctrlDominio.getCurrentEscenarioGrid();
         editEscenario.drawGrid(parts);
+        editEscenario.setNameEscenario(name);
         changeWindow("EditarEscenario");
         
     }
@@ -259,16 +347,38 @@ public class CtrlView {
     
     public void commitPlayCurrentGame(int x, int y) {
         String ret = ctrlDominio.colocarFicha(x, y);
-        if(ret.equals("Movimiento Realizado")){
-            gameView.addLog(x,y);
+        if(!ret.equals("Movimiento Ilegal")){
+            if(ret.equals("Movimiento Realizado"))gameView.addLog(x,y);
+            else gameView.popUpMessage(ret);
             printTurn();
             redrawTablero();
             printTypeGame();
             printColorTurn();
-            printPlayers();
+            printFichas();
+            restartIATimer();
+            checkGameisFinished();
         }else{
             gameView.popUpMessage(ret);
         }
+    }
+    
+    public void printFichas() {
+        int[] moves = ctrlDominio.currentGameMoves();
+        
+        gameView.setFichas(moves[0], moves[1]);
+    }
+    
+    public void checkGameisFinished() {
+        if(ctrlDominio.currentGameisFinished()) {
+            ctrlDominio.updateEstadisticas();
+            gameView.printGameFinished(ctrlDominio.currentGameScores());
+        }
+    }
+    
+    public void restartIATimer() {
+        if(gameView.getTypeGame().equals("IAvsIA") || (gameView.getTypeGame().equals("PLAYERvsIA") && turnPlayer().equals("IA"))){
+                gameView.restartIATimer();
+            }
     }
 
     public void redrawTablero() {

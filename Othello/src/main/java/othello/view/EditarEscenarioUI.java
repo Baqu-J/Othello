@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +50,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         int f = 0, s = 0;
         if(grid.length > 0){
             for (String grid1 : grid) {
-                tableroUI1.add(new CasillaEscenarioUI(grid1, iCtrlView, f, s));
+                tableroUI1.add(new CasillaUI(1, grid1, iCtrlView, f, s));
                 if(s == 7) {
                     s = 0;
                     ++f;
@@ -63,6 +65,10 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         tableroUI1.clearGrid();
         fillGrid(grid);
     }
+    
+    protected void setNameEscenario(String name) {
+        jLabel1.setText(name);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,11 +80,15 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         tableroUI1 = new othello.view.TableroUI(iCtrlView);
         jPanel4 = new javax.swing.JPanel();
         btn_anterior = new javax.swing.JButton();
         btn_siguiente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
 
@@ -87,6 +97,14 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel6.add(jLabel1);
+
+        jPanel1.add(jPanel6);
+
+        tableroUI1.setLayout(new java.awt.GridLayout(8, 8));
         jPanel1.add(tableroUI1);
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
@@ -123,7 +141,19 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jButton1.setText("Borrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+
+        jPanel3.add(jPanel2);
 
         jPanel5.setMaximumSize(new java.awt.Dimension(32767, 30));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -143,6 +173,7 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anteriorActionPerformed
@@ -160,6 +191,17 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
         iCtrlView.backToWindow("ModificarEscenario");
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int ret = iCtrlView.borrar_escenario(jLabel1.getText());
+
+            if(ret == 1){
+                JOptionPane.showMessageDialog(null, "Escenario Borrado");
+                iCtrlView.changeWindow("MenuEscenario");
+                this.setVisible(false);
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,10 +210,14 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton btn_anterior;
     private javax.swing.JButton btn_siguiente;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private othello.view.TableroUI tableroUI1;
     // End of variables declaration//GEN-END:variables
 }

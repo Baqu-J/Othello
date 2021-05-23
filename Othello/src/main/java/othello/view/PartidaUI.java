@@ -2,8 +2,11 @@ package othello.view;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,14 +34,11 @@ public class PartidaUI extends javax.swing.JFrame {
         this.setTitle("Othello App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
-
+        btn_Pausa.setEnabled(false);
+        btn_Pausa.setVisible(false);
         try {
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
             this.setIconImage(image);
-            Image imageResized = ImageIO.read(new File("src/main/java/resources/OthelloBlackToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-            jLabelIcon1.setIcon(new ImageIcon(imageResized));
-            imageResized = ImageIO.read(new File("src/main/java/resources/OthelloWhiteToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-            jLabelIcon2.setIcon(new ImageIcon(imageResized));
 
         } catch (Exception ex) {
         }
@@ -52,14 +52,21 @@ public class PartidaUI extends javax.swing.JFrame {
     }
 
     public void initGame() {
+        
         iCtrlView.printTypeGame();
         iCtrlView.redrawTablero();
         iCtrlView.printTurn();
         iCtrlView.printColorTurn();
         iCtrlView.printPlayers();
+        iCtrlView.printFichas();
+        btn_Pausa.setText("Pausar");
 
         if (this.typeGame.equals("IAvsIA")) {
             //timerToIAMove.scheduleAtFixedRate(task, new Date(), 1000);
+            btn_Pausa.setEnabled(true);
+            btn_Pausa.setVisible(true);
+            
+            jButtonGuardar.setEnabled(false);
             timerToIAMove.start();
         }
     }
@@ -86,13 +93,12 @@ public class PartidaUI extends javax.swing.JFrame {
                     y++;
                 }
             }
-            if(this.typeGame.equals("IAvsIA") || (this.typeGame.equals("PLAYERvsIA") && iCtrlView.turnPlayer().equals("IA"))){
-                timerToIAMove.restart();
-                //timerToIAMove = new Timer();
-                //timerToIAMove.scheduleAtFixedRate(task, new Date(), 1000);
-            }
         }
         tableroUI1.revalidate();
+    }
+    
+    public void restartIATimer() {
+        timerToIAMove.restart();
     }
 
     protected void reloadGrid(String[] grid) {
@@ -103,10 +109,28 @@ public class PartidaUI extends javax.swing.JFrame {
     public void printColorTurn(String color) {
         jLabelTurnoColor.setText(color);
     }
+    
+    public void setFichas(int n, int b) {
+        FichasN.setText(String.valueOf(n));
+        FichasB.setText(String.valueOf(b));
+    }
+    
+    public void setPlayerIcons(String N, String B) {
+            Image imageResized;
+        try {
+            imageResized = ImageIO.read(new File("src/main/java/resources/OthelloBlackToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            jLabelIcon1.setIcon(new ImageIcon(imageResized));
+            imageResized = ImageIO.read(new File("src/main/java/resources/OthelloWhiteToken.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            jLabelIcon2.setIcon(new ImageIcon(imageResized));
+        } catch (IOException ex) {
+            Logger.getLogger(PartidaUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void printPlayers(String[] players) {
         jLabel3.setText(players[0]);
         jLabel5.setText(players[1]);
+        setPlayerIcons(players[2], players[3]);
     }
 
     public void popUpMessage(String ret) {
@@ -114,7 +138,9 @@ public class PartidaUI extends javax.swing.JFrame {
     }
 
     public void addLog(int x, int y) {
-        jTextArea1.append("Turno: " + turnGame + " - Ficha colocada en la posición x=" + x + " - y=" + y + "\n");
+        if(x != 0 && y != 0) {
+            jTextArea1.append("Turno: " + turnGame + " - Ficha colocada en la posición x=" + x+1 + " - y=" + y+1 + "\n");
+        }
     }
 
     public String getTypeGame() {
@@ -134,6 +160,28 @@ public class PartidaUI extends javax.swing.JFrame {
         this.turnGame = turnGame;
         jLabelTurno.setText("Turno: " + turnGame);
     }
+    
+    public void printGameFinished(int[] scores) {
+       String res;
+       res = "Game finished!\n";
+       if(scores[0] > scores[1]) {
+           res += "WINNER - Negro!\n";
+       }
+       else if(scores[1] > scores[0]) {
+           res += "WINNER - Blanco!\n";
+       }
+       else {
+           res += "EMPATE!\n";
+       }
+       
+       res += "Scores: \n"
+               + "\tBlanco : " + scores[1]+"\n"
+               + "\tNegro : " + scores[0] + "\n";
+       jTextArea1.append(res);
+       
+       
+       
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,23 +202,24 @@ public class PartidaUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabelIcon1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        FichasN = new javax.swing.JLabel();
         tableroUI1 = new othello.view.TableroUI();
         jPanel3 = new javax.swing.JPanel();
         jLabelIcon2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        FichasB = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButtonGuardar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        btn_Pausa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(537, 425));
-        setPreferredSize(new java.awt.Dimension(537, 425));
+        setMinimumSize(new java.awt.Dimension(720, 720));
+        setPreferredSize(new java.awt.Dimension(720, 720));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -203,10 +252,9 @@ public class PartidaUI extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Ficha");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         jPanel2.add(jLabel7, gridBagConstraints);
 
         jLabelIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -221,15 +269,12 @@ public class PartidaUI extends javax.swing.JFrame {
         jLabel3.setText("jLabel2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         jPanel2.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("jLabel3");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        jPanel2.add(jLabel4, gridBagConstraints);
+        FichasN.setForeground(new java.awt.Color(255, 255, 255));
+        FichasN.setText("jLabel8");
+        jPanel2.add(FichasN, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -262,23 +307,22 @@ public class PartidaUI extends javax.swing.JFrame {
         jLabel5.setText("jLabel4");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jPanel3.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("jLabel5");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        jPanel3.add(jLabel6, gridBagConstraints);
+        jPanel3.add(jLabel5, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ficha");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel3.add(jLabel2, gridBagConstraints);
+
+        FichasB.setForeground(new java.awt.Color(255, 255, 255));
+        FichasB.setText("jLabel8");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        jPanel3.add(jLabel2, gridBagConstraints);
+        jPanel3.add(FichasB, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -300,7 +344,9 @@ public class PartidaUI extends javax.swing.JFrame {
                 jButtonGuardarActionPerformed(evt);
             }
         });
-        jPanel5.add(jButtonGuardar, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        jPanel5.add(jButtonGuardar, gridBagConstraints);
 
         jButtonSalir.setText("Salir");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -310,9 +356,20 @@ public class PartidaUI extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(jButtonSalir, gridBagConstraints);
+
+        btn_Pausa.setText("Pausar");
+        btn_Pausa.setPreferredSize(new java.awt.Dimension(71, 23));
+        btn_Pausa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PausaActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel5.add(btn_Pausa, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -340,9 +397,10 @@ public class PartidaUI extends javax.swing.JFrame {
         getContentPane().add(jPanel4, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarPartida() {
+    protected void guardarPartida() {
         String ret = iCtrlView.guardarPartida();
         if (ret.equals("Error al guardar Partida")) {
             JOptionPane.showMessageDialog(null, ret, "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -353,11 +411,12 @@ public class PartidaUI extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
-        guardarPartida();
+        if(!typeGame.equals("IAvsIA"))guardarPartida();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
+        PauseExit();
         int seleccion = JOptionPane.showOptionDialog(
                 null,
                 "Quieres guardar la partida?",
@@ -366,25 +425,52 @@ public class PartidaUI extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 null, 3);
-
-        if (seleccion == 0) {
-            guardarPartida();
-        } else if (seleccion == 1) {
-
+        if(seleccion != 3) {
+            if (seleccion == 0) {
+                guardarPartida();
+            }
+            this.setVisible(false);
+            iCtrlView.backToMainWindow("Partida");
         }
+        
+        
 
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
+    private void Pause() {
+        
+        if(btn_Pausa.getText().equals("Pausar")) {
+            btn_Pausa.setText("Reanudar");
+            timerToIAMove.stop();
+        }
+        else{
+            btn_Pausa.setText("Pausar");
+            timerToIAMove.restart();
+        }
+    }
+    
+    public void PauseExit() {
+        if(timerToIAMove.isRunning()) {
+            Pause();
+        }
+    }
+    
+    private void btn_PausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PausaActionPerformed
+        // TODO add your handling code here:
+           Pause();
+    }//GEN-LAST:event_btn_PausaActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FichasB;
+    private javax.swing.JLabel FichasN;
+    private javax.swing.JButton btn_Pausa;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelIcon1;
     private javax.swing.JLabel jLabelIcon2;

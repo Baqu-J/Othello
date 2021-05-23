@@ -423,6 +423,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         iCtrlView.setupGame(Jugador1.isSelected(), Jugador2.isSelected(), IA1.isSelected(), IA2.isSelected(), (String)Combo1.getSelectedItem(), (String)Combo2.getSelectedItem(), RadioBlanco1.isSelected(), LabelEscenario.getText());
         iCtrlView.changeWindow("Partida");
+        this.setVisible(false);
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

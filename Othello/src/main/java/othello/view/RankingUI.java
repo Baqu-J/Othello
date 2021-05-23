@@ -67,7 +67,6 @@ public class RankingUI extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
-        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
@@ -115,19 +114,6 @@ public class RankingUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 7, 0, 7);
         jPanel2.add(btn_atras, gridBagConstraints);
 
-        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 7, 0, 7);
-        jPanel2.add(btn_exit, gridBagConstraints);
-
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
@@ -139,13 +125,8 @@ public class RankingUI extends javax.swing.JFrame {
         iCtrlView.backToMainWindow("Ranking");
     }//GEN-LAST:event_btn_atrasActionPerformed
 
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
-    private javax.swing.JButton btn_exit;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;

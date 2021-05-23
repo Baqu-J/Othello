@@ -5,7 +5,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -54,7 +57,6 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
-        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
@@ -140,21 +142,6 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
         jPanel6.add(btn_atras, gridBagConstraints);
 
-        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel6.add(btn_exit, gridBagConstraints);
-
         getContentPane().add(jPanel6, java.awt.BorderLayout.SOUTH);
 
         pack();
@@ -162,7 +149,7 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void actualiza_frame(){
-        jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModelConsulta()));
         jPanel5.setVisible(false);
     }
     
@@ -170,10 +157,6 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         iCtrlView.backToWindow("Perfil");
     }//GEN-LAST:event_btn_atrasActionPerformed
-
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jPanel5.setVisible(true);
@@ -193,8 +176,19 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String jugador = jComboBox1.getSelectedItem().toString();
-        String password = JOptionPane.showInputDialog("Ingresa Contraseña");
-        if(password != null){
+        
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Ingresa Contraseña:");
+        JPasswordField pass = new JPasswordField(10);
+        panel.add(label);
+        panel.add(pass);
+        String[] options = new String[]{"OK", "Cancelar"};
+        int option = JOptionPane.showOptionDialog(null, panel, "Eliminar Usuario",
+                                 JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                                 null, options, options[1]);
+        if(option == 0) // pressing OK button
+        {
+            String password = String.valueOf(pass.getPassword());
             int ret = iCtrlView.borrar_perfil(jugador, password);
 
             if(ret == 1){
@@ -207,11 +201,25 @@ public class ConsultarEstadisticaUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "contraseña incorrecta", "ERROR", 0);
             }  
         }
+        
+        /*String password = JOptionPane.showInputDialog("Ingresa Contraseña");
+        if(password != null){
+            int ret = iCtrlView.borrar_perfil(jugador, password);
+
+            if(ret == 1){
+                JOptionPane.showMessageDialog(null, "Usuario Borrado");
+                jLabel2.setText("");
+                jPanel5.setVisible(false);
+                jComboBox1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "contraseña incorrecta", "ERROR", 0);
+            }  
+        }*/
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
-    private javax.swing.JButton btn_exit;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

@@ -53,6 +53,15 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
         this.btn_seleccionar.setEnabled(true);
         this.btn_seleccionar.setVisible(true);
     }
+    public void disableBack() {
+        this.backButton.setEnabled(false);
+        this.backButton.setVisible(false);
+    }
+    public void enableBack() {
+        this.backButton.setEnabled(true);
+        this.backButton.setVisible(true);
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

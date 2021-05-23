@@ -47,7 +47,6 @@ public class MenuPerfilUI extends javax.swing.JFrame {
         btn_consultarEstadistica = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btn_atras = new javax.swing.JButton();
-        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
@@ -105,30 +104,11 @@ public class MenuPerfilUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
         jPanel2.add(btn_atras, gridBagConstraints);
 
-        btn_exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_exit.setText("EXIT");
-        btn_exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exitActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
-        jPanel2.add(btn_exit, gridBagConstraints);
-
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_exitActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         this.setLocationRelativeTo(null);
@@ -149,7 +129,6 @@ public class MenuPerfilUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_atras;
     private javax.swing.JButton btn_consultarEstadistica;
     private javax.swing.JButton btn_crearPerfil;
-    private javax.swing.JButton btn_exit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

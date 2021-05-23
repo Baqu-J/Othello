@@ -57,6 +57,16 @@ public class CtrlPersistence {
         else return -1;
     }
     
+    public int BorrarEscenario(String nombre) { //Check si perfil existe
+        Boolean success = false;
+        File file = new File("JSON/Escenarios/" + nombre +".json");
+
+        if(file.exists()) success = file.delete();
+    
+        if(success) return 1;
+        else return -1;
+    }
+    
     /**
      * Función que carga todos los usuarios almacenados en una lista.
      * @return lista de usuarios con sus estadisticas respectivas.

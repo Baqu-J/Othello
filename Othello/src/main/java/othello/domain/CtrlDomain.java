@@ -60,6 +60,10 @@ public class CtrlDomain {
             ctrlPersistencia.GuardarPerfil(e);
         }
     }
+    
+    public Boolean currentGameisFinished() {
+        return currentGame.gameIsFinished();
+    }
 
     /**
      * Método que carga todos los Escenarios.
@@ -136,6 +140,19 @@ public class CtrlDomain {
                     perfiles.remove(e);
                 }
             }
+        }
+        return ret;
+    }
+    
+    public int borrarEscenario(String nombre) {
+        int ret = -1;
+        Escenario e = searchEscenario(nombre);
+        if (e != null){
+            
+                ret = ctrlPersistencia.BorrarEscenario(nombre);
+                if (ret == 1) {
+                    escenarios.remove(e);
+                }
         }
         return ret;
     }
@@ -394,5 +411,22 @@ public class CtrlDomain {
     public String[] getTableroCurrentGame() {
         //System.out.println(currentGame);
         return currentGame.getT().toString().split(",");
+    }
+    
+    public int[] currentGameScores() {
+        int[] res = new int[2];
+        
+        res[0] = currentGame.getT().getNegras().size();
+        res[1] = currentGame.getT().getBlancas().size();
+        
+        return res;
+    }
+    
+    public void updateEstadisticas() {
+        currentGame.updateEstadisticas();
+    }
+    
+    public int[] currentGameMoves() {
+        return currentGame.getFichas();
     }
 }

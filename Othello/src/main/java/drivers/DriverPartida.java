@@ -33,8 +33,8 @@ public class DriverPartida {
         dominio = CtrlDomain.getInstance();
         do {
             p.getT().print_tablero();
-            dominio.printPartida(p);
-            dominio.colocarFicha(p, new Pair(-1, -1));
+           // dominio.printPartida(p);
+           // dominio.colocarFicha(p, new Pair(-1, -1));
         }while(!p.gameIsFinished());
             p.getT().print_tablero();
             int nB = p.getT().getBlancas().size();
