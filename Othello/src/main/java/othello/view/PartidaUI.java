@@ -59,6 +59,7 @@ public class PartidaUI extends javax.swing.JFrame {
         iCtrlView.printColorTurn();
         iCtrlView.printPlayers();
         iCtrlView.printFichas();
+        btn_Pausa.setEnabled(true);
         btn_Pausa.setText("Pausar");
 
         if (this.typeGame.equals("IAvsIA")) {
@@ -139,7 +140,9 @@ public class PartidaUI extends javax.swing.JFrame {
 
     public void addLog(int x, int y) {
         if(x != 0 && y != 0) {
-            jTextArea1.append("Turno: " + turnGame + " - Ficha colocada en la posición x=" + x+1 + " - y=" + y+1 + "\n");
+            int auxX = x+1;
+            int auxY = y+1;
+            jTextArea1.append("Turno: " + iCtrlView.getCurrentGameTurn() + " - Ficha colocada en la posición x=" + auxX + " - y=" + auxY + "\n");
         }
     }
 
@@ -433,10 +436,16 @@ public class PartidaUI extends javax.swing.JFrame {
             iCtrlView.backToMainWindow("Partida");
         }
         
-        
-
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
+    
+    public void disablePausa() {
+        btn_Pausa.setEnabled(false);
+    }
+    
+    public void stopIATimer() {
+        timerToIAMove.stop();
+    }
+    
     private void Pause() {
         
         if(btn_Pausa.getText().equals("Pausar")) {

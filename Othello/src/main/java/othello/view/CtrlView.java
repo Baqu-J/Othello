@@ -371,6 +371,8 @@ public class CtrlView {
     public void checkGameisFinished() {
         if(ctrlDominio.currentGameisFinished()) {
             ctrlDominio.updateEstadisticas();
+            gameView.stopIATimer();
+            gameView.disablePausa();
             gameView.printGameFinished(ctrlDominio.currentGameScores());
         }
     }
@@ -397,6 +399,10 @@ public class CtrlView {
     public void printTurn() {
         String turn = ctrlDominio.getTurnoPartida();
         gameView.setTurnGame(turn);
+    }
+    
+    public String getCurrentGameTurn() {
+        return ctrlDominio.getTurnoPartida();
     }
     
     public void printColorTurn() {
