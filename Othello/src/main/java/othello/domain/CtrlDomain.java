@@ -150,7 +150,8 @@ public class CtrlDomain {
      */
     public String consultaPerfil(String nombre) {
         Estadistica p = searchEstadistica(nombre);
-        return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
+        if(p !=null) return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
+        return "";
     }
     
     /**

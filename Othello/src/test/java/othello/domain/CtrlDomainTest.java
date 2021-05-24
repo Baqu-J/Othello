@@ -61,7 +61,7 @@ public class CtrlDomainTest {
     public void testSearchEstadistica() {
         System.out.println("searchEstadistica");
         String nombre = "";
-        String expResult = "<html><p>Puntos: 0<p>Victorias: 0<p>Derrotas: 0<p>Empates: 0<html>";
+        String expResult = "";
         String result = instance.consultaPerfil(nombre);
         assertEquals(expResult, result);
     }
