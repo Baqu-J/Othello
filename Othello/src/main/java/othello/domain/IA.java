@@ -1,7 +1,6 @@
 package othello.domain;
 
 import java.util.ArrayList;
-import java.util.Random;
 import othello.data.Casilla;
 import othello.data.Pair;
 import othello.data.Node;
@@ -156,21 +155,35 @@ public class IA extends GameState {
      * Método que devuelve el movimiento que la IA ha seleccionado.
      *
      * @param t Árbol con posibles jugadas.
+     * @param ia 
      * @return Coordenada escogida.
      */
-    public Pair escogerMovimiento(Tree<Node> t) {
+    public Pair escogerMovimiento(Tree<Node> t, IA ia) {
     
         Node maxEval = new Node(NEGATIVE_INFINITY);
+        Node minEval = new Node(POSITIVE_INFINITY);
+        Node movimiento;
         
-        for (Tree<Node> child : t.getSubTrees()) {
-            Node eval = alpha_beta(child, this.depth, NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
-            if(maxEval.getScore() < eval.getScore()) {
-                maxEval.setScore(eval.getScore());
-                maxEval.setCord(child.getRoot().getCord());
-            }
+        if(ia.getOpcion() == Dificultad.FACIL){
+            for (Tree<Node> child : t.getSubTrees()) {
+                Node eval = alpha_beta(child, ia.getDepth(), NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
+                if(minEval.getScore() > eval.getScore()) {
+                    minEval.setScore(eval.getScore());
+                    minEval.setCord(child.getRoot().getCord());
+                }
+            }    
+            movimiento = minEval;
         }
- 
-        Node movimiento = maxEval;
+        else{
+            for (Tree<Node> child : t.getSubTrees()) {
+                Node eval = alpha_beta(child, ia.getDepth(), NEGATIVE_INFINITY, POSITIVE_INFINITY, true);
+                if(maxEval.getScore() < eval.getScore()) {
+                    maxEval.setScore(eval.getScore());
+                    maxEval.setCord(child.getRoot().getCord());
+                }
+            }
+            movimiento = maxEval;
+        }
         return movimiento.getCord();
     }
 }

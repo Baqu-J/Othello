@@ -61,49 +61,8 @@ public class CtrlDomain {
         }
     }
     
-    public Boolean currentGameisFinished() {
-        return currentGame.gameIsFinished();
-    }
-
     /**
-     * Método que carga todos los Escenarios.
-     */
-    private void cargarEscenarios() {
-        escenarios = ctrlPersistencia.CargarEscenarios();
-    }
-
-    /**
-     * Método que guarda cada Escenario.
-     */
-    public void guardarEscenarios() {
-        for (Escenario e : escenarios) {
-            ctrlPersistencia.GuardarEscenario(e);
-        }
-    }
-
-    /**
-     * Método que crea un Escenario si no existe ningunO con el mismo id y lo
-     * añade al listado ESCENARIOS y crea su archivo.
-     *
-     * @param nombre id deL Escenario
-     * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
-     */
-    public int crearEscenario(String nombre) {
-
-        int ret = -1;
-        Escenario e = searchEscenario(nombre);
-        if (e == null) {
-            e = new Escenario(nombre);
-            ret = ctrlPersistencia.CrearEscenario(e);
-            if (ret == 1) {
-                escenarios.add(e);
-            }
-        }
-        return ret;
-    }
-
-    /**
-     * Método que crea una Estadistica si no existe ninguna con el mismo id y lo
+     * Función que crea una Estadistica si no existe ninguna con el mismo id y lo
      * añade al listado perfiles y crea su archivo.
      *
      * @param nombre id de la Estadistica
@@ -124,7 +83,7 @@ public class CtrlDomain {
     }
 
     /**
-     * Método que elimina una Estadistica del listado perfiles y su archivo.
+     * Función que elimina una Estadistica del listado perfiles y su archivo.
      *
      * @param nombre id de la Estadistica
      * @param password
@@ -144,19 +103,10 @@ public class CtrlDomain {
         return ret;
     }
     
-    public int borrarEscenario(String nombre) {
-        int ret = -1;
-        Escenario e = searchEscenario(nombre);
-        if (e != null){
-            
-                ret = ctrlPersistencia.BorrarEscenario(nombre);
-                if (ret == 1) {
-                    escenarios.remove(e);
-                }
-        }
-        return ret;
-    }
-
+    /**
+     * Función para obtener el ranking actual
+     * @return ranking
+     */
     public ArrayList<String> getRanking() {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
@@ -193,9 +143,69 @@ public class CtrlDomain {
         return null;
     }
     
+    /**
+     * Función para consultar las estadísticas de un perfil
+     * @param nombre
+     * @return estadisticas de "nombre"
+     */
     public String consultaPerfil(String nombre) {
         Estadistica p = searchEstadistica(nombre);
         return ("<html>" + p.getId() + "<p>Puntos: " + p.getPuntos() + "<p>Victorias: " + p.getVictoria() + "<p>Derrotas: " + p.getDerrota() + "<p>Empates: " + p.getEmpate() + "<html>");
+    }
+    
+    /**
+     * Método que carga todos los Escenarios.
+     */
+    private void cargarEscenarios() {
+        escenarios = ctrlPersistencia.CargarEscenarios();
+    }
+
+    /**
+     * Método que guarda cada Escenario.
+     */
+    public void guardarEscenarios() {
+        for (Escenario e : escenarios) {
+            ctrlPersistencia.GuardarEscenario(e);
+        }
+    }
+
+    /**
+     * Función que crea un Escenario si no existe ningunO con el mismo id y lo
+     * añade al listado ESCENARIOS y crea su archivo.
+     *
+     * @param nombre id deL Escenario
+     * @return -1 en caso de error y 1 en caso de operación realizada con éxito.
+     */
+    public int crearEscenario(String nombre) {
+
+        int ret = -1;
+        Escenario e = searchEscenario(nombre);
+        if (e == null) {
+            e = new Escenario(nombre);
+            ret = ctrlPersistencia.CrearEscenario(e);
+            if (ret == 1) {
+                escenarios.add(e);
+            }
+        }
+        return ret;
+    }
+    
+    /**
+     * Función para borrar un escenario
+     * @param nombre
+     * @return 1:Borrado satisfactoriamente, -1:Escenario no existe o no se pudo borrar
+     */
+    public int borrarEscenario(String nombre) {
+        int ret = -1;
+        Escenario e = searchEscenario(nombre);
+        if (e != null){
+            
+                ret = ctrlPersistencia.BorrarEscenario(nombre);
+                if (ret == 1) {
+                    escenarios.remove(e);
+                }
+        }
+        return ret;
     }
 
     /**
@@ -207,7 +217,10 @@ public class CtrlDomain {
         return escenarios;
     }
 
-    
+    /**
+     * Función que retorna una lista con todos los escenario actuales
+     * @return lista escenarios
+     */
     public ArrayList<String> getEscenarios() {
         ArrayList<String> esc = new ArrayList<>(); 
         for (int i = 0; i < escenarios.size(); i++) { 
@@ -231,27 +244,51 @@ public class CtrlDomain {
         return null;
     }
 
+    /**
+     * Método para cargar el Escenario con id "name"
+     * @param name 
+     */
     public void setCurrentEscenario(String name){
         currentEscenario = searchEscenario(name);
     }
     
+    /**
+     * Función para obtener el escenario actual
+     * @return escenario
+     */
     public String[] getCurrentEscenarioGrid() {
         String[] parts = currentEscenario.toStringGrid().split(",");
         return parts;
     }
     
+    /**
+     * Método para deshacer un movimiento en un escenario 
+     */
     public void undoCurrentEscenario() {
         currentEscenario.undo();
     }
     
+    /**
+     * Método para rehacer un movimiento en un escenario
+     */
     public void reCurrentEscenario() {
         currentEscenario.redo();
     }
     
+    /**
+     * Método para realizar un movimiento en un escenario
+     * @param first
+     * @param second 
+     */
     public void CommitPlayCurrentEscenario(int first, int second) {
         currentEscenario.commitPlay(new Pair(first, second), currentEscenario.getColor());
     }
     
+    /**
+     * Función para comprobar el turno en un partida
+     * @param p:Partida
+     * @return true:turno correcto, false:turno incorrecto
+     */
     public boolean turno(Partida p) {
         if (p.getType() == Partida.GameType.PLAYERvsPLAYER) {
             return true;
@@ -268,44 +305,74 @@ public class CtrlDomain {
         return false;
     }
     
+    /**
+     * Función para obtener el tipo de partida
+     * @return tipo de partida(texto)
+     */
     public String getTipoPartida() {
         return currentGame.getType().toString();
     }
     
+    /**
+     * Función para obtener el turno actual en la partida
+     * @return turno(texto)
+     */
     public String getTurnoPartida() {
         return String.valueOf(currentGame.getTurn());
     }
     
+    /**
+     * Función para obtener el color del turno de la partida
+     * @return turnoColor(texto)
+     */
     public String getTurnoColorPartida() {
         return currentGame.getColorTurn();
     }
     
+    /**
+     * Función para obtener los jugadores de una partida
+     * @return jugadores(texto)
+     */
     public String[] getJugadoresPartida() {
          return currentGame.getPlayers().split(",");
     }
     
+    /**
+     * Función para obtener el jugador con el turno actual
+     * @return Jugador en turno(texto)
+     */
     public String getJugadoresTurno() {
          return currentGame.getPlayerTurn();
     }
-    
-    /*public void printPartida(Partida p) {
-        p.printTurn();
-    }*/
-    
+
+    /**
+     * Función para colocar una ficha en el tablero
+     * @param x
+     * @param y
+     * @return confirmación de dicho movimiento
+     */
     public String colocarFicha(int x, int y) {
         String ret = "";
         Pair p = new Pair(x,y);
         int r = currentGame.move(p);
-        if(r == -1) {
-            ret = "No tengo movimientos";
-        }else if(r == 0) {
-            ret = "Movimiento Ilegal";
-        }else {
-           ret = "Movimiento Realizado"; 
+        switch (r) {
+            case -1:
+                ret = "No tengo movimientos";
+                break;
+            case 0:
+                ret = "Movimiento Ilegal"; 
+                break;
+            default:
+                ret = "Movimiento Realizado";
+                break;
         }
         return ret;
     }
 
+    /**
+     * Función para guardar una partida
+     * @return confirmación de si se guardó o no la partida
+     */
     public String guardarPartida() {
         String ret = "Error al guardar Partida";
         int r = ctrlPersistencia.GuardarPartida(currentGame);
@@ -315,10 +382,25 @@ public class CtrlDomain {
         return ret;
     }
 
+    /**
+     * Función para cargar una partida
+     * @return partida elegida
+     */
     public Partida cargarPartida() {
         return ctrlPersistencia.CargarPartida();
     }
     
+    /**
+     * Método para iniciar una partida
+     * @param J1
+     * @param J2
+     * @param IA1
+     * @param IA2
+     * @param Opc1
+     * @param Opc2
+     * @param P1White
+     * @param nameEscenario 
+     */
     public void setupGame(Boolean J1, Boolean J2, Boolean IA1, Boolean IA2, String Opc1, String Opc2, Boolean P1White, String nameEscenario) {
         Partida.GameType gt;
         if(J1 && J2) gt = Partida.GameType.PLAYERvsPLAYER;
@@ -393,6 +475,10 @@ public class CtrlDomain {
         }
     }
     
+    /**
+     * Función para cargar una partida
+     * @return confirmación de la acción
+     */
     public String loadGame() {
         Partida p = cargarPartida();
         if(p == null) return "error";
@@ -402,17 +488,29 @@ public class CtrlDomain {
         }
     }
     
+    /**
+     * Función para mostrar el ranking actual
+     * @return lista de jugadores con estadisticas
+     */
     public ArrayList<Estadistica> displayRanking() {
         Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
         Collections.sort(perfiles, c);
         return perfiles;
     }
     
+    /**
+     * Método para obtener el tablero actual
+     * @return tablero(texto)
+     */
     public String[] getTableroCurrentGame() {
         //System.out.println(currentGame);
         return currentGame.getT().toString().split(",");
     }
     
+    /**
+     * Función para obtener el score de una partida
+     * @return score (texto)
+     */
     public int[] currentGameScores() {
         int[] res = new int[2];
         
@@ -422,10 +520,26 @@ public class CtrlDomain {
         return res;
     }
     
+    /**
+     * Función que verifica si una partida ha terminado
+     * @return true:Partida terminada, false:Partida en curso
+     */
+    public Boolean currentGameisFinished() {
+        return currentGame.gameIsFinished();
+    }
+    
+    /**
+     * Método para actualizar estadísticas al finalizar una partida
+     */
     public void updateEstadisticas() {
         currentGame.updateEstadisticas();
     }
     
+    /**
+     * Función para obtener número de fichas actuales de cada jugador para colocar
+     * en el tablero
+     * @return fichas de cada jugador
+     */
     public int[] currentGameMoves() {
         return currentGame.getFichas();
     }

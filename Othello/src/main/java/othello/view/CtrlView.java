@@ -122,33 +122,10 @@ public class CtrlView {
     }
 };
     
-    public String[] getProfileModel() {
-        ArrayList<String> profiles = new ArrayList<>();
-        Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
-
-        for (Estadistica e : temp) {
-            profiles.add(e.getId());
-        }
-        profiles.add("Guest");
-        String[] ret = new String[]{};
-        ret = profiles.toArray(ret);
-        return ret;
-
-    }
-    
-    public String[] getProfileModelConsulta() {
-        ArrayList<String> profiles = new ArrayList<>();
-        Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
-
-        for (Estadistica e : temp) {
-            profiles.add(e.getId());
-        }
-        String[] ret = new String[]{};
-        ret = profiles.toArray(ret);
-        return ret;
-
-    }
-
+    /**
+     * Método para cambiar de frame
+     * @param window 
+     */
     public void changeWindow(String window) {
 
         switch (window) {
@@ -219,6 +196,10 @@ public class CtrlView {
         }
     }
 
+    /**
+     * Método para volver al frame principañ
+     * @param window 
+     */
     public void backToMainWindow(String window) {
         switch (window) {
             case "Ranking":
@@ -246,6 +227,10 @@ public class CtrlView {
         }
     }
 
+    /**
+     * Método para volver al frame anterior
+     * @param window 
+     */
     public void backToWindow(String window) {
         switch (window) {
 
@@ -276,40 +261,100 @@ public class CtrlView {
         }
     }
 
+    /**
+     * Función para obtener el ranking actual
+     * @return ranking
+     */
     public ArrayList<String> getRanking() {
         return ctrlDominio.getRanking();
     }
 
+    /**
+     * Función para obtener la estadística de un perfil
+     * @param id
+     * @return estadística de perfil "id"
+     */
     public String estadistica_perfil(String id) {
         return ctrlDominio.consultaPerfil(id);
     }
+    
+    /**
+     * Función para obtener la lista de los perfiles actuales
+     * @return lista perfiles
+     */
+    public String[] getProfileModelConsulta() {
+        ArrayList<String> profiles = new ArrayList<>();
+        Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
 
-    public int borrar_perfil(String id, String password) {
-        return ctrlDominio.borrarPerfil(id, password);
+        for (Estadistica e : temp) {
+            profiles.add(e.getId());
+        }
+        String[] ret = new String[]{};
+        ret = profiles.toArray(ret);
+        return ret;
+
     }
     
-    public int borrar_escenario(String id) {
-        return ctrlDominio.borrarEscenario(id);
+    /**
+     * Función para obtener lista de jugadores + usuario GUEST
+     * @return lista
+     */
+    public String[] getProfileModel() {
+        ArrayList<String> profiles = new ArrayList<>();
+        Iterable<Estadistica> temp = ctrlDominio.listPerfiles();
+
+        for (Estadistica e : temp) {
+            profiles.add(e.getId());
+        }
+        profiles.add("Guest");
+        String[] ret = new String[]{};
+        ret = profiles.toArray(ret);
+        return ret;
+
     }
 
+    /**
+     * Función para crear un perfil
+     * @param nombre
+     * @param password
+     * @return 1:creado satisfactoriamente, -1:ya existe perfil
+     */
     public int crearPerfil(String nombre, String password) {
         return ctrlDominio.crearPerfil(nombre, password);
     }
 
-    public void setupGame(Boolean J1, Boolean J2, Boolean IA1, Boolean IA2, String Opc1, String Opc2, Boolean P1White, String nameEscenario) {
-        ctrlDominio.setupGame(J1, J2, IA1, IA2, Opc1, Opc2, P1White, nameEscenario);
+    /**
+     * Función para borrar un perfil
+     * @param id
+     * @param password
+     * @return 1:borrado con exito, -1:no existe perfil o no se pudo borrar
+     */
+    public int borrar_perfil(String id, String password) {
+        return ctrlDominio.borrarPerfil(id, password);
     }
     
-    public void loadGame() {
-        String s = ctrlDominio.loadGame();
-        if(s.equals("ok")) {
-            changeWindow("Partida");
-        }
+    /**
+     * Función para borrar un escenario identificado con "id"
+     * @param id
+     * @return 1:borrado existosamente, -1:no se pudo borrar escenario
+     */
+    public int borrar_escenario(String id) {
+        return ctrlDominio.borrarEscenario(id);
     }
+    
+    /**
+     * Función para crear un nuevo escenario
+     * @param nombre
+     * @return 1:creado satisfactoriamente, -1:ya existe escenario o no se pudo crear
+     */
     public int crearEscenario(String nombre) {
         return ctrlDominio.crearEscenario(nombre);
     }
     
+    /**
+     * Método para editar un escenario existente
+     * @param name 
+     */
     public void editEscenario(String name) {
         ctrlDominio.setCurrentEscenario(name);
         String[] parts = ctrlDominio.getCurrentEscenarioGrid();
@@ -319,32 +364,84 @@ public class CtrlView {
         
     }
     
+    /**
+     * Método para realizar un movimiento en el tablero del escenario
+     * @param first
+     * @param second 
+     */
     public void commitPlayCurrentEscenario(int first, int second) {
         ctrlDominio.CommitPlayCurrentEscenario(first, second);
         redrawEscenario();
     }
     
+    /**
+     * Método para mostrar el movimiento en el tablero del escenario
+     */
     public void redrawEscenario() {
         String[] parts = ctrlDominio.getCurrentEscenarioGrid();
         editEscenario.drawGrid(parts);
     }
        
+    /**
+     * Método para deshacer un movimiento en el tablero del escenario
+     */
     public void undoCurrentEscenario() {
         ctrlDominio.undoCurrentEscenario();
     }
     
+    /**
+     * Método para rehacer un movimiento en el tablero del escenario
+     */
     public void redoCurrentEscenario() {
         ctrlDominio.reCurrentEscenario();
     }
     
+    /**
+     * Función para obtener todos los escenarios
+     * @return escenarios
+     */
     public ArrayList<String> getEscenarios() {
         return ctrlDominio.getEscenarios();
     }
     
+    /**
+     * Método para cargar un escenario en una partida
+     * @param s 
+     */
     public void setEscenarioCrearPartida(String s) {
         createGameView.setEscenario(s);
     }
     
+    /**
+     * Método para iniciar una partida
+     * @param J1
+     * @param J2
+     * @param IA1
+     * @param IA2
+     * @param Opc1
+     * @param Opc2
+     * @param P1White
+     * @param nameEscenario 
+     */
+    public void setupGame(Boolean J1, Boolean J2, Boolean IA1, Boolean IA2, String Opc1, String Opc2, Boolean P1White, String nameEscenario) {
+        ctrlDominio.setupGame(J1, J2, IA1, IA2, Opc1, Opc2, P1White, nameEscenario);
+    }
+    
+    /**
+     * Método para cargar una partida
+     */
+    public void loadGame() {
+        String s = ctrlDominio.loadGame();
+        if(s.equals("ok")) {
+            changeWindow("Partida");
+        }
+    }
+    
+    /**
+     * Método para realizar un movimiento en una partida
+     * @param x
+     * @param y 
+     */
     public void commitPlayCurrentGame(int x, int y) {
         String ret = ctrlDominio.colocarFicha(x, y);
         if(!ret.equals("Movimiento Ilegal")){
@@ -362,12 +459,18 @@ public class CtrlView {
         }
     }
     
+    /**
+     * Método para mostrar las fichas actuales de cada jugador en una partida
+     */
     public void printFichas() {
         int[] moves = ctrlDominio.currentGameMoves();
         
         gameView.setFichas(moves[0], moves[1]);
     }
     
+    /**
+     * Método para verificar si el juego ha terminado
+     */
     public void checkGameisFinished() {
         if(ctrlDominio.currentGameisFinished()) {
             ctrlDominio.updateEstadisticas();
@@ -377,48 +480,75 @@ public class CtrlView {
         }
     }
     
+    /**
+     * Método que asigna un tiempo a cada jugada de la IA
+     */
     public void restartIATimer() {
         if(gameView.getTypeGame().equals("IAvsIA") || (gameView.getTypeGame().equals("PLAYERvsIA") && turnPlayer().equals("IA"))){
                 gameView.restartIATimer();
             }
     }
 
+    /**
+     * Método para mostrar el movimiento de la ficha en el tablero de partida
+     */
     public void redrawTablero() {
         String[] parts = ctrlDominio.getTableroCurrentGame();
-        /*for(int i = 0;i < parts.length;i++){
-            System.out.println(parts[i]);
-        }*/
         gameView.reloadGrid(parts);
     }
     
+    /**
+     * Método para mostrar el tipo de partida durante la partida
+     */
     public void printTypeGame() {
         String type = ctrlDominio.getTipoPartida();
         gameView.setTypeGame(type);
     }
     
+    /**
+     * Método para mostrar el turno actual en una partida
+     */
     public void printTurn() {
         String turn = ctrlDominio.getTurnoPartida();
         gameView.setTurnGame(turn);
     }
     
+    /**
+     * Método para mostrar el turno de la partida
+     * @return 
+     */
     public String getCurrentGameTurn() {
         return ctrlDominio.getTurnoPartida();
     }
     
+    /**
+     * Método para mostrar el color del turno en una partida
+     */
     public void printColorTurn() {
         String color = ctrlDominio.getTurnoColorPartida();
         gameView.printColorTurn(color);
     }
 
+    /**
+     * Método para mostrar los jugadores actuales de una partida
+     */
     public void printPlayers() {
         String[] players = ctrlDominio.getJugadoresPartida();
         gameView.printPlayers(players);
     }
     
+    /**
+     * Método para mostrar el nombre del jugador a quien le toca el turno en una partida
+     * @return nombre usuario o IA
+     */
     public String turnPlayer() {
         return ctrlDominio.getJugadoresTurno();
     }
     
+    /**
+     * Método para guardar una partida
+     * @return confirmación
+     */
     public String guardarPartida() {
         return ctrlDominio.guardarPartida();
     }

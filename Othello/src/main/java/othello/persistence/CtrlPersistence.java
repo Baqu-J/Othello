@@ -34,7 +34,7 @@ public class CtrlPersistence {
     //methods
     /**
      * Función que almacena un perfil de usuario.
-     * @param e
+     * @param e:Estadistica
      * @return 1:ejecutado satisfactoriamente, -1:error, 0:Exeception
      */
     public int CrearPerfil(Estadistica e) { //Check si perfil existe    
@@ -57,7 +57,12 @@ public class CtrlPersistence {
         else return -1;
     }
     
-    public int BorrarEscenario(String nombre) { //Check si perfil existe
+    /**
+     * 
+     * @param nombre
+     * @return 1:Escenario borrado, -1:Escenario no existe o no se puede borrar
+     */
+    public int BorrarEscenario(String nombre) {
         Boolean success = false;
         File file = new File("JSON/Escenarios/" + nombre +".json");
 
@@ -107,7 +112,7 @@ public class CtrlPersistence {
     
     /**
      * Función que almacena un Escenario.
-     * @param e
+     * @param e: Escenario
      * @return 1:ejecutado satisfactoriamente, 0:Exeception
      */
     public int CrearEscenario(Escenario e) {
@@ -117,7 +122,7 @@ public class CtrlPersistence {
     
     /**
      * Función que modifica y guarda un escenario ya almacenado.
-     * @param e
+     * @param e: Escenario
      * @return 1:ejecutado satisfactoriamente, 0:Exeception
      */
     public int GuardarEscenario(Escenario e) {
@@ -126,7 +131,7 @@ public class CtrlPersistence {
     
     /**
      * Función que actualiza la información de un usuario ya almacenado 
-     * @param e
+     * @param e: Estadistica
      * @return 1:ejecutado satisfactoriamente, 0:error
      */
     public int GuardarPerfil(Estadistica e) {
@@ -135,7 +140,7 @@ public class CtrlPersistence {
     
     /**
      * Función que almacena un partida.
-     * @param p
+     * @param p: Partida
      * @return 1:ejecutado satisfactoriamente, 0:Exeception
      */
     public int GuardarPartida(Partida p) {

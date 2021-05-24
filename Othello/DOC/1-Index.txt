@@ -1,0 +1,6 @@
+Carpeta DOC. Contiene la documentación del proyecto:
+0-subcarpeta apidocs-JavaDoc: documentación del proyecto generada con JAVADOC
+1-index
+2-Proyecto-Othello : documentación y descripción general del proyecto OTHELLO.
+3-Lista-clases-miembros: las clases implementadas por cada miembro del grupo.
+4-Manual de compilación i execucion: descripción de como compilar y ejecutar el programa.

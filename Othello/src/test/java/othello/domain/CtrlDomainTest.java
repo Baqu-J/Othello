@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import othello.data.Pair;
-import othello.domain.tablero.Escenario;
 
 /**
  *
@@ -18,8 +16,7 @@ import othello.domain.tablero.Escenario;
  */
 public class CtrlDomainTest {
 
-    private ArrayList<Estadistica> perfiles;
-
+    CtrlDomain instance;
     private double expected, valueOne, valueTwo;
 
     public CtrlDomainTest() {
@@ -35,39 +32,26 @@ public class CtrlDomainTest {
 
     @Before
     public void setUp() {
+         instance = CtrlDomain.getInstance();
     }
 
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of getInstance method, of class CtrlDomain.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        CtrlDomain expResult = null;
-        CtrlDomain result = CtrlDomain.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of crearPerfil method, of class CtrlDomain.
      */
     @Test
     public void testCrearPerfil() {
         System.out.println("crearPerfil");
-        String nombre = "";
-        String password = "";
-        CtrlDomain instance = null;
-        int expResult = 1;
+        String nombre = "franco";
+        String password = "acevedo";
+        int expResult = -1;
+        //USUARIO YA EXISTE
         int result = instance.crearPerfil(nombre,password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -77,12 +61,9 @@ public class CtrlDomainTest {
     public void testSearchEstadistica() {
         System.out.println("searchEstadistica");
         String nombre = "";
-        CtrlDomain instance = null;
-        String expResult = null;
+        String expResult = "<html><p>Puntos: 0<p>Victorias: 0<p>Derrotas: 0<p>Empates: 0<html>";
         String result = instance.consultaPerfil(nombre);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -93,12 +74,9 @@ public class CtrlDomainTest {
         System.out.println("borrarPerfil");
         String nombre = "";
         String password = "";
-        CtrlDomain instance = null;
-        int expResult = 1;
+        int expResult = -1;
         int result = instance.borrarPerfil(nombre,password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -107,13 +85,8 @@ public class CtrlDomainTest {
     @Test
     public void testDisplayRanking() {
         System.out.println("DisplayRanking");
-        CtrlDomain instance = null;
-
-        Comparator c = (Comparator<Estadistica>) (Estadistica o1, Estadistica o2) -> o2.getPuntos() - o1.getPuntos();
-        Collections.sort(perfiles, c);
 
         ArrayList<Estadistica> result = instance.displayRanking();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.listPerfiles(), result);
     }
 }

@@ -1,0 +1,7 @@
+drivers
+othello.data
+othello.domain
+othello.domain.tablero
+othello.persistence
+othello.test
+othello.view

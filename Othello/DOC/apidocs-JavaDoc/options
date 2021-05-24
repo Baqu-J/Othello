@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/FRANCO/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar;C:/Users/FRANCO/.m2/repository/org/netbeans/external/AbsoluteLayout/RELEASE123/AbsoluteLayout-RELEASE123.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/FRANCO/Desktop/PROP/3-PROYECTO_FINAL/subgrup-prop1-1/Othello/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/FRANCO/Desktop/PROP/3-PROYECTO_FINAL/subgrup-prop1-1/Othello/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Othello 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/FRANCO/Desktop/PROP/3-PROYECTO_FINAL/subgrup-prop1-1/Othello/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Othello 1.0-SNAPSHOT API'

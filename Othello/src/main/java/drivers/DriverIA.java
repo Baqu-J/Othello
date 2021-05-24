@@ -186,6 +186,6 @@ public class DriverIA {
                     break;
             }
         } while (!exit);
-        System.out.println(ia.escogerMovimiento(t));
+        System.out.println(ia.escogerMovimiento(t,ia));
     }
 }

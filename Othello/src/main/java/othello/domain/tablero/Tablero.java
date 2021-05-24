@@ -168,7 +168,7 @@ public class Tablero implements Serializable{
      * Método que evalua si una posición es legal para jugarla
      * @param p
      * @param c
-     * @return 
+     * @return false-> jugada no legal; true-> jugada legal
      */
     protected boolean is_legal(Pair p, Casilla c) {
         if (matrix[p.first()][p.second()] != Casilla.VACIA) {
@@ -304,7 +304,7 @@ public class Tablero implements Serializable{
     /**
      * Función para obtener los posibles movimientos legales del color "c"
      * @param c
-     * @return lista de posiciones
+     * @return lista de posiciones legales
      */
     public ArrayList<Pair> getLegalMoves(Casilla c) { 
         ArrayList<Pair> positions;

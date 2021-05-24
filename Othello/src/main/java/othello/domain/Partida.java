@@ -259,6 +259,10 @@ public class Partida implements Serializable {
         }
     }
 
+    /**
+     * Función para obtener el nombre y color de los jugadores en una partida
+     * @return players (texto)
+     */
     public String getPlayers() {
         String ret = "";
         switch (this.type) {
@@ -302,6 +306,10 @@ public class Partida implements Serializable {
         return ret;
     }
 
+    /**
+     * Función para obtener el turno actual durante una partida
+     * @return turno(texto)
+     */
     public String getPlayerTurn() {
         String ret = "";
         if (this.type == GameType.PLAYERvsIA) {
@@ -323,6 +331,10 @@ public class Partida implements Serializable {
         return ret;
     }
     
+    /**
+     * Método para obtener el color del turno en la partida
+     * @return color de turno(texto)
+     */
     public String getColorTurn() {
         String ret = "";
         switch (this.type) {
@@ -487,11 +499,12 @@ public class Partida implements Serializable {
      * Función para realizar el movimiento de una IA
      *
      * @param ia
-     * @return
+     * @return true: movimiento realizado, false:no existe movimientos
      */
     private boolean iaMove(IA ia) {
+        
         Tree jugadas = createTree(t, ia);
-        Pair c = ia.escogerMovimiento(jugadas);
+        Pair c = ia.escogerMovimiento(jugadas, ia);
         if(!(t.commitPlay(c, ia.getColor()).isEmpty())) {
             return true;
         }
@@ -523,6 +536,11 @@ public class Partida implements Serializable {
         }
     }
     
+    /**
+     * Método para obtener el número de fichas de cada jugador de una partida
+     * @return res[2]: res[0]->nºfichas jugador1
+     *                 res[1]->,ºfichas jugador2
+     */
     public int[] getFichas() {
         int[] res = new int[2];
         switch (this.type) {
