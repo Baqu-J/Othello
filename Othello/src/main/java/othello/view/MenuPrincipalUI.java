@@ -31,6 +31,14 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
             
         } catch (Exception ex) {
         }
+        
+        try {
+            Image image = ImageIO.read(new File("src/main/java/resources/othello.png"));
+            jLabel1.setIcon(new ImageIcon(image));
+            
+        } catch (Exception ex) {
+            jLabel1.setVisible(false);
+        }
     }
 
     /**
@@ -46,9 +54,12 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btn_ranking = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         btn_perfil = new javax.swing.JButton();
         btn_jugar = new javax.swing.JButton();
         btn_escenario = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(200, 60), new java.awt.Dimension(200, 60), new java.awt.Dimension(200, 60));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(200, 60), new java.awt.Dimension(200, 60), new java.awt.Dimension(200, 60));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
@@ -67,6 +78,14 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
+        jPanel2.add(jLabel1, gridBagConstraints);
+
         btn_perfil.setText("PERFIL");
         btn_perfil.setMaximumSize(new java.awt.Dimension(200, 60));
         btn_perfil.setMinimumSize(new java.awt.Dimension(200, 60));
@@ -77,6 +96,9 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel2.add(btn_perfil, gridBagConstraints);
 
@@ -90,10 +112,10 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel2.add(btn_jugar, gridBagConstraints);
 
         btn_escenario.setText("ESCENARIO");
@@ -106,10 +128,19 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel2.add(btn_escenario, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(btn_escenario, gridBagConstraints);
+        jPanel2.add(filler1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        jPanel2.add(filler2, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -143,6 +174,9 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_jugar;
     private javax.swing.JButton btn_perfil;
     private javax.swing.JButton btn_ranking;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables

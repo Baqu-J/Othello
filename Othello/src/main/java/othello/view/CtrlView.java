@@ -510,7 +510,7 @@ public class CtrlView {
      */
     public void printTurn() {
         String turn = ctrlDominio.getTurnoPartida();
-        gameView.setTurnGame(turn);
+        gameView.setTurnGame(String.valueOf(Integer.parseInt(turn)+1));
     }
     
     /**

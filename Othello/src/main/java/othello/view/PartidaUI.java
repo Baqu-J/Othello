@@ -3,15 +3,12 @@ package othello.view;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-//import java.util.Timer;
 import javax.swing.Timer;
 
 /**
@@ -23,6 +20,9 @@ public class PartidaUI extends javax.swing.JFrame {
     private CtrlView iCtrlView;
     private String typeGame;
     private String turnGame;
+    
+    private String [] letras = {"A","B","C","D","E","F","G","H"};
+    private String [] numeros = {"8","7","6","5","4","3","2","1"};
 
     private Timer timerToIAMove = new Timer(1000,null);
 
@@ -52,7 +52,7 @@ public class PartidaUI extends javax.swing.JFrame {
     }
 
     public void initGame() {
-        
+        jTextArea1.setText("");
         iCtrlView.printTypeGame();
         iCtrlView.redrawTablero();
         iCtrlView.printTurn();
@@ -63,11 +63,12 @@ public class PartidaUI extends javax.swing.JFrame {
         btn_Pausa.setText("Pausar");
 
         if (this.typeGame.equals("IAvsIA")) {
-            //timerToIAMove.scheduleAtFixedRate(task, new Date(), 1000);
+            
             btn_Pausa.setEnabled(true);
             btn_Pausa.setVisible(true);
             
             jButtonGuardar.setEnabled(false);
+            jButtonGuardar.setVisible(false);
             timerToIAMove.start();
         }
     }
@@ -112,8 +113,8 @@ public class PartidaUI extends javax.swing.JFrame {
     }
     
     public void setFichas(int n, int b) {
-        FichasN.setText(String.valueOf(n));
-        FichasB.setText(String.valueOf(b));
+        FichasN.setText("x"+String.valueOf(n));
+        FichasB.setText("x"+String.valueOf(b));
     }
     
     public void setPlayerIcons(String N, String B) {
@@ -139,10 +140,10 @@ public class PartidaUI extends javax.swing.JFrame {
     }
 
     public void addLog(int x, int y) {
-        if(x != 0 && y != 0) {
-            int auxX = x+1;
-            int auxY = y+1;
-            jTextArea1.append("Turno: " + iCtrlView.getCurrentGameTurn() + " - Ficha colocada en la posición x=" + auxX + " - y=" + auxY + "\n");
+        if(x != -1 && y != -1) {
+            int auxX = x;
+            int auxY = y;
+            jTextArea1.append("Turno: " + turnGame + " - Ficha colocada en la posición " + letras[auxY] + numeros[auxX] + "\n");
         }
     }
 
@@ -219,6 +220,33 @@ public class PartidaUI extends javax.swing.JFrame {
         btn_Pausa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 720));
@@ -242,7 +270,7 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel1.add(jPanel6);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -289,7 +317,7 @@ public class PartidaUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(100, 5, 100, 5);
         getContentPane().add(jPanel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         getContentPane().add(tableroUI1, gridBagConstraints);
 
@@ -328,7 +356,7 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel3.add(FichasB, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
@@ -385,6 +413,7 @@ public class PartidaUI extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setFocusable(false);
         jTextArea1.setMinimumSize(new java.awt.Dimension(250, 100));
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -393,11 +422,149 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel4.add(jScrollPane1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         getContentPane().add(jPanel4, gridBagConstraints);
+
+        jPanel7.setLayout(new java.awt.GridLayout(1, 8));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("A");
+        jPanel7.add(jLabel4);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("B");
+        jPanel7.add(jLabel6);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("C");
+        jPanel7.add(jLabel8);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("D");
+        jPanel7.add(jLabel9);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("E");
+        jPanel7.add(jLabel10);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("F");
+        jPanel7.add(jLabel11);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("G");
+        jPanel7.add(jLabel12);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("H");
+        jPanel7.add(jLabel13);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        getContentPane().add(jPanel7, gridBagConstraints);
+
+        jPanel8.setLayout(new java.awt.GridLayout(8, 1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText(" ");
+        jPanel8.add(jLabel14);
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText(" ");
+        jPanel8.add(jLabel15);
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText(" ");
+        jPanel8.add(jLabel16);
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText(" ");
+        jPanel8.add(jLabel17);
+
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText(" ");
+        jPanel8.add(jLabel18);
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText(" ");
+        jPanel8.add(jLabel19);
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText(" ");
+        jPanel8.add(jLabel20);
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText(" ");
+        jPanel8.add(jLabel21);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 7);
+        getContentPane().add(jPanel8, gridBagConstraints);
+
+        jPanel10.setLayout(new java.awt.GridLayout(8, 1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("8");
+        jPanel10.add(jLabel22);
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("7");
+        jPanel10.add(jLabel23);
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("6");
+        jPanel10.add(jLabel24);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("5");
+        jPanel10.add(jLabel25);
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("4");
+        jPanel10.add(jLabel26);
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel27.setText("3");
+        jPanel10.add(jLabel27);
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("2");
+        jPanel10.add(jLabel28);
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("1");
+        jPanel10.add(jLabel29);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        getContentPane().add(jPanel10, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -477,20 +644,47 @@ public class PartidaUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelIcon1;
     private javax.swing.JLabel jLabelIcon2;
     private javax.swing.JLabel jLabelTurno;
     private javax.swing.JLabel jLabelTurnoColor;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private othello.view.TableroUI tableroUI1;
