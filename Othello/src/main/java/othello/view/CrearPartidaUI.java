@@ -38,30 +38,57 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         //setVisible(true);
     }
     
-    
     public void actualiza_boxs(){
-        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
-        
-        DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        if(!Combo1.getSelectedItem().equals("Guest")){
-            model.removeElement(Combo1.getSelectedItem());
+        if(Jugador1.isSelected()) {
+            Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            if(Jugador2.isSelected()) {
+                DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+                if(!Combo1.getSelectedItem().equals("Guest")){
+                    model.removeElement(Combo1.getSelectedItem());
+                }
+                Object o = Combo2.getSelectedItem();
+                Combo2.setModel(model);
+                Combo2.setSelectedItem(o);
+
+                model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+                if(!Combo2.getSelectedItem().equals("Guest")){
+                    model.removeElement(Combo2.getSelectedItem());
+                }
+                o = Combo1.getSelectedItem();
+                Combo1.setModel(model);
+                Combo1.setSelectedItem(o);
+            }
         }
-        Object o = Combo2.getSelectedItem();
-        Combo2.setModel(model);
-        Combo2.setEditable(false);
-        Combo2.setSelectedItem(o);
-        Combo2.setEditable(true);
-        
-        model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
-        if(!Combo2.getSelectedItem().equals("Guest")){
-            model.removeElement(Combo2.getSelectedItem());
+        else {
+            if(Jugador2.isSelected()){
+                Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            }
         }
-        o = Combo1.getSelectedItem();
-        Combo1.setModel(model);
-        Combo1.setEditable(false);
-        Combo1.setSelectedItem(o);
-        Combo1.setEditable(true);
-        
+        if(Jugador2.isSelected()) {
+            Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            if(Jugador1.isSelected()) {
+                DefaultComboBoxModel model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+                if(!Combo2.getSelectedItem().equals("Guest")){
+                    model.removeElement(Combo2.getSelectedItem());
+                }
+                Object o = Combo1.getSelectedItem();
+                Combo1.setModel(model);
+                Combo1.setSelectedItem(o);
+
+                model = new DefaultComboBoxModel(iCtrlView.getProfileModel());
+                if(!Combo1.getSelectedItem().equals("Guest")){
+                    model.removeElement(Combo1.getSelectedItem());
+                }
+                o = Combo2.getSelectedItem();
+                Combo2.setModel(model);
+                Combo2.setSelectedItem(o);
+            }
+        }
+        else {
+            if(Jugador1.isSelected()){
+                Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+            }
+        }
     }
     
     public void setEscenario(String s) {
@@ -374,6 +401,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         labelJ1.setText("Escoge dificultad:");
         Combo1.setModel(new DefaultComboBoxModel(new String[]{"Facil", "Normal", "Dificil"}));
+        actualiza_boxs();
     }//GEN-LAST:event_IA1ActionPerformed
 
     private void RadioNegro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioNegro1ActionPerformed
@@ -384,19 +412,20 @@ public class CrearPartidaUI extends javax.swing.JFrame {
     private void Jugador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jugador1ActionPerformed
         // TODO add your handling code here:
         labelJ1.setText("Escoge perfil:");
-        Combo1.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+        actualiza_boxs();
     }//GEN-LAST:event_Jugador1ActionPerformed
 
     private void Jugador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jugador2ActionPerformed
         // TODO add your handling code here:
          labelJ2.setText("Escoge perfil:");
-         Combo2.setModel(new DefaultComboBoxModel(iCtrlView.getProfileModel()));
+         actualiza_boxs();
     }//GEN-LAST:event_Jugador2ActionPerformed
 
     private void IA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IA2ActionPerformed
         // TODO add your handling code here:
         labelJ2.setText("Escoge dificultad:");
         Combo2.setModel(new DefaultComboBoxModel(new String[]{"Facil", "Normal", "Dificil"}));
+        actualiza_boxs();
     }//GEN-LAST:event_IA2ActionPerformed
 
     private void RadioBlanco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBlanco1ActionPerformed
@@ -450,9 +479,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
             }
             Object o = Combo2.getSelectedItem();
             Combo2.setModel(model);
-            Combo2.setEditable(false);
             Combo2.setSelectedItem(o);
-            Combo2.setEditable(true);
         }
     }//GEN-LAST:event_Combo1ActionPerformed
 
@@ -465,9 +492,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
             }
             Object o = Combo1.getSelectedItem();
             Combo1.setModel(model);
-            Combo1.setEditable(false);
             Combo1.setSelectedItem(o);
-            Combo1.setEditable(true);
         }
     }//GEN-LAST:event_Combo2ActionPerformed
 
