@@ -193,13 +193,24 @@ public class EditarEscenarioUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int ret = iCtrlView.borrar_escenario(jLabel1.getText());
+        
+        int seleccion = JOptionPane.showOptionDialog(
+                null,
+                "Quieres borrar el escenario?",
+                "Salir",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                null, 2);
+        if(seleccion == 0) {
+            int ret = iCtrlView.borrar_escenario(jLabel1.getText());
 
             if(ret == 1){
                 JOptionPane.showMessageDialog(null, "Escenario Borrado");
                 iCtrlView.changeWindow("MenuEscenario");
                 this.setVisible(false);
             }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

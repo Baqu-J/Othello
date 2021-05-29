@@ -391,6 +391,15 @@ public class CtrlDomain {
         return ctrlPersistencia.CargarPartida();
     }
     
+    public String borrarPartida() {
+        String ret = "Error al borrar Partida";
+            int r = ctrlPersistencia.BorrarPartida();
+            if(r == 1) {
+                ret = "Partida borrada corectamente";
+            }
+            return ret;
+        
+    }
     /**
      * Método para iniciar una partida
      * @param J1

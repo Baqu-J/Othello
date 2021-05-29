@@ -6,6 +6,7 @@
 package othello.view;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,7 +57,7 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
         return escenarios;
     }
 
-    public void setEscenarios(ArrayList<String> escenarios) {
+    public int setEscenarios(ArrayList<String> escenarios) {
         this.escenarios = escenarios;
         if(!escenarios.isEmpty()) {
             String[] parts = escenarios.get(current).split(",");
@@ -66,6 +67,10 @@ public class panelSeleccionarEscenario extends javax.swing.JPanel {
                 grid[i-1] = parts[i];
             }
             reloadGrid(grid);
+            return 0;
+        }
+        else {
+            return -1;
         }
     }
     

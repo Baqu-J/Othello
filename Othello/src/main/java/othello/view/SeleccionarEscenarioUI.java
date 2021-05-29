@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -243,7 +244,12 @@ public class SeleccionarEscenarioUI extends javax.swing.JFrame {
     
     public void initEscenario(){
         panelSeleccionarEscenario1.resetCurrent();
-        panelSeleccionarEscenario1.setEscenarios(iCtrlView.getEscenarios());
+        int res = panelSeleccionarEscenario1.setEscenarios(iCtrlView.getEscenarios());
+        if(res == -1) {
+            this.setVisible(false);
+            iCtrlView.changeWindow("MenuEscenario");
+            JOptionPane.showMessageDialog(null, "No hay escenarios!");
+        }
     }
     
 

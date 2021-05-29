@@ -477,6 +477,9 @@ public class CtrlView {
             gameView.stopIATimer();
             gameView.disablePausa();
             gameView.printGameFinished(ctrlDominio.currentGameScores());
+            ctrlDominio.borrarPartida();
+            gameView.setVisible(false);
+            backToMainWindow("Partida");
         }
     }
     

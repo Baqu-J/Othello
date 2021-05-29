@@ -167,7 +167,7 @@ public class PartidaUI extends javax.swing.JFrame {
     
     public void printGameFinished(int[] scores) {
        String res;
-       res = "Game finished!\n";
+       res = "Partida terminada!\n";
        if(scores[0] > scores[1]) {
            res += "WINNER - Negro!\n";
        }
@@ -181,7 +181,7 @@ public class PartidaUI extends javax.swing.JFrame {
        res += "Scores: \n"
                + "\tBlanco : " + scores[1]+"\n"
                + "\tNegro : " + scores[0] + "\n";
-       jTextArea1.append(res);
+       JOptionPane.showMessageDialog(null, res);
        
        
        

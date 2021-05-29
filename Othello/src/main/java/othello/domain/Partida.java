@@ -364,7 +364,7 @@ public class Partida implements Serializable {
                 break;
 
             default:
-                if (this.turn % 2 == 0) {System.out.println(this.j2.getColor().toString());
+                if (this.turn % 2 == 0) {
                     ret = this.j1.getColor().toString();
                 } else {
                     ret = this.j2.getColor().toString();
