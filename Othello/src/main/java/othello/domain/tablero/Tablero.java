@@ -2,6 +2,8 @@ package othello.domain.tablero;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import othello.data.Casilla;
 import othello.data.Pair;
 
@@ -379,5 +381,31 @@ public class Tablero implements Serializable{
         }
         return ret;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tablero other = (Tablero) obj;
+        if (!Arrays.deepEquals(this.matrix, other.matrix)) {
+            return false;
+        }
+        if (!Objects.equals(this.blancas, other.blancas)) {
+            return false;
+        }
+        if (!Objects.equals(this.negras, other.negras)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }
