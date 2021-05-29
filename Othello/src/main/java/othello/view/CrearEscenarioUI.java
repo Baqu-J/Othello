@@ -133,6 +133,8 @@ public class CrearEscenarioUI extends javax.swing.JFrame {
             if(ret == 1){
                 JOptionPane.showMessageDialog(null, "Escenario creado");
                 jTextField1.setText("");
+                this.setVisible(false);
+                iCtrlView.editEscenario(name);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Escenario ya existe", "ERROR", 0);

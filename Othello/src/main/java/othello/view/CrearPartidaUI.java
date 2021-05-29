@@ -462,6 +462,7 @@ public class CrearPartidaUI extends javax.swing.JFrame {
 
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
         iCtrlView.loadGame();
     }//GEN-LAST:event_loadGameButtonActionPerformed
 

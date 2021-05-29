@@ -24,7 +24,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         try {
-            Image imageResized = ImageIO.read(new File("src/main/java/resources/ranking.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            Image imageResized = ImageIO.read(new File("src/main/java/resources/ranking.png")).getScaledInstance(30, 30, Image.SCALE_DEFAULT);
             btn_ranking.setIcon(new ImageIcon(imageResized));
             Image image = ImageIO.read(new File("src/main/java/resources/OthelloWindowIcon.png"));
             this.setIconImage(image);
@@ -33,7 +33,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         }
         
         try {
-            Image image = ImageIO.read(new File("src/main/java/resources/othello.png"));
+            Image image = ImageIO.read(new File("src/main/java/resources/othello.png")).getScaledInstance(200, 70, Image.SCALE_DEFAULT);
             jLabel1.setIcon(new ImageIcon(image));
             
         } catch (Exception ex) {
@@ -53,8 +53,9 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         btn_ranking = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         btn_perfil = new javax.swing.JButton();
         btn_jugar = new javax.swing.JButton();
         btn_escenario = new javax.swing.JButton();
@@ -64,9 +65,11 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(537, 425));
         setPreferredSize(new java.awt.Dimension(537, 425));
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        btn_ranking.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_ranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_rankingActionPerformed(evt);
@@ -74,17 +77,14 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         });
         jPanel4.add(btn_ranking);
 
-        getContentPane().add(jPanel4, java.awt.BorderLayout.NORTH);
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        getContentPane().add(jPanel4);
 
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
-        jPanel2.add(jLabel1, gridBagConstraints);
+        jPanel5.add(jLabel1);
+
+        getContentPane().add(jPanel5);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         btn_perfil.setText("PERFIL");
         btn_perfil.setMaximumSize(new java.awt.Dimension(200, 60));
@@ -142,7 +142,7 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel2.add(filler2, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2);
 
         pack();
         setLocationRelativeTo(null);
@@ -179,5 +179,6 @@ public class MenuPrincipalUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
