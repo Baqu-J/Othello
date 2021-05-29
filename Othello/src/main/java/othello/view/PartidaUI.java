@@ -249,8 +249,9 @@ public class PartidaUI extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(720, 720));
-        setPreferredSize(new java.awt.Dimension(720, 720));
+        setMaximumSize(new java.awt.Dimension(780, 720));
+        setMinimumSize(new java.awt.Dimension(780, 720));
+        setPreferredSize(new java.awt.Dimension(780, 720));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -370,6 +371,9 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setMaximumSize(new java.awt.Dimension(100, 21));
+        jButtonGuardar.setMinimumSize(new java.awt.Dimension(100, 21));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(100, 21));
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuardarActionPerformed(evt);
@@ -380,6 +384,9 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel5.add(jButtonGuardar, gridBagConstraints);
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.setMaximumSize(new java.awt.Dimension(100, 21));
+        jButtonSalir.setMinimumSize(new java.awt.Dimension(100, 21));
+        jButtonSalir.setPreferredSize(new java.awt.Dimension(100, 21));
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalirActionPerformed(evt);
@@ -392,7 +399,9 @@ public class PartidaUI extends javax.swing.JFrame {
         jPanel5.add(jButtonSalir, gridBagConstraints);
 
         btn_Pausa.setText("Pausar");
-        btn_Pausa.setPreferredSize(new java.awt.Dimension(71, 23));
+        btn_Pausa.setMaximumSize(new java.awt.Dimension(100, 21));
+        btn_Pausa.setMinimumSize(new java.awt.Dimension(100, 21));
+        btn_Pausa.setPreferredSize(new java.awt.Dimension(100, 21));
         btn_Pausa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_PausaActionPerformed(evt);
