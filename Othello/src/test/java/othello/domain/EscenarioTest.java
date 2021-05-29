@@ -62,7 +62,7 @@ public class EscenarioTest {
         escenario.redo();
         escenario.undo();
         escenario.redo();
-        assertEquals(aux, escenario);
+        assertEquals(aux, escenario.getTop());
     
     }
 }
