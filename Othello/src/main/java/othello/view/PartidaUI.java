@@ -407,6 +407,7 @@ public class PartidaUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel4.add(jPanel5, gridBagConstraints);
 
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "HISTORIAL DE JUGADAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
         jScrollPane1.setMinimumSize(new java.awt.Dimension(275, 100));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(275, 100));
 
