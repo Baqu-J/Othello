@@ -46,7 +46,7 @@ public class PartidaUI extends javax.swing.JFrame {
         timerToIAMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timerToIAMove.stop();
-                iCtrlView.commitPlayCurrentGame(0, 0); 
+                iCtrlView.commitPlayCurrentGame(-1, -1); 
             }
         });
     }
@@ -69,6 +69,9 @@ public class PartidaUI extends javax.swing.JFrame {
             
             jButtonGuardar.setEnabled(false);
             jButtonGuardar.setVisible(false);
+            timerToIAMove.start();
+        }
+        else if(iCtrlView.isIABlack_in_PvsIA()) {
             timerToIAMove.start();
         }
     }

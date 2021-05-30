@@ -364,6 +364,10 @@ public class CtrlView {
         
     }
     
+    public boolean isIABlack_in_PvsIA() {
+        return ctrlDominio.isIABlack_in_PvsIA();
+    }
+    
     /**
      * Método para realizar un movimiento en el tablero del escenario
      * @param first

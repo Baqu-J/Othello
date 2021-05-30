@@ -580,4 +580,11 @@ public class Partida implements Serializable {
         createTree_rec(jugadas, ia.getDepth(), tablero, ia, ia.getColor());
         return jugadas;
     }
+    
+    public boolean isIABlack_in_PvsIA() {
+        if(type == GameType.PLAYERvsIA) {
+            if(j1 == null) return true;
+        }
+        return false;
+    }
 }

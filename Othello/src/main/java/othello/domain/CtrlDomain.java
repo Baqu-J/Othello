@@ -485,6 +485,10 @@ public class CtrlDomain {
         }
     }
     
+    public boolean isIABlack_in_PvsIA() {
+        return currentGame.isIABlack_in_PvsIA();
+    }
+    
     /**
      * Función para cargar una partida
      * @return confirmación de la acción
