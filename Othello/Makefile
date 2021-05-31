@@ -8,10 +8,12 @@ PathClassesTablero = ./src/main/java/othello/domain/tablero/*.java
 PathPersistencia = ./src/main/java/othello/persistence/*.java
 PathPresentacio = ./src/main/java/othello/view/*.java
 
-PathMain = ./src/main/java/othello/test/Main.java
+PathMainCommandLine = ./src/main/java/othello/test/Main.java
+PathMain = ./src/main/java/othello/view/Main.java
 PathTests = ./src/main/java/drivers/*.java
 
-Main = othello/test/Main
+MainCommandLine = othello/test/Main
+Main = othello/view/Main
 
 DriverCtrlDomain = drivers/DriverCtrlDomain
 DriverEscenario = drivers/DriverEscenario
