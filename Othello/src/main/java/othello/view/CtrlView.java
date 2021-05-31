@@ -102,7 +102,7 @@ public class CtrlView {
     WindowListener exitListenerinGame = new WindowAdapter() {
     @Override
     public void windowClosing(WindowEvent e) {
-        gameView.PauseExit();
+        
         int seleccion = JOptionPane.showOptionDialog(
                 null,
                 "Quieres guardar la partida?",
@@ -110,8 +110,8 @@ public class CtrlView {
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                null, 3);
-        if(seleccion != 3) {
+                null, 2);
+        if(seleccion != 2) {
             if (seleccion == 0) {
                 gameView.guardarPartida();
             }

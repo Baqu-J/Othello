@@ -621,7 +621,7 @@ public class PartidaUI extends javax.swing.JFrame {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
-        PauseExit();
+        
         int seleccion = JOptionPane.showOptionDialog(
                 null,
                 "Quieres guardar la partida?",
@@ -637,7 +637,7 @@ public class PartidaUI extends javax.swing.JFrame {
             this.setVisible(false);
             iCtrlView.backToMainWindow("Partida");
         }
-        restartIATimer();
+        
     }//GEN-LAST:event_jButtonSalirActionPerformed
     
     public void disablePausa() {
@@ -650,14 +650,23 @@ public class PartidaUI extends javax.swing.JFrame {
     
     private void Pause() {
         
-        if(btn_Pausa.getText().equals("Pausar")) {
+        if(timerToIAMove.isRunning()) {
+            btn_Pausa.setText("Reanudar");
+            timerToIAMove.stop();
+        }
+        else {
+            btn_Pausa.setText("Pausar");
+            timerToIAMove.restart();
+        }
+        
+        /*if(btn_Pausa.getText().equals("Pausar")) {
             btn_Pausa.setText("Reanudar");
             timerToIAMove.stop();
         }
         else{
             btn_Pausa.setText("Pausar");
             timerToIAMove.restart();
-        }
+        }*/
     }
     
     public void PauseExit() {
