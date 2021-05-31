@@ -1,6 +1,8 @@
 PathBin = ./EXE
 
+PathLibs = ./src/main/java/lib/\*
 PathGson = ./src/main/java/lib/gson-2.8.6.jar
+PathJUnit = ./src/main/java/lib/junit-4.13.2.jar
 
 PathDatos = ./src/main/java/othello/data/*.java
 PathClasses = ./src/main/java/othello/domain/*.java
@@ -12,6 +14,8 @@ PathMain = ./src/main/java/othello/view/Main.java
 
 PathTests = ./src/main/java/drivers/*.java
 
+PathJUnitTests = ./src/test/java/othello/domain/*.java
+
 Main = othello/view/Main
 
 DriverCtrlDomain = drivers/DriverCtrlDomain
@@ -20,36 +24,44 @@ DriverIA = drivers/DriverIA
 DriverPartida = drivers/DriverPartida
 DriverTablero = drivers/DriverTablero
 
+JUnitCtrlDomainTest = othello/domain/CtrlDomainTest
+JUnitEscenarioTest = othello/domain/EscenarioTest
+JUnitPartidaTest = othello/domain/PartidaTest
+
 default: all
 
 all:
-	 javac -d $(PathBin) -cp $(PathGson) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) 
+	 javac -d $(PathBin) -cp $(PathLibs) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) 
 
 compileMain: 
-	javac -d $(PathBin) -cp $(PathGson) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) $(PathMain) 
+	javac -d $(PathBin) -cp $(PathLibs) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) $(PathMain) 
 
 run: compileMain
-	java -cp $(PathBin):$(PathGson) $(Main)
+	java -cp $(PathBin):$(PathLibs) $(Main)
 
 
 compileDrivers: 
-	javac -d $(PathBin) -cp $(PathGson) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) $(PathTests) 
+	javac -d $(PathBin) -cp $(PathLibs) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) $(PathTests) 
 	
 	
 runDriverCtrlDomain: compileDrivers
-	java -cp $(PathBin):$(PathGson) $(DriverCtrlDomain)
+	java -cp $(PathBin):$(PathLibs) $(DriverCtrlDomain)
 
 runDriverEscenario: compileDrivers
-	java -cp $(PathBin):$(PathGson) $(DriverEscenario)
+	java -cp $(PathBin):$(PathLibs) $(DriverEscenario)
 
 runDriverIA: compileDrivers
-	java -cp $(PathBin):$(PathGson) $(DriverIA)
+	java -cp $(PathBin):$(PathLibs) $(DriverIA)
 
 runDriverPartida: compileDrivers
-	java -cp $(PathBin):$(PathGson) $(DriverPartida)
+	java -cp $(PathBin):$(PathLibs) $(DriverPartida)
 	
 runDriverTablero: compileDrivers
-	java -cp $(PathBin):$(PathGson) $(DriverTablero)
+	java -cp $(PathBin):$(PathLibs) $(DriverTablero)
+	
+compileJUnit: 
+	javac -d $(PathBin) -cp $(PathLibs) $(PathDatos) $(PathClasses) $(PathClassesTablero) $(PathPersistencia) $(PathPresentacio) $(PathJUnitTests)
+
 	
 clean:
 	rm -f -r $(PathBin)
