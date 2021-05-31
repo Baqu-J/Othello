@@ -423,9 +423,7 @@ public class Partida implements Serializable {
                             ia1.decreaseFichas();
                             b = 1;
                         }
-                    } else {
-                        System.out.println(this.ia1.getColor() + "has no moves!");
-                    }
+                    } 
                 } else {
 
                     if (!t.getLegalMoves(this.ia2.getColor()).isEmpty() && ia2.getNumeroDeFichas() > 0) {
@@ -433,9 +431,7 @@ public class Partida implements Serializable {
                             ia2.decreaseFichas();
                             b = 1;
                         }
-                    } else {
-                        System.out.println(this.ia2.getColor() + "has no moves!");
-                    }
+                    } 
                 }
                 break;
 
@@ -448,9 +444,7 @@ public class Partida implements Serializable {
                                 ia1.decreaseFichas();
                                 b = 1;
                             }
-                        } else {
-                            System.out.println(this.ia1.getColor() + "has no moves!");
-                        }
+                        } 
                     } else {
 
                         if (!t.getLegalMoves(this.j1.getColor()).isEmpty() && j1.getNumeroDeFichas() > 0) {
@@ -461,8 +455,6 @@ public class Partida implements Serializable {
                             } else {
                                 b = 0;
                             }
-                        } else {
-                            System.out.println(this.j1.getColor() + "has no moves!");
                         }
                     }
                 } else {
@@ -474,9 +466,7 @@ public class Partida implements Serializable {
                                 ia2.decreaseFichas();
                                 b = 1;
                             }
-                        } else {
-                            System.out.println(this.ia2.getColor() + "has no moves!");
-                        }
+                        } 
                     } else {
 
                         if (!t.getLegalMoves(this.j2.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
@@ -487,8 +477,6 @@ public class Partida implements Serializable {
                             } else {
                                 b = 0;
                             }
-                        } else {
-                            System.out.println(this.j2.getColor() + "has no moves!");
                         }
                     }
                 }
