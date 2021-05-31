@@ -10,6 +10,7 @@ PathPresentacio = ./src/main/java/othello/view/*.java
 
 PathMainCommandLine = ./src/main/java/othello/test/Main.java
 PathMain = ./src/main/java/othello/view/Main.java
+
 PathTests = ./src/main/java/drivers/*.java
 
 MainCommandLine = othello/test/Main
