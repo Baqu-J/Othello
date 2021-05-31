@@ -212,7 +212,24 @@ public class Partida implements Serializable {
         if (t.getLegalMoves(Casilla.BLANCA).isEmpty() && t.getLegalMoves(Casilla.NEGRA).isEmpty()) {
             return true;
         }
+        else if(t.getLegalMoves(Casilla.BLANCA).isEmpty() && !NegroTieneFichas()) return true;
+        else if(t.getLegalMoves(Casilla.NEGRA).isEmpty() && !BlancoTieneFichas()) return true;
+        else if(!BlancoTieneFichas() && !NegroTieneFichas()) return true;
         return false;
+    }
+    
+    public boolean BlancoTieneFichas() {
+        if(j2 != null) {
+            return (j2.getNumeroDeFichas() > 0);
+        }
+        else return ia2.getNumeroDeFichas()>0;
+    }
+    
+    public boolean NegroTieneFichas() {
+        if(j1 != null) {
+            return (j1.getNumeroDeFichas() > 0);
+        }
+        else return ia1.getNumeroDeFichas()>0;
     }
 
     /**
