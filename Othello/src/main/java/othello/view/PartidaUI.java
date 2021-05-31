@@ -621,21 +621,36 @@ public class PartidaUI extends javax.swing.JFrame {
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
-        
-        int seleccion = JOptionPane.showOptionDialog(
-                null,
-                "Quieres guardar la partida?",
-                "Salir",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                null, 2);
-        if(seleccion != 2) {
-            if (seleccion == 0) {
-                guardarPartida();
+        if(!this.typeGame.equals("IAvsIA")){
+            int seleccion = JOptionPane.showOptionDialog(
+                    null,
+                    "Quieres guardar la partida?",
+                    "Salir",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    null, 2);
+            if(seleccion != 2) {
+                if (seleccion == 0) {
+                    guardarPartida();
+                }
+                this.setVisible(false);
+                iCtrlView.backToMainWindow("Partida");
             }
-            this.setVisible(false);
-            iCtrlView.backToMainWindow("Partida");
+        }
+        else {
+            int seleccion = JOptionPane.showOptionDialog(
+                    null,
+                    "Quieres salir de la partida?",
+                    "Salir",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    null, 1);
+            if(seleccion != 1) {
+                this.setVisible(false);
+                iCtrlView.backToMainWindow("Partida");
+            }
         }
         
     }//GEN-LAST:event_jButtonSalirActionPerformed

@@ -102,23 +102,39 @@ public class CtrlView {
     WindowListener exitListenerinGame = new WindowAdapter() {
     @Override
     public void windowClosing(WindowEvent e) {
-        
-        int seleccion = JOptionPane.showOptionDialog(
-                null,
-                "Quieres guardar la partida?",
-                "Salir",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                null, 2);
-        if(seleccion != 2) {
-            if (seleccion == 0) {
-                gameView.guardarPartida();
+        if(!ctrlDominio.getTipoPartida().equals("IAvsIA")) {
+            int seleccion = JOptionPane.showOptionDialog(
+                    null,
+                    "Quieres guardar la partida?",
+                    "Salir",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    null, 2);
+            if(seleccion != 2) {
+                if (seleccion == 0) {
+                    gameView.guardarPartida();
+                }
+                ctrlDominio.guardarEscenarios();
+                ctrlDominio.guardarUsuarios();
+                System.exit(0);
             }
-            ctrlDominio.guardarEscenarios();
-            ctrlDominio.guardarUsuarios();
-            System.exit(0);
         }
+        else {
+            int seleccion = JOptionPane.showOptionDialog(
+                        null,
+                        "Quieres salir de la partida?",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        null, 1);
+                if(seleccion != 1) {
+                    ctrlDominio.guardarEscenarios();
+                    ctrlDominio.guardarUsuarios();
+                    System.exit(0);
+                }
+            }
     }
 };
     
