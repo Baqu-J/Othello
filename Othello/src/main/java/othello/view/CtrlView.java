@@ -553,6 +553,14 @@ public class CtrlView {
     }
     
     /**
+     * Método para obtener el historial de las jugadas de una partida
+     * @return movimientos de la partida
+     */
+    public String[] getLogMoves() {
+        return ctrlDominio.getLogMoves();
+    }
+    
+    /**
      * Método para guardar una partida
      * @return confirmación
      */

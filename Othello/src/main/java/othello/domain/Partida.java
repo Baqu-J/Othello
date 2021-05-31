@@ -2,6 +2,7 @@ package othello.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Stack;
 import othello.data.Casilla;
 import othello.data.Node;
 import othello.data.Pair;
@@ -28,8 +29,9 @@ public class Partida implements Serializable {
     private Jugador j1;
     private Jugador j2;
     private int turn;
+    private Stack<String> logMoves;
 
-    // Constructors
+        // Constructors
     /**
      * Constructor de partida por defecto
      */
@@ -41,6 +43,7 @@ public class Partida implements Serializable {
         this.ia2 = null;
         this.j1 = null;
         this.j2 = null;
+        this.logMoves = new Stack<String>();
     }
 
     /**
@@ -56,6 +59,7 @@ public class Partida implements Serializable {
         this.type = type;
         this.t = t;
         this.turn = turno;
+        this.logMoves = new Stack<String>();
 
         this.ia1 = player1;
         this.ia2 = player2;
@@ -77,6 +81,7 @@ public class Partida implements Serializable {
         this.type = type;
         this.t = t;
         this.turn = turno;
+        this.logMoves = new Stack<String>();
 
         this.ia1 = player1;
         this.ia2 = null;
@@ -99,6 +104,7 @@ public class Partida implements Serializable {
         this.type = type;
         this.t = t;
         this.turn = turno;
+        this.logMoves = new Stack<String>();
 
         this.ia1 = null;
         this.ia2 = null;
@@ -179,6 +185,14 @@ public class Partida implements Serializable {
         this.turn = turn;
     }
 
+    public Stack<String> getLogMoves() {
+        return logMoves;
+    }
+
+    public void setLogMoves(Stack<String> logMoves) {
+        this.logMoves = logMoves;
+    }
+    
     public void setAll(GameType type, Tablero t, int turno, IA ia1, IA ia2, Jugador j1, Jugador j2) {
         this.type = type;
         this.ia1 = ia1;
@@ -424,6 +438,7 @@ public class Partida implements Serializable {
 
                         if (!t.getLegalMoves(this.j1.getColor()).isEmpty() && j1.getNumeroDeFichas() > 0) {
                             if (!t.commitPlay(coord, this.j1.getColor()).isEmpty()) {
+                                logMoves.push(String.valueOf(coord.first())+";"+String.valueOf(coord.second()));
                                 j1.decreaseFichas();
                                 b = 1;
                             } else {
@@ -449,6 +464,7 @@ public class Partida implements Serializable {
 
                         if (!t.getLegalMoves(this.j2.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
                             if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                                logMoves.push(String.valueOf(coord.first())+";"+String.valueOf(coord.second()));
                                 j2.decreaseFichas();
                                 b = 1;
                             } else {
@@ -466,6 +482,7 @@ public class Partida implements Serializable {
 
                     if (!t.getLegalMoves(this.j1.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
                         if (!t.commitPlay(coord, this.j1.getColor()).isEmpty() && j1.getNumeroDeFichas() > 0) {
+                            logMoves.push(String.valueOf(coord.first())+";"+String.valueOf(coord.second()));
                             j1.decreaseFichas();
                             b = 1;
                         } else {
@@ -478,6 +495,7 @@ public class Partida implements Serializable {
 
                     if (!t.getLegalMoves(this.j2.getColor()).isEmpty() && j2.getNumeroDeFichas() > 0) {
                         if (!t.commitPlay(coord, this.j2.getColor()).isEmpty()) {
+                            logMoves.push(String.valueOf(coord.first())+";"+String.valueOf(coord.second()));
                             j2.decreaseFichas();
                             b = 1;
                         } else {
@@ -506,6 +524,7 @@ public class Partida implements Serializable {
         Tree jugadas = createTree(t, ia);
         Pair c = ia.escogerMovimiento(jugadas, ia);
         if(!(t.commitPlay(c, ia.getColor()).isEmpty())) {
+            logMoves.push(String.valueOf(c.first())+";"+String.valueOf(c.second()));
             return true;
         }
         else return false;

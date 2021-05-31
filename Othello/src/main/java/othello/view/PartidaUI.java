@@ -1,14 +1,19 @@
 package othello.view;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.Timer;
 
 /**
@@ -221,6 +226,7 @@ public class PartidaUI extends javax.swing.JFrame {
         jButtonGuardar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         btn_Pausa = new javax.swing.JButton();
+        btn_historial = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel7 = new javax.swing.JPanel();
@@ -383,7 +389,9 @@ public class PartidaUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(jButtonGuardar, gridBagConstraints);
 
         jButtonSalir.setText("Salir");
@@ -397,7 +405,7 @@ public class PartidaUI extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(jButtonSalir, gridBagConstraints);
 
@@ -411,8 +419,22 @@ public class PartidaUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(btn_Pausa, gridBagConstraints);
+
+        btn_historial.setText("Ver Historial");
+        btn_historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_historialActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel5.add(btn_historial, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -649,11 +671,34 @@ public class PartidaUI extends javax.swing.JFrame {
            Pause();
     }//GEN-LAST:event_btn_PausaActionPerformed
 
+    private void btn_historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_historialActionPerformed
+        // TODO add your handling code here:
+        String[] hist = iCtrlView.getLogMoves();
+        String[] move = new String[hist.length];
+        for(int i = 0; i < hist.length; i++) {
+            String[] coord = hist[i].split(";");
+            move[i] = letras[Integer.valueOf(coord[1])] + numeros[Integer.valueOf(coord[0])];
+        }
+        if(move.length > 0) {
+            JDialog jd = new JDialog(this, "Historial de Movimientos", true);
+            JList jl = new JList(move);
+            JScrollPane jsp = new JScrollPane();
+            jsp.setViewportView(jl);
+            jd.add(jsp);
+            jd.pack();
+            jd.setLocationRelativeTo(this);
+            jd.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "No se ha realizado ninguna jugada!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_historialActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FichasB;
     private javax.swing.JLabel FichasN;
     private javax.swing.JButton btn_Pausa;
+    private javax.swing.JButton btn_historial;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;

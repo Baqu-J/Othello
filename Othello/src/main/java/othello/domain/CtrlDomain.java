@@ -3,6 +3,7 @@ package othello.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Stack;
 import othello.data.Casilla;
 import othello.data.Pair;
 import othello.domain.tablero.Escenario;
@@ -330,6 +331,19 @@ public class CtrlDomain {
         return currentGame.getColorTurn();
     }
     
+    /**
+     * Función para obtener el historial de los movimientos de la partida
+     * @return movimientos
+     */
+    public String[] getLogMoves() {
+        Stack<String> s = currentGame.getLogMoves();
+        String[] log = new String[s.size()];
+        for(int i = 0; i < s.size(); i++){
+            log[i] = s.elementAt(i);
+        }
+        return log;
+    }
+
     /**
      * Función para obtener los jugadores de una partida
      * @return jugadores(texto)
