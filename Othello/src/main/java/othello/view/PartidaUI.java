@@ -629,15 +629,15 @@ public class PartidaUI extends javax.swing.JFrame {
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                null, 3);
-        if(seleccion != 3) {
+                null, 2);
+        if(seleccion != 2) {
             if (seleccion == 0) {
                 guardarPartida();
             }
             this.setVisible(false);
             iCtrlView.backToMainWindow("Partida");
         }
-        
+        restartIATimer();
     }//GEN-LAST:event_jButtonSalirActionPerformed
     
     public void disablePausa() {
